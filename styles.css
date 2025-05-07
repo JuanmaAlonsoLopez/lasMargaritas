@@ -14,7 +14,7 @@ body {
 /*MENU DE NAVEGACION*/
 
 header {
-    background-color: #FFFFFF;
+    background-color: #79a774;
     color: #333;
     padding: 15px 40px;
     display: flex;
@@ -28,6 +28,12 @@ header {
     font-size: 5rem;
     font-weight: 600;
     color: #85B27D;
+}
+
+header .logo img {
+    max-width: 80px; /* Ajusta el tamaño del logo */
+    height: auto; /* Mantiene la proporción del logo */
+    display: block; /* Elimina cualquier espacio adicional */
 }
 
 .menu {
