@@ -1,166 +1,329 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Las Margaritas - E-commerce</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Las Margaritas</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
-        <div class="logo-container">
-          <img src="images/logo.png" alt="Logo" class="logo"> <!-- Aquí va el logo, ajusta la ruta de la imagen -->
-        </div>
-        <nav>
-          <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Productos</a></li>
-            <li><a href="#">Sobre Nosotros</a></li>
-            <li><a href="#">Contacto</a></li>
-          </ul>
+        <div class="logo">🌻</div>
+        <nav class="menu">
+            <a href="index.html">INICIO</a>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">PRODUCTOS ▼</a>
+                <div class="dropdown-content">
+                    <a href="#">CATEGORÍAS</a>
+                    <a href="#">LISTADO DE PRODUCTOS</a>
+                    <a href="#">PRODUCTOS INDIVIDUAL</a>
+                </div>
+            </div>
+            <a href="sobreNosotros.html">SOBRE NOSOTROS</a>
+            <a href="contacto.html">CONTACTO</a>
         </nav>
-        <div class="cart-container">
-          <a href="#" class="cart-icon">
-            <img src="images/cart-icon.png" alt="Carrito"> <!-- Aquí va el ícono del carrito -->
-          </a>
+        <div class="cart">
+            <a href="#"><img src="./images/icons8-carrito-de-compras.gif" alt="Carrito de compras"></a>
         </div>
-      </header>
-      
-  <main>
-    <section id="productos-destacados">
-      <h2>Productos destacados</h2>
-      <div class="producto-container">
-        <!-- Product 1 -->
-        <div class="producto">
-          <img src="images/producto_1.png" alt="Producto 1">
-          <h3>Producto 1</h3>
-          <p>Precio: $20.00</p>
-          <a href="#">Ver más</a>
-        </div>
-        <!-- Product 2 -->
-        <div class="producto">
-            <img src="images/producto_1.png" alt="Producto 2">
-          <h3>Producto 2</h3>
-          <p>Precio: $22.00</p>
-          <a href="#">Ver más</a>
-        </div>
-        <!-- Product 3 -->
-        <div class="producto">
-            <img src="images/producto_1.png" alt="Producto 3">
-          <h3>Producto 3</h3>
-          <p>Precio: $19.00</p>
-          <a href="#">Ver más</a>
-        </div>
-        <!-- Product 4 -->
-        <div class="producto">
-            <img src="images/producto_1.png" alt="Producto 4">
-          <h3>Producto 4</h3>
-          <p>Precio: $25.00</p>
-          <a href="#">Ver más</a>
-        </div>
-        <!-- Product 5 -->
-        <div class="producto">
-            <img src="images/producto_1.png" alt="Producto 1">
-          <h3>Producto 5</h3>
-          <p>Precio: $18.00</p>
-          <a href="#">Ver más</a>
-        </div>
-      </div>
-    </section>
+    </header>
 
-    <!-- Nueva sección con las imágenes de categorías -->
-    <section id="categorias">
-      <h2>Catálogo</h2>
-      <div class="categoria">
-        <img src="images/confort.png" alt="Confort">
-        <div class="label">Confort</div>
-      </div>
-      <div class="categoria">
-        <img src="images/lineaBaby.png" alt="Línea Baby">
-        <div class="label">Línea Baby</div>
-      </div>
-      <div class="categoria">
-        <img src="images/ortopedica.png" alt="Ortopédicas">
-        <div class="label">Ortopédicas</div>
-      </div>
-    </section>
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Productos - Las Margaritas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-    <section id="confort">
-      <h2>Confort</h2>
-      <div class="producto-container">
-        <!-- Product 1 -->
-        <div class="producto">
-          <img src="images/producto_1.png" alt="Producto 1">
-          <h3>Producto 1</h3>
-          <p>Precio: $20.00</p>
-          <a href="#">Ver más</a>
-        </div>
-        <!-- Más productos... -->
-      </div>
-    </section>
-
-    <section id="linea-baby">
-      <h2>Línea Baby</h2>
-      <div class="producto-container">
-        <!-- Product 1 -->
-        <div class="producto">
-          <img src="images/producto_1.png" alt="Producto 1">
-          <h3>Producto 1</h3>
-          <p>Precio: $22.00</p>
-          <a href="#">Ver más</a>
-        </div>
-        <!-- Más productos... -->
-      </div>
-    </section>
-
-    <section id="ortopedicas">
-      <h2>Ortopédicas</h2>
-      <div class="producto-container">
-        <!-- Product 1 -->
-        <div class="producto">
-          <img src="images/producto_1.png" alt="Producto 1">
-          <h3>Producto 1</h3>
-          <p>Precio: $25.00</p>
-          <a href="#">Ver más</a>
-        </div>
-        <!-- Más productos... -->
-      </div>
-    </section>
-
-    <footer>
-        <div class="footer-container">
-          <div class="footer-left">
-            <div class="logo-footer">
-              <img src="images/logoNombre.png" alt="Logo">
+    <div class="imagenLasMargaritas">
+        <img src="./images/565935e7c8c07772ffa7519df8340e25beed6079 (1).png" alt="Las Margaritas">
+    </div>
+    
+    <section class="productos-destacados">
+        <h2>Productos destacados</h2>
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="producto">
+                    <img src="./images/115718a41ddcbc3aeaed7a283bdec5fdf986e43f.png" alt="Producto 1">
+                    <p>Producto 001</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/46f7cad60e722b34caa7431fed9da9ae5285a97c.png" alt="Producto 2">
+                    <p>Producto 002</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/97a64c10e08cd740339f3b554d1a312582d5aad8.png" alt="Producto 3">
+                    <p>Producto 003</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/afda3e5b7d1e32f1aaac97f29c4d2da4caf591f8.png" alt="Producto 4">
+                    <p>Producto 004</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/c87aaa9a447aca7a98d26ba34cd214669b5c693a.png" alt="Producto 5">
+                    <p>Producto 005</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
             </div>
-            <div class="social-media">
-              <a href="#">Instagram</a>
-              <a href="#">Facebook</a>
-            </div>
-          </div>
-          <div class="footer-right">
-            <div class="contact-info">
-              <h3>Contacto</h3>
-              <p>Teléfono: 2323232323</p>
-              <p>Email: lasmargaritas@gmail.com</p>
-            </div>
-            <div class="footer-links">
-              <h3>Más información</h3>
-              <ul>
-                <li><a href="#">Lorem ipsum</a></li>
-                <li><a href="#">Lorem ipsum</a></li>
-                <li><a href="#">Lorem ipsum</a></li>
-                <li><a href="#">Lorem ipsum</a></li>
-              </ul>
-            </div>
-          </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
         </div>
-        <!-- Nueva línea de derechos reservados -->
-        <div class="footer-bottom">
-          <p>&copy; 2025 Las Margaritas. Todos los derechos reservados.</p>
+        <button class="ver-mas">Ver más</button>
+    </section>
+    
+    <div class="productos-seccion">
+        <div class="contenedor-productos">
+            <div class="producto grande">
+                <img src="./images/7e7831b695727d1e24399259213027414a33a9ef.png" alt="Confort" />
+                <div class="label">CONFORT</div>
+            </div>
+
+            <div class="columna-derecha">
+                <div class="producto chico">
+                        <img src="./images/be72939325d5cbb600409d87cf4036d9a189a9e8.png" alt="Línea Baby" />
+                    <div class="label">LINEA BABY</div>
+                </div>
+                <div class="producto chico">
+                        <img src="./images/4661e30697659e8d1fab764357412c56f9497750.png" alt="Ortopédicas" />
+                    <div class="label">ORTOPEDICAS</div>
+                </div>
+            </div>
         </div>
-      </footer>
-            
-  </main>
+    </div>
+
+    <section class="productos-destacados">
+        <h2>Confort</h2>
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="producto">
+                    <img src="./images/115718a41ddcbc3aeaed7a283bdec5fdf986e43f.png" alt="Producto 1">
+                    <p>Producto 001</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/46f7cad60e722b34caa7431fed9da9ae5285a97c.png" alt="Producto 2">
+                    <p>Producto 002</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/97a64c10e08cd740339f3b554d1a312582d5aad8.png" alt="Producto 3">
+                    <p>Producto 003</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/afda3e5b7d1e32f1aaac97f29c4d2da4caf591f8.png" alt="Producto 4">
+                    <p>Producto 004</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/c87aaa9a447aca7a98d26ba34cd214669b5c693a.png" alt="Producto 5">
+                    <p>Producto 005</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </div>
+        <button class="ver-mas">Ver más</button>
+    </section>
+
+    <div class="beneficios">
+        <h2>Beneficios</h2>
+        <div class="iconos-beneficios">
+            <div class="beneficio">
+                <img src="./images/conveniente.png" alt="" />
+                <p class="tipoBeneficio">Comodidad</p>
+            </div>
+            <div class="beneficio">
+                <img src="./images/diagrama.png" alt="" />
+                <p class="tipoBeneficio">Mejor Sueño</p>
+            </div>
+            <div class="beneficio">
+                <img src="./images/calidad.png" alt="" />
+                <p class="tipoBeneficio">Material de calidad</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="productos-destacados">
+        <h2>Linea baby</h2>
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="producto">
+                    <img src="./images/115718a41ddcbc3aeaed7a283bdec5fdf986e43f.png" alt="Producto 1">
+                    <p>Producto 001</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/46f7cad60e722b34caa7431fed9da9ae5285a97c.png" alt="Producto 2">
+                    <p>Producto 002</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/97a64c10e08cd740339f3b554d1a312582d5aad8.png" alt="Producto 3">
+                    <p>Producto 003</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/afda3e5b7d1e32f1aaac97f29c4d2da4caf591f8.png" alt="Producto 4">
+                    <p>Producto 004</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/c87aaa9a447aca7a98d26ba34cd214669b5c693a.png" alt="Producto 5">
+                    <p>Producto 005</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </div>
+        <button class="ver-mas">Ver más</button>
+    </section>
+
+    <div class="banner-ortopedicas">
+        <div class="texto">
+            <h2>Prueba nuestra línea de<br>almohadas ortopédicas</h2>
+            <button class="ver-mas">Ver productos</button>
+        </div>
+    </div>
+    
+
+    <section class="productos-destacados">
+        <h2>Confort</h2>
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="producto">
+                    <img src="./images/115718a41ddcbc3aeaed7a283bdec5fdf986e43f.png" alt="Producto 1">
+                    <p>Producto 001</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/46f7cad60e722b34caa7431fed9da9ae5285a97c.png" alt="Producto 2">
+                    <p>Producto 002</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/97a64c10e08cd740339f3b554d1a312582d5aad8.png" alt="Producto 3">
+                    <p>Producto 003</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/afda3e5b7d1e32f1aaac97f29c4d2da4caf591f8.png" alt="Producto 4">
+                    <p>Producto 004</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+                <div class="producto">
+                    <img src="./images/c87aaa9a447aca7a98d26ba34cd214669b5c693a.png" alt="Producto 5">
+                    <p>Producto 005</p>
+                    <span>$12,000</span>
+                    <p>12 cuotas sin interés de $100</p>
+                    <button>Ver producto</button>
+                </div>
+            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </div>
+        <button class="ver-mas">Ver más</button>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-contenido">
+        <div class="columna logo-redes">
+            <img src="./images/LasMargaritas.png" alt="Las Margaritas" class="logo-footer" />
+            <div class="redes">
+            <img src="./images/logotipo-de-instagram.png" alt="Instagram">
+            <img src="./images/simbolo-de-la-aplicacion-de-facebook.png" alt="Facebook">
+            </div>
+        </div>
+    
+        <div class="columna links">
+            <div class="grupo">
+            <h4>Lorem lorem</h4>
+            <ul>
+                <li>Lorem lorem</li>
+                <li>Lorem lorem</li>
+                <li>Lorem lorem</li>
+                <li>Lorem lorem</li>
+                <li>Lorem lorem</li>
+                <li><button class="btn-negro">Lorem</button></li>
+            </ul>
+            </div>
+            <div class="grupo">
+            <h4>Lorem lorem</h4>
+            <ul>
+                <li>Lorem lorem</li>
+                <li>Lorem lorem</li>
+                <li>Lorem lorem</li>
+                <li>Lorem lorem</li>
+                <li>Lorem lorem</li>
+                <li>Lorem lorem</li>
+                <li>Lorem lorem</li>
+            </ul>
+            </div>
+        </div>
+    
+        <div class="columna contacto">
+            <h4>Contacto</h4>
+            <p><img src="./images/telefono.png" alt="Tel"> 222292929</p>
+            <p><img src="./images/email.png" alt="Mail"> Mail@gmail.com</p>
+        </div>
+        </div>
+    
+        <div class="footer-derechos">
+        Todos los derechos reservados @ Las Margaritas 2025
+        </div>
+    </footer>
+        
+
+    <script src="carousel.js"></script> <!-- Enlazamos el archivo JS aquí -->
+    
+
 </body>
+
 </html>
+
