@@ -1,0 +1,244 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #FFFFFF;
+    color: white;
+}
+
+
+
+
+
+
+
+/*MENU DE NAVEGACION*/
+
+header {
+    background-color: #79a774;
+    color: #2b2a2a;
+    padding: 15px 40px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 5rem;
+    font-weight: 600;
+    color: #85B27D;
+    padding: 10px 20px 10px 10px; 
+}
+
+header .logo img {
+    max-width: 80px; /* Ajusta el tamaño del logo */
+    height: auto; /* Mantiene la proporción del logo */
+    display: flex; /* Elimina cualquier espacio adicional */
+}
+
+.menu {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: left;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.menu a:hover {
+    color: #eeeb48;
+    background-color: #85B27D;
+}
+
+.menu a.active {
+    color: white;
+    background-color: #85B27D;
+}
+
+.cart{
+    display: flex;
+    margin-left: auto; /* Esto empuja el elemento hacia la derecha */
+    height: 50px;
+    width: 50px;
+    justify-content: flex-end;
+    
+}
+
+.cart img {
+    height: 50px;
+    width: 50px;
+}
+
+/* Cambia la animacion del carrito al pasar el mouse */
+.cart a:hover {
+    color: #85B27D;   
+
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: transparent;
+    border: none;
+    color: #333;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #85B27D;
+    color: white;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #84b37c;
+    color: #eeeb48;
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.activado{
+    color: rgb(0, 0, 0);
+    background-color: #20221f70;
+}
+
+/*! Hasta aca es el menu*/
+
+
+
+
+
+
+
+/*! FOOTER*/
+
+.footer {
+    font-family: sans-serif;
+    background-color: #5E7F58;
+    color: rgb(255, 255, 255);
+}
+
+.footer-contenido {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px 20px;
+    flex-wrap: wrap;
+}
+.footer a{
+    color: rgb(255, 255, 255);
+}
+
+.columna {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 200px;
+}
+
+.logo-footer {
+    width: 200px;
+}
+
+.redes img {
+    width: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.links {
+    display: flex;
+    gap: 40px;
+}
+
+.links .grupo h4 {
+    margin-bottom: 10px;
+}
+
+.links .grupo ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.links .grupo ul li {
+    margin-bottom: 6px;
+}
+
+.btn-negro {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 5px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btnFooterSec{
+    margin-top: 10px;
+    padding: 10px;
+}
+
+
+.contacto img {
+    width: 18px;
+    vertical-align: middle;
+    margin-right: 8px;
+/*Necesito que coloquemos imagenes en blanco para que quede mucho mejor*/
+}
+
+.footer-derechos {
+    background-color: #79a774;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+}
