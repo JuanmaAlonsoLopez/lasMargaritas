@@ -149,29 +149,42 @@ h2 {
     width: 100%;
 }
 
+.columna-derecha {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.producto {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
 
 .producto img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover;         /* CROPEA la imagen para llenar el contenedor */
+    object-position: center;   /* Centra lo que se ve del recorte */
     display: block;
+    border-radius: 8px;
 }
 
+
+
+/* Tamaños */
 .grande {
     flex: 2;
-}
-
-.columna-derecha {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    gap: 20px;
+    height: 210px;
 }
 
 .chico {
-    width: 300px;
-    height: 50%;
+    width: 100px;
+    height: 100px;
 }
+
+
 
 /*Acomodar estos nombres*/
 
