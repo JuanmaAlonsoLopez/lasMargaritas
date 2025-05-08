@@ -1,0 +1,64 @@
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+    margin: 0;
+}
+
+
+main {
+    flex-grow: 1;
+}
+
+/* Estilos de la sección de contacto */
+.contacto {
+    background-color: #5E7F58;
+    color: white;
+    text-align: center; 
+    padding: 40px 20px; 
+    font-family: 'Montserrat', sans-serif;
+}
+
+.contacto h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+.contacto-contenido {
+    background-color: white;
+    color: #333;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contacto-contenido h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #5E7F58;
+}
+
+.contacto-items {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;
+    align-items: center;
+}
+
+.contacto-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.2rem;
+}
+
+.contacto-item img {
+    width: 30px;
+    height: 30px;
+}
+

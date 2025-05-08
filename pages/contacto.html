@@ -5,70 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
     <link rel="icon" href="../images/logoBanner/logo.png" type="image/png">
-    <title>Contacto</title>
+    <title>Sobre Nosotros</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../styles/categorias.css">
+    <link rel="stylesheet" href="../style/footer-nav.css">
+    <link rel="stylesheet" href="../style/contacto.css">
 </head>
+
+
 <body>
+    
+
     <header>
-        <div class="logo">🌻</div>
+        <div class="logo">
+            <img src="../images/logoBanner/logo.png" alt="Logo Las Margaritas">
+        </div>
         <nav class="menu">
-            <a href="../index.html">INICIO</a>
+            <!--Esta clase "activado" la usamos para saber en que pagina estamos-->
+            <a  href="../index.html">INICIO</a>
             <div class="dropdown">
                 <a href="#" class="dropbtn">PRODUCTOS ▼</a>
                 <div class="dropdown-content">
-                    <a href="#">CATEGORÍAS</a>
+                    <a " href="/pages/categorias.html">CATEGORÍAS</a>
                     <a href="#">LISTADO DE PRODUCTOS</a>
                     <a href="#">PRODUCTOS INDIVIDUAL</a>
                 </div>
             </div>
-            <a href="sobreNosotros.html">SOBRE NOSOTROS</a>
-            <a href="contacto.html">CONTACTO</a>
+            <a href="/pages/sobreNosotros.html">SOBRE NOSOTROS</a>
+            <a class="activado" href="/pages/contacto.html">CONTACTO</a>
         </nav>
         <div class="cart">
-            <a href="#"><img src="./images/icons8-carrito-de-compras.gif" alt="Carrito de compras"></a>
+            <a href="#"><img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="carritoDeCompras"></a>
         </div>
     </header>
 
+
+
+    <!-- Empieza el contenedor de la pagina-->
+    <main>
+        <!-- Todo el contenido de la página va aquí (incluyendo la sección de contacto) -->
+        <section class="contacto">
+            <h1>Contacto</h1>
+            <div class="contacto-contenido">
+                <h2>Contacta con nosotros</h2>
+                <div class="contacto-items">
+                    <div class="contacto-item">
+                        <img src="/images/email.png" alt="Email">
+                        <p>contacto@gmail.com</p>
+                    </div>
+                    <div class="contacto-item">
+                        <img src="/images/telefono.png" alt="Teléfono">
+                        <p>261292929</p>
+                    </div>
+                    <div class="contacto-item">
+                        <img src="/images/simbolo-de-la-aplicacion-de-facebook.png" alt="Facebook">
+                        <p>Facebook</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Empieza el Footer-->
     <footer class="footer">
         <div class="footer-contenido">
         <div class="columna logo-redes">
-            <img src="./images/LasMargaritas.png" alt="Las Margaritas" class="logo-footer" />
+            <img src="/images/logoBanner/LasMargaritas.png" alt="Las Margaritas" class="logo-footer" />
             <div class="redes">
-            <img src="./images/logotipo-de-instagram.png" alt="Instagram">
-            <img src="./images/simbolo-de-la-aplicacion-de-facebook.png" alt="Facebook">
+            <img src="/images/logotipo-de-instagram.png" alt="Instagram">
+            <img src="/images/simbolo-de-la-aplicacion-de-facebook.png" alt="Facebook">
             </div>
         </div>
     
         <div class="columna links">
             <div class="grupo">
-            <h4>Lorem lorem</h4>
+            <h4>Secciones</h4>
             <ul>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li><button class="btn-negro">Lorem</button></li>
-            </ul>
-            </div>
-            <div class="grupo">
-            <h4>Lorem lorem</h4>
-            <ul>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
+                <li><a href="#">Informacion</a></li>
+                <li><a href="/pages/sobreNosotros.html">Sobre nosotros</a></li>
+                <li><a href="#">Politica de privacidad</a></li>
+                <li><a href="#">Terminos y condiciones</a></li>
+                
+                <li><button class="btn-negro btnFooterSec">Llamanos</button></li>
             </ul>
             </div>
         </div>
     
         <div class="columna contacto">
             <h4>Contacto</h4>
-            <p><img src="./images/telefono.png" alt="Tel"> 222292929</p>
-            <p><img src="./images/email.png" alt="Mail"> Mail@gmail.com</p>
+            <p><img src="/images/telefono.png" alt="Tel"> 222292929</p>
+            <p><img src="/images/email.png" alt="Mail"> Mail@gmail.com</p>
         </div>
         </div>
     
@@ -76,6 +102,7 @@
         Todos los derechos reservados @ Las Margaritas 2025
         </div>
     </footer>
+    <!-- termina Footer-->
         
 
     <script src="carousel.js"></script> <!-- Enlazamos el archivo JS aquí -->
