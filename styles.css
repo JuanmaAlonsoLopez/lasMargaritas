@@ -53,11 +53,19 @@ h2 {
 }
 
 
+.producto {
+    display: flex;
+    flex-direction: column; /* Coloca los elementos en una columna */
+    justify-content: space-between; /* Distribuye los elementos uniformemente */
+    align-items: center; /* Centra los elementos horizontalmente */
+    height: 350px; /* Asegura una altura uniforme para todas las tarjetas */
+    text-align: center;
+    padding: 10px; /* Opcional: agrega espacio interno */
+}
 
 .producto img {
-    width: 100px;
-    height: 100px;
-    border-radius: 8px;
+    max-height: 150px; /* Limita la altura de las imágenes */
+    object-fit: cover; /* Asegura que las imágenes se recorten proporcionalmente */
 }
 
 .producto p {
@@ -219,7 +227,6 @@ h2 {
     min-height: 300px;
     height: auto;
     overflow: visible;
-
     margin-bottom: 30px;
 }
 
