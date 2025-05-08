@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
     <title>Las Margaritas</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    
+    <!--- Menu principal -->
+
     <header>
         <div class="logo">
-          <img src="/images/Logo.png" alt="Logo Las Margaritas">
+            <img src="./images/logoBanner/logo.png" alt="Logo Las Margaritas">
         </div>
         <nav class="menu">
-            <a href="index.html">INICIO</a>
+            <!--Esta clase "activado" la usamos para saber en que pagina estamos-->
+            <a class="activado" href="index.html">INICIO</a>
             <div class="dropdown">
                 <a href="#" class="dropbtn">PRODUCTOS ▼</a>
                 <div class="dropdown-content">
@@ -22,21 +27,16 @@
                     <a href="#">PRODUCTOS INDIVIDUAL</a>
                 </div>
             </div>
-            <a href="sobreNosotros.html">SOBRE NOSOTROS</a>
-            <a href="contacto.html">CONTACTO</a>
+            <a href="./pages/sobreNosotros.html">SOBRE NOSOTROS</a>
+            <a href="./pages/contacto.html">CONTACTO</a>
         </nav>
         <div class="cart">
-            <a href="#"><img src="./images/icons8-carrito-de-compras.gif" alt="Carrito de compras"></a>
+            <a href="#"><img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="carritoDeCompras"></a>
         </div>
     </header>
+    
+<!--- Hasta aca -->
 
-    <!DOCTYPE html>
-<html lang="es">
-<head>
-    <title>Productos - Las Margaritas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-</head>
 <body>
 
     <div class="imagenLasMargaritas">
@@ -178,7 +178,7 @@
         <div class="carousel-container">
             <div class="carousel">
                 <div class="producto">
-                    <img src="./images/115718a41ddcbc3aeaed7a283bdec5fdf986e43f.png" alt="Producto 1">
+                    <img src="./images/fot/115718a41ddcbc3aeaed7a283bdec5fdf986e43f.png" alt="Producto 1">
                     <p>Producto 001</p>
                     <span>$12,000</span>
                     <p>12 cuotas sin interés de $100</p>
@@ -273,10 +273,12 @@
         <button class="ver-mas">Ver más</button>
     </section>
 
+<!-- Footer-->
+
     <footer class="footer">
         <div class="footer-contenido">
         <div class="columna logo-redes">
-            <img src="./images/LasMargaritas.png" alt="Las Margaritas" class="logo-footer" />
+            <img src="./images/logoBanner/LasMargaritas.png" alt="Las Margaritas" class="logo-footer" />
             <div class="redes">
             <img src="./images/logotipo-de-instagram.png" alt="Instagram">
             <img src="./images/simbolo-de-la-aplicacion-de-facebook.png" alt="Facebook">
@@ -285,26 +287,14 @@
     
         <div class="columna links">
             <div class="grupo">
-            <h4>Lorem lorem</h4>
+            <h4>Secciones</h4>
             <ul>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li><button class="btn-negro">Lorem</button></li>
-            </ul>
-            </div>
-            <div class="grupo">
-            <h4>Lorem lorem</h4>
-            <ul>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
-                <li>Lorem lorem</li>
+                <li><a href="#">Informacion</a></li>
+                <li><a href="#">Sobre nosotros</a></li>
+                <li><a href="#">Politica de privacidad</a></li>
+                <li><a href="#">Terminos y condiciones</a></li>
+                
+                <li><button class="btn-negro btnFooterSec">Llamanos</button></li>
             </ul>
             </div>
         </div>
@@ -320,7 +310,8 @@
         Todos los derechos reservados @ Las Margaritas 2025
         </div>
     </footer>
-        
+
+    <!-- termina Footer-->
 
     <script src="carousel.js"></script> <!-- Enlazamos el archivo JS aquí -->
     
