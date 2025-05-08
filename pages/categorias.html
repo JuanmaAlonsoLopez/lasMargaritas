@@ -23,15 +23,15 @@
             <!--Esta clase "activado" la usamos para saber en que pagina estamos-->
             <a  href="../index.html">INICIO</a>
             <div class="dropdown">
-                <a href="#" class="dropbtn">PRODUCTOS ▼</a>
+                <a class="activado"  href="#" class="dropbtn">PRODUCTOS ▼</a>
                 <div class="dropdown-content">
-                    <a class="activado" href="#">CATEGORÍAS</a>
+                    <a href="#">CATEGORÍAS</a>
                     <a href="#">LISTADO DE PRODUCTOS</a>
                     <a href="#">PRODUCTOS INDIVIDUAL</a>
                 </div>
             </div>
-            <a href="./pages/sobreNosotros.html">SOBRE NOSOTROS</a>
-            <a href="./pages/contacto.html">CONTACTO</a>
+            <a href="/pages/sobreNosotros.html">SOBRE NOSOTROS</a>
+            <a href="/pages/contacto.html">CONTACTO</a>
         </nav>
         <div class="cart">
             <a href="#"><img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="carritoDeCompras"></a>
@@ -40,8 +40,119 @@
     
     
     
+    <!-- Seleccion de categoria-->
     
+    <section class="categorias">
+        <h2>Categorías</h2>
     
+        <!-- Categoría: Confort -->
+        <div class="categoria">
+            <h2></h2>
+            <h2>Confort</h2>
+            <div class="carousel-container">
+                <div class="carousel">
+                    <div class="producto">
+                        <div>
+                            <img src="/images/fotosProductos/producto_1.png" alt="Producto 1">
+                            <p>Producto 001</p>
+                            <span>$12,000</span>
+                            <div class="cuotas">
+                                <p>12 cuotas sin interés de $100</p>
+                            </div>
+                            <button>Ver producto</button>
+                        </div>
+                    </div>
+                    <div class="producto">
+                        <div>
+                            <img src="/images/fotosProductos/producto_2.png">
+                            <p>Producto 002</p>
+                            <span>$12,000</span>
+                            <div class="cuotas">
+                                <p>12 cuotas sin interés de $100</p>
+                            </div>
+                            <button>Ver producto</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+            <button class="ver-mas" onclick="location.href='./pages/confort.html'">Ver más</button>
+        </div>
+    
+        <!-- Categoría: Línea Baby -->
+        <div class="categoria">
+            <h2></h2>
+            <h2>Línea Baby</h2>
+            <div class="carousel-container">
+                <div class="carousel">
+                    <div class="producto">
+                        <div>
+                            <img src="/images/fotosProductos/producto_1.png" alt="Producto 1">
+                            <p>Producto 001</p>
+                            <span>$12,000</span>
+                            <div class="cuotas">
+                                <p>12 cuotas sin interés de $100</p>
+                            </div>
+                            <button>Ver producto</button>
+                        </div>
+                    </div>
+                    <div class="producto">
+                        <div>
+                            <img src="/images/fotosProductos/producto_2.png" alt="Producto 2">
+                            <p>Producto 002</p>
+                            <span>$12,000</span>
+                            <div class="cuotas">
+                                <p>12 cuotas sin interés de $100</p>
+                            </div>
+                            <button>Ver producto</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+            <button class="ver-mas" onclick="location.href='./pages/linea-baby.html'">Ver más</button>
+        </div>
+    
+        <!-- Categoría: Ortopédica -->
+        <div class="categoria">
+            <h2></h2>
+            <h2>Ortopédica</h2>
+            <div class="carousel-container">
+                <div class="carousel">
+                    <div class="producto">
+                        <div>
+                            <img src="/images/fotosProductos/producto_1.png" alt="Producto 1">
+                            <p>Producto 001</p>
+                            <span>$12,000</span>
+                            <div class="cuotas">
+                                <p>12 cuotas sin interés de $100</p>
+                            </div>
+                            <button>Ver producto</button>
+                        </div>
+                    </div>
+                    <div class="producto">
+                        <div>
+                            <img src="/images/fotosProductos/producto_2.png" alt="Producto 2">
+                            <p>Producto 002</p>
+                            <span>$12,000</span>
+                            <div class="cuotas">
+                                <p>12 cuotas sin interés de $100</p>
+                            </div>
+                            <button>Ver producto</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+            <button class="ver-mas" onclick="location.href='./pages/ortopedica.html'">Ver más</button>
+        </div>
+    </section>
+
+    <!-- Seleccion de categoria-->
+
     
     <!-- Footer-->
     
@@ -60,7 +171,7 @@
             <h4>Secciones</h4>
             <ul>
                 <li><a href="#">Informacion</a></li>
-                <li><a href="#">Sobre nosotros</a></li>
+                <li><a href="/pages/sobreNosotros.html">Sobre nosotros</a></li>
                 <li><a href="#">Politica de privacidad</a></li>
                 <li><a href="#">Terminos y condiciones</a></li>
                 
