@@ -7,7 +7,7 @@ section {
     max-width: 1200px;
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
 }
 
 .imagenLasMargaritas {
@@ -37,35 +37,27 @@ h2 {
     margin-bottom: 30px;
 }
 
-.carousel-container {
-    position: relative;
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-}
 
-
-
+/*Carousel*/
 .carousel {
-    display: flex;
-    gap: 20px; /* Espaciado entre tarjetas */
-    overflow: visible;
+display: grid;
+grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según sea necesario */
 }
 
 
 .producto {
-    display: flex;
     flex-direction: column; /* Coloca los elementos en una columna */
     justify-content: space-between; /* Distribuye los elementos uniformemente */
     align-items: center; /* Centra los elementos horizontalmente */
     height: 350px; /* Asegura una altura uniforme para todas las tarjetas */
     text-align: center;
-    padding: 10px; /* Opcional: agrega espacio interno */
+     /* Opcional: agrega espacio interno */
 }
 
 .producto img {
     max-height: 150px; /* Limita la altura de las imágenes */
     object-fit: cover; /* Asegura que las imágenes se recorten proporcionalmente */
+    padding: 10px;
 }
 
 .producto p {
@@ -105,14 +97,15 @@ h2 {
 .prev, .next {
     position: absolute;
     top: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
+    background-color: rgba(0, 0, 0, 0.144);
+    color: rgb(0, 0, 0);
     border: none;
-    padding: 10px;
+    padding: 5px;
     cursor: pointer;
     font-size: 2rem;
     z-index: 1;
     transform: translateY(-50%);
+    
 }
 
 .prev {
@@ -208,15 +201,20 @@ h2 {
 
 
 .carousel-container {
+     /* Cambia el tamaño mínimo según sea necesario */
     overflow-x: auto;
     overflow-y: visible;
     white-space: nowrap;
+    scrollbar-width: thin; /* Para navegadores como Firefox */
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
 }
 
-.carousel {
-    display: flex;
-    gap: 20px;
-}
+
+
+
 
 .producto {
     background-color: #ffffff;
@@ -242,6 +240,9 @@ h2 {
     text-align: center;
     padding: 40px 20px;
     font-family: sans-serif;
+    align-items: center;
+    justify-content: auto;
+    
 }
 
 .beneficios h2 {
@@ -251,17 +252,17 @@ h2 {
 }
 
 .iconos-beneficios {
-    display: flex;
+    display: grid;
+    grid-template-columns: 33% 33% 33%; 
     justify-content: center;
-    gap: 50px;
-    flex-wrap: wrap;
+    align-items: center;
 }
 
 .beneficio {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 120px;
+    min-width: 100px;
 }
 
 .beneficio img {
