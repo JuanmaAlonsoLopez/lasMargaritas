@@ -83,6 +83,16 @@ header .logo img {
     width: 35px;
 }
 
+.busqueda{
+    background-color: #cccccc9c;
+    border-radius: 10px;
+    width: 200px;
+    justify-content: left;
+}
+.busqueda img{
+    padding: 2px;
+}
+
 /* Cambia la animacion del carrito al pasar el mouse */
 .cart a:hover {
     color: #85B27D;   
