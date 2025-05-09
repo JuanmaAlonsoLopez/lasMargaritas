@@ -137,24 +137,46 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 /*----------------------------------------------------------------------------------------*/
 
 .productos-seccion {
-    padding: 20px;
+    padding: 30px;
     background-color: #c9d3c7;
-    display: flex;
     justify-content: center;
+    width: 100%;
+    height: auto;
 }
 
 .contenedor-productos {
-    display: flex;
-    gap: 10px;
-    max-width: 900px;
+    display: grid;
+    grid-template-columns: 50% 50%; /* Cambia el tamaño mínimo según sea necesario */
+}
+
+.productoGrande1 {
+    height: 300px; 
     width: 100%;
 }
 
-.columna-derecha {
+.productoGrande1 img {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    padding: 5px; /* Reducí el padding si querés que ocupen más el contenedor */
+    object-fit: cover;
+    border-radius: 30px;
+}
+.segColumna{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
+
+.productoChico1 img,
+.productoChico2 img {
+    height: 140px; /* Reducí el alto */
+    width: 100%;
+    padding: 5px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
 
 .producto {
     position: relative;
@@ -175,29 +197,15 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 
 
 /* Tamaños */
-.grande {
-    flex: 2;
-    height: 210px;
-}
 
-.chico {
-    width: 100px;
-    height: 100px;
-}
+
+
 
 
 
 /*Acomodar estos nombres*/
 
-.label {
-    top: 10px;
-    left: 10px;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 5px 10px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-family: sans-serif;
-}
+
 
 
 .carousel-container {
