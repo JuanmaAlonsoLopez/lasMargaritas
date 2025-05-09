@@ -189,10 +189,26 @@ header .logo img {
     width: 200px;
 }
 
+.redes {
+    display: flex;
+    margin: 10px;
+    justify-content: center;
+}
+
 .redes img {
     width: 24px;
-    margin-right: 10px;
-    cursor: pointer;
+    height: 24px;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+    justify-content: center;
+}
+
+
+.redes img:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+    align-items: center;
+    justify-content: center;
 }
 
 .links {
