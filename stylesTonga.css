@@ -10,82 +10,6 @@ body {
     color: #333;
 }
 
-header {
-    background-color: #fff;
-    color: black;
-    display: flex;
-    justify-content: space;
-    align-items: center;
-    padding: 10px 40px;
-    border-bottom: 1px solid #ccc;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-
-header .logo {
-    font-size: 2.5rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    margin-left: left; /* Alinea el logo a la izquierda */
-}
-
-header nav {
-    display: flex;
-    gap: 30px;
-    font-size: 1.2rem;
-    text-align: center;
-    margin-left: left;
-   
-}
-
-header nav a {
-    text-decoration: none;
-    color: black;
-    font-weight: 500;
-    text-align: center;
-    margin-left: left;
-}
-
-header nav a:hover {
-    color: #4CAF50;
-}
-
-header .dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-header .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    z-index: 1;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-}
-
-header .dropdown:hover .dropdown-content {
-    display: block;
-}
-
-header .cart {
-    font-size: 2rem;
-    cursor: pointer;
-    display: flex;
-    align-items: right ;
-}
-
-.header-div {
- width: 100%;
- display: flex;
- justify-content:space-between;
- align-items: center;
-}
-
 .product-page {
     margin-top: 120px;
     display: flex;
@@ -181,7 +105,7 @@ header .cart {
 .product-description .description {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #555;
+    color: #333; /* antes #555 */
     margin-bottom: 40px;
 }
 
@@ -192,11 +116,14 @@ header .cart {
     margin-top: 30px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    color: #333; /* ← texto principal en negro */
 }
 
 .product-tech h2 {
     font-size: 1.8rem;
     margin-bottom: 20px;
+    font-weight: bold;
+    color: #2d2d2d; /* título más oscuro */
 }
 
 .product-tech ul {
@@ -225,73 +152,299 @@ header .cart {
     margin-bottom: 30px;
     border-radius: 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    color: #333; /* ← visibilidad del texto */
 }
 
-footer {
-    background-color: #A7B5A0;
-    color: white;
-    text-align: center;
-    padding: 30px 0;
-    position: relative;
-    bottom: 0;
+.review-card p {
+    color: #333; /* ← asegura que los párrafos sean legibles */
+}
+
+.review-card strong {
+    color: #111;
+}
+
+/* ========== HEADER DE LAS MARGARITAS ========== */
+header {
+    background-color: #5E7F58;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    font-family: 'Montserrat', sans-serif;
+    flex-wrap: wrap;
+    position: fixed;
     width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: none;
 }
 
+header .logo img {
+    height: 60px;
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    transition: background-color 0.3s;
+    border-radius: 4px;
+}
+
+.menu a:hover, .menu .activado {
+    background-color: #4a6243;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #6d9262;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    border-radius: 4px;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    display: block;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #567a50;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.cart {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.cart img {
+    width: 30px;
+    height: 30px;
+}
+.header-container,
 .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    flex-wrap: wrap;
+    padding: 10px 20px;
+    width: 100%;
 }
 
-.footer-logo {
-    font-size: 2rem;
+
+/* ========== FOOTER DE LAS MARGARITAS ========== */
+.footer {
+  background-color: #5E7F58;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  padding: 40px 0 0 0;
+  margin-top: 60px;
+  width: 100%;
 }
 
-.footer-socials a {
-    color: black;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 1.5rem;
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-.footer-socials a:hover {
-    opacity: 0.8;
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding-bottom: 30px;
 }
 
-.footer-contact p {
-    font-size: 1.2rem;
+.footer .columna {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.footer-bottom {
-    background-color: black;
-    padding: 10px;
+/* LOGO + REDES */
+.logo-redes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
 }
 
-footer .footer-info p {
-    font-size: 1rem;
-    margin: 10px 0;
+.logo-marca {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
-/* Responsive */
+.logo-footer {
+  width: 200px;
+  height: auto;
+}
+
+.redes {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.redes img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+/* SECCIONES */
+.footer h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer ul li {
+  margin-bottom: 10px;
+}
+
+.footer ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer ul li a:hover {
+  text-decoration: underline;
+}
+
+.btnFooterSec {
+  background-color: white;
+  color: #5E7F58;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.3s ease;
+}
+
+.btnFooterSec:hover {
+  background-color: #c9d3c7;
+}
+
+/* CONTACTO */
+.footer .contacto p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer .contacto img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
 @media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column;
-        align-items: center;
-    }
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+  }
 
-    .footer-logo {
-        font-size: 1.5rem;
-    }
+  .footer .columna {
+    align-items: center;
+  }
 
-    .footer-socials {
-        margin: 20px 0;
-    }
+  .logo-footer {
+    width: 150px;
+  }
 
-    .footer-contact {
-        margin: 20px 0;
-    }
+  .redes {
+    justify-content: center;
+  }
+
+  .btnFooterSec {
+    align-self: center;
+  }
+
+  .footer-derechos {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
+
+/* ZÓCALO INFERIOR */
+.footer-derechos {
+  background-color: #7ea86b;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* Zócalo inferior */
+.footer-derechos {
+  background-color: #4a6243;
+  color: #dcdcdc;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.footer-derechos {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #dcdcdc;
+}
+.product-details h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #333;
+}
+.new-price {
+    color: #333;
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin-left: 10px;
 }
