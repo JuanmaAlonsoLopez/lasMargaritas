@@ -63,7 +63,6 @@ body {
 
 .product-details .old-price {
     text-decoration: line-through;
-    margin-right: 10px;
     color: #888;
 }
 
