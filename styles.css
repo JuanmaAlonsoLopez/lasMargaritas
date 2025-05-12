@@ -150,7 +150,7 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 }
 
 .productoGrande1 {
-    height: 300px; 
+    height: 300px;
     width: 100%;
 }
 
@@ -194,7 +194,64 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     border-radius: 8px;
 }
 
+/* Mobile (hasta 600px): 1 columna */
+@media (max-width: 600px) {
+    .carousel {
+        grid-template-columns: 100%;
+    }
 
+    .producto {
+        height: auto;
+        padding: 20px 10px;
+    }
+
+    .producto img {
+        max-height: 120px;
+    }
+
+    .producto span {
+        margin-bottom: 20px;
+    }
+
+    .producto button {
+        padding: 8px 16px;
+        font-size: 1rem;
+    }
+
+    .ver-mas {
+        font-size: 1rem;
+        padding: 8px 30px;
+    }
+}
+
+/* Tablets (601px a 900px): 2 o 3 columnas */
+@media (min-width: 601px) and (max-width: 900px) {
+    .carousel {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .producto img {
+        max-height: 130px;
+    }
+
+    .producto button {
+        padding: 8px 18px;
+    }
+}
+
+/* Laptops (901px a 1200px): 4 columnas */
+@media (min-width: 901px) and (max-width: 1200px) {
+    .carousel {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Pantallas grandes (más de 1200px): 5 columnas como original */
+@media (min-width: 1201px) {
+    .carousel {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
 
 /* Tamaños */
 
