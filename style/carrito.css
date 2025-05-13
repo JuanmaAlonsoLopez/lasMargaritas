@@ -1,7 +1,7 @@
 /* Estilo para el modal del carrito */
 .carrito-modal {
-    top: 0;
-    left: 0;
+   
+    right: 0;
     width: 100%;
     height: 100%;
     z-index: 1000;
@@ -10,7 +10,7 @@
 }
 
 .carrito-contenido {
-    background-color: #2D7D4A; /* Verde de tu página */
+    background-color: #5E7F58; /* Verde de tu página */
     padding: 20px;
     border-radius: 8px;
     width: 90%;
@@ -30,7 +30,7 @@
     font-size: 1rem;
     margin: 10px 0;
     text-align: center;
-    color: #e5e5e5;
+    color: #dbdb0e;
 }
 
 .carrito-item {
@@ -72,8 +72,8 @@
 }
 
 .ir-al-carrito, .seguir-comprando {
-    background-color: #25D366; /* Verde de tu página */
-    color: white;
+    background-color: rgba(165, 224, 158, 0.95); /* Verde de tu página */
+    color: black;
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
@@ -86,7 +86,7 @@
 }
 
 .ir-al-carrito:hover, .seguir-comprando:hover {
-    background-color: #128C7E; /* Verde más oscuro */
+    background-color: #054024; /* Verde más oscuro */
 }
 
 /* Mostrar el modal */
