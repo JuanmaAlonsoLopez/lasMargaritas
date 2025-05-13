@@ -16,6 +16,7 @@
 <!-- HEADER ORIGINAL -->
     <!--- Menu principal -->
 
+    <!--  -->
     <header>
         <div class="logo">
             <img src="../images/logoBanner/logo.png" alt="Logo Las Margaritas">
@@ -24,20 +25,32 @@
             <!--Esta clase "activado" la usamos para saber en que pagina estamos-->
             <a href="../index.html">INICIO</a>
             <div class="dropdown">
-                <a class="activado"  href="#" class="dropbtn">PRODUCTOS ▼</a>
+                <a href="#" class="dropbtn">PRODUCTOS ▼</a>
                 <div class="dropdown-content">
-                    <a href="/pages/categorias.html">CATEGORÍAS</a>
-                    <a href="/pages/listadoProductos.html">LISTADO DE PRODUCTOS</a>
-                    <a href="#">PRODUCTOS INDIVIDUAL</a>
+                    <a href="../pages/categorias.html">CATEGORÍAS</a>
+                    <a href="../pages/listadoProductos.html">LISTADO DE PRODUCTOS</a>
+                    <a class="activado" href="#">PRODUCTOS INDIVIDUAL</a>
                 </div>
             </div>
-            <a href="/pages/sobreNosotros.html">SOBRE NOSOTROS</a>
-            <a href="/pages/contacto.html">CONTACTO</a>
+            <a href="../pages/sobreNosotros.html">SOBRE NOSOTROS</a>
+            <a href="../pages/contacto.html">CONTACTO</a>
         </nav>
+        <div class="busBloque">
+
+            <div class="cart busqueda">
+                <a href="#"><img src="../images/logoBanner/search_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
+            </div>
+
+        </div>
         <div class="cart">
             <a href="#"><img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="carritoDeCompras"></a>
+            <div class="ingresar">
+                <a  href="#"><img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
+                <span>Ingresar</span>
+            </div>
         </div>
     </header>
+    <!--  -->
     
 <!-- FIN HEADER -->
 
@@ -129,6 +142,6 @@
 <!-- FIN FOOTER -->
 
 <script src="../carousel.js"></script>
-
+<script src="../js/navbar.js"></script>
 </body>
 </html>

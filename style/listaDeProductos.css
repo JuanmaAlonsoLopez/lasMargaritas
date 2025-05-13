@@ -1,0 +1,19 @@
+.catListada h3{
+    text-align: center;
+    font-size: 2rem;
+    margin: 20px 0;
+}
+
+.productos-grid{
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.prooductoListado{
+    display: grid;
+    justify-items: center;
+}

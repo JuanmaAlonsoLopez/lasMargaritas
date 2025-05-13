@@ -6,38 +6,61 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
     <link rel="icon" href="../images/logoBanner/logo.png" type="image/png">
     <title>Categorias</title>
+    <link rel="stylesheet" href="../style/footer-nav.css">
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../styles/categorias.css">
-    <link rel="stylesheet" href="../style/footer-nav.css">
 </head>
 
 
 <body>
     
 
+    <!--  -->
     <header>
         <div class="logo">
             <img src="../images/logoBanner/logo.png" alt="Logo Las Margaritas">
         </div>
         <nav class="menu">
             <!--Esta clase "activado" la usamos para saber en que pagina estamos-->
-            <a  href="../index.html">INICIO</a>
+            <a href="../index.html">INICIO</a>
             <div class="dropdown">
-                <a class="activado"  href="#" class="dropbtn">PRODUCTOS ▼</a>
+                <a href="#" class="dropbtn">PRODUCTOS ▼</a>
                 <div class="dropdown-content">
-                    <a href="#">CATEGORÍAS</a>
-                    <a href="/pages/listadoProductos.html">LISTADO DE PRODUCTOS</a>
+                    <a class="activado" href="../pages/categorias.html">CATEGORÍAS</a>
+                    <a href="../pages/listadoProductos.html">LISTADO DE PRODUCTOS</a>
                     <a href="#">PRODUCTOS INDIVIDUAL</a>
                 </div>
             </div>
-            <a href="/pages/sobreNosotros.html">SOBRE NOSOTROS</a>
-            <a href="/pages/contacto.html">CONTACTO</a>
+            <a href="../pages/sobreNosotros.html">SOBRE NOSOTROS</a>
+            <a href="../pages/contacto.html">CONTACTO</a>
         </nav>
+        <div class="busBloque">
+
+            <div class="cart busqueda">
+                <a href="#"><img src="../images/logoBanner/search_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
+            </div>
+
+        </div>
         <div class="cart">
             <a href="#"><img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="carritoDeCompras"></a>
+            <div class="ingresar">
+                <a  href="#"><img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
+                <span>Ingresar</span>
+            </div>
         </div>
     </header>
-    
+    <!--  -->
+
+
+
+
+
+
+
+
+
+
+
     
     
     <!-- Seleccion de categoria-->
@@ -47,106 +70,94 @@
     
         <!-- Categoría: Confort -->
         <div class="categoria">
-            <h2></h2>
+        
+            <!----------------------->
             <h2>Confort</h2>
-            <div class="carousel-container">
-                <div class="carousel">
-                    <div class="producto">
-                        <div>
-                            <img src="/images/fotosProductos/producto_1.png" alt="Producto 1">
-                            <p>Producto 001</p>
-                            <span>$12,000</span>
-                            <div class="cuotas">
-                                <p>12 cuotas sin interés de $100</p>
+            <h3 class="textDesc">Aca vamos a poner una explicacion de cada una de las cosas y esto es lo que tenemos que pedirle a la ia</h3>
+            <!-- carrusel de producto -->
+           
+            <!--Poner esto en las otras categorias-->
+            <section class="productos-destacados">
+                <div class="carousel-container" id="carousel1">
+                    <div class="carousel">
+                        <div class="productos">
+                            <!-- Producto 1 -->
+                            <div class="producto">
+                                <img src="../images/fotosProductos/producto_1.png" alt="Producto 1">
+                                <p>Producto 001</p>
+                                <span>$12,000</span>
+                                <div class="cuotas">
+                                    <p>12 cuotas sin interés de $100</p>
+                                </div>
+                                <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
                             </div>
-                            <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
+                            <!-- Aquí agrega más productos -->
                         </div>
                     </div>
-                    <div class="producto">
-                        <div>
-                            <img src="/images/fotosProductos/producto_2.png" alt="product_2"/>
-                            <p>Producto 002</p>
-                            <span>$12,000</span>
-                            <div class="cuotas">
-                                <p>12 cuotas sin interés de $100</p>
-                            </div>
-                            <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                        </div>
-                    </div>
+                    <div class="dots-container"></div>
                 </div>
-                <button class="prev">&#10094;</button>
-                <button class="next">&#10095;</button>
-            </div>
+            </section>
+            <!---->
+
+
             <button class="ver-mas" onclick="location.href='./confortPage.html'">Ver más</button>
         </div>
     
         <!-- Categoría: Línea Baby -->
         <div class="categoria">
-            <h2></h2>
             <h2>Línea Baby</h2>
-            <div class="carousel-container">
-                <div class="carousel">
-                    <div class="producto">
-                        <div>
-                            <img src="/images/fotosProductos/producto_1.png" alt="Producto 1">
-                            <p>Producto 001</p>
-                            <span>$12,000</span>
-                            <div class="cuotas">
-                                <p>12 cuotas sin interés de $100</p>
+            <h3 class="textDesc">Aca vamos a poner una explicacion de cada una de las cosas y esto es lo que tenemos que pedirle a la ia</h3>
+            <!--Poner esto en las otras categorias-->
+            <section class="productos-destacados">
+                <div class="carousel-container" id="carousel2">
+                    <div class="carousel">
+                        <div class="productos">
+                            <!-- Producto 1 -->
+                            <div class="producto">
+                                <img src="../images/fotosProductos/producto_2.png" alt="Producto 1">
+                                <p>Producto 001</p>
+                                <span>$12,000</span>
+                                <div class="cuotas">
+                                    <p>12 cuotas sin interés de $100</p>
+                                </div>
+                                <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
                             </div>
-                            <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
+                            <!-- Aquí agrega más productos -->
                         </div>
                     </div>
-                    <div class="producto">
-                        <div>
-                            <img src="/images/fotosProductos/producto_2.png" alt="Producto 2">
-                            <p>Producto 002</p>
-                            <span>$12,000</span>
-                            <div class="cuotas">
-                                <p>12 cuotas sin interés de $100</p>
-                            </div>
-                            <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                        </div>
-                    </div>
+                    <div class="dots-container"></div>
                 </div>
-                <button class="prev">&#10094;</button>
-                <button class="next">&#10095;</button>
-            </div>
+            </section>
+            <!---->
             <button class="ver-mas" onclick="location.href='./lineaBaby.html'">Ver más</button>
         </div>
     
         <!-- Categoría: Ortopédica -->
         <div class="categoria">
-            <h2></h2>
             <h2>Ortopédica</h2>
-            <div class="carousel-container">
-                <div class="carousel">
-                    <div class="producto">
-                        <div>
-                            <img src="/images/fotosProductos/producto_1.png" alt="Producto 1">
-                            <p>Producto 001</p>
-                            <span>$12,000</span>
-                            <div class="cuotas">
-                                <p>12 cuotas sin interés de $100</p>
+            <h3 class="textDesc">Aca vamos a poner una explicacion de cada una de las cosas y esto es lo que tenemos que pedirle a la ia</h3>
+            <!--Poner esto en las otras categorias-->
+            <section class="productos-destacados">
+                <div class="carousel-container" id="carousel3">
+                    <div class="carousel">
+                        <div class="productos">
+                            <!-- Producto 1 -->
+                            <div class="producto">
+                                <img src="../images/fotosProductos/producto_1.png" alt="Producto 1">
+                                <p>Producto 001</p>
+                                <span>$12,000</span>
+                                <div class="cuotas">
+                                    <p>12 cuotas sin interés de $100</p>
+                                </div>
+                                <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
                             </div>
-                            <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
+                            <!-- Aquí agrega más productos -->
                         </div>
                     </div>
-                    <div class="producto">
-                        <div>
-                            <img src="/images/fotosProductos/producto_2.png" alt="Producto 2">
-                            <p>Producto 002</p>
-                            <span>$12,000</span>
-                            <div class="cuotas">
-                                <p>12 cuotas sin interés de $100</p>
-                            </div>
-                            <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                        </div>
-                    </div>
+                    <div class="dots-container"></div>
                 </div>
-                <button class="prev">&#10094;</button>
-                <button class="next">&#10095;</button>
-            </div>
+            </section>
+            <!---->
             <button class="ver-mas" onclick="location.href='./ortopedica.html'">Ver más</button>
         </div>
     </section>
@@ -193,7 +204,7 @@
     </footer>
     
     <!-- termina Footer-->
-
-
+<script src="../carousel.js"></script> <!-- Enlazamos el archivo JS aquí -->
+<script src="../js/navbar.js"></script>
 </body>
 </html>
