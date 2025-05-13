@@ -7,27 +7,103 @@ section {
     max-width: 1200px;
     background-color: white;
     border-radius: 8px;
-    
+}
+a{
+    text-decoration: none;
+    color: #000000;
 }
 
-.imagenLasMargaritas {
-    background-color: #5E7F58;
+
+
+/*--------------------------------------------------*/
+
+/*-------------Carrusel del inicio GRANDE-----------------------*/
+
+/* Estilos generales */
+
+.banner {
+    position: relative;
+    width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    padding: 10px 0;
-    height: 300px; 
+    background-color: #5E7F58;
 }
 
-.imagenLasMargaritas img {
-    width: 80%;
-    max-width: 600px;
-    height: auto;
-    display: block;
+.carousel-item {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.carousel-item img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5; /* Fondo más suave */
+}
+
+.carousel-text {
+    position: absolute;
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    z-index: 1;
+    padding: 0 20px;
+}
+
+
+.carousel-text h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color:#ffffff;
+}
+
+.carousel-text p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #fbff00;
+}
+
+.date {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+
+
+/*--------------------------------------------------*/
+.textMedio{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 100px;
+}
+
+.textMedio span{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+/*--------------------------------------------------*/
+
+
+
 
 /*PRODUCTOS DESTACADOS*/
+
 
 h2 {
     font-family: 'Montserrat', sans-serif;
@@ -194,6 +270,85 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     border-radius: 8px;
 }
 
+
+/*   nuevo csss */
+
+.productos-destacados {
+    padding: 30px;
+    background-color: #c9d3c7;
+    text-align: center;
+}
+
+.carousel-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 10px;
+}
+
+.carousel {
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+}
+
+.productos {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Mostrar 5 productos a la vez */
+    gap: 20px;
+}
+
+.producto {
+    background-color: white;
+    text-align: center;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.producto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.dots-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.dot:hover {
+    background-color: #717171;
+}
+
+.ver-mas {
+    background-color: #5E7F58;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.ver-mas:hover {
+    background-color: #4c6747;
+}
+
+
+/*--------------------------------------------------*/
+
+
 /* Mobile (hasta 600px): 1 columna */
 @media (max-width: 600px) {
     .carousel {
@@ -254,15 +409,7 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 }
 
 /* Tamaños */
-
-
-
-
-
-
 /*Acomodar estos nombres*/
-
-
 
 
 .carousel-container {
@@ -371,25 +518,3 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     margin: auto;
     background-color: #c9d3c7;
 }
-
-
-
-
-/*SOBRE NOSOTROS ------------------------------------*/
-
-.bloque{
-    background-color: #FFFFFF;
-}
-
-.bloque{
-    display: flex;
-    align-items: center;
-}
-
-.miembroEquipo{
-    max-width: 80px;
-    max-height: 80px;
-    border-radius: 500%;
-}
-
-/*Contacto ------------------------------------*/

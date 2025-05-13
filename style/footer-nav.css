@@ -14,8 +14,6 @@ body {
 }
 
 
-
-
 /*MENU DE NAVEGACION*/
 
 header {
@@ -25,18 +23,18 @@ header {
     display: flex;
     align-items: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    height: 95px;
+    height: 55px;
 }
 
 .logo {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 600px;
+    font-weight: 500px;
     color: #85B27D;
     padding: 10px 20px 10px 10px; 
 }
 
 header .logo img {
-    max-width: 60px; /* Ajusta el tamaño del logo */
+    max-width: 44px; /* Ajusta el tamaño del logo */
     height: auto; /* Mantiene la proporción del logo */
     display: flex; /* Elimina cualquier espacio adicional */
 }
@@ -76,21 +74,38 @@ header .logo img {
     justify-content: flex-end;
 }
 
+.ingresar{
+    display: flex;
+}
+
+.ingresar span{
+    font-weight: 600;
+    color: #000000;
+    align-items: center;
+    padding: 15px 0px 10px 0px;
+}
+
+
 .cart img {
     justify-content: center;
     margin: 10px;
-    height: 35px;
-    width: 35px;
+    height: 30px;
+    width: 30px;
 }
 
 .busqueda{
     background-color: #cccccc9c;
     border-radius: 10px;
     width: 200px;
+    height: 35px;
     justify-content: left;
+    align-items: center;
 }
 .busqueda img{
-    padding: 2px;
+    padding: 1px 1px 1px 1px;
+    margin: 5px 0px 0px 5px;
+    height: 30px;
+    align-items: center;
 }
 
 /* Cambia la animacion del carrito al pasar el mouse */

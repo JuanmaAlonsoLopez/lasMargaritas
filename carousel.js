@@ -1,26 +1,62 @@
-let currentIndex = 0;
+// Función para generar dinámicamente las pelotitas para cada carrusel
+function generateDots(carouselId) {
+    const productos = document.querySelectorAll(`#${carouselId} .producto`);
+    const productosPorGrupo = 5;
+    const totalProductos = productos.length;
+    const totalGrupos = Math.ceil(totalProductos / productosPorGrupo);
 
-function showCarouselItem(index) {
-    const items = document.querySelectorAll('.producto');
-    const totalItems = items.length;
-    
-    if (index >= totalItems) currentIndex = 0;  // Regresa al inicio cuando llega al final
-    if (index < 0) currentIndex = totalItems - 1;  // Regresa al final si va hacia atrás
+    const dotsContainer = document.querySelector(`#${carouselId} .dots-container`);
+    dotsContainer.innerHTML = ''; // Limpiar pelotitas existentes
 
-    const carousel = document.querySelector('.carousel');
-    carousel.style.transform = `translateX(-${currentIndex * 33.33}%)`; // Cada producto ocupa un 33.33% del ancho
+    // Crear pelotitas según la cantidad de grupos
+    for (let i = 0; i < totalGrupos; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        dot.onclick = () => moveToSlide(i, carouselId); // Asignar evento de clic
+        dotsContainer.appendChild(dot);
+    }
+
+    // Inicializar la visualización de los productos
+    moveToSlide(0, carouselId);
 }
 
-// Mostrar el tercer producto centrado al inicio
-showCarouselItem(currentIndex);
+// Función para mover el carrusel a un grupo específico
+function moveToSlide(index, carouselId) {
+    const productos = document.querySelectorAll(`#${carouselId} .producto`);
+    const productosPorGrupo = 5;
+    const totalProductos = productos.length;
+    const totalGrupos = Math.ceil(totalProductos / productosPorGrupo);
 
-document.querySelector('.prev').addEventListener('click', () => {
-    currentIndex--;
-    showCarouselItem(currentIndex);
-});
+    if (index >= totalGrupos) index = 0;
+    if (index < 0) index = totalGrupos - 1;
 
-document.querySelector('.next').addEventListener('click', () => {
-    currentIndex++;
-    showCarouselItem(currentIndex);
-});
+    const start = index * productosPorGrupo;
+    const end = start + productosPorGrupo;
 
+    productos.forEach((producto, i) => {
+        if (i >= start && i < end) {
+            producto.style.display = 'block'; // Mostrar producto en el grupo actual
+        } else {
+            producto.style.display = 'none'; // Ocultar productos fuera del grupo
+        }
+    });
+
+    // Actualizar las pelotitas de navegación
+    const dots = document.querySelectorAll(`#${carouselId} .dot`);
+    dots.forEach((dot, i) => {
+        if (i === index) {
+            dot.style.backgroundColor = '#717171'; // Resaltar pelotita activa
+        } else {
+            dot.style.backgroundColor = '#bbb'; // Restablecer el color de las otras pelotitas
+        }
+    });
+}
+
+// Inicializar todos los carruseles cuando la página cargue
+window.onload = () => {
+    const carousels = document.querySelectorAll('.carousel-container');
+    carousels.forEach(carousel => {
+        const carouselId = carousel.id;
+        generateDots(carouselId); // Generar pelotitas para cada carrusel
+    });
+};
