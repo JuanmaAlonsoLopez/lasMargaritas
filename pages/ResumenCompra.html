@@ -25,13 +25,13 @@
             <div class="dropdown">
                 <a href="#" class="dropbtn">PRODUCTOS ▼</a>
                 <div class="dropdown-content">
-                    <a href="./pages/categorias.html">CATEGORÍAS</a>
-                    <a href="./pages/listadoProductos.html">LISTADO DE PRODUCTOS</a>
+                    <a href="../pages/categorias.html">CATEGORÍAS</a>
+                    <a href="../pages/listadoProductos.html">LISTADO DE PRODUCTOS</a>
                     <a href="#">PRODUCTOS INDIVIDUAL</a>
                 </div>
             </div>
-            <a href="../sobreNosotros.html">SOBRE NOSOTROS</a>
-            <a href="../contacto.html">CONTACTO</a>
+            <a href="../pages/sobreNosotros.html">SOBRE NOSOTROS</a>
+            <a href="../pages/contacto.html">CONTACTO</a>
         </nav>
         <div class="busBloque">
 
@@ -48,51 +48,56 @@
             </div>
         </div>
     </header>
+
+    
     <!--  -->
 
-<body>
   <div class="container">
     <!-- Ventana izquierda: Productos en el carrito -->
     <div class="left-container">
-      <div class="productoRes">
-        <input type="checkbox" id="producto1" class="checkbox">
-        <label for="producto1" class="producto-label">
-          <img src="../images/prod_margarita1.png" alt="Producto" class="producto-img">
-          <div class="producto-info">
-            <span class="producto-nombre">Azucar Ledesma Clásica Paquete De 1 Kilo</span>
 
-            <div class="acciones">
-              <button class="eliminar">Eliminar</button>
-              <button class="comprar-ahora">Comprar ahora</button>
-            </div>
-            
-          </div>
-        </label>
-      </div>
-      <div class="envio">
-        <span class="envio-text">Envío</span>
-        <div class="barra-envio">
-          <span>Agrega $32,030.97 más para conseguir envío gratis en productos de DISTRIBUIDORA-MAYA.</span>
+      <!--Producto esto se saca--->
+        <div class="Producto">
+            <input type="checkbox" id="producto1" class="checkbox">
+            <label for="producto1" class="producto-label">
+                <img src="../images/prod_almohadon1.png" alt="Producto Almohadón" class="producto-img">
+                <div class="producto-info">
+                    <span class="producto-nombre">Almohadón Ortopédico Deluxe - 70x50 cm</span>
+                  </div>
+                </label>
+                <div class="acciones">
+                    <button class="eliminar">Eliminar</button>
+                
+                    <button class="comprar-ahora">Comprar ahora</button>
+                </div>
         </div>
-      </div>
-      <div class="productos-relacionados">
-        <span>Ver más productos de este vendedor</span>
-      </div>
+        <!-- Envío -->
+        <div class="envio">
+            <span class="envio-text">Envío</span>
+            <div class="barra-envio">
+                <span>Agrega $1,500 más para conseguir envío gratis en productos de Almohadones Ortopédicos.</span>
+            </div>
+        </div>
+        <!-- Productos relacionados -->
+        <div class="productos-relacionados">
+            <span>Ver más productos de este vendedor</span>
+        </div>
     </div>
 
     <!-- Ventana derecha: Resumen de compra -->
     <div class="right-container">
-      <div class="resumen-compra">
-        <h3>Resumen de compra</h3>
-        <div class="detalles">
-          <p>Producto: $969.03</p>
-          <p>Envío: $10,051.99</p>
-          <p>Total: $11,021.02</p>
+        <div class="resumen-compra">
+            <h3>Resumen de compra</h3>
+            <div class="detalles">
+                <p>Producto: $9,290.00</p>
+                <p>Envío: $1,500.00</p>
+                <p>Total: $10,790.00</p>
+            </div>
+            <button class="continuar-compra">Continuar compra</button>
         </div>
-        <button class="listadoProductos">Continuar compra</button>
-      </div>
     </div>
-  </div>
+</div>
+
 
 
     <!-- Footer-->
