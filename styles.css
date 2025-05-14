@@ -125,6 +125,13 @@ h2 {
     margin: 30px;
 }
 
+.carousel-item{
+    font-family:'Madre-Script', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+
+    
+}
 
 /*Carousel*/
 .carousel {
