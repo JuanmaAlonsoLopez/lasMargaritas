@@ -124,7 +124,6 @@
     font-size: 18px;
 }
 
-
 /*Contacto ------------------------------------*/
 
 .mail {
@@ -134,9 +133,9 @@
     align-items: center;
     gap: 10px;
     
-  }
+}
 
-  .mail img {
+.mail img {
     width: 20px; /* Ajusta este valor según el tamaño que desees */
     height: auto;
 }
