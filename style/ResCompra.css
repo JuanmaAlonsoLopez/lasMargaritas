@@ -1,123 +1,142 @@
+/* Estilo general del body */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  margin: 0;
-  padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
 }
 
+/* Contenedor principal utilizando Grid */
 .container {
-  display: grid;
-  grid-template-columns: 60% 35%;
-  gap: 20px;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: grid;
+    grid-template-columns: 3fr 2fr; /* Columna izquierda más ancha que la derecha */
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
+/* Contenedor de productos (izquierda) */
 .left-container {
-
-  background-color: white;
-  padding: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
-.right-container {
-    
-  background-color: white;
-  padding: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
 
-.producto {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+
+/* Estilo de cada producto */
+
+
+.Producto {
+    display: flex;
+    align-items: center;
+    margin: 10px 10px 20px 10px;
+    width: 100%;
 }
 
 .producto-img {
-  width: 80px;
-  height: 80px;
-  margin-right: 20px;
-  border-radius: 8px;
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    border-radius: 8px;
 }
 
 .producto-info {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
+
+.checkbox {
+    margin-right: 10px;
+}
+
 
 .producto-nombre {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.productoRes{
-    display: flex;
-
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .acciones {
-  display: flexbox;
-  gap: 10px;
-  margin: 10px;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    gap: 10px;
+    margin: 10px;
 }
 
 .eliminar, .comprar-ahora {
-  background-color: #34a853; /* Verde para que coincida con el estilo */
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 5px;
-  width: 120px;
+    background-color: #34a853;
+    color: white;
+    border: none;
+    padding: 5px 10px 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    
+
 }
 
-.eliminar:hover, .comprar-ahora:hover {
-  background-color: #0c7a29;
+.eliminar:hover, .ajustar:hover, .comprar-ahora:hover {
+    background-color: #0c7a29;
 }
 
+/* Estilo para la sección de Envío */
 .envio {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .envio-text {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .barra-envio {
-  margin-top: 10px;
-  color: #555;
+    margin-top: 10px;
+    color: #555;
 }
 
+/* Estilo para productos relacionados */
 .productos-relacionados {
-  margin-top: 30px;
+    margin-top: 30px;
 }
 
-.right-container .resumen-compra {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Contenedor del resumen de compra (derecha) */
+.right-container {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
-.right-container .detalles p {
-  font-size: 16px;
-  margin: 10px 0;
+.resumen-compra {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.continuar {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 15px 30px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 20px;
+.resumen-compra h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
 }
 
-.continuar:hover {
-  background-color: #0056b3;
+.detalles p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+/* Estilo para el botón de continuar compra */
+.continuar-compra {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.continuar-compra:hover {
+    background-color: #0056b3;
 }
