@@ -4,20 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
-    <link rel="icon" href="../images/logoBanner/logo.png" type="image/png">
-    <title>Sobre Nosotros</title>
+    <link rel="icon" href="./images/logoBanner/logo.png" type="image/png">
+    <title>Las Margaritas</title>
     <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="../styles/categorias.css">
     <link rel="stylesheet" href="../style/footer-nav.css">
-    <link rel="stylesheet" href="../style/sobreNosotros.css">
+    <link rel="stylesheet" href="../style/paginaError.css">
 </head>
-
 
 <body>
     
+    <!--- Menu principal -->
 
-    <!--HEADER -->
-    
     <header>
     <div class="logo">
         <a href="../index.html">
@@ -25,17 +22,17 @@
         </a>
     </div>
     <nav class="menu">
-        <a  href="../index.html">INICIO</a>
+        <a href="../index.html">INICIO</a>
         <div class="dropdown">
             <a href="#" class="dropbtn">PRODUCTOS ▼</a>
             <div class="dropdown-content">
                 <a href="../pages/categorias.html">CATEGORÍAS</a>
                 <a href="../pages/listadoProductos.html">LISTADO DE PRODUCTOS</a>
-
+                <a href="#">PRODUCTOS INDIVIDUAL</a>
             </div>
         </div>
-        <a href="../pages/sobreNosotros.html">SOBRE NOSOTROS</a>
-        <a href="../pages/contacto.html">CONTACTO</a>
+        <a href="/pages/sobreNosotros.html">SOBRE NOSOTROS</a>
+        <a href="/pages/contacto.html">CONTACTO</a>
     </nav>
     <!--<div class="busBloque">
         <div class="cart busqueda">
@@ -49,7 +46,7 @@
                 <div id="cart-items">
                     <!-- Productos del carrito se cargarán aquí -->
                 </div>
-                <button onclick="location.href='../pages/ResumenCompra.html'" class="ir-al-carrito" >Ir al carrito</button>
+                <button onclick="location.href='./pages/ResumenCompra.html'" class="ir-al-carrito" >Ir al carrito</button>
             </div>
             <div class="ingresar">
                 <a href="#"><img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
@@ -57,59 +54,20 @@
             </div>
         </div>
     </header>
-    <!--  -->
-    
-        <main class="nosotros-main">
 
-        <div class="hero-nosotros">
-            <h1 class="titulo-nosotros">Sobre Nosotros</h1>
+    <!-- Pagina Error-->
+     
+    <main class="error-404">
+        <div class="error-container">
+            <h1>404</h1>
+            <h2>¡Oops! Página no encontrada</h2>
+            <p>Lo sentimos, pero la página que estás buscando no existe o ha sido movida.</p>
+            <a href="../index.html" class="btn-volver">Volver al inicio</a>
         </div>
-
-        <div class="nuestra-empresa">
-            <h2>Nuestra empresa</h2>
-            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto...</p>
-        </div>
-
-        <div id="visionMision">
-
-            <div class="vision">
-            <h3>Visión</h3>
-        </div>
-
-        <div class="mision">
-            <h3>Misión</h3>
-        </div>
-
-        </div>
-        
-        <div class="pContainer">
-            <p>Lorem Ipsum es simplemente el texto de relleno de.... </p>
-            <p>Lorem Ipsum es simplemente el texto de relleno...</p>
-        </div>
-        </section>
-
-        <section class="equipo-desarrollo">
-            <h2>Equipo de desarrollo</h2>
-            <div class="imagenes-equipo">
-                <img src="../images/equipoDev/imgPerfilNegro.jpeg" alt="Miembro 1">
-                <img src="../images/equipo2.png" alt="Miembro 2">
-                <img src="../images/equipo3.png" alt="Miembro 3">
-                <img src="../images/equipo4.png" alt="Miembro 4">
-                <img src="../images/equipo5.png" alt="Miembro 5">
-                <img src="../images/equipo6.png" alt="Miembro 6">
-            </div>
-        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas...</p>
-        </section>
-
-        <section class="contacto-nosotros">
-            <button class="btn-contacto">Contacta con nosotros</button>
-            <p class="mail"><img src="../images/email.png" alt="Mail"> contacto@gmail.com</p>
-        </section>
     </main>
 
-    
-    
-    
+    <!-- Pagina Error-->
+
     <!-- Footer-->
 
     <footer class="footer">
@@ -139,7 +97,7 @@
     
         <div class="columna contacto">
             <h4>Contacto</h4>
-            <p><img src="../images/telefono.png" alt="Tel"> 11 3437-4127</p>
+            <p><img src="../images/telefono.png" alt="Tel"> +5492612543607</p>
             <p><a href="mailto:info@lasmargaritas.online"><img src="../images/email.png" alt="Mail"> info@lasmargaritas.online</a></p>
         </div>
         </div>
@@ -151,11 +109,14 @@
 
     <!-- termina Footer-->
 
-<script src="../js/navbar.js"></script>
-<script src="../js/carritoDes.js"></script>
+    <script src="carousel.js"></script> <!-- Enlazamos el archivo JS aquí -->
+    <script src="js/navbar.js"></script>
+    <script src="js/carritoDes.js"></script>
+
     <a href="https://wa.me/5492612543607" target="_blank" class="whatsapp-float">
         <img src="../images/imageswhatsapp-icon.png" alt="WhatsApp">
     </a>
-
+</a>
 </body>
+
 </html>
