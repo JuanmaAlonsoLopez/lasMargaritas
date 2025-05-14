@@ -16,39 +16,48 @@
     
 
     <!--  -->
+    <!--HEADER -->
+    
     <header>
-        <div class="logo">
+    <div class="logo">
+        <a href="../index.html">
             <img src="../images/logoBanner/logo.png" alt="Logo Las Margaritas">
-        </div>
-        <nav class="menu">
-            <!--Esta clase "activado" la usamos para saber en que pagina estamos-->
-            <a href="../index.html">INICIO</a>
-            <div class="dropdown">
-                <a href="#" class="dropbtn">PRODUCTOS ▼</a>
-                <div class="dropdown-content">
-                    <a href="../pages/categorias.html">CATEGORÍAS</a>
-                    <a href="../pages/listadoProductos.html">LISTADO DE PRODUCTOS</a>
-                    <a href="#">PRODUCTOS INDIVIDUAL</a>
-                </div>
+        </a>
+    </div>
+    <nav class="menu">
+        <a  href="../index.html">INICIO</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">PRODUCTOS ▼</a>
+            <div class="dropdown-content">
+                <a href="../pages/categorias.html">CATEGORÍAS</a>
+                <a href="../pages/listadoProductos.html">LISTADO DE PRODUCTOS</a>
+                <a href="#">PRODUCTOS INDIVIDUAL</a>
             </div>
-            <a href="../pages/sobreNosotros.html">SOBRE NOSOTROS</a>
-            <a href="../pages/contacto.html">CONTACTO</a>
-        </nav>
-        <div class="busBloque">
-
-            <div class="cart busqueda">
-                <a href="#"><img src="../images/logoBanner/search_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
-            </div>
-
         </div>
+        <a href="../pages/sobreNosotros.html">SOBRE NOSOTROS</a>
+        <a href="../pages/contacto.html">CONTACTO</a>
+    </nav>
+    <!--<div class="busBloque">
+        <div class="cart busqueda">
+            <a href="#"><img src="../images/logoBanner/search_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
+        </div>
+    </div>-->
         <div class="cart">
-            <a href="#"><img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="carritoDeCompras"></a>
+            <a href="#" id="cart-icon"><img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="carritoDeCompras"></a>
+            <div class="cart-dropdown">
+                <h3>Productos en el carrito</h3>
+                <div id="cart-items">
+                    <!-- Productos del carrito se cargarán aquí -->
+                </div>
+                <button onclick="location.href='../pages/ResumenCompra.html'" class="ir-al-carrito" >Ir al carrito</button>
+            </div>
             <div class="ingresar">
-                <a  href="#"><img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
+                <a href="#"><img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
                 <span>Ingresar</span>
             </div>
         </div>
     </header>
+    <!--  -->
     <!--  -->
     
     <!-- Logo Whatsapp -->
@@ -120,14 +129,16 @@
 
 
     
-    <!-- Footer-->
-    
+<!-- Footer-->
+
     <footer class="footer">
         <div class="footer-contenido">
         <div class="columna logo-redes">
             <img src="../images/logoBanner/LasMargaritas.png" alt="Las Margaritas" class="logo-footer" />
             <div class="redes">
-            <img src="../images/logotipo-de-instagram.png" alt="Instagram">
+            <a href="https://www.instagram.com/lasmargaritasmza/" target="_blank">
+                <img src="../images/logotipo-de-instagram.png" alt="Instagram">
+            </a>
             <img src="../images/simbolo-de-la-aplicacion-de-facebook.png" alt="Facebook">
             </div>
         </div>
@@ -148,8 +159,8 @@
     
         <div class="columna contacto">
             <h4>Contacto</h4>
-            <p><img src="../images/telefono.png" alt="Tel"> 222292929</p>
-            <p><img src="../images/email.png" alt="Mail"> Mail@gmail.com</p>
+            <p><img src="../images/telefono.png" alt="Tel"> 11 3437-4127</p>
+            <p><a href="mailto:info@lasmargaritas.online"><img src="../images/email.png" alt="Mail"> info@lasmargaritas.online</a></p>
         </div>
         </div>
     
@@ -157,9 +168,11 @@
         Todos los derechos reservados @ Las Margaritas 2025
         </div>
     </footer>
-    
+
     <!-- termina Footer-->
-<script src="../js/navbar.js"></script>
+    
+    <script src="../js/navbar.js"></script>
+    <script src="../js/carritoDes.js"></script>
 
 </body>
 </html>

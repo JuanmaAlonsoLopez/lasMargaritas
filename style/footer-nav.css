@@ -10,20 +10,11 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #FFFFFF;
+    justify-content: space-between;
 }
-
 
 /*MENU DE NAVEGACION*/
 
-/*header {
-    background-color: #79a774;
-    color: #2b2a2a;
-    padding: 15px 40px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    height: 55px;
-}*/
 header {
     background-color: rgba(121, 167, 116, 0.95);
     color: #2b2a2a;
@@ -215,7 +206,89 @@ header .logo img {
     background-color: #20221f70;
 }
 
+
+/*! Carrito desplegable */
+.cart-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    right: 30px;
+    top: 57px;
+    width: 500px;
+    border-radius: 8px;
+    z-index: 500;
+}
+
+#cart-items {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.cart-dropdown h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.cart-dropdown .cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cart-item img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.cart-item .producto-nombre {
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.cart-item .producto-precio {
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.cart-item .eliminar {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cart-item .eliminar:hover {
+    background-color: #cc0000;
+}
+
+.ir-al-carrito {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.ir-al-carrito:hover {
+    background-color: #0056b3;
+}
+    /*! Hasta aca el Carrito desplegable */
 /*! Hasta aca es el menu*/
+
+
+
+
 
 
 
@@ -229,6 +302,7 @@ header .logo img {
     font-family: sans-serif;
     background-color: #5E7F58;
     color: rgb(255, 255, 255);
+    margin-top: auto;
 }
 
 .footer-contenido {

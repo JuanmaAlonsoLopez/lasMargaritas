@@ -1,4 +1,16 @@
 /*--------------------------------------------------*/
+html, body {
+    height: 100%;
+    margin: 0; /* Elimina márgenes por defecto */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Esto asegura que el footer se mantenga abajo */
+    height: 100%;
+}
+
 
 /*INICIO*/
 section {

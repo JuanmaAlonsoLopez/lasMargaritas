@@ -1,19 +1,19 @@
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
     <link rel="icon" href="../images/logoBanner/logo.png" type="image/png">
-    <title>Categorias</title>
+    <title>Resumen de Compra</title>
     <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="../style/categorias.css">
+    <link rel="stylesheet" href="../style/product.css">
     <link rel="stylesheet" href="../style/footer-nav.css">
+    <link rel="stylesheet" href="../style/carrito.css">
+    <link rel="stylesheet" href="../style/ResCompra.css">
 </head>
 
-
 <body>
-    
 
     <!--  -->
     <!--HEADER -->
@@ -58,79 +58,58 @@
         </div>
     </header>
     <!--  -->
+
+    
     <!--  -->
-    
 
-<!-- Página categoría Confort -->
-    <main>
+  <div class="container">
+    <!-- Ventana izquierda: Productos en el carrito -->
+    <div class="left-container">
 
-<!-- Logo Whatsapp -->
-    
-    <a href="https://wa.me/5402612543607" class="boton-whatsapp" target="_blank">
-            <img src="/images/whatsapp (1).png" alt="WhatsApp" />
-    </a>
-
-        <section class="categorias">
-            <h2>Categorías</h2>
-
-            <!-- Categoría: Confort -->
-            <div class="categoria">
-                <h2>Confort</h2>
-
-                    <!-- Contenedor de tarjetas de productos en grilla -->
-                <div class="productos-grid">
-                    
-                    <!-- Tarjeta de producto (repetible) -->
-                    <div class="producto">
-                        <img src="/images/fotosProductos/producto_1.png" alt="Producto 2">
-                        <p>Producto 001</p>
-                        <span>$12,000</span>
-                        <div class="cuotas">
-                            <p>12 cuotas sin interés de $100</p>
-                        </div>
-                        <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                    </div>
-        
-                    <!-- Duplicar o generar más tarjetas desde backend o JS -->
-                    <!-- ... otras tarjetas ... -->
-
-                    <div class="producto">
-                        <img src="/images/fotosProductos/producto_1.png" alt="Producto 3">
-                        <p>Producto 001</p>
-                        <span>$12,000</span>
-                        <div class="cuotas">
-                            <p>12 cuotas sin interés de $100</p>
-                        </div>
-                        <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                    </div>
-        
-                    <div class="producto">
-                        <img src="/images/fotosProductos/producto_1.png" alt="Producto 4">
-                        <p>Producto 001</p>
-                        <span>$12,000</span>
-                        <div class="cuotas">
-                            <p>12 cuotas sin interés de $100</p>
-                        </div>
-                        <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button> 
-                    </div>
-                    
-                    <div class="producto">
-                        <img src="/images/fotosProductos/producto_1.png" alt="Producto 5">
-                        <p>Producto 001</p>
-                        <span>$12,000</span>
-                        <div class="cuotas">
-                            <p>12 cuotas sin interés de $100</p>
-                        </div>
-                        <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button> 
-                    </div>
+      <!--Producto esto se saca--->
+        <div class="Producto">
+            <input type="checkbox" id="producto1" class="checkbox">
+            <label for="producto1" class="producto-label">
+                <img src="../images/prod_almohadon1.png" alt="Producto Almohadón" class="producto-img">
+                <div class="producto-info">
+                    <span class="producto-nombre">Almohadón Ortopédico Deluxe - 70x50 cm</span>
+                  </div>
+                </label>
+                <div class="acciones">
+                    <button class="eliminar">Eliminar</button>
+                
+                    <button class="comprar-ahora">Comprar ahora</button>
                 </div>
-            </div> <!-- .categoria -->
-        </section>
-    </main>
-<!-- Fin página categoría Confort -->
+        </div>
+        <!-- Envío -->
+        <div class="envio">
+            <span class="envio-text">Envío</span>
+            <div class="barra-envio">
+                <span>Agrega $1,500 más para conseguir envío gratis en productos de Almohadones Ortopédicos.</span>
+            </div>
+        </div>
+        <!-- Productos relacionados -->
+        <div class="productos-relacionados">
+            <span>Ver más productos de este vendedor</span>
+        </div>
+    </div>
+
+    <!-- Ventana derecha: Resumen de compra -->
+    <div class="right-container">
+        <div class="resumen-compra">
+            <h3>Resumen de compra</h3>
+            <div class="detalles">
+                <p>Producto: $9,290.00</p>
+                <p>Envío: $1,500.00</p>
+                <p>Total: $10,790.00</p>
+            </div>
+            <button class="continuar-compra">Continuar compra</button>
+        </div>
+    </div>
+</div>
 
 
-    
+
 <!-- Footer-->
 
     <footer class="footer">
@@ -173,7 +152,8 @@
 
     <!-- termina Footer-->
 
-<script src="../js/navbar.js"></script>
-<script src="../js/carritoDes.js"></script>
+    <script src="../js/navbar.js"></script> 
+    <script src="../js/carritoDes.js"></script>
 </body>
 </html>
+
