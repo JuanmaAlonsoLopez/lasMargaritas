@@ -71,23 +71,6 @@
     margin-top: 15px;
 }
 
-.ir-al-carrito, .seguir-comprando {
-    background-color: rgba(165, 224, 158, 0.95); /* Verde de tu página */
-    color: black;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    text-align: center;
-    width: 48%;
-    display: inline-block;
-    font-size: 1.1rem;
-    margin-top: 15px;
-}
-
-.ir-al-carrito:hover, .seguir-comprando:hover {
-    background-color: #054024; /* Verde más oscuro */
-}
 
 /* Mostrar el modal */
 .carrito-modal.mostrar {
