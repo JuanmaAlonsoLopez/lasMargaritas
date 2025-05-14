@@ -357,6 +357,33 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     background-color: #4c6747;
 }
 
+/*--------------------------------------------------*/
+/* Botón flotante de WhatsApp */
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px; /* Distancia desde la parte inferior */
+    right: 20px; /* Distancia desde la parte derecha */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    width: 60px; /* Tamaño del botón */
+    height: 60px;
+    background-color: #25D366; /* Color de fondo de WhatsApp */
+    border-radius: 50%; /* Hace el botón circular */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease; /* Animación al pasar el mouse */
+}
+
+.whatsapp-float img {
+    width: 35px; /* Tamaño del icono */
+    height: 35px;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el mouse */
+}
+
 
 /*--------------------------------------------------*/
 
