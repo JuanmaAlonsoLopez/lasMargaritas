@@ -4,19 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
-    <link rel="icon" href="../images/logoBanner/logo.png" type="image/png">
-    <title>Contacto</title>
+    <link rel="icon" href="./images/logoBanner/logo.png" type="image/png">
+    <title>Las Margaritas</title>
     <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="../styles/categorias.css">
     <link rel="stylesheet" href="../style/footer-nav.css">
-    <link rel="stylesheet" href="../style/contacto.css">
+    <link rel="stylesheet" href="../style/paginaError.css">
 </head>
 
-
 <body>
-    <!--  -->
-    <!--HEADER -->
     
+    <!--- Menu principal -->
+
     <header>
     <div class="logo">
         <a href="../index.html">
@@ -24,17 +22,17 @@
         </a>
     </div>
     <nav class="menu">
-        <a  href="../index.html">INICIO</a>
+        <a href="../index.html">INICIO</a>
         <div class="dropdown">
             <a href="#" class="dropbtn">PRODUCTOS ▼</a>
             <div class="dropdown-content">
                 <a href="../pages/categorias.html">CATEGORÍAS</a>
                 <a href="../pages/listadoProductos.html">LISTADO DE PRODUCTOS</a>
-
+                <a href="#">PRODUCTOS INDIVIDUAL</a>
             </div>
         </div>
-        <a href="../pages/sobreNosotros.html">SOBRE NOSOTROS</a>
-        <a href="../pages/contacto.html">CONTACTO</a>
+        <a href="/pages/sobreNosotros.html">SOBRE NOSOTROS</a>
+        <a href="/pages/contacto.html">CONTACTO</a>
     </nav>
     <!--<div class="busBloque">
         <div class="cart busqueda">
@@ -48,7 +46,7 @@
                 <div id="cart-items">
                     <!-- Productos del carrito se cargarán aquí -->
                 </div>
-                <button onclick="location.href='../pages/ResumenCompra.html'" class="ir-al-carrito" >Ir al carrito</button>
+                <button onclick="location.href='./pages/ResumenCompra.html'" class="ir-al-carrito" >Ir al carrito</button>
             </div>
             <div class="ingresar">
                 <a href="#"><img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
@@ -56,37 +54,19 @@
             </div>
         </div>
     </header>
-    <!--  -->
-    <!--  -->
 
-
-
-    <!-- Empieza el contenedor de la pagina-->
-    <main>
-        <!-- Todo el contenido de la página va aquí (incluyendo la sección de contacto) -->
-        <section class="contacto">
-            <h1>Contacto</h1>
-            <div class="contacto-contenido">
-                <h2>Contacta con nosotros</h2>
-                <div class="contacto-items">
-                    <div class="contacto-item">
-                        <img src="/images/email.png" alt="Email">
-                        <p><a href="mailto:info@lasmargaritas.online">info@lasmargaritas.online</a></p>
-                    </div>
-                    <div class="contacto-item">
-                        <img src="/images/telefono.png" alt="Teléfono">
-                        <p>11 3437-4127</p>
-                    </div>
-                    <div class="contacto-item">
-                        <a href="https://www.instagram.com/lasmargaritasmza/" target="_blank">
-                            <img src="../images/logotipo-de-instagram.png" alt="Instagram">
-                        </a>
-                        <p>@lasmargaritasmza</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Pagina Error-->
+     
+    <main class="error-404">
+        <div class="error-container">
+            <h1>404</h1>
+            <h2>¡Oops! Página no encontrada</h2>
+            <p>Lo sentimos, pero la página que estás buscando no existe o ha sido movida.</p>
+            <a href="../index.html" class="btn-volver">Volver al inicio</a>
+        </div>
     </main>
+
+    <!-- Pagina Error-->
 
     <!-- Footer-->
 
@@ -128,14 +108,15 @@
     </footer>
 
     <!-- termina Footer-->
-        
 
     <script src="carousel.js"></script> <!-- Enlazamos el archivo JS aquí -->
-    <script src="../js/navbar.js"></script>
-    <script src="../js/carritoDes.js"></script>
-    
+    <script src="js/navbar.js"></script>
+    <script src="js/carritoDes.js"></script>
+
     <a href="https://wa.me/5492612543607" target="_blank" class="whatsapp-float">
         <img src="../images/imageswhatsapp-icon.png" alt="WhatsApp">
     </a>
+</a>
 </body>
+
 </html>
