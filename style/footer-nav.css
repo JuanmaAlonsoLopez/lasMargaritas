@@ -53,6 +53,7 @@ header .logo img {
     display: flex; /* Elimina cualquier espacio adicional */
 }
 
+
 .menu {
     display: flex;
     gap: 30px;

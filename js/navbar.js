@@ -11,11 +11,18 @@ window.addEventListener('scroll', () => {
     }
 });
 
-
-//Menu Hamburguesa
+//Menu hamburguesa
 const btnHamburguesa = document.getElementById('btnHamburguesa');
 const menuHamburguesa = document.getElementById('menuHamburguesaResponsive');
 
 btnHamburguesa.addEventListener('click', () => {
     menuHamburguesa.classList.toggle('activo');
+});
+
+//Cerrar Menu
+const btnCerrarMenu = document.getElementById('btnCerrarMenu');
+const menuHamburguer = document.getElementById('menuHamburguesaResponsive');
+
+btnCerrarMenu.addEventListener('click', () => {
+    menuHamburguesa.classList.remove('activo');
 });

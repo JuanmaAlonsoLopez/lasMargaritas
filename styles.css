@@ -444,7 +444,31 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 /* Oculta el menú normal en pantallas pequeñas y medianas (móvil y laptop) */
 @media (max-width: 900px) {
     nav.menu {
+        display: none; 
+    }
+
+    .menu-hamburguesa .cerrar-menu {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 30px;
+        cursor: pointer;
+        color: #333;
+        user-select: none;
+    }
+
+    div.ingresar{
         display: none;
+    }
+
+    .menu-hamburguesa .cerrar-menu {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 30px;
+        cursor: pointer;
+        color: #333;
+        user-select: none;
 }
 
   /* Estilos para botón hamburguesa visible */
@@ -543,6 +567,7 @@ nav.menu-hamburguesa {
         font-size: 1rem;
         padding: 8px 30px;
     }
+
 }
 
 /* Tablets (601px a 900px): 2 o 3 columnas */
