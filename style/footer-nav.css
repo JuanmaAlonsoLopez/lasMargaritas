@@ -397,3 +397,13 @@ header .logo img {
     padding: 10px;
     font-weight: bold;
 }
+
+
+@media (max-width: 600px){
+    .footer { 
+        display: block;
+        justify-content: center;
+        align-items: center;
+    }
+
+}
