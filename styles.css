@@ -562,6 +562,42 @@ nav.menu-hamburguesa {
         font-size: 1rem;
         padding: 8px 30px;
     }
+
+    .textMedio{
+        padding: 20px;
+    }
+
+    .textMedio h2{
+    font-size: 1.5rem;
+    }
+
+    .textMedio span{
+        font-size: 0.8rem;
+        display: block;
+    }
+
+    .contenedor-productos{
+        display: block;
+    }
+
+    .productoGrande1{
+        width: 100%;
+        height: auto;
+    }
+    .productoChico1,
+    .productoChico2{
+        width: 100%;
+        height: auto;
+    }
+
+
+
+
+
+
+
+
+
 }
 
 /* Tablets (601px a 900px): 2 o 3 columnas */
