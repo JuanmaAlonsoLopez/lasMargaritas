@@ -322,8 +322,8 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 .producto img {
     width: 100%;
     height: 100%;
-    object-fit: cover;         
-    object-position: center;   
+    object-fit: cover;
+    object-position: center;
     display: block;
     border-radius: 8px;
 }
@@ -404,8 +404,89 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 }
 
 
-/*--------------------------------------------------*/
 
+
+
+
+
+
+
+/*-----------------------------------------*/
+/* Menú hamburguesa responsive */
+
+/* Oculta el menú normal en pantallas pequeñas y medianas (móvil y laptop) */
+@media (max-width: 900px) {
+    nav.menu {
+        display: none;
+}
+
+  /* Estilos para botón hamburguesa visible */
+.menu-hamburguesa-btn {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+  /* Las 3 barras del icono hamburguesa */
+.menu-hamburguesa-btn span {
+    display: block;
+    height: 3px;
+    background-color: #333;
+    margin: 5px 0;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+  /* Menú hamburguesa desplegable */
+.menu-hamburguesa {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.3);
+    padding-top: 60px;
+    z-index: 9998;
+}
+
+.menu-hamburguesa a {
+    display: block;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+    text-decoration: none;
+}
+
+.menu-hamburguesa a:hover {
+    background-color: #f4f4f4;
+}
+
+/* Cuando está activo el menú hamburguesa */
+.menu-hamburguesa.activo {
+    display: block;
+    }
+}
+
+/* Oculta el botón hamburguesa en pantallas grandes */
+@media (min-width: 901px) {
+.menu-hamburguesa-btn {
+    display: none;
+}
+
+  /* Oculta el menú hamburguesa alternativo en pantallas grandes */
+nav.menu-hamburguesa {
+    display: none !important;
+    }
+}
+
+/* Diseño responsive para el carousel y productos */
 
 /* Mobile (hasta 600px): 1 columna */
 @media (max-width: 600px) {
@@ -466,6 +547,22 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Tamaños */
 /*Acomodar estos nombres*/
 
@@ -523,7 +620,7 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 
 .iconos-beneficios {
     display: grid;
-    grid-template-columns: 33% 33% 33%; 
+    grid-template-columns: 33% 33% 33%;
     justify-content: center;
     align-items: center;
 }

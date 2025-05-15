@@ -10,3 +10,10 @@ window.addEventListener('scroll', () => {
         header.classList.remove('fixed');
     }
 });
+
+const btnHamburguesa = document.getElementById('btnHamburguesa');
+const menuHamburguesa = document.getElementById('menuHamburguesaResponsive');
+
+btnHamburguesa.addEventListener('click', () => {
+    menuHamburguesa.classList.toggle('activo');
+});
