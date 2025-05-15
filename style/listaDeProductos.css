@@ -21,17 +21,57 @@
 /* Mobile (hasta 600px): 1 columna */
 @media (max-width: 600px) {
 
+    .catListada h3{
+        font-size: 1.5rem;
+        padding: 30px;
+    }
+
     .productos-grid {
         display: grid;
         grid-template-columns: 50% 50%; /* Una sola columna que ocupe todo el ancho */
         align-items: center;
         justify-content: center;
-        gap: 20px;
-        padding: 20px;
+        gap: 40px;
+        padding: 0px;
     }
-    .producto{
+    
+    .producto {
+    display: grid;
+    max-width: 150px; /* limita el ancho máximo para que no ocupe todo el 50% */
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    grap: 10px
+    }
+
+    .producto img {
+        max-width: 100%; /* hace que la imagen ocupe todo el ancho del contenedor */
+        height: auto; /* mantiene la proporción de la imagen */
+    }
+
+    .producto p {
+        font-size: 0.8rem; /* tamaño de fuente más pequeño */
         
     }
+
+    .producto span{
+        font-size: 0.8rem; /* tamaño de fuente más pequeño */
+        color: #000;
+        font-weight: bold;
+    }
+
+    .producto button{
+        font-size: 0.8rem; /* tamaño de fuente más pequeño */
+        padding: 5px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    
+
+
 
 }
 
