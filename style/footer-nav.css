@@ -209,6 +209,22 @@ header .logo img {
 
 
 /*! Carrito desplegable */
+
+/* Mobile (hasta 600px): 1 columna */
+@media (max-width: 600px){
+    .cart-dropdown{
+
+        max-width: 200px;
+
+    }
+}
+
+/* Tablets (601px a 900px): 2 o 3 columnas */
+@media (min-width: 601px) and (max-width: 900px) {
+
+
+}
+
 .cart-dropdown {
     display: none;
     position: absolute;
