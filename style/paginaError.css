@@ -1,0 +1,39 @@
+/* Estilos para la página de error 404 */
+.error-404 {
+    text-align: center;
+    padding: 100px 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+}
+
+.error-404 h1 {
+    font-size: 6rem;
+    color: #5E7F58;
+    margin-bottom: 20px;
+}
+
+.error-404 h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.error-404 p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.btn-volver {
+    display: inline-block;
+    background-color: #5E7F58;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-volver:hover {
+    background-color: #85B27D;
+}
