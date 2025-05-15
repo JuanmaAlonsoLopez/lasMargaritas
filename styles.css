@@ -183,6 +183,7 @@ h2 {
 .carousel {
 display: grid;
 grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según sea necesario */
+    overflow: hidden; /* Puedes dejar esto para esconder scroll bar */
 }
 
 
@@ -358,10 +359,23 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 }
 
 .productos {
-    display: grid;
+    /*display: grid;
     grid-template-columns: repeat(5, 1fr); /* Mostrar 5 productos a la vez */
+    /*gap: 20px;*/
+
+    display: flex; /* En lugar de grid para un scroll horizontal suave */
     gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; /* Para mejor scroll en iOS */
+    scrollbar-width: none; /* Firefox */
+
 }
+
+.productos::-webkit-scrollbar {
+    display: none; /* Oculta scroll bar en Chrome y Safari */
+}
+
 
 .producto {
     background-color: white;
@@ -517,7 +531,12 @@ nav.menu-hamburguesa {
 
 /* Mobile (hasta 600px): 1 columna */
 @media (max-width: 600px) {
+    .carousel-container{
+
+    }
+
     .carousel {
+        display: grid;
         grid-template-columns: 100%;
     }
 
