@@ -11,6 +11,8 @@ window.addEventListener('scroll', () => {
     }
 });
 
+
+//Menu Hamburguesa
 const btnHamburguesa = document.getElementById('btnHamburguesa');
 const menuHamburguesa = document.getElementById('menuHamburguesaResponsive');
 

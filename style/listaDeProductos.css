@@ -17,3 +17,32 @@
     display: grid;
     justify-items: center;
 }
+
+/* Mobile (hasta 600px): 1 columna */
+@media (max-width: 600px) {
+
+    .productos-grid {
+        display: grid;
+        grid-template-columns: 100%; /* Una sola columna que ocupe todo el ancho */
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+}
+
+/* Tablets (601px a 900px): 2 o 3 columnas */
+@media (min-width: 601px) and (max-width: 900px) {
+
+    .productos-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+}

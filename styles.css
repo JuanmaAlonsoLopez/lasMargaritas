@@ -438,13 +438,6 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 }
 
 
-
-
-
-
-
-
-
 /*-----------------------------------------*/
 /* Menú hamburguesa responsive */
 
@@ -580,21 +573,6 @@ nav.menu-hamburguesa {
         grid-template-columns: repeat(5, 1fr);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* Tamaños */
