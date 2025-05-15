@@ -555,9 +555,27 @@ nav.menu-hamburguesa {
 
 /* Mobile (hasta 600px): 1 columna */
 @media (max-width: 600px) {
-    .carousel-container{
-
+    
+    .textMedio{
+        display: block;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        padding: 20px 20px 0px 20px;
     }
+
+    .textMedio h2{
+        display: block;
+        font-size: 1.6rem;
+        margin: 5px;
+        padding: 20px;
+    }
+    .textMedio span{
+        display: block;
+        font-size: 1rem;
+    }
+
+
 
     .carousel {
         display: grid;
@@ -587,6 +605,29 @@ nav.menu-hamburguesa {
         font-size: 1rem;
         padding: 8px 30px;
     }
+
+    .contenedor-productos{
+        display: block;
+    }
+    .productoGrande1{
+        width: 100%;
+        height: auto;
+    }
+    .productoChico1, .productoChico2{
+        width: 100%;
+        height: auto;
+    }
+    .productoChico1 img, .productoChico2 img{
+        height: 140px;
+        width: 100%;
+        padding: 5px;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+
+
+
+
 }
 
 /* Tablets (601px a 900px): 2 o 3 columnas */
