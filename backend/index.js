@@ -1,6 +1,9 @@
 const express = require('express');
 const pool = require('./db');
 const authRoutes = require('./routes/auth'); // rutas de auth que creaste
+const cors = require('cors');
+const PORT = process.env.PORT || 3000;
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -19,7 +22,7 @@ app.get('/usuarios', async (req, res) => {
 
 // Usar rutas de autenticación bajo /api/auth
 app.use('/api/auth', authRoutes);
+app.use(cors());
 
-app.listen(3000, () => {
-    console.log('Servidor escuchando en el puerto 3000');
-});
+app.use(express.static(path.join(__dirname, 'public')));
+app.listen(PORT, () => console.log(`Server en http://localhost:${PORT}`));
