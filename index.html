@@ -5,63 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.adobe.com/fonts/madre-script">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+
     <link rel="icon" href="./images/logoBanner/logo.png" type="image/png">
     <title>Las Margaritas</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="./style/footer-nav.css">
+    <link rel="stylesheet" href="./style/nuevo/nav-footer.css">
 </head>
 
 <body>
     
     <!--- Menu principal -->
 
-    <header>
-    <div class="logo">
-        <a href="index.html">
-            <img src="./images/logoBanner/logo.png" alt="Logo Las Margaritas">
-        </a>
+
+
+
+
+
+<header id="mainHeader">
+  <div class="header-inner">
+    <!-- Logo -->
+    <div class="logo" id="logo">
+      <a href="index.html">
+        <img src="./images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas">
+      </a>
     </div>
 
-    <nav class="menu">
-        <a class="activado" href="index.html">INICIO</a>
-        <div class="dropdown">
-            <a href="#" class="dropbtn">PRODUCTOS ▼</a>
-            <div class="dropdown-content">
-                <a href="./pages/categorias.html">CATEGORÍAS</a>
-                <a href="./pages/listadoProductos.html">LISTADO DE PRODUCTOS</a>
-            </div>
-        </div>
-        <a href="./pages/sobreNosotros.html">SOBRE NOSOTROS</a>
-        <a href="./pages/contacto.html">CONTACTO</a>
+    <!-- Menú -->
+    <nav class="main-nav" id="mainNav">
+      <a class="activo" href="index.html">Inicio</a>
+      <a href="./pages/categorias.html">Productos</a>
+      <a href="./pages/sobreNosotros.html">Sobre nosotros</a>
+      <a href="./pages/contacto.html">Contacto</a>
     </nav>
-    <!--<div class="busBloque">
-        <div class="cart busqueda">
-            <a href="#"><img src="../images/logoBanner/search_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
-        </div>
-        
-    </div>-->
-        <div class="cart">
-            <a href="#" id="cart-icon"><img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="carritoDeCompras"></a>
-            <div class="cart-dropdown">
-                <h3>Productos en el carrito</h3>
-                <div id="cart-items">
-                    <!-- Productos del carrito se cargarán aquí -->
-                </div>
-                <button onclick="location.href='./pages/ResumenCompra.html'" class="ir-al-carrito" >Ir al carrito</button>
-            </div>
-            <div class="ingresar">
-                <a href="#"><img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
-                <span>Ingresar</span>
-            </div>
-        </div>
 
-        <!-- Botón hamburguesa -->
-        <div class="menu-hamburguesa-btn" id="btnHamburguesa" aria-label="Abrir menú">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </header>
+    <!-- Íconos a la derecha -->
+    <div class="icons" id="icons">
+      <a href="#">
+        <img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="Ingresar">
+      </a>
+      <a href="#">
+        <img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="Carrito">
+      </a>
+    </div>
+  </div>
+</header>
+
+
+
+
+
+
+
+
 
 
     <!-- Menú hamburguesa -->
@@ -75,8 +71,23 @@
         <a href="#"><img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"> INGRESAR</a>
     </nav>
 
-
+ 
 <!--- Hasta aca -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Banner -->
     <div class="banner">
@@ -407,7 +418,7 @@
     
 
     <section class="productos-destacados">
-    <h2><a href="/pages/ortopedica.html">Ortopedica</h2>
+    
     <div class="carousel-container" id="carousel4">
         <div class="carousel">
             <div class="productos">
@@ -463,7 +474,7 @@
                     </div>
                     <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
                 </div> 
-<div class="producto">
+            <div class="producto">
                     <!--Imagen de producto-->
                     <img src="../images/fotosProductos/Petalo-Photoroom.png" alt="Producto 6">
                     <!--!Nombre producto-->
@@ -485,42 +496,50 @@
 
 <!-- Footer-->
 
-    <footer class="footer">
-        <div class="footer-contenido">
-        <div class="columna logo-redes">
-            <img src="./images/logoBanner/LasMargaritas.png" alt="Las Margaritas" class="logo-footer" />
-            <div class="redes">
-            <a href="https://www.instagram.com/lasmargaritasmza/" target="_blank" rel="noopener">
-                <img src="/images/logotipo-de-instagram.png" alt="Instagram">
-            </a>
-            <img src="./images/simbolo-de-la-aplicacion-de-facebook.png" alt="Facebook">
-            </div>
-        </div>
+   <footer class="footer">
+  <div class="footer-grid">
+    <!-- Columna izquierda -->
+    <div class="footer-right">
+      <img src="./images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas" class="footer-logo">
+      <p class="footer-desc">Fabrica de productos de confort</p>
+      <a href="#" class="footer-social">
+        <img src="./images/icono-instagram.svg" alt="Instagram">
+      </a>
+    </div>
+
+    <!-- Columna derecha -->
+    <div class="footer-center">
+        
+      <h3>Lorem</h3>
+        <img src="./images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas" class="footer-logo">
+      <p class="footer-desc">Fabrica de productos de confort</p>
+      <a href="#" class="footer-social">
+        <img src="./images/icono-instagram.svg" alt="Instagram">
+      </a>
+    </div>
+
+    <div class="footer-left">
+        <h3>Lorem</h3>
+        <img src="./images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas" class="footer-logo">
+      <p class="footer-desc">Fabrica de productos de confort</p>
+      <a href="#" class="footer-social">
+        <img src="./images/icono-instagram.svg" alt="Instagram">
+      </a>
+    </div>
+
+
+
     
-        <div class="columna links">
-            <div class="grupo">
-            <h4>Secciones</h4>
-            <ul>
-                <li><a href="/pages/sobreNosotros.html">Sobre nosotros</a></li>
-                <li><a href="#">Politica de privacidad</a></li>
-                <li><a href="#">Terminos y condiciones</a></li>
-                
-                <li><button class="btn-negro btnFooterSec">Llamanos</button></li>
-            </ul>
-            </div>
-        </div>
-    
-        <div class="columna contacto">
-            <h4>Contacto</h4>
-            <p><img src="../images/telefono.png" alt="Tel"> +5492612543607</p>
-            <p><a href="mailto:info@lasmargaritas.online"><img src="../images/email.png" alt="Mail"> info@lasmargaritas.online</a></p>
-        </div>
-        </div>
-    
-        <div class="footer-derechos">
-        Todos los derechos reservados @ Las Margaritas 2025
-        </div>
-    </footer>
+  </div>
+
+  <!-- Línea inferior -->
+  <div class="footer-bottom">
+    <p>Todos los derechos reservados @ Las Margaritas 2025</p>
+  </div>
+</footer>
+
+
+
 
     <!-- termina Footer-->
 
