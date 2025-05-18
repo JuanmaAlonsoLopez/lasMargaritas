@@ -106,6 +106,7 @@ a{
 }
 
 .carousel-text {
+    font-family: Monserat, sans-serif;
     position: absolute;
     text-align: center;
     color: white;
@@ -120,6 +121,7 @@ a{
     margin-bottom: 20px;
     font-weight: bold;
     color:#ffffff;
+    font-family: "Quintessential", serif;
 }
 
 .carousel-text p {
@@ -146,6 +148,14 @@ a{
     padding: 100px;
 }
 
+.textMedio h2{
+    font-family: "Quintessential", serif;
+    font-size: 2.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 .textMedio span{
     font-family: 'Montserrat', sans-serif;
     font-size: 1.5rem;
@@ -157,6 +167,49 @@ a{
 
 /*--------------------------------------------------*/
 
+.categoriaImg h2{
+    font-family: "Quintessential", serif;
+    padding: 30px;
+}
+
+.muestraCategorias{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    justify-content: center;
+    align-items: center;
+}
+
+.categoriaColumna{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.categoriaColumna img{
+    width: 100%;
+    grap: 10px;
+    height: 600px;
+    object-fit: cover;
+}
+
+.categoriaColumna p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+
+
+
+
+
+
+
+/*--------------------------------------------------*/
 
 
 
@@ -172,7 +225,7 @@ h2 {
 }
 
 .carousel-item{
-    font-family:'Madre-Script', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 400;
 
@@ -193,7 +246,7 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     align-items: center; /* Centra los elementos horizontalmente */
     height: 350px; /* Asegura una altura uniforme para todas las tarjetas */
     text-align: center;
-     /* Opcional: agrega espacio interno */
+    font-family: 'Montserrat', sans-serif;
 }
 
 .producto img {
@@ -219,8 +272,7 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     background-color: #A7B5A0;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 10px 20px; 
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s ease;
@@ -323,7 +375,6 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 .producto {
     position: relative;
     overflow: hidden;
-    border-radius: 8px;
     flex-shrink: 0;
 }
 
@@ -341,7 +392,6 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 
 .productos-destacados {
     padding: 30px;
-    background-color: #c9d3c7;
     text-align: center;
 }
 
@@ -380,7 +430,6 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 .producto {
     background-color: white;
     text-align: center;
-    border-radius: 8px;
     overflow: hidden;
 }
 
@@ -400,7 +449,7 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     height: 15px;
     width: 15px;
     margin: 0 5px;
-    background-color: #bbb;
+    background-color: #87d872;
     border-radius: 50%;
     display: inline-block;
     transition: background-color 0.3s ease;
@@ -408,7 +457,7 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 }
 
 .dot:hover {
-    background-color: #717171;
+    background-color: #55a53a;
 }
 
 .ver-mas {
@@ -626,8 +675,6 @@ nav.menu-hamburguesa {
     }
 
 
-
-
 }
 
 /* Tablets (601px a 900px): 2 o 3 columnas */
@@ -682,7 +729,6 @@ nav.menu-hamburguesa {
 
 .producto {
     background-color: #ffffff;
-    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.329);
     width: 200px; /* Ajusta el ancho según sea necesario */
     text-align: center;
@@ -693,10 +739,18 @@ nav.menu-hamburguesa {
 }
 
 .cuotas{
+    display: flex;
     width: 100%;
-    background-color: #28721b93;
+    align-items: center;
+    justify-content: center;
 }
 
+.cuotas p{
+    color: blue;
+    font-size: 1.0rem;
+    align-items: center;
+    justify-content: center;
+}
 /*-------------------------------------------------------------------------------------------*/
 
 .beneficios {

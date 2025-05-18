@@ -125,9 +125,8 @@ header.scrolled .icons img {
 
 
 .footer {
-  background-color: rgb(113, 99, 99);
+  background-color: rgb(255, 255, 255);
   color: black;
-  padding: 40px;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -137,6 +136,7 @@ header.scrolled .icons img {
   gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 50px;
 }
 
 .footer-right,
@@ -145,8 +145,21 @@ header.scrolled .icons img {
   display: flex;
   flex-direction: column;
   gap: 20px;
+align-items: center;
+justify-content: center;
 }
 
+.footer-right img{
+  width: 200px;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.socialMedia img{
+  width: 30px;
+
+}
 
 .footer-bottom {
   background-color: #a7b29c;
@@ -154,4 +167,5 @@ header.scrolled .icons img {
   padding: 20px;
   font-size: 1.1rem;
   font-weight: 500;
+  width: 100%;
 }
