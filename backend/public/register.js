@@ -19,6 +19,7 @@ form.addEventListener('submit', async (e) => {
 
     if (response.ok) {
       alert('User registered successfully!');
+      window.location.href = 'http://localhost:3000/login.html';
     } else {
       alert('Error: ' + (data.message || 'Unknown error'));
     }

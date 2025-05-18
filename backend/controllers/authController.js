@@ -48,7 +48,7 @@ exports.forgotPassword = async (req, res) => {
     if (userRes.rows.length === 0) return res.status(400).json({ message: 'Email not found' });
 
     const resetToken = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '15m' });
-    const resetLink = `http://localhost:3000/reset-password/${resetToken}`;
+    const resetLink = `http://localhost:3000/reset-password.html?token=${resetToken}`;
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
