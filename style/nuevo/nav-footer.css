@@ -132,6 +132,7 @@ header.scrolled .icons img {
   background-color: rgb(255, 255, 255);
   color: black;
   font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 -6px 10px -4px rgba(0, 0, 0, 0.15);
 }
 
 .footer-grid {
