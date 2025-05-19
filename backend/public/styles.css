@@ -39,3 +39,32 @@ button {
 button:hover {
   background-color: #218838;
 }
+
+/* Google Button */
+.google-btn {
+  display: inline-flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  color: #757575;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  padding: 0 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+}
+
+.google-btn:hover {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.google-btn .google-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}

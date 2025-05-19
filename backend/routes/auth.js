@@ -9,18 +9,23 @@ router.post(
   '/register',
   [
     body('email').isEmail().withMessage('Invalid email'),
-    body('password').isLength({ min: 6 }).withMessage('Password min 6 chars'),
     body('name').notEmpty().withMessage('Name required'),
+    body('password').isLength({ min: 6 }).withMessage('Password min 6 chars'),
+    body('confirmPassword')
+      .custom((val, { req }) => val === req.body.password)
+      .withMessage('Passwords must match'),
   ],
   validate,
   authController.register
 );
 
+router.get('/activate/:token', authController.activate);
+
 router.post(
   '/login',
   [
-    body('email').isEmail().withMessage('Invalid email'),
-    body('password').exists().withMessage('Password required'),
+    body('email').isEmail(),
+    body('password').exists(),
   ],
   validate,
   authController.login
@@ -28,14 +33,19 @@ router.post(
 
 router.post(
   '/forgot-password',
-  [body('email').isEmail().withMessage('Invalid email')],
+  [body('email').isEmail()],
   validate,
   authController.forgotPassword
 );
 
 router.post(
   '/reset-password/:token',
-  [body('password').isLength({ min: 6 }).withMessage('Password min 6 chars')],
+  [
+    body('password').isLength({ min: 6 }),
+    body('confirmPassword')
+      .custom((val, { req }) => val === req.body.password)
+      .withMessage('Passwords must match'),
+  ],
   validate,
   authController.resetPassword
 );

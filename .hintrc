@@ -20,6 +20,7 @@
           "scrollbar-width: none"
         ]
       }
-    ]
+    ],
+    "button-type": "off"
   }
 }

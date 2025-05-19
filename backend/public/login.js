@@ -27,7 +27,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
     alert('¡Login exitoso!');
     // Redirigir a la página que desees, por ejemplo:
-    window.location.href = 'http://localhost:5500/index.html';
+    window.location.href = 'http://127.0.0.1:5500/index.html';
   } catch (err) {
     console.error('Fetch error:', err);
     alert('No se pudo conectar con el servidor');

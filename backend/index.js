@@ -1,6 +1,9 @@
 const express = require('express');
+const session = require('express-session');
 const pool = require('./db');
 const authRoutes = require('./routes/auth');
+const { googleCallback } = require('./controllers/authController');
+const passport = require('./utils/passport');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
@@ -18,20 +21,37 @@ app.use(cors({
 app.use(express.json());
 
 // 2) Rutas
-app.get('/usuarios', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT * FROM users');
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error al consultar usuarios');
-  }
-});
+// app.get('/usuarios', async (req, res) => {
+//   try {
+//     const result = await pool.query('SELECT * FROM users');
+//     res.json(result.rows);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send('Error al consultar usuarios');
+//   }
+// });
+
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile','email'] })
+);
+
+// Ruta de callback: ahora delega al authController
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login.html' }),
+  googleCallback
+);
 
 app.use('/api/auth', authRoutes);
 
 // 3) Servir front-end estático (si usas esta opción)
-//    Mueve tus HTML/JS/CSS a /backend/public
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 4) Arrancar servidor
