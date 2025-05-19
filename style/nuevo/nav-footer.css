@@ -120,6 +120,10 @@ header.scrolled .icons img {
   height: 22px;
   width: 22px;
 }
+
+/* media  */
+
+
 /* Fin de Header */
 
 
@@ -275,3 +279,79 @@ justify-content: center;
 
 
 
+@media (max-width: 768px) {
+    
+ .header-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    text-align: center;
+  }
+
+  .logo {
+    flex: 1;
+    justify-content: flex-start;
+    display: flex;
+    margin-bottom: 0;
+  }
+
+  .icons {
+    flex: 1;
+    justify-content: flex-end;
+    gap: 15px;
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #5E7F58;
+    margin-left: 10px;
+  }
+
+  .main-nav {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: white;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    padding: 20px 0;
+  }
+
+  .main-nav.active {
+    display: flex;
+  }
+
+
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .footer-right img {
+    width: 150px;
+  }
+
+  .socialMedia img{
+  width: 40px;
+
+}
+
+
+  .footer-right, .footer-center, .footer-left {
+    align-items: center;
+  }
+}
