@@ -13,7 +13,11 @@
 
 .categoria {
     margin-bottom: 40px;
+    align-items: center;
+    justify-content: center;
 }
+
+
 
 .categoria h2 {
     font-family: 'Montserrat', sans-serif;
@@ -22,6 +26,15 @@
     text-align: center;
     
 }
+
+.categoria h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    color: #333;
+    text-align: center;
+    justify-content: center;
+}
+
 
 .categoria .carousel-container {
     margin-bottom: 40px; /* Espacio entre el carrusel y el botón */
