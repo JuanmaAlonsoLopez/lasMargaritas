@@ -1,52 +1,55 @@
-// Datos de los productos en el carrito
-const cartItems = [
-    { id: 1, name: 'Almohadón Ortopédico Deluxe - 70x50 cm', price: 12000, imageUrl: '../images/prod_almohadon1.png' },
-    { id: 2, name: 'Almohadón Memory Foam - 60x40 cm', price: 8500, imageUrl: '../images/prod_almohadon2.png' }
+// Simulación de productos
+const productosCarrito = [
+  {
+    id: 1,
+    nombre: "Producto 001",
+    imagen: "../images/fotosProductos/Manantial-Photoroom.png",
+    cantidad: 1,
+    precio: 12000
+  }
 ];
 
-// Función para actualizar el carrito
-function updateCart() {
-    const cartContainer = document.getElementById('cart-items');
-    cartContainer.innerHTML = ''; // Limpiar el carrito actual
+const iconos = document.querySelectorAll('.icons a');
+const carritoIcon = iconos[1];
+const dropdown = document.getElementById('cartDropdown');
+const cartItems = document.getElementById('cartItems');
 
-    cartItems.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        
-        //<img src="${item.imageUrl}" alt="${item.name}">
-        cartItem.innerHTML = `
-
-            <img src="https://imagedelivery.net/7yveHullsFjmXtPLdJPFsg/1553f2f9-dff7-42d5-7520-ea1173387b00/fit=cover" alt="">
-
-            <span class="producto-nombre">${item.name}</span>
-            <span class="producto-precio">$${item.price}</span>
-            <button class="eliminar" onclick="removeItem(${item.id})">Eliminar</button>
-        `;
-        
-        cartContainer.appendChild(cartItem);
-    });
-}
-
-// Función para eliminar un producto del carrito
-function removeItem(id) {
-    const index = cartItems.findIndex(item => item.id === id);
-    if (index !== -1) {
-        cartItems.splice(index, 1); // Eliminar el producto
-        updateCart(); // Actualizar el carrito
-    }
-}
-
-// Mostrar el carrito al hacer clic en el icono
-const cartIcon = document.getElementById('cart-icon');
-cartIcon.addEventListener('click', () => {
-    const cartDropdown = document.querySelector('.cart-dropdown');
-    // Alternar entre mostrar y ocultar el carrito
-    if (cartDropdown.style.display === 'none' || cartDropdown.style.display === '') {
-        cartDropdown.style.display = 'block';
-    } else {
-        cartDropdown.style.display = 'none';
-    }
+carritoIcon.addEventListener('click', () => {
+  dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+  renderCart();
 });
 
-// Inicializar el carrito
-updateCart();
+function renderCart() {
+  cartItems.innerHTML = '';
+  productosCarrito.forEach((producto, index) => {
+    const item = document.createElement('div');
+    item.classList.add('cart-item');
+    item.innerHTML = `
+      <img src="${producto.imagen}" alt="${producto.nombre}">
+      <div class="cart-item-info">
+        <p>${producto.nombre}</p>
+        <div class="quantity-controls">
+          <button onclick="cambiarCantidad(${index}, -1)">-</button>
+          <span>${producto.cantidad}</span>
+          <button onclick="cambiarCantidad(${index}, 1)">+</button>
+        </div>
+      </div>
+      <div class="cart-price">$${producto.precio * producto.cantidad}</div>
+      <div class="remove-item" onclick="eliminarItem(${index})">&#128465;</div>
+    `;
+    cartItems.appendChild(item);
+  });
+}
+
+function cambiarCantidad(index, delta) {
+  productosCarrito[index].cantidad += delta;
+  if (productosCarrito[index].cantidad < 1) {
+    productosCarrito.splice(index, 1);
+  }
+  renderCart();
+}
+
+function eliminarItem(index) {
+  productosCarrito.splice(index, 1);
+  renderCart();
+}

@@ -8,7 +8,7 @@
     <title>Sobre Nosotros</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../styles/categorias.css">
-    <link rel="stylesheet" href="../style/footer-nav.css">
+    <link rel="stylesheet" href="../style/nuevo/nav-footer.css">
     <link rel="stylesheet" href="../style/sobreNosotros.css">
 </head>
 
@@ -18,46 +18,50 @@
 
     <!--HEADER -->
     
-    <header>
-    <div class="logo">
+   <!--  -->
+    <header id="mainHeader">
+    <div class="header-inner">
+    <!-- Logo -->
+    <div class="logo" id="logo">
         <a href="../index.html">
-            <img src="../images/logoBanner/logo.png" alt="Logo Las Margaritas">
+            <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas">
         </a>
     </div>
-    <nav class="menu">
-        <a  href="../index.html">INICIO</a>
-        <div class="dropdown">
-            <a href="#" class="dropbtn">PRODUCTOS ▼</a>
-            <div class="dropdown-content">
-                <a href="../pages/categorias.html">CATEGORÍAS</a>
-                <a href="../pages/listadoProductos.html">LISTADO DE PRODUCTOS</a>
 
-            </div>
-        </div>
-        <a class="activado" href="../pages/sobreNosotros.html">SOBRE NOSOTROS</a>
-        <a href="../pages/contacto.html">CONTACTO</a>
+    <!-- Menú -->
+    <nav class="main-nav" id="mainNav">
+      <a  href="../index.html">Inicio</a>
+      <a  href="../pages/categorias.html">Productos</a>
+      <a class="activo" href="../pages/sobreNosotros.html">Sobre nosotros</a>
+      <a href="../pages/contacto.html">Contacto</a>
     </nav>
-    <!--<div class="busBloque">
-        <div class="cart busqueda">
-            <a href="#"><img src="../images/logoBanner/search_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
-        </div>
-    </div>-->
-        <div class="cart">
-            <a href="#" id="cart-icon"><img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="carritoDeCompras"></a>
-            <div class="cart-dropdown">
-                <h3>Productos en el carrito</h3>
-                <div id="cart-items">
-                    <!-- Productos del carrito se cargarán aquí -->
-                </div>
-                <button onclick="location.href='../pages/ResumenCompra.html'" class="ir-al-carrito" >Ir al carrito</button>
-            </div>
-            <div class="ingresar">
-                <a href="#"><img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
-                <span>Ingresar</span>
-            </div>
-        </div>
-    </header>
-    <!--  -->
+
+    <!-- Íconos a la derecha -->
+    <div class="icons" id="icons">
+      <a href="#">
+        <img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="Ingresar">
+      </a>
+      <a href="#">
+        <img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="Carrito">
+      </a>
+    </div>
+    
+
+
+
+
+</div>
+</header>
+
+
+<div class="cart-dropdown" id="cartDropdown">
+  <div class="cart-arrow"></div>
+  <div class="cart-content">
+    <h3>Productos en el carrito</h3>
+    <div class="cart-items" id="cartItems"></div>
+    <button onclick="location.href='../pages/ResumenCompra.html'" class="btn-go-cart">Ir al carrito</button>
+  </div>
+</div>
     
     
     <main class="nosotros-main">
@@ -74,25 +78,31 @@
 
         <div id="Contactos">
 
-            <div class="vision">
-            <h3>Compromiso</h3>
-            <p>Nos comprometemos con nuestros usuarios al realizar nuestros productos
-            con las mejores materias primas que se fabricanen Argentina. Nuestros productos son 100% nacionales.</p>
-        </div>
 
-        <div class="mision">
-            <h3>Calidad</h3>
-            <p>Nuestros productos están fabricados y confeccionados pensando en el confort de nuestros usuarios, mantenemos
-                la excelente calidad de nuestros productos en el transcurso del tiempo
+        <div class="contenedorCCG">
 
-            </p>
-        </div>
-         <div class="mision">
-            <h3>Garantía</h3>
-            <p>Damos garantía por los productos que fabricamos y mantenemos el contacto a través de nuestros medios digitales
-                para brindar el mejor servicio post-venta
-            </p>
-        </div>
+          <div class="mision">
+          <h3>Compromiso</h3>
+          <p>Nos comprometemos con nuestros usuarios al realizar nuestros productos
+          con las mejores materias primas que se fabricanen Argentina. Nuestros productos son 100% nacionales.</p>
+      </div>
+
+      <div class="mision">
+          <h3>Calidad</h3>
+          <p>Nuestros productos están fabricados y confeccionados pensando en el confort de nuestros usuarios, mantenemos
+              la excelente calidad de nuestros productos en el transcurso del tiempo
+
+          </p>
+      </div>
+       <div class="mision">
+          <h3>Garantía</h3>
+          <p>Damos garantía por los productos que fabricamos y mantenemos el contacto a través de nuestros medios digitales
+              para brindar el mejor servicio post-venta
+          </p>
+      </div>
+
+
+        </div>  
 
         </div>
         </section>
@@ -100,12 +110,43 @@
         <section class="equipo-desarrollo">
             <h2>Equipo de desarrollo</h2>
             <div class="imagenes-equipo">
+
+              <div class="miembroEquipo">
                 <img src="../images/equipoDev/imgPerd.jpg" alt="Miembro 1">
+                <span>Mauricio Medina</span>
+                <p>Cargo</p>
+              </div>
+
+              <div class="miembroEquipo">
                 <img src="../images/equipoDev/ImgLorenzo.jpg" alt="Miembro 2">
+                <span>Gaston Lorenzo</span>
+                <p>Cargo</p>
+              </div>
+
+              <div class="miembroEquipo">
                 <img src="../images/equipoDev/ImgBastias.jpg" alt="Miembro 3">
+                <span>Nicolas Bastias</span>
+                <p>Cargo</p>
+              </div>
+
+              <div class="miembroEquipo">
                 <img src="../images/equipoDev/ImgCanillas.jpg" alt="Miembro 4">
+                <span>Ramiro Canillas</span>
+                <p>Cargo</p>
+              </div>
+
+              <div class="miembroEquipo">
                 <img src="../images/equipoDev/ImgMeregalli.jpg" alt="Miembro 5">
+                <span>Gianlucas Meregali</span>
+                <p>Cargo</p>
+              </div>
+
+              <div class="miembroEquipo">
                 <img src="../images/equipoDev/ImgAlonso.jpg" alt="Miembro 6">
+                <span>Juan Manuel Alonso</span>
+                <p>Cargo</p>
+              </div>
+
             </div>
         <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas...</p>
         </section>
@@ -122,41 +163,45 @@
     <!-- Footer-->
 
     <footer class="footer">
-        <div class="footer-contenido">
-        <div class="columna logo-redes">
-            <img src="../images/logoBanner/LasMargaritas.png" alt="Las Margaritas" class="logo-footer" />
-            <div class="redes">
-            <a href="https://www.instagram.com/lasmargaritasmza/" target="_blank">
+  <div class="footer-grid">
+    <!-- Columna izquierda -->
+    <div class="footer-right">
+      <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas" class="footer-logo">
+      <p class="footer-desc">Fabrica de productos de confort</p>
+      <a href="#" class="footer-social">
+        <div class="socialMedia">
+            <a href="https://www.instagram.com/almohadones.lasmargaritas">
                 <img src="../images/logotipo-de-instagram.png" alt="Instagram">
             </a>
-            <img src="../images/simbolo-de-la-aplicacion-de-facebook.png" alt="Facebook">
-            </div>
+            
         </div>
+      </a>
+    </div>
+
+    <!-- Columna derecha -->
+    <div class="footer-center">
+        
+    <span>Avda. Juan B. Justo 8667</span>
+    <span>CABA, Argentina</span>
     
-        <div class="columna links">
-            <div class="grupo">
-            <h4>Secciones</h4>
-            <ul>
-                <li><a href="/pages/sobreNosotros.html">Sobre nosotros</a></li>
-                <li><a href="#">Politica de privacidad</a></li>
-                <li><a href="#">Terminos y condiciones</a></li>
-                
-                <li><button class="btn-negro btnFooterSec">Llamanos</button></li>
-            </ul>
-            </div>
-        </div>
-    
-        <div class="columna contacto">
-            <h4>Contacto</h4>
-            <p><img src="../images/telefono.png" alt="Tel"> 11 3437-4127</p>
-            <p><a href="mailto:info@lasmargaritas.online"><img src="../images/email.png" alt="Mail"> info@lasmargaritas.online</a></p>
-        </div>
-        </div>
-    
-        <div class="footer-derechos">
-        Todos los derechos reservados @ Las Margaritas 2025
-        </div>
-    </footer>
+    <span>telefono: 11 3437-4127</span>
+    <span>Email: info@lasmargaritas.online</span>
+
+
+    </div>
+
+    <div class="footer-left">
+        <a href=""><span>Contacto</span></a>
+        <a href=""><span>Sobre Nosotros</span></a>
+        <a href=""><span>Otro</span></a>
+    </div>  
+  </div>
+
+  <!-- Línea inferior -->
+  <div class="footer-bottom">
+    <p>Todos los derechos reservados @ Las Margaritas 2025</p>
+  </div>
+</footer>
 
     <!-- termina Footer-->
 
