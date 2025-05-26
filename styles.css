@@ -190,7 +190,7 @@ a{
 
 .categoriaColumna img{
     width: 100%;
-    grap: 10px;
+    gap: 10px;
     height: 600px;
     object-fit: cover;
 }

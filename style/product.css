@@ -1,11 +1,13 @@
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #ffffff;
+    background-color: #f5f5f5;
     color: #333;
+    margin: 0;
+    padding: 0;
 }
 
 /* ------------------------ */
-/* Página principal del producto */
+/* Contenedor principal */
 /* ------------------------ */
 .product-page {
     margin-top: 60px;
@@ -13,10 +15,16 @@ body {
     display: flex;
     flex-direction: column;
     gap: 50px;
+    background-color: #fff;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
 }
 
 /* ------------------------ */
-/* Sección principal con imagen y detalles */
+/* Imagen + detalles */
 /* ------------------------ */
 .product-info {
     display: flex;
@@ -25,14 +33,14 @@ body {
     flex-wrap: wrap;
     gap: 40px;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    margin: 100px auto 0 auto;
 }
 
 .product-images {
     flex: 1;
     min-width: 300px;
     max-width: 600px;
+    text-align: center;
 }
 
 .product-images .main-image {
@@ -47,21 +55,25 @@ body {
 }
 
 .product-details h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 20px;
     color: #222;
 }
 
 .label {
-    font-size: 1.1rem;
+    display: inline-block;
+    font-size: 1rem;
     font-weight: bold;
-    color: #7ca87c;
+    background-color: #d8f3dc;
+    color: #40916c;
+    padding: 6px 12px;
+    border-radius: 4px;
     margin-bottom: 10px;
 }
 
 .price {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #333;
     margin: 10px 0;
@@ -75,43 +87,42 @@ body {
 }
 
 .new-price {
-    color: #222;
+    color: #1b4332;
     font-weight: bold;
 }
 
 .installments {
-    font-size: 1.2rem;
-    color: #7ca87c;
-    margin-bottom: 30px;
+    font-size: 1.1rem;
+    color: #74c69d;
+    margin-bottom: 20px;
 }
 
 .product-details .btn {
-    background-color: #88b884;
+    background-color: #95d5b2;
     color: white;
     border: none;
-    padding: 15px 25px;
+    padding: 12px 22px;
     border-radius: 6px;
     font-size: 1rem;
     font-weight: bold;
     margin-right: 10px;
+    margin-bottom: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .product-details .add-to-cart {
-    background-color: #5e7f58;
+    background-color: #52796f;
 }
 
 .product-details .btn:hover {
-    opacity: 0.9;
+    opacity: 0.92;
 }
 
 /* ------------------------ */
-/* Descripción del producto */
+/* Descripción */
 /* ------------------------ */
 .product-description {
-    max-width: 1200px;
-    margin: 0 auto;
     font-size: 1.1rem;
     color: #444;
     line-height: 1.6;
@@ -123,14 +134,14 @@ body {
 /* ------------------------ */
 .product-tech {
     background-color: #f3f9f3;
+    width: 100%;
+    max-width: 1200px;
+    margin: 30px auto;
     padding: 30px 40px;
     border-radius: 14px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     color: #222;
-    width: 95%;
-    margin: 30px auto 0 auto;
     box-sizing: border-box;
-    text-align: left;
 }
 
 .product-tech h2 {
@@ -146,8 +157,12 @@ body {
 }
 
 .product-tech li {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    width: 100%;
+    background-color: #e9f5ec;
+    padding: 12px 20px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    box-sizing: border-box;
 }
 
 .product-tech li strong {
@@ -158,24 +173,34 @@ body {
 /* Opiniones */
 /* ------------------------ */
 .reviews {
-    width: 95%;
+    width: 100%;
+    max-width: 1200px;
     margin: 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background-color: #f3f9f3;
 }
 
 .reviews h2 {
     font-size: 1.8rem;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     text-align: left;
 }
 
 .review-card {
-    background-color: #fafafa;
-    padding: 25px 40px;
+    width: 100%;
+    background-color: #e9f5ec;
+    padding: 20px 25px;
     margin-bottom: 20px;
-    border-radius: 14px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-    text-align: left;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+    transition: transform 0.2s ease-in-out;
+}
+
+.review-card:hover {
+    transform: translateY(-2px);
 }
 
 .review-card p {
