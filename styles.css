@@ -522,6 +522,9 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     background-color: #5E7F58;
 }
 
+.btn{
+    
+}
 
 
 
@@ -555,6 +558,11 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 .menu-toggle {
   display: none; /* Oculto por defecto (versión PC) */
 }
+
+.btnComprarCarrito{
+    
+}
+
 
 
 /*-----------------------------------------*/

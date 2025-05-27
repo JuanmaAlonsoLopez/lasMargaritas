@@ -119,6 +119,8 @@ body {
     opacity: 0.92;
 }
 
+
+
 /* ------------------------ */
 /* Descripción */
 /* ------------------------ */
@@ -211,4 +213,10 @@ body {
 
 .review-card strong {
     font-weight: bold;
+}
+
+
+.whatsappBTN{
+    width: 92%;
+    background-color: #0add26 !important;
 }
