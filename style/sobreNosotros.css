@@ -62,6 +62,13 @@
 }
 
 
+.equipoDesarrolloLogo img{
+    width: 220px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+
 
 #visionMision {
     display: flex;
@@ -182,6 +189,7 @@
 
     .equipo-desarrollo{
         padding: 0px;
+        margin: 0px;
     }
 
     .equipo-desarrollo h2{
