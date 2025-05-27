@@ -44,7 +44,7 @@
 }
 
 .ver-mas {
-    margin: 80px auto 0 auto; /* Incrementa el margen superior para separarlo del carrusel */
+    margin: 0px auto 0 auto; /* Incrementa el margen superior para separarlo del carrusel */
 }
 
 .ver-mas:hover {
