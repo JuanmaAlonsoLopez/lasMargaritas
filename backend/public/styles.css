@@ -473,6 +473,19 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 
 .ver-mas:hover {
     background-color: #4c6747;
+  transition: 0.5s ease;
+
+
+}
+
+#show-hide{
+  position: relative;
+  top: -10px;
+  float: right;
+  color: rgb(117, 109, 109);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all .5s ease;
 }
 
 
@@ -544,6 +557,8 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     justify-content: center;
     align-items: center;
     transition: transform 0.3s ease; /* Animación al pasar el mouse */
+  margin-top: 15px; /* o el valor que quieras */
+
 }
 
 .whatsapp-float img {
@@ -634,199 +649,97 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     z-index: 9998;
 }
 
-.menu-hamburguesa a {
-    display: block;
-    padding: 15px 20px;
-    border-bottom: 1px solid #eee;
-    color: #333;
-    text-decoration: none;
+.google-btn .google-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
 }
 
-.menu-hamburguesa a:hover {
-    background-color: #f4f4f4;
+/* ----REGISTER------- */
+
+/* Estilo para el formulario */
+#registerForm {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+
+  display: grid;
+  grid-template-columns: 1fr; /* UNA SOLA COLUMNA */
+  gap: 15px; /* espacio entre filas */
+  width: 350px;
 }
 
-/* Cuando está activo el menú hamburguesa */
-.menu-hamburguesa.activo {
-    display: block;
-    }
+/* Inputs estilo */
+#registerForm input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Oculta el botón hamburguesa en pantallas grandes */
-@media (min-width: 901px) {
-.menu-hamburguesa-btn {
-    display: none;
+/* Botón estilo */
+#registerForm button {
+  grid-column: 1 / -1; /* Ocupa las dos columnas */
+  padding: 12px;
+  background-color: #28a745; /* Verde */
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-  /* Oculta el menú hamburguesa alternativo en pantallas grandes */
-nav.menu-hamburguesa {
-    display: none !important;
-    }
+#registerForm button:hover {
+  background-color: #218838;
 }
 
-/* Diseño responsive para el carousel y productos */
-
-/* Mobile (hasta 600px): 1 columna */
-@media (max-width: 600px) {
-    
-    .banner{
-        margin: 10px 0px 0px 0px;
-    }
-
-
-    .textMedio{
-        display: block;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        padding: 100px 20px 0px 20px;
-    }
-
-    .textMedio h2{
-        display: block;
-        font-size: 1.6rem;
-        margin: 5px;
-        padding: 20px;
-    }
-    
-    .textMedio span{
-        display: block;
-        font-size: 1rem;
-    }
-
-    .carousel {
-        display: grid;
-        grid-template-columns: 100%;
-    }
-
-    .producto {
-        
-        height: auto;
-        padding: 20px 10px;
-    }
-
-    .producto img {
-        max-height: 120px;
-    }
-
-    .producto span {
-        margin-bottom: 20px;
-    }
-
-    .producto button {
-        padding: 8px 16px;
-        font-size: 1rem;
-    }
-
-    .ver-mas {
-        font-size: 1rem;
-        padding: 8px 30px;
-    }
-
-    .contenedor-productos{
-        display: block;
-    }
-    .productoGrande1{
-        width: 100%;
-        height: auto;
-    }
-    .productoChico1, .productoChico2{
-        width: 100%;
-        height: auto;
-    }
-    .productoChico1 img, .productoChico2 img{
-        height: 140px;
-        width: 100%;
-        padding: 5px;
-        object-fit: cover;
-        border-radius: 20px;
-    }
-
-    .muestraCategorias {
-        display: block;
-    }
-
-    .categoriaColumna{
-        display: block;
-    }
-
-    .categoriaColumna img{
-        width: 100%;
-        height: auto;
-        padding: 5px;
-        object-fit: cover;
-        border-radius: 20px;
-    }
+/* ----reset-password------- */
 
 
 
-
-
-
-
-
+/* Formulario con fondo blanco, sombra y borde redondeado */
+#resetForm {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-/* Tablets (601px a 900px): 2 o 3 columnas */
-@media (min-width: 601px) and (max-width: 900px) {
-    .carousel {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .producto img {
-        max-height: 130px;
-    }
-
-    .producto button {
-        padding: 8px 18px;
-    }
+/* Inputs estilo */
+#resetForm input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Laptops (901px a 1200px): 4 columnas */
-@media (min-width: 901px) and (max-width: 1200px) {
-    .carousel {
-        grid-template-columns: repeat(4, 1fr);
-    }
+/* Botón ancho y con color */
+#resetForm button {
+  background-color: #28a745;
+  color: white;
+  padding: 12px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* Pantallas grandes (más de 1200px): 5 columnas como original */
-@media (min-width: 1201px) {
-    .carousel {
-        grid-template-columns: repeat(5, 1fr);
-    }
+/* Hover del botón */
+#resetForm button:hover {
+  background-color: #218838;
 }
 
-
-/* Tamaños */
-/*Acomodar estos nombres*/
-
-
-.carousel-container {
-     /* Cambia el tamaño mínimo según sea necesario */
-    overflow-x: auto;
-    overflow-y: visible;
-    white-space: nowrap;
-    scrollbar-width: thin; /* Para navegadores como Firefox */
-    position: relative;
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-}
-
-
-
-
-
-.producto {
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.329);
-    width: 200px; /* Ajusta el ancho según sea necesario */
-    text-align: center;
-    min-height: 300px;
-    height: auto;
-    overflow: visible;
-    margin-bottom: 30px;
-}
 
 .cuotas{
     display: flex;
