@@ -15,5 +15,13 @@ document.getElementById('resetForm').addEventListener('submit', async e => {
   });
   const data = await res.json();
   alert(data.message || 'Error');
-  if (res.ok) window.location.href = 'login.html';
+  if (res.ok) {
+    alert(data.message);
+    if (window.opener) {
+      window.opener.location.href = '/login.html';
+      window.close();
+    } else {
+      window.location.href = '/login.html';
+    }
+  }
 });

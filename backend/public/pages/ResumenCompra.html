@@ -1,25 +1,21 @@
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.adobe.com/fonts/madre-script">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
-    <!-- Nueva fuente -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quintessential&display=swap" rel="stylesheet">
-    <!------------------>
-
     <link rel="icon" href="../images/logoBanner/logo.png" type="image/png">
-    <title>Las Margaritas</title>
+    <title>Resumen de Compra</title>
     <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="../style/nuevo/nav-footer.css">
     <link rel="stylesheet" href="../style/product.css">
-  </head>
-  <body>
- <!--HEADER -->
+    <link rel="stylesheet" href="../style/nuevo/nav-footer.css">
+    <link rel="stylesheet" href="../style/carrito.css">
+    <link rel="stylesheet" href="../style/ResCompra.css">
+</head>
+
+<body>
+
+    <!--HEADER -->
     
        <!--- Menu principal -->
 
@@ -57,17 +53,7 @@
 </div>
 </header>
 
-<div class="cart-dropdown" id="cartDropdown">
-  <div class="cart-arrow"></div>
-  <div class="cart-content">
-    <h3>Productos en el carrito</h3>
-    <div class="cart-items" id="cartItems"></div>
-    <button onclick="location.href='./pages/ResumenCompra.html'" class="btn-go-cart">Ir al carrito</button>
-  </div>
-</div>
- 
-
-<!-- Botón hamburguesa -->
+    <!-- Botón hamburguesa -->
     <div class="menu-hamburguesa-btn" id="btnHamburguesa" aria-label="Abrir menú">
         <span></span>
         <span></span>
@@ -76,70 +62,62 @@
 
     <!-- Menú hamburguesa -->
     <nav class="menu-hamburguesa" id="menuHamburguesaResponsive">
-        <a href="../index.html">INICIO</a>
+        <a href="index.html">INICIO</a>
         <a href="./pages/categorias.html">CATEGORÍAS</a>
         <a href="./pages/listadoProductos.html">LISTADO DE PRODUCTOS</a>
         <a href="./pages/sobreNosotros.html">SOBRE NOSOTROS</a>
         <a href="./pages/contacto.html">CONTACTO</a>
     </nav>
+    
+    <!--  -->
 
-<main class="product-page">
-    <section class="product-info">
-        <div class="product-images">
-            <img src="../images/prod_margarita1.png" alt="Producto principal" class="main-image">
-        </div>
-        <div class="product-details">
-            <h1>Almohadón Redondo Espuma c/ Funda y Gel</h1>
-            <div class="price-section">
-                <p class="label">Etiqueta</p>
-                <p class="price">
-    <span class="old-price">$ 6,000</span>
-    <span class="new-price">$ 5,000</span>
-                </p>
-                <p class="installments">3 cuotas sin interés de $ 2,000</p>
-            </div>
-            <div class="btnComprarCarrito">
-                <div>
-                  <button class="btn">Ver planes y medios de pagos</button>
+  <div class="container">
+    <!-- Ventana izquierda: Productos en el carrito -->
+    <div class="left-container">
 
-                  <button class="btn add-to-cart">Agregar al carrito</button>
+      <!--Producto esto se saca--->
+        <div class="Producto">
+            <input type="checkbox" id="producto1" class="checkbox">
+            <label for="producto1" class="producto-label">
+                <img src="../images/fotosProductos/Margarita-Photoroom.png" alt="Producto Almohadón" class="producto-img">
+                <div class="producto-info">
+                    <span class="producto-nombre">Almohadón Ortopédico Deluxe - 70x50 cm</span>
+                  </div>
+                </label>
+                <div class="acciones">
+                    <button class="eliminar">Eliminar</button>
+                
+                    <button class="comprar-ahora">Comprar ahora</button>
                 </div>
-                <button class="btn add-to-cart  whatsappBTN">Consultar por WhatsApp</button>
-            </div>
-            
         </div>
-    </section>
-
-    <section class="product-description">
-        <p class="description">
-            Lorem ipsum dolor sit amet consectetur adipiscing elit, rhoncus a cum accumsan gravida porta
-            luctus cursus, nec metus tellus integer interdum massa.
-        </p>
-    </section>
-
-    <section class="product-tech">
-        <h2>Ficha técnica</h2>
-        <ul>
-            <li><strong>Color:</strong> Blanco</li>
-            <li><strong>Ancho:</strong> 100 cm</li>
-            <li><strong>Peso:</strong> 2 kg</li>
-        </ul>
-    </section>
-
-    <section class="reviews">
-    <h2>Opiniones</h2>
-
-    <div class="review-card">
-        <p><strong>Review title</strong></p>
-        <p>Muy buen producto, super cómodo y llegó rápido.</p>
+        <!-- Envío -->
+        <div class="envio">
+            <span class="envio-text">Envío</span>
+            <div class="barra-envio">
+                <span>Agrega $1,500 más para conseguir envío gratis en productos de Almohadones Ortopédicos.</span>
+            </div>
+        </div>
+        <!-- Productos relacionados -->
+        <div class="productos-relacionados">
+            <span>Ver más productos de este vendedor</span>
+        </div>
     </div>
 
-    <div class="review-card">
-        <p><strong>Review title</strong></p>
-        <p>Excelente atención, lo recomendaría sin dudas.</p>
+    <!-- Ventana derecha: Resumen de compra -->
+    <div class="right-container">
+        <div class="resumen-compra">
+            <h3>Resumen de compra</h3>
+            <div class="detalles">
+                <p>Producto: $9,290.00</p>
+                <p>Envío: $1,500.00</p>
+                <p>Total: $10,790.00</p>
+            </div>
+            <button class="continuar-compra">Continuar compra</button>
+        </div>
     </div>
-    </section>
-</main>
+</div>
+
+
 
 <!-- Footer-->
 
@@ -185,14 +163,13 @@
 
     <!-- termina Footer-->
 
-
-    <script src="../carousel.js"></script>
-    <script src="../js/navbar.js"></script>
+    <script src="../js/navbar.js"></script> 
     <script src="../js/carritoDes.js"></script>
-  <!-- Logo Whatsapp -->  
+
     <a href="https://wa.me/5492612543607" target="_blank" class="whatsapp-float">
         <img src="../images/imageswhatsapp-icon.png" alt="WhatsApp">
     </a>
-
+<script src="/js/common.js"></script>
 </body>
 </html>
+

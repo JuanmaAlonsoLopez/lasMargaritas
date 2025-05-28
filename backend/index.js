@@ -4,6 +4,7 @@ const pool = require('./db');
 const authRoutes = require('./routes/auth');
 const { googleCallback } = require('./controllers/authController');
 const passport = require('./utils/passport');
+const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();

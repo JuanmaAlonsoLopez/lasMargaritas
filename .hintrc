@@ -3,24 +3,13 @@
     "development"
   ],
   "hints": {
-    "axe/name-role-value": [
-      "default",
-      {
-        "link-name": "off"
-      }
-    ],
     "compat-api/css": [
       "default",
       {
         "ignore": [
-          "user-select",
-          "-webkit-overflow-scrolling",
-          "scrollbar-width",
-          "scrollbar-width: thin",
-          "scrollbar-width: none"
+          "user-select"
         ]
       }
-    ],
-    "button-type": "off"
+    ]
   }
 }
