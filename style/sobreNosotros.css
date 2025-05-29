@@ -9,12 +9,6 @@
     align-items: center;
 }
 
-.miembroEquipo{
-    max-width: 80px;
-    max-height: 80px;
-    border-radius: 500%;
-}
-
 
 /*MAIN CLASS------------------------------------*/
 
@@ -51,15 +45,20 @@
     top: 548px;
     left: 154px;
     border-radius: 43px;
-
-    
-    
-
   }
 
 
 
 /* Para la sección visión y misión */
+
+.contenedorCCG{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    gap: 20px;
+}
+
+
+
 #visionMision {
     display: flex;
     justify-content: center;
@@ -72,38 +71,13 @@
   .vision h3, .mision h3 {
     background-color: hsla(111, 26%, 59%, 1);
     border-radius: 20px;
-    margin-top: 10px;
+    margin: 10px;
     font-size: 25px;
-    padding: 1px 50px;
+    padding: 10px;
 }
-
-
-  .pContainer{
-    display: flex;
-    justify-content: center;
-    gap: 300px;
-    margin: 20px 0;
-    flex-wrap: wrap;
-  }
-
-
-
 
 
   /* IMAGENS DEL EQUIPO --------------------------------- */ 
-.imagenes-equipo {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin: 20px 0;
-    flex-wrap: wrap;
-}
-
-.imagenes-equipo img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-}
 
 .btn-contacto {
     background-color: hsla(111, 26%, 59%, 1);
@@ -130,5 +104,99 @@
 .contacto-nosotros img {
     width: 25px; /* Ajusta este valor según el tamaño que desees */
     height: 25px;
+
+}
+
+
+.mision{
+    padding: 60px 60px 0px 60px;
+}
+
+.imagenes-equipo{
+    display: grid;
+    grid-template-columns: 16% 16% 16% 16% 16% 16%;
+}
+
+
+.miembroEquipo{
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.miembroEquipo img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.miembroEquipo span {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 20px;
+    color: #000000; 
+}
+
+.miembroEquipo p {
+    padding: 10px 0px 0px 0px ;
+    text-align: center;
+    font-size: 15px;
+    color: #1900ff; 
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .nosotros-main {
+        padding: 0px;
+    }
+
+    .titulo-nosotros {
+        padding: 100px 0px 0px 0px;
+    }
+
+    .nuestra-empresa h2{
+        font-size: 25px;
+        padding: 10px;
+    }
+
+    .nuestra-empresa p{
+        padding: 10px;
+    }
+
+
+    .contenedorCCG{
+        grid-template-columns: 100%;
+    }
+
+
+    .imagenes-equipo{
+        grid-template-columns: 50% 50%;
+        padding: 10px; 
+    }   
+
+    .equipo-desarrollo{
+        padding: 0px;
+    }
+
+    .equipo-desarrollo h2{
+        font-size: 25px;
+        padding: 10px;
+    }
+
+
+    .miembroEquipo{
+        width: 100%;
+        margin: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .miembroEquipo img{
+        width: 80px;
+        height: 80px;
+    }
+
 
 }

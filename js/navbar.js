@@ -1,28 +1,19 @@
-// Obtenemos el header
-const header = document.querySelector('header');
+const header = document.getElementById('mainHeader');
+const toggleBtn = document.createElement('div');
+toggleBtn.className = 'menu-toggle';
+toggleBtn.innerHTML = '&#9776;'; // ícono ☰
 
-// Escuchamos el evento de scroll
+toggleBtn.onclick = () => {
+  document.getElementById('mainNav').classList.toggle('active');
+};
+
+const headerInner = document.querySelector('.header-inner');
+headerInner.insertBefore(toggleBtn, headerInner.querySelector('.icons'));
+
 window.addEventListener('scroll', () => {
-    // Verificamos si la posición del scroll es mayor que 0
-    if (window.scrollY > 0) {
-        header.classList.add('fixed');
-    } else {
-        header.classList.remove('fixed');
-    }
-});
-
-//Menu hamburguesa
-const btnHamburguesa = document.getElementById('btnHamburguesa');
-const menuHamburguesa = document.getElementById('menuHamburguesaResponsive');
-
-btnHamburguesa.addEventListener('click', () => {
-    menuHamburguesa.classList.toggle('activo');
-});
-
-//Cerrar Menu
-const btnCerrarMenu = document.getElementById('btnCerrarMenu');
-const menuHamburguer = document.getElementById('menuHamburguesaResponsive');
-
-btnCerrarMenu.addEventListener('click', () => {
-    menuHamburguesa.classList.remove('activo');
+  if (window.scrollY > 30) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
 });

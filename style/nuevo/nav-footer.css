@@ -1,0 +1,358 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Contenedor del header */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 30px; /* antes: 20px 40px */
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  transition: all 0.3s ease;
+}
+
+/* Logo */
+.logo {
+  flex: 1 1 100%;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.logo img {
+  height: 48px; /* antes: 60px */
+  transition: all 0.3s ease;
+}
+
+/* Navegación */
+.main-nav {
+  flex: 1 1 100%;
+  display: flex;
+  justify-content: center;
+  gap: 40px; /* antes: 60px */
+  margin-top: 15px; /* antes: 20px */
+  transition: all 0.3s ease;
+}
+.main-nav a {
+  text-decoration: none;
+  font-size: 1.3rem; /* antes: 1.6rem */
+  color: black;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 4px; /* antes: 5px */
+  transition: all 0.3s ease;
+}
+.main-nav a.activo::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px; /* antes: 3px */
+  width: 100%;
+  background-color: #5E7F58;
+}
+
+/* Íconos */
+.icons {
+  flex: 1 1 100%;
+  display: flex;
+  justify-content: center; /* antes: center */
+  gap: 15px; /* antes: 20px */
+  margin-top: 15px; /* antes: 20px */
+  transition: all 0.3s ease;
+}
+.icons img {
+  height: 24px; /* antes: 30px */
+  width: 24px;
+  filter: brightness(0);
+  cursor: pointer;
+}
+
+/* Estilo cuando se scrollea */
+header.scrolled .header-inner {
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 8px 20px; /* antes: 10px 30px */
+}
+
+header.scrolled .logo {
+  flex: none;
+  justify-content: flex-start;
+}
+header.scrolled .logo img {
+  height: 34px; /* antes: 40px */
+}
+
+header.scrolled .main-nav {
+  flex: none;
+  margin-top: 0;
+  justify-content: center;
+  gap: 35px; /* un poco más chico aún en scroll */
+}
+
+header.scrolled .main-nav a {
+  font-size: 1.2rem;
+}
+
+header.scrolled .icons {
+  flex: none;
+  margin-top: 0;
+  justify-content: flex-end;
+  gap: 12px;
+}
+header.scrolled .icons img {
+  height: 22px;
+  width: 22px;
+}
+
+/* media  */
+
+
+/* Fin de Header */
+
+
+
+.footer {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 -6px 10px -4px rgba(0, 0, 0, 0.15);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Divide en 3 columnas iguales */
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+.footer-right,
+.footer-center,
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+align-items: center;
+justify-content: center;
+}
+
+.footer-right img{
+  width: 200px;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.socialMedia img{
+  width: 30px;
+
+}
+
+.footer-bottom {
+  background-color: #a7b29c;
+  text-align: center;
+  padding: 20px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  width: 100%;
+}
+
+
+
+/* ----------------------- ----------------------- */
+.cart-dropdown {
+  position: absolute;
+  top: 175px;
+  right: 30px;
+  width: 320px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: none;
+  flex-direction: column;
+  padding: 20px;
+  z-index: 9999;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.cart-arrow {
+  position: absolute;
+  top: -10px;
+  right: 40px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #ffffff;
+}
+
+.cart-content h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.cart-item img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quantity-controls button {
+  padding: 3px 7px;
+  border: none;
+  background-color: #a7b29c;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cart-price {
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-left: 5px;
+}
+
+.remove-item {
+  cursor: pointer;
+  color: red;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.btn-go-cart {
+  background-color: #5E7F58;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+    
+ .header-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    text-align: center;
+  }
+
+  .logo {
+    flex: 1;
+    justify-content: flex-start;
+    display: flex;
+    margin-bottom: 0;
+  }
+
+  .icons {
+    flex: 1;
+    justify-content: flex-end;
+    gap: 15px;
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #5E7F58;
+    margin-left: 10px;
+  }
+
+  .main-nav {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: white;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    padding: 20px 0;
+  }
+
+  .main-nav.active {
+    display: flex;
+  }
+
+
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .footer-right img {
+    width: 150px;
+  }
+
+  .socialMedia img{
+  width: 40px;
+
+}
+
+
+  .footer-right, .footer-center, .footer-left {
+    align-items: center;
+  }
+}
