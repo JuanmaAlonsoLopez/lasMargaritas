@@ -4,15 +4,12 @@ const pool = require('../db');
 const transporter = require('../utils/mailer');
 
 exports.googleCallback = (req, res) => {
-  // Generar el JWT
   const token = jwt.sign(
     { userId: req.user.id, role: req.user.role },
     process.env.JWT_SECRET,
     { expiresIn: '1h' }
   );
-
-  // Redirigir al front (cambia dashboard.html por donde quieras)
-  return res.redirect(`http://localhost:5500/index.html?token=${token}`);
+  res.redirect(`http://localhost:3000/index.html?token=${token}`);
 };
 
 exports.register = async (req, res) => {

@@ -8,11 +8,17 @@
     font-size: 2.5rem;
     color: #333;
     text-align: center;
-    ;
 }
 
 .categoria {
     margin-bottom: 40px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.categorias h2{
+    padding: 100px 0px 30px 0px;
 }
 
 .categoria h2 {
@@ -20,15 +26,25 @@
     font-size: 2rem;
     color: #333;
     text-align: center;
-    
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
 }
+
+.categoria h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    color: #333;
+    text-align: center;
+    justify-content: center;
+}
+
 
 .categoria .carousel-container {
     margin-bottom: 40px; /* Espacio entre el carrusel y el botón */
 }
 
 .ver-mas {
-    margin: 80px auto 0 auto; /* Incrementa el margen superior para separarlo del carrusel */
+    margin: 0px auto 0 auto; /* Incrementa el margen superior para separarlo del carrusel */
 }
 
 .ver-mas:hover {
@@ -95,3 +111,5 @@
 .producto button:hover {
     background-color: #85B27D;
 }
+
+

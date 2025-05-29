@@ -8,88 +8,72 @@
     <title>Categorias</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../style/categorias.css">
-    <link rel="stylesheet" href="../style/footer-nav.css">
+    <link rel="stylesheet" href="../style/nuevo/nav-footer.css">
 </head>
 
 
 <body>
     
 
-    <!--  -->
-    <!--HEADER -->
-    
-    <header>
-    <div class="logo">
+  <!-- Header -->
+    <header id="mainHeader">
+    <div class="header-inner">
+    <!-- Logo -->
+    <div class="logo" id="logo">
         <a href="../index.html">
-            <img src="../images/logoBanner/logo.png" alt="Logo Las Margaritas">
+            <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas">
         </a>
     </div>
-    <nav class="menu">
-        <a  href="../index.html">INICIO</a>
-        <div class="dropdown">
-            <a href="#" class="dropbtn">PRODUCTOS ▼</a>
-            <div class="dropdown-content">
-                <a href="../pages/categorias.html">CATEGORÍAS</a>
-                <a href="../pages/listadoProductos.html">LISTADO DE PRODUCTOS</a>
-            </div>
-        </div>
-        <a href="../pages/sobreNosotros.html">SOBRE NOSOTROS</a>
-        <a href="../pages/contacto.html">CONTACTO</a>
+
+    <!-- Menú -->
+    <nav class="main-nav" id="mainNav">
+        <a  href="../index.html">Inicio</a>
+        <a  href="../pages/categorias.html">Productos</a>
+        <a  href="../pages/sobreNosotros.html">Sobre nosotros</a>
+        <a  href="../pages/contacto.html">Contacto</a>
     </nav>
-    <!--<div class="busBloque">
-        <div class="cart busqueda">
-            <a href="#"><img src="../images/logoBanner/search_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
-        </div>
-    </div>-->
-        <div class="cart">
-            <a href="#" id="cart-icon"><img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="carritoDeCompras"></a>
-            <div class="cart-dropdown">
-                <h3>Productos en el carrito</h3>
-                <div id="cart-items">
-                    <!-- Productos del carrito se cargarán aquí -->
-                </div>
-                <button onclick="location.href='../pages/ResumenCompra.html'" class="ir-al-carrito" >Ir al carrito</button>
-            </div>
-            <div class="ingresar">
-                <a href="#"><img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"></a>
-                <span>Ingresar</span>
-            </div>
-        </div>
-    </header>
-    <!--  -->
-    <!--  -->
-    
-    <!-- Botón hamburguesa -->
-    <div class="menu-hamburguesa-btn" id="btnHamburguesa" aria-label="Abrir menú">
-        <span></span>
-        <span></span>
-        <span></span>
+
+    <!-- Íconos a la derecha -->
+    <div class="icons" id="icons">
+    <a href="#">
+        <img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="Ingresar">
+      </a>
+    <a href="#">
+        <img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="Carrito">
+    </a>
     </div>
+    
 
-    <!-- Menú hamburguesa -->
-    <nav class="menu-hamburguesa" id="menuHamburguesaResponsive">
-        <a href="index.html">INICIO</a>
-        <a href="./pages/categorias.html">CATEGORÍAS</a>
-        <a href="./pages/listadoProductos.html">LISTADO DE PRODUCTOS</a>
-        <a href="./pages/sobreNosotros.html">SOBRE NOSOTROS</a>
-        <a href="./pages/contacto.html">CONTACTO</a>
-    </nav>
+</div>
+</header>
 
 
+<div class="cart-dropdown" id="cartDropdown">
+  <div class="cart-arrow"></div>
+  <div class="cart-content">
+    <h3>Productos en el carrito</h3>
+    <div class="cart-items" id="cartItems"></div>
+    <button onclick="location.href='../pages/ResumenCompra.html'" class="btn-go-cart">Ir al carrito</button>
+  </div>
+</div>
+    
+<!-- Header Hasta aca -->
 
-<!-- Página categoría Ortopedicas -->
+
+
+
+<!-- Página categoría Linea Baby -->
     <main>
         <section class="categorias">
             <h2>Categorías</h2>
 
-            <!-- Categoría: Ortopedicas -->
+            <!-- Categoría: Linea Baby -->
             <div class="categoria">
-                <h2>Ortopedicas</h2>
+                <h2>Linea Baby</h2>
 
-                <!-- Contenedor de tarjetas de productos en grilla -->
+                 <!-- Contenedor de tarjetas de productos en grilla -->
                 <div class="productos-grid">
-                    
-                    <div class="producto">
+                   <div class="producto">
                          <!--Imagen de producto-->
                     <img src="../images/fotosProductos/Margarita-Photoroom.png" alt="Producto 1">
                     <!--!Nombre producto-->
@@ -161,61 +145,66 @@
                     <!-- ... otras tarjetas ... -->
 
                     
+                </div> 
+                    
+                    </div>
                 </div>
             </div> <!-- .categoria -->
         </section>
     </main>
-<!-- Fin página categoría Ortopedica -->
+<!-- Fin página categoría LineaBaby -->
 
 
     
 <!-- Footer-->
 
     <footer class="footer">
-        <div class="footer-contenido">
-        <div class="columna logo-redes">
-            <img src="../images/logoBanner/LasMargaritas.png" alt="Las Margaritas" class="logo-footer" />
-            <div class="redes">
-            <a href="https://www.instagram.com/lasmargaritasmza/" target="_blank">
+  <div class="footer-grid">
+    <!-- Columna izquierda -->
+    <div class="footer-right">
+      <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas" class="footer-logo">
+      <p class="footer-desc">Fabrica de productos de confort</p>
+      <a href="#" class="footer-social">
+        <div class="socialMedia">
+            <a href="https://www.instagram.com/almohadones.lasmargaritas">
                 <img src="../images/logotipo-de-instagram.png" alt="Instagram">
             </a>
-            <img src="../images/simbolo-de-la-aplicacion-de-facebook.png" alt="Facebook">
-            </div>
+            
         </div>
-    
-        <div class="columna links">
-            <div class="grupo">
-            <h4>Secciones</h4>
-            <ul>
-                <li><a href="/pages/sobreNosotros.html">Sobre nosotros</a></li>
-                <li><a href="#">Politica de privacidad</a></li>
-                <li><a href="#">Terminos y condiciones</a></li>
-                
-                <li><button class="btn-negro btnFooterSec">Llamanos</button></li>
-            </ul>
-            </div>
-        </div>
-    
-        <div class="columna contacto">
-            <h4>Contacto</h4>
-            <p><img src="../images/telefono.png" alt="Tel"> +5492612543607</p>
-            <p><a href="mailto:info@lasmargaritas.online"><img src="../images/email.png" alt="Mail"> info@lasmargaritas.online</a></p>
-        </div>
-        </div>
-    
-        <div class="footer-derechos">
-        Todos los derechos reservados @ Las Margaritas 2025
-        </div>
-    </footer>
+      </a>
+    </div>
 
-    <!-- termina Footer-->
+    <!-- Columna derecha -->
+    <div class="footer-center">
+        
+    <span>Avda. Juan B. Justo 8667</span>
+    <span>CABA, Argentina</span>
     
-    <script src="../js/navbar.js"></script>
-    <script src="../js/carritoDes.js"></script>
+    <span>telefono: 11 3437-4127</span>
+    <span>Email: info@lasmargaritas.online</span>
 
+
+    </div>
+
+    <div class="footer-left">
+        <a href=""><span>Contacto</span></a>
+        <a href=""><span>Sobre Nosotros</span></a>
+        <a href=""><span>Otro</span></a>
+    </div>  
+  </div>
+
+  <!-- Línea inferior -->
+  <div class="footer-bottom">
+    <p>Todos los derechos reservados @ Las Margaritas 2025</p>
+  </div>
+</footer>
+<!-- termina Footer-->
+
+<script src="../js/navbar.js"></script>
+<script src="../js/carritoDes.js"></script>
     <a href="https://wa.me/5492612543607" target="_blank" class="whatsapp-float">
         <img src="../images/imageswhatsapp-icon.png" alt="WhatsApp">
     </a>
-
+<script src="/js/common.js"></script>
 </body>
 </html>

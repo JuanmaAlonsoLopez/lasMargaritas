@@ -1,0 +1,193 @@
+body {
+  /* font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f4f4f4; */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+form {
+  max-width: 400px;
+  margin: auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+}
+
+/* input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+} */
+
+/* Inputs estilo */
+#loginForm input[type="email"],
+#loginForm input[type="password"] {
+  width: 90%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+button {
+  width: 98%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+
+}
+
+button:hover {
+  background-color: #218838;
+  transition: 0.5s ease;
+
+
+}
+
+#show-hide{
+  position: relative;
+  top: -10px;
+  float: right;
+  color: rgb(117, 109, 109);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all .5s ease;
+}
+
+/* Google Button */
+.google-btn {
+  display: inline-flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  color: #757575;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  padding: 0 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+  margin-top: 15px; /* o el valor que quieras */
+
+}
+
+.google-btn:hover {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.google-btn .google-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+
+/* ----REGISTER------- */
+
+/* Estilo para el formulario */
+#registerForm {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+
+  display: grid;
+  grid-template-columns: 1fr; /* UNA SOLA COLUMNA */
+  gap: 15px; /* espacio entre filas */
+  width: 350px;
+}
+
+/* Inputs estilo */
+#registerForm input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Botón estilo */
+#registerForm button {
+  grid-column: 1 / -1; /* Ocupa las dos columnas */
+  padding: 12px;
+  background-color: #28a745; /* Verde */
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#registerForm button:hover {
+  background-color: #218838;
+}
+
+/* ----reset-password------- */
+
+
+
+/* Formulario con fondo blanco, sombra y borde redondeado */
+#resetForm {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Inputs estilo */
+#resetForm input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Botón ancho y con color */
+#resetForm button {
+  background-color: #28a745;
+  color: white;
+  padding: 12px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover del botón */
+#resetForm button:hover {
+  background-color: #218838;
+}
+

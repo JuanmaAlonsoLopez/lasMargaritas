@@ -1,4 +1,3 @@
-// login.js
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -21,15 +20,29 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
       return alert('Error: ' + (data.message || 'Invalid credentials'));
     }
 
-    // Si todo va bien, guardamos el token y el usuario
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify(data.user));
+    if (res.ok) {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
 
-    alert('¡Login exitoso!');
-    // Redirigir a la página que desees, por ejemplo:
-    window.location.href = 'http://127.0.0.1:5500/index.html';
+      // Redirigir a la página anterior o a home
+      const lastPage = localStorage.getItem('lastPage') || '/index.html';
+      localStorage.removeItem('lastPage');
+      window.location.href = lastPage;
+    }
   } catch (err) {
     console.error('Fetch error:', err);
     alert('No se pudo conectar con el servidor');
   }
 });
+
+// Show/Hide contraseña
+const passwordInput = document.getElementById('password');
+const togglePasswordButton = document.getElementById('show-hide');  // Cambié aquí el id
+
+togglePasswordButton.addEventListener('click', () => {
+  const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+  passwordInput.setAttribute('type', type);
+  togglePasswordButton.textContent = type === 'password' ? 'Show' : 'Hide';
+});
+
+

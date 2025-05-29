@@ -13,7 +13,7 @@
     padding: 20px;
 }
 
-.prooductoListado{
+.productoListado{
     display: grid;
     justify-items: center;
 }
@@ -42,7 +42,7 @@
     padding: 10px;
     box-sizing: border-box;
     border-radius: 8px;
-    grap: 10px
+    gap: 10px
     }
 
     .producto img {
