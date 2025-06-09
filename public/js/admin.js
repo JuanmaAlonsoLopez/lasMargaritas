@@ -42,6 +42,8 @@ const btnCancel  = document.getElementById('btnCancel');
 const closeBtn   = document.getElementById('closeBtn');
 const tbody      = document.querySelector('#tblProducts tbody');
 
+// ...existing code...
+
 function renderTable() {
   const prods = getProducts();
   tbody.innerHTML = '';
@@ -60,6 +62,29 @@ function renderTable() {
   });
 }
 
+// --- NUEVO: Manejo de imagen ---
+const imageInput = document.getElementById('image');
+const imagePreview = document.getElementById('imagePreview');
+let currentImageData = "";
+
+imageInput.addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      imagePreview.src = e.target.result;
+      imagePreview.style.display = 'block';
+      currentImageData = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  } else {
+    imagePreview.src = '';
+    imagePreview.style.display = 'none';
+    currentImageData = "";
+  }
+});
+
+
 function openModal(edit = false, p = {}) {
   formTitle.textContent = edit ? 'Editar producto' : 'Nuevo producto';
   document.getElementById('prodId').value      = p.id || '';
@@ -67,20 +92,40 @@ function openModal(edit = false, p = {}) {
   document.getElementById('description').value = p.description || '';
   document.getElementById('price').value       = p.price || '';
   document.getElementById('stock').value       = p.stock || '';
+  // --- NUEVO: Imagen ---
+  if (p.image) {
+    imagePreview.src = p.image;
+    imagePreview.style.display = 'block';
+    currentImageData = p.image;
+  } else {
+    imagePreview.src = '';
+    imagePreview.style.display = 'none';
+    currentImageData = "";
+  }
+  imageInput.value = '';
   modal.classList.remove('hidden');
 }
+
 function closeModal() {
   form.reset();
+  imagePreview.src = '';
+  imagePreview.style.display = 'none';
+  currentImageData = "";
   modal.classList.add('hidden');
 }
 
+function resetModal() {
+  form.reset();
+  imagePreview.src = '';
+  imagePreview.style.display = 'none';
+  currentImageData = "";
+}
+
 btnAdd.addEventListener('click', () => openModal());
-btnCancel.addEventListener('click', closeModal);
-closeBtn.addEventListener('click', closeModal);
-modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
-});
+closeBtn.addEventListener('click', () => closeModal());
+resetBtn.addEventListener('click', () => resetModal());
+btnCancel.addEventListener('click', () => closeModal());
+
 
 form.onsubmit = e => {
   e.preventDefault();
@@ -89,16 +134,19 @@ form.onsubmit = e => {
   const description = document.getElementById('description').value;
   const price       = parseFloat(document.getElementById('price').value);
   const stock       = parseInt(document.getElementById('stock').value, 10);
+  const image       = currentImageData; // NUEVO
   let prods = getProducts();
   if (!id) {
-    prods.push({ id: Date.now().toString(), name, description, price, stock });
+    prods.push({ id: Date.now().toString(), name, description, price, stock, image });
   } else {
-    prods = prods.map(x => x.id === id ? { id, name, description, price, stock } : x);
+    prods = prods.map(x => x.id === id ? { id, name, description, price, stock, image } : x);
   }
   saveProducts(prods);
   renderTable();
   closeModal();
 };
+
+// ...existing code...
 
 tbody.addEventListener('click', e => {
   const id = e.target.dataset.id;

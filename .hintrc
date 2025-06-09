@@ -10,7 +10,8 @@
           "user-select",
           "-webkit-overflow-scrolling",
           "scrollbar-width",
-          "scrollbar-width: none"
+          "scrollbar-width: none",
+          "-moz-appearance"
         ]
       }
     ],

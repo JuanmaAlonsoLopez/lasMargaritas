@@ -83,11 +83,18 @@
           <label>Descripción:<br>
             <textarea id="description" rows="3" required></textarea>
           </label>
-          <label>Precio: <input type="number" id="price" step="0.01" required></label>
-          <label>Stock: <input type="number" id="stock" required></label>
+            <label>Precio: <input type="number" id="price" step="0.01" min="0" required></label>
+            <label>Stock: <input type="number" id="stock" min="0" required></label>
+          
+          <label>Imagen:
+            <input type="file" id="image" accept="image/*">
+          </label>
+          <img id="imagePreview" src="" alt="Vista previa" style="display:none; max-width: 120px; margin: 10px 0; border-radius: 6px;">
+          
           <div class="buttons">
             <button type="submit">Guardar</button>
             <button type="button" id="btnCancel">Cancelar</button>
+            <button type="button" id="resetBtn">Reset</button>
           </div>
         </form>
       </div>
