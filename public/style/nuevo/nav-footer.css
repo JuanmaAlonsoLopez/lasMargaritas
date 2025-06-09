@@ -352,7 +352,8 @@ justify-content: center;
 }
 
 
-  .footer-right, .footer-center, .footer-left {
-    align-items: center;
-  }
+.footer-right, .footer-center, .footer-left {
+  align-items: center;
 }
+}
+

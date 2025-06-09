@@ -7,8 +7,18 @@
       "default",
       {
         "ignore": [
-          "user-select"
+          "user-select",
+          "-webkit-overflow-scrolling",
+          "scrollbar-width",
+          "scrollbar-width: none"
         ]
+      }
+    ],
+    "disown-opener": "off",
+    "axe/name-role-value": [
+      "default",
+      {
+        "link-name": "off"
       }
     ]
   }

@@ -535,9 +535,6 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     background-color: #5E7F58;
 }
 
-.btn{
-    
-}
 
 
 
@@ -574,9 +571,6 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
   display: none; /* Oculto por defecto (versión PC) */
 }
 
-.btnComprarCarrito{
-    
-}
 
 
 
@@ -790,6 +784,7 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     width: 90px;
     height: 90px;
     margin-bottom: 20px;
+    border: 2px solid red;
 }
 
 .beneficio p {
