@@ -748,6 +748,32 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     align-items: center;
     justify-content: center;
 }
+
+/*BANNER---------------------------------------------------------------------*/
+
+
+
+.banner-ortopedicas {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 0) 100%), url('/istockphoto-970904118-612x612.jpg');
+    background-size: contain; /* Hace que la imagen se vea más chica */
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border-radius: 20px;
+    padding: 60px 80px;
+    width: 100%;
+    max-width: 1640px;
+    height: 441px;
+
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    margin: auto;
+    background-color: #c9d3c7;
+}
+}
+
+
 /*-------------------------------------------------------------------------------------------*/
 
 .beneficios {
@@ -784,7 +810,6 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     width: 90px;
     height: 90px;
     margin-bottom: 20px;
-    border: 2px solid red;
 }
 
 .beneficio p {
@@ -798,28 +823,4 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     color: #333;
     text-align: center;
     margin-bottom: 30px;
-}
-
-/*BANNER---------------------------------------------------------------------*/
-
-
-
-.banner-ortopedicas {
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 0) 100%), url('/istockphoto-970904118-612x612.jpg');
-    background-size: contain; /* Hace que la imagen se vea más chica */
-    background-position: center;
-    background-repeat: no-repeat;
-
-    border-radius: 20px;
-    padding: 60px 80px;
-    width: 100%;
-    max-width: 1640px;
-    height: 441px;
-
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    margin: auto;
-    background-color: #c9d3c7;
-}
 }
