@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Admin – Las Margaritas</title>
+
+  <!-- Fuentes y favicon -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="../images/logoBanner/logo.png" type="image/png">
+
+  <!-- CSS globales del proyecto -->
+  <link rel="stylesheet" href="../styles.css" >
+  <link rel="stylesheet" href="../style/nuevo/nav-footer.css">
+
+  <!-- CSS específico para admin -->
+  <link rel="stylesheet" href="../style/admin.css">
+</head>
+<body>
+  <!--  -->
+     <!--HEADER -->
+    
+       <!--- Menu principal -->
+
+<header id="mainHeader">
+    <div class="header-inner">
+    <!-- Logo -->
+    <div class="logo" id="logo">
+        <a href="../index.html">
+            <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas">
+        </a>
+    </div>
+
+    <!-- Menú -->
+    <nav class="main-nav" id="mainNav">
+      <a href="../index.html">Inicio</a>
+      <a class="activo" href="../pages/listadoProductos.html">Productos</a>
+      <a href="../pages/sobreNosotros.html">Sobre nosotros</a>
+      <a href="../pages/contacto.html">Contacto</a>
+    </nav>
+
+    <!-- Íconos a la derecha -->
+    <div class="icons" id="icons">
+      <a href="#">
+        <img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="Ingresar">
+      </a>
+      <a href="../pages/carrito.html">
+        <img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="Carrito">
+      </a>
+    </div>
+    
+
+
+
+
+</div>
+</header>
+
+  <!-- MAIN ADMIN -->
+  <main class="admin-main">
+   
+    <!-- Sección Productos -->
+    <section id="productsSection">
+      <button id="btnAdd">+ Nuevo producto</button>
+      <table id="tblProducts">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div id="modal" class="hidden">
+        <form id="productForm">
+          <span id="closeBtn" class="close">&times;</span>
+          <h2 id="formTitle">Nuevo producto</h2>
+          <input type="hidden" id="prodId">
+          <label>Nombre: <input type="text" id="name" required></label>
+          <label>Descripción:<br>
+            <textarea id="description" rows="3" required></textarea>
+          </label>
+          <label>Precio: <input type="number" id="price" step="0.01" required></label>
+          <label>Stock: <input type="number" id="stock" required></label>
+          <div class="buttons">
+            <button type="submit">Guardar</button>
+            <button type="button" id="btnCancel">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Sección Usuarios -->
+    <section id="usersSection" class="hidden">
+      <button id="btnAddUser">+ Nuevo usuario</button>
+      <table id="tblUsers">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Nombre</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div id="modalUser" class="hidden">
+        <form id="userForm">
+          <span id="closeUser" class="close">&times;</span>
+          <h2 id="userFormTitle">Nuevo usuario</h2>
+          <input type="hidden" id="userId">
+          <label>Email: <input type="email" id="userEmail" required></label>
+          <label>Nombre: <input type="text" id="userName" required></label>
+          <label>Estado:
+            <select id="userStatus">
+              <option value="activo">Activo</option>
+              <option value="baja">De baja</option>
+            </select>
+          </label>
+          <div class="buttons">
+            <button type="submit">Guardar</button>
+            <button type="button" id="btnCancelUser">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+<!-- Footer-->
+
+   <footer class="footer">
+  <div class="footer-grid">
+    <!-- Columna izquierda -->
+    <div class="footer-right">
+      <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas" class="footer-logo">
+      <p class="footer-desc">Fabrica de productos de confort</p>
+      <a href="#" class="footer-social">
+        <div class="socialMedia">
+           <a href="https://www.instagram.com/almohadones.lasmargaritas">
+                <img src="../images/logotipo-de-instagram.png" alt="Instagram">
+            </a>
+        </div>
+      </a>
+    </div>
+
+    <!-- Columna derecha -->
+    <div class="footer-center">
+        
+    <span>Avda. Juan B. Justo 8667</span>
+    <span>CABA, Argentina</span>
+    
+    <span>telefono: 11 3437-4127</span>
+    <span>Email: info@lasmargaritas.online</span>
+
+
+    </div>
+
+    <div class="footer-left">
+        <a href=""><span>Contacto</span></a>
+        <a href=""><span>Sobre Nosotros</span></a>
+        <a href=""><span>Otro</span></a>
+    </div>  
+  </div>
+
+  <!-- Línea inferior -->
+  <div class="footer-bottom">
+    <p>Todos los derechos reservados @ Las Margaritas 2025</p>
+  </div>
+</footer>
+
+    <!-- termina Footer-->
+    <a href="https://wa.me/5492612543607" target="_blank" class="whatsapp-float">
+        <img src="../images/imageswhatsapp-icon.png" alt="WhatsApp">
+    </a>
+  <!-- Scripts -->
+  <script src="../js/navbar.js"></script>
+  <script src="../js/carritoDes.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>
