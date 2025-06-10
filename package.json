@@ -1,25 +1,31 @@
 {
-  "name": "backend",
+  "name": "las-margaritas-backend",
   "version": "1.0.0",
+  "description": "Backend para el e-commerce Las Margaritas",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "bcrypt": "^6.0.0",
+    "bcrypt": "^5.1.0",           
+    "body-parser": "^1.20.2",     
     "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "express-session": "^1.18.1",
-    "express-validator": "^7.2.1",
+    "dotenv": "^16.4.5",         
+    "express": "^4.19.2",         
+    "express-session": "^1.18.0", 
+    "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.2",
-    "nodemailer": "^7.0.3",
+    "mercadopago": "^2.0.0",     
+    "nodemailer": "^6.9.13",     
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
-    "pg": "^8.16.0"
+    "pg": "^8.11.3"              
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"          
   }
 }

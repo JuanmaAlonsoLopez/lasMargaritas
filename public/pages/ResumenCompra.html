@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,52 +14,36 @@
 
 <body>
 
-    <!--HEADER -->
-    
-       <!--- Menu principal -->
+    <header id="mainHeader">
+        <div class="header-inner">
+            <div class="logo" id="logo">
+                <a href="../index.html">
+                    <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas">
+                </a>
+            </div>
+            <nav class="main-nav" id="mainNav">
+                <a href="../index.html">Inicio</a>
+                <a class="activo" href="../pages/listadoProductos.html">Productos</a>
+                <a href="../pages/sobreNosotros.html">Sobre nosotros</a>
+                <a href="../pages/contacto.html">Contacto</a>
+            </nav>
+            <div class="icons" id="icons">
+                <a href="#">
+                    <img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="Ingresar">
+                </a>
+                <a href="../pages/carrito.html">
+                    <img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="Carrito">
+                </a>
+            </div>
+        </div>
+    </header>
 
-<header id="mainHeader">
-    <div class="header-inner">
-    <!-- Logo -->
-    <div class="logo" id="logo">
-        <a href="../index.html">
-            <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas">
-        </a>
-    </div>
-
-    <!-- Menú -->
-    <nav class="main-nav" id="mainNav">
-      <a href="../index.html">Inicio</a>
-      <a class="activo" href="../pages/listadoProductos.html">Productos</a>
-      <a href="../pages/sobreNosotros.html">Sobre nosotros</a>
-      <a href="../pages/contacto.html">Contacto</a>
-    </nav>
-
-    <!-- Íconos a la derecha -->
-    <div class="icons" id="icons">
-      <a href="#">
-        <img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="Ingresar">
-      </a>
-      <a href="../pages/carrito.html">
-        <img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="Carrito">
-      </a>
-    </div>
-    
-
-
-
-
-</div>
-</header>
-
-    <!-- Botón hamburguesa -->
     <div class="menu-hamburguesa-btn" id="btnHamburguesa" aria-label="Abrir menú">
         <span></span>
         <span></span>
         <span></span>
     </div>
 
-    <!-- Menú hamburguesa -->
     <nav class="menu-hamburguesa" id="menuHamburguesaResponsive">
         <a href="index.html">INICIO</a>
         <a href="./pages/categorias.html">CATEGORÍAS</a>
@@ -68,108 +51,202 @@
         <a href="./pages/sobreNosotros.html">SOBRE NOSOTROS</a>
         <a href="./pages/contacto.html">CONTACTO</a>
     </nav>
-    
-    <!--  -->
 
-  <div class="container">
-    <!-- Ventana izquierda: Productos en el carrito -->
-    <div class="left-container">
-
-      <!--Producto esto se saca--->
-        <div class="Producto">
-            <input type="checkbox" id="producto1" class="checkbox">
-            <label for="producto1" class="producto-label">
-                <img src="../images/fotosProductos/Margarita-Photoroom.png" alt="Producto Almohadón" class="producto-img">
-                <div class="producto-info">
-                    <span class="producto-nombre">Almohadón Ortopédico Deluxe - 70x50 cm</span>
-                  </div>
-                </label>
-                <div class="acciones">
-                    <button class="eliminar">Eliminar</button>
-                
-                    <button class="comprar-ahora">Comprar ahora</button>
+    <div class="container">
+        <div class="left-container">
+            <div id="cart-products-container">
                 </div>
-        </div>
-        <!-- Envío -->
-        <div class="envio">
-            <span class="envio-text">Envío</span>
-            <div class="barra-envio">
-                <span>Agrega $1,500 más para conseguir envío gratis en productos de Almohadones Ortopédicos.</span>
+
+            <div class="envio">
+                <span class="envio-text">Envío</span>
+                <div class="barra-envio">
+                    <span>Agrega $1,500 más para conseguir envío gratis en productos de Almohadones Ortopédicos.</span>
+                </div>
+            </div>
+            <div class="productos-relacionados">
+                <span>Ver más productos de este vendedor</span>
             </div>
         </div>
-        <!-- Productos relacionados -->
-        <div class="productos-relacionados">
-            <span>Ver más productos de este vendedor</span>
-        </div>
-    </div>
 
-    <!-- Ventana derecha: Resumen de compra -->
-    <div class="right-container">
-        <div class="resumen-compra">
-            <h3>Resumen de compra</h3>
-            <div class="detalles">
-                <p>Producto: $9,290.00</p>
-                <p>Envío: $1,500.00</p>
-                <p>Total: $10,790.00</p>
+        <div class="right-container">
+            <div class="resumen-compra">
+                <h3>Resumen de compra</h3>
+                <div class="detalles">
+                    <p id="product-subtotal">Producto: $0.00</p>
+                    <p id="shipping-cost">Envío: $1,500.00</p>
+                    <p id="total-amount">Total: $0.00</p>
+                </div>
+                <button id="comprar" class="continuar-compra">Continuar compra</button>
             </div>
-            <button class="continuar-compra">Continuar compra</button>
         </div>
     </div>
-</div>
 
-
-
-<!-- Footer-->
-
-   <footer class="footer">
-  <div class="footer-grid">
-    <!-- Columna izquierda -->
-    <div class="footer-right">
-      <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas" class="footer-logo">
-      <p class="footer-desc">Fabrica de productos de confort</p>
-      <a href="#" class="footer-social">
-        <div class="socialMedia">
-           <a href="https://www.instagram.com/almohadones.lasmargaritas">
-                <img src="../images/logotipo-de-instagram.png" alt="Instagram">
-            </a>
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-right">
+                <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas" class="footer-logo">
+                <p class="footer-desc">Fabrica de productos de confort</p>
+                <a href="#" class="footer-social">
+                    <div class="socialMedia">
+                        <a href="https://www.instagram.com/almohadones.lasmargaritas">
+                            <img src="../images/logotipo-de-instagram.png" alt="Instagram">
+                        </a>
+                    </div>
+                </a>
+            </div>
+            <div class="footer-center">
+                <span>Avda. Juan B. Justo 8667</span>
+                <span>CABA, Argentina</span>
+                <span>telefono: 11 3437-4127</span>
+                <span>Email: info@lasmargaritas.online</span>
+            </div>
+            <div class="footer-left">
+                <a href=""><span>Contacto</span></a>
+                <a href=""><span>Sobre Nosotros</span></a>
+                <a href=""><span>Otro</span></a>
+            </div>
         </div>
-      </a>
-    </div>
+        <div class="footer-bottom">
+            <p>Todos los derechos reservados @ Las Margaritas 2025</p>
+        </div>
+    </footer>
 
-    <!-- Columna derecha -->
-    <div class="footer-center">
-        
-    <span>Avda. Juan B. Justo 8667</span>
-    <span>CABA, Argentina</span>
-    
-    <span>telefono: 11 3437-4127</span>
-    <span>Email: info@lasmargaritas.online</span>
-
-
-    </div>
-
-    <div class="footer-left">
-        <a href=""><span>Contacto</span></a>
-        <a href=""><span>Sobre Nosotros</span></a>
-        <a href=""><span>Otro</span></a>
-    </div>  
-  </div>
-
-  <!-- Línea inferior -->
-  <div class="footer-bottom">
-    <p>Todos los derechos reservados @ Las Margaritas 2025</p>
-  </div>
-</footer>
-
-    <!-- termina Footer-->
-
-    <script src="../js/navbar.js"></script> 
+    <script src="../js/navbar.js"></script>
     <script src="../js/carritoDes.js"></script>
-
     <a href="https://wa.me/5492612543607" target="_blank" class="whatsapp-float">
         <img src="../images/imageswhatsapp-icon.png" alt="WhatsApp">
     </a>
-<script src="/js/common.js"></script>
+    <script src="/js/common.js"></script>
+
+    <script>
+        // --- Productos Hardcodeados para el carrito ---
+        // Estos productos simulan lo que podrías obtener de tu base de datos o de un carrito real.
+        const hardcodedCartProducts = [
+            {
+                id: 1, // ID de producto (importante para el backend)
+                title: 'Almohadón Ortopédico Deluxe - 70x50 cm',
+                quantity: 1,
+                unit_price: 9290, // Precio por unidad
+                image: '../images/fotosProductos/Margarita-Photoroom.png'
+            },
+            {
+                id: 2, // Otro producto de ejemplo
+                title: 'Cojín Lumbar Ergonómico',
+                quantity: 2,
+                unit_price: 3500,
+                image: 'https://via.placeholder.com/100/FF0000/FFFFFF?text=Cojin' // Imagen de ejemplo
+            },
+            {
+                id: 3, // Otro producto de ejemplo
+                title: 'Funda de Almohada de Algodón Premium',
+                quantity: 3,
+                unit_price: 1200,
+                image: 'https://via.placeholder.com/100/0000FF/FFFFFF?text=Funda' // Imagen de ejemplo
+            }
+        ];
+
+        // --- Función para renderizar los productos en el carrito ---
+        function renderCartProducts() {
+            const container = document.getElementById('cart-products-container');
+            container.innerHTML = ''; // Limpiar el contenedor antes de renderizar
+
+            let subtotal = 0;
+
+            hardcodedCartProducts.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('Producto');
+                productDiv.id = `product-${product.id}`; // Un ID único para cada producto
+
+                const productHtml = `
+                    <input type="checkbox" id="checkbox-${product.id}" class="checkbox" checked disabled>
+                    <label for="checkbox-${product.id}" class="producto-label">
+                        <img src="${product.image}" alt="Producto ${product.title}" class="producto-img">
+                        <div class="producto-info">
+                            <span class="producto-nombre">${product.title}</span>
+                            <span class="producto-cantidad">Cantidad: ${product.quantity}</span>
+                            <span class="producto-precio">Precio unitario: $${product.unit_price.toLocaleString('es-AR')}</span>
+                            <span class="producto-precio-total">Subtotal: $${(product.quantity * product.unit_price).toLocaleString('es-AR')}</span>
+                        </div>
+                    </label>
+                    <div class="acciones">
+                        <button class="eliminar" data-product-id="${product.id}">Eliminar</button>
+                    </div>
+                `;
+                productDiv.innerHTML = productHtml;
+                container.appendChild(productDiv);
+
+                subtotal += product.quantity * product.unit_price;
+            });
+
+            // Actualizar el resumen de compra
+            const shippingCost = 1500; // Costo de envío fijo para este ejemplo
+            const total = subtotal + shippingCost;
+
+            document.getElementById('product-subtotal').textContent = `Producto: $${subtotal.toLocaleString('es-AR')}.00`;
+            document.getElementById('total-amount').textContent = `Total: $${total.toLocaleString('es-AR')}.00`;
+
+            // Agregar event listeners a los botones de eliminar (opcional para hardcodeado, pero buena práctica)
+            container.querySelectorAll('.eliminar').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productIdToRemove = parseInt(this.dataset.productId);
+                    alert(`Funcionalidad de eliminar para el producto ID ${productIdToRemove} (no implementado en este ejemplo hardcodeado).`);
+                    // Aquí deberías:
+                    // 1. Eliminar el producto del array hardcodedCartProducts.
+                    // 2. Volver a llamar a renderCartProducts() para actualizar la vista.
+                });
+            });
+        }
+
+        // Llamar a la función para renderizar los productos cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', renderCartProducts);
+
+        // --- Lógica del botón "Continuar compra" para Mercado Pago ---
+        document.getElementById('comprar').addEventListener('click', function () {
+            // Prepara los ítems para enviar a Mercado Pago desde el array hardcodeado
+            // Es crucial enviar el ID del producto para que el backend lo valide con su "DB"
+            const cartItemsToSend = hardcodedCartProducts.map(product => ({
+                id: product.id,
+                title: product.title,       // Estos campos pueden ser validados o ignorados por el backend
+                quantity: product.quantity,
+                unit_price: product.unit_price // Estos campos pueden ser validados o ignorados por el backend
+            }));
+
+            if (cartItemsToSend.length === 0) {
+                alert('Tu carrito está vacío. Agrega productos antes de continuar.');
+                return;
+            }
+
+            fetch('http://localhost:3000/create_preference', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ items: cartItemsToSend }), // Envía los ítems hardcodeados
+            })
+            .then(response => {
+                if (!response.ok) {
+                    // Si la respuesta no es 2xx (ej. 400, 500), intentar leer el error JSON
+                    return response.json().then(err => { 
+                        throw new Error(err.message || 'Error desconocido al procesar la solicitud.'); 
+                    }).catch(() => {
+                        // Si la respuesta no es un JSON válido, aún así mostrar un error genérico
+                        throw new Error(`Error HTTP: ${response.status} ${response.statusText}. Respuesta no es JSON.`);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.init_point) {
+                    window.location.href = data.init_point;
+                } else {
+                    alert('No se pudo generar la preferencia de pago.');
+                }
+            })
+            .catch(error => {
+                console.error('Error al iniciar el pago:', error);
+                alert(`Ocurrió un error al procesar tu solicitud de pago: ${error.message}. Por favor, intenta de nuevo.`);
+            });
+        });
+    </script>
 </body>
 </html>
-
