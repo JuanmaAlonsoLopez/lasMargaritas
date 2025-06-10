@@ -13,13 +13,24 @@
 /*MAIN CLASS------------------------------------*/
 
 .nosotros-main {
+    font-family: 'Montserrat';
     text-align: center;
-    padding: 20px;
-    color: #000000;
-        font-family:'Montserrat', sans-serif;
-
-    
+    padding: 40px;
+    margin: 20px auto;
+    max-width: 1200px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
 }
+
+.nosotros-main .h2{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
 
 
 .hero-nosotros img {
@@ -29,16 +40,17 @@
 
 .titulo-nosotros {
     top: 50%;
+    width: 1494;
     left: 50%;
     font-size: 48px;
     color: BLACK;
     padding: 200px 0px 0px 0px;
-}  
+}
 
-.nuestra-empresa h2,
-.equipo-desarrollo h2 {
-    background-color: hsla(111, 26%, 59%, 1);
+.nuestra-empresa h2, .equipo-desarrollo h2 , p{
+    /*background-color: hsla(111, 26%, 59%, 1);*/
     color: black;
+    
     /* display: inline-block; */
     padding: 8px 20px;
     margin-top: 40px;
@@ -46,8 +58,7 @@
     height: 83;
     top: 548px;
     left: 154px;
-    border-radius: 43px;
-        font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 
   }
 
@@ -59,6 +70,7 @@
     display: grid;
     grid-template-columns: 33% 33% 33%;
     gap: 20px;
+    
 }
 
 
@@ -66,6 +78,7 @@
     width: 220px;
     height: 200px;
     border-radius: 50%;
+
 }
 
 
@@ -77,31 +90,46 @@
     margin: 20px 0;
     flex-wrap: wrap;
 
-  }
 
-  .vision h3, .mision h3 {
-    background-color: hsla(111, 26%, 59%, 1);
+}
+
+.vision h3, .mision h3 {
+    /*background-color: hsla(111, 26%, 59%, 1);*/
     border-radius: 20px;
     margin: 10px;
     font-size: 25px;
     padding: 10px;
+
 }
 
 
   /* IMAGENS DEL EQUIPO --------------------------------- */ 
 
 .btn-contacto {
-    background-color: hsla(111, 26%, 59%, 1);
+    /*background-color: hsla(111, 26%, 59%, 1);
     color: black;
     border: none;
     padding: 10px 25px;
     border-radius: 20px;
     margin: 30px 0;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 18px;*/
+
+    background-color: #5E7F58;
+    color: white;
+    border: none;
+    padding: 10px 40px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    transition: background-color 0.3s ease;
 }
 
 /*Contacto ------------------------------------*/
+
 
 .mail {
     font-size: 20px;
@@ -109,7 +137,6 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    
 }
 
 .contacto-nosotros img {
