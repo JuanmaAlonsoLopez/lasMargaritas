@@ -275,10 +275,84 @@ justify-content: center;
   margin-top: 10px;
 }
 
+/* Fondo blur negro */
+.cart-blur-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.45); /* negro y más oscuro */
+  backdrop-filter: blur(6px);
+  z-index: 9998;
+  transition: opacity 0.3s;
+}
+.cart-blur-bg.hidden {
+  display: none;
+}
 
+/* Popup centrado y grande */
+.cart-dropdown {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  max-width: 98vw;
+  background-color: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  display: none;
+  flex-direction: column;
+  padding: 48px 40px 36px 40px;
+  font-size: 1.15rem;
+  z-index: 9999;
+  font-family: 'Montserrat', sans-serif;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.cart-dropdown[style*="display: flex"] {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
 
+/* Animación de entrada */
+.cart-dropdown {
+  transform: translate(-50%, -48%) scale(0.98);
+}
 
-
+/* Botón de cierre */
+.cart-close {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  font-size: 2rem ;
+  color: #888;
+  cursor: pointer;
+  z-index: 2;
+  transition: color 0.2s;
+}
+.cart-close:hover {
+  color: #222;
+}
+.cart-empty {
+  text-align: center;
+  color: #888;
+  font-size: 1.1rem;
+  padding: 30px 0;
+}
+/* Responsive */
+@media (max-width: 600px) {
+  .cart-dropdown {
+    width: 98vw;
+    max-width: 98vw;
+    padding: 18px 6px 18px 6px;
+  }
+  .cart-close {
+    top: 10px;
+    right: 12px;
+    font-size: 1.5rem;
+  }
+}
 
 @media (max-width: 768px) {
     

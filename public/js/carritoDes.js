@@ -13,14 +13,34 @@ const iconos = document.querySelectorAll('.icons a');
 const carritoIcon = iconos[1];
 const dropdown = document.getElementById('cartDropdown');
 const cartItems = document.getElementById('cartItems');
+const blurBg = document.getElementById('cart-blur-bg');
 
-carritoIcon.addEventListener('click', () => {
-  dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
-  renderCart();
+// Mostrar/ocultar el carrito y el blur
+carritoIcon.addEventListener('click', (e) => {
+  e.preventDefault();
+  const isOpen = dropdown.style.display === 'flex';
+  if (!isOpen) {
+    dropdown.style.display = 'flex';
+    blurBg.classList.remove('hidden');
+    renderCart();
+  } else {
+    dropdown.style.display = 'none';
+    blurBg.classList.add('hidden');
+  }
+});
+
+// Cerrar el carrito al hacer click en el blur
+blurBg.addEventListener('click', function() {
+  dropdown.style.display = 'none';
+  blurBg.classList.add('hidden');
 });
 
 function renderCart() {
   cartItems.innerHTML = '';
+  if (productosCarrito.length === 0) {
+    cartItems.innerHTML = `<div class="cart-empty">Tu carrito está vacío.</div>`;
+    return;
+  }
   productosCarrito.forEach((producto, index) => {
     const item = document.createElement('div');
     item.classList.add('cart-item');
@@ -41,15 +61,22 @@ function renderCart() {
   });
 }
 
-function cambiarCantidad(index, delta) {
+// Estas funciones deben estar en window para que funcionen los onclick del HTML generado
+window.cambiarCantidad = function(index, delta) {
   productosCarrito[index].cantidad += delta;
   if (productosCarrito[index].cantidad < 1) {
     productosCarrito.splice(index, 1);
   }
   renderCart();
-}
+};
 
-function eliminarItem(index) {
+window.eliminarItem = function(index) {
   productosCarrito.splice(index, 1);
   renderCart();
-}
+};
+
+// Cerrar con la X
+document.getElementById('cartCloseBtn').onclick = function() {
+  document.getElementById('cartDropdown').style.display = 'none';
+  document.getElementById('cart-blur-bg').classList.add('hidden');
+};
