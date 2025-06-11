@@ -9,7 +9,10 @@ exports.googleCallback = (req, res) => {
     process.env.JWT_SECRET,
     { expiresIn: '1h' }
   );
-  res.redirect(`http://localhost:3000/index.html?token=${token}`);
+  
+  // Redirigir a la página de inicio con el token y los datos del usuario (nombre, email)
+  const user = req.user;
+  res.redirect(`http://localhost:3000/index.html?token=${token}&user=${encodeURIComponent(JSON.stringify({ name: user.name, email: user.email }))}`);
 };
 
 exports.register = async (req, res) => {

@@ -824,3 +824,29 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     text-align: center;
     margin-bottom: 30px;
 }
+
+/*cerrar sesión y nombre*/
+
+.user-name {
+  font-family: Monserat, sans-serif;
+  font-weight: 600;
+  color: #5E7F58;
+  font-size: 1rem;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.account-link-logout {
+  font-family: Monserat, sans-serif;
+  background: #aaa;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4em 1em;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.account-link-logout:hover {
+  background: #5E7F58;
+}
