@@ -8,7 +8,6 @@
     font-size: 2.5rem;
     color: #333;
     text-align: center;
-    ;
 }
 
 .categoria {
@@ -18,13 +17,17 @@
 }
 
 
+.categorias h2{
+    padding: 100px 0px 30px 0px;
+}
 
 .categoria h2 {
     font-family: 'Montserrat', sans-serif;
     font-size: 2rem;
     color: #333;
     text-align: center;
-    
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
 }
 
 .categoria h3 {

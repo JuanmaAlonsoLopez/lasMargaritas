@@ -10,7 +10,7 @@ body {
 /* Contenedor principal */
 /* ------------------------ */
 .product-page {
-    margin-top: 60px;
+    margin: 180px 0px 100px 0px;
     padding: 50px 20px;
     display: flex;
     flex-direction: column;
