@@ -1,47 +1,60 @@
+// =================================================================
+// IMPORTS Y CONFIGURACIÓN INICIAL
+// =================================================================
 const express = require('express');
 const session = require('express-session');
-const pool = require('./db'); // <-- DESCOMENTAR: Tu archivo de conexión a la base de datos
-// const authRoutes = require('./routes/auth');
-// const { googleCallback } = require('./controllers/authController');
-// const passport = require('./utils/passport');
-// const jwt = require('jsonwebtoken');
+const pool = require('./db'); // Conexión a la base de datos
 const cors = require('cors');
 const path = require('path');
 const { MercadoPagoConfig, Preference } = require('mercadopago');
 
-require('dotenv').config();
+require('dotenv').config(); // Cargar variables de entorno del archivo .env
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Configuración del cliente de Mercado Pago
 const client = new MercadoPagoConfig({
     accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN,
 });
 
-app.use(cors({
-  origin: 'http://127.0.0.1:5500', // Reemplaza con la URL de tu frontend
-  methods: ['GET','POST','PUT','DELETE'],
-  allowedHeaders: ['Content-Type','Authorization']
-}));
 
-app.use(express.json());
+// =================================================================
+// MIDDLEWARE (ORDEN CORRECTO ES CRUCIAL)
+// =================================================================
 
+// ✅ 1. MIDDLEWARE DE LOG (PRIMERO)
+// Se ejecuta para CADA solicitud que llega al servidor, incluidas las OPTIONS.
 app.use((req, res, next) => {
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
-    if (req.method === 'POST') {
-        if (req.body && Object.keys(req.body).length > 0) {
-            console.log('Request body:', JSON.stringify(req.body, null, 2));
-        } else {
-            console.log('Request body: (empty or not JSON)');
-        }
+    console.log(`[${new Date().toISOString()}] Request Received: ${req.method} ${req.url}`);
+    if (req.method === 'POST' && req.body && Object.keys(req.body).length > 0) {
+        console.log('Request body:', JSON.stringify(req.body, null, 2));
     }
     next();
 });
 
-// --- TUS RUTAS DE AUTENTICACIÓN Y USUARIOS ---
-// Descomenta estas secciones cuando las necesites activar,
-// asegurándote de que los archivos 'db', 'routes/auth', 'controllers/authController', 'utils/passport' existen.
+// ✅ 2. MIDDLEWARE DE CORS (SEGUNDO)
+// Configuración mejorada para evitar problemas de cookies y CORS
+app.use(cors({
+    origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5500', 'http://127.0.0.1:5500'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
+
+// ✅ 3. MIDDLEWARE PARA PARSEAR JSON
+// Necesario para leer el `req.body` en las solicitudes POST/PUT.
+app.use(express.json());
+
+
+// =================================================================
+// RUTAS DE AUTENTICACIÓN (Comentadas para simplificar)
+// =================================================================
 /*
+const authRoutes = require('./routes/auth');
+const { googleCallback } = require('./controllers/authController');
+const passport = require('./utils/passport');
+const jwt = require('jsonwebtoken');
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -53,12 +66,10 @@ app.use(passport.session());
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile','email'] })
 );
-
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login.html' }),
   googleCallback
 );
-
 app.use('/api/auth', authRoutes);
 
 app.get('/usuarios', async (req, res) => {
@@ -71,186 +82,141 @@ app.get('/usuarios', async (req, res) => {
   }
 });
 */
-// --- FIN DE RUTAS DE AUTENTICACIÓN ---
+
+// =================================================================
+// RUTAS DE LA API
+// =================================================================
+
+// --- RUTA PARA OBTENER PRODUCTOS ---
+
+// AÑADE ESTE CÓDIGO EN TU ARCHIVO index.js
+
+// --- NUEVA RUTA PARA OBTENER CATEGORÍAS ACTIVAS ---
+// Devuelve una lista de nombres de categorías que tienen productos en promoción.
+app.get('/api/categories', async (req, res) => {
+    // Esta consulta selecciona los nombres distintos de las categorías
+    // que están asociadas con al menos un producto que tenga 'promotion_active = TRUE'.
+    const query = `
+        SELECT DISTINCT
+            pc.name
+        FROM
+            public.product_category pc
+        JOIN
+            public.products p ON pc.id = p.category
+        WHERE
+            p.promotion_active = TRUE
+        ORDER BY
+            pc.name ASC;
+    `;
+
+    try {
+        const result = await pool.query(query);
+        // Enviamos solo un array de strings (nombres de categorías)
+        const categoryNames = result.rows.map(row => row.name);
+        res.json(categoryNames);
+    } catch (error) {
+        console.error('Error al obtener categorías activas (GET /api/categories):', error.stack);
+        res.status(500).json({ message: 'Error interno del servidor al obtener categorías.' });
+    }
+});
 
 
-// --- INICIO: RUTAS DE MERCADO PAGO ---
+// --- RUTAS DE MERCADO PAGO ---
 
 // Ruta para crear la preferencia de pago
 app.post('/create_preference', async (req, res) => {
-    const clientCartItems = req.body.items; // Estos ítems solo tienen id y quantity del frontend
-
-    console.log('Received items from client for Mercado Pago:', clientCartItems);
+    const clientCartItems = req.body.items;
+    const { full_name, address, city, province, phone, email, user_id } = req.body;
 
     if (!clientCartItems || clientCartItems.length === 0) {
-        console.error('Error: El carrito está vacío o no se enviaron ítems para Mercado Pago.');
         return res.status(400).json({ message: 'El carrito está vacío o no se enviaron ítems.' });
     }
-
-    let itemsForMercadoPago = [];
-    let orderTotal = 0; // Para calcular el total de la orden
+    if (!full_name || !address || !city || !province || !phone || !email) {
+        return res.status(400).json({ message: 'Faltan datos de envío o contacto del cliente.' });
+    }
 
     try {
-        // --- COMIENZO: LÓGICA DE BASE DE DATOS REAL (PARA REEMPLAZAR EL HARDCODEO) ---
-        // Aquí deberías tener una función que consulte tu tabla de productos (ej. 'public.products')
-        // para obtener el título, precio y stock real de cada producto basado en su ID.
-        // NO CONFÍES EN LOS PRECIOS/TÍTULOS QUE VIENEN DEL CLIENTE.
-
-        // Ejemplo de consulta a la DB (descomenta y adapta cuando tengas tu tabla de productos):
-        /*
+        // Validar productos y stock contra la base de datos real
         const productIds = clientCartItems.map(item => item.id);
-        const productsQuery = `SELECT id, title, price, stock FROM public.products WHERE id = ANY($1)`;
+        const productsQuery = `
+            SELECT id, name, price, stock, promotion_active, discount AS discount_value
+            FROM public.products
+            WHERE id = ANY($1::int[]) AND promotion_active = TRUE
+        `;
         const dbProductsResult = await pool.query(productsQuery, [productIds]);
         const productsMap = new Map(dbProductsResult.rows.map(p => [p.id, p]));
-        */
 
-        // --- SIMULACIÓN DE PRODUCTOS DE LA BASE DE DATOS (PARA PRUEBAS HASTA QUE CONECTES LA DB) ---
-        // Elimina o comenta este mockProductsDB cuando uses tu DB real de productos
-        const mockProductsDB = {
-            1: { id: 1, title: 'Almohadón Ortopédico Deluxe - 70x50 cm', price: 9290, stock: 50, image: '../images/fotosProductos/Margarita-Photoroom.png' },
-            2: { id: 2, title: 'Cojín Lumbar Ergonómico', price: 3500, stock: 20, image: 'https://via.placeholder.com/100/FF0000/FFFFFF?text=Cojin' },
-            3: { id: 3, title: 'Funda de Almohada de Algodón Premium', price: 1200, stock: 30, image: 'https://via.placeholder.com/100/0000FF/FFFFFF?text=Funda' }
-        };
-        // --- FIN DE SIMULACIÓN DE PRODUCTOS DE LA BASE DE DATOS ---
-
+        let itemsForMercadoPago = [];
+        let orderTotal = 0;
 
         for (const clientItem of clientCartItems) {
-            // Reemplaza esta línea con la búsqueda real en 'productsMap' si usas la DB de productos:
-            // const productFromDB = productsMap.get(clientItem.id);
-            const productFromDB = mockProductsDB[clientItem.id]; // Mantengo la simulación por ahora
+            const productFromDB = productsMap.get(clientItem.id);
 
             if (!productFromDB) {
-                console.error(`Error: Producto con ID ${clientItem.id} no encontrado en la base de datos.`);
-                return res.status(404).json({ message: `Producto con ID ${clientItem.id} no encontrado.` });
+                return res.status(404).json({ message: `Producto con ID ${clientItem.id} no encontrado o no está en promoción.` });
             }
             if (productFromDB.stock < clientItem.quantity) {
-                console.error(`Error: No hay suficiente stock para ${productFromDB.title}. Solicitado: ${clientItem.quantity}, Disponible: ${productFromDB.stock}`);
-                return res.status(400).json({ message: `No hay suficiente stock para ${productFromDB.title}.` });
+                return res.status(400).json({ message: `No hay suficiente stock para ${productFromDB.name}.` });
             }
 
-            const itemPrice = productFromDB.price; // Precio validado desde tu DB
-            const itemQuantity = clientItem.quantity; // Cantidad del carrito del cliente
+            let finalPrice = parseFloat(productFromDB.price);
+            if (productFromDB.discount_value && productFromDB.discount_value > 0) {
+                finalPrice = finalPrice * (1 - (parseFloat(productFromDB.discount_value) / 100));
+            }
 
             itemsForMercadoPago.push({
                 id: productFromDB.id.toString(),
-                title: productFromDB.title,
-                quantity: itemQuantity,
-                unit_price: itemPrice,
+                title: productFromDB.name,
+                quantity: parseInt(clientItem.quantity),
+                unit_price: finalPrice,
                 currency_id: 'ARS'
             });
-            orderTotal += itemPrice * itemQuantity; // Suma al total de la orden
+            orderTotal += finalPrice * parseInt(clientItem.quantity);
         }
 
-        console.log('Items prepared for Mercado Pago preference:', itemsForMercadoPago);
-        console.log('Calculated Order Total:', orderTotal);
+        // Crear la orden en nuestra base de datos
+        const insertOrderQuery = `
+            INSERT INTO public.orders (user_id, total, full_name, address, city, province, phone, email, status)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'pending')
+            RETURNING id;
+        `;
+        const orderResult = await pool.query(insertOrderQuery, [user_id, orderTotal, full_name, address, city, province, phone, email]);
+        const orderId = orderResult.rows[0].id;
+        console.log(`Orden creada en DB: ID ${orderId}`);
 
-        // --- COMIENZO: CREAR LA ORDEN EN TU BASE DE DATOS ---
-        // Aquí insertarás la orden en la tabla 'public.orders'
-        let orderId;
-        try {
-            // Esto es un placeholder para los datos del usuario y la dirección.
-            // En una aplicación real, los obtendrías del usuario logueado (req.user)
-            // o de un formulario de checkout.
-            const user_id = null; // Reemplaza con req.user.id si tienes autenticación
-            const full_name = 'Comprador de Prueba';
-            const address = 'Calle Falsa 123';
-            const city = 'Mendoza';
-            const province = 'Mendoza';
-            const phone = '261-1234567';
-            const email = 'comprador_prueba@example.com';
-            const status = 'pending'; // Estado inicial de la orden
-
-            const insertOrderQuery = `
-                INSERT INTO public.orders (user_id, total, full_name, address, city, province, phone, email, status)
-                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-                RETURNING id;
-            `;
-            // --- DESCOMENTAR Y ADAPTAR ESTO CUANDO CONECTES LA DB ---
-            /*
-            const orderResult = await pool.query(insertOrderQuery, [
-                user_id,
-                orderTotal,
-                full_name,
-                address,
-                city,
-                province,
-                phone,
-                email,
-                status
-            ]);
-            orderId = orderResult.rows[0].id;
-            */
-            orderId = `mock_order_${Date.now()}`; // Simulación de ID de orden para pruebas
-            console.log(`Orden creada en DB (simulada): ID ${orderId}, Total: ${orderTotal}`);
-
-        } catch (dbError) {
-            console.error('Error al insertar la orden en la base de datos:', dbError);
-            return res.status(500).json({ message: 'Error al procesar la orden en el servidor.', error: dbError.message });
-        }
-        // --- FIN: CREAR LA ORDEN EN TU BASE DE DATOS ---
-
-
+        // Crear la preferencia de Mercado Pago
         const preferenceBody = {
             items: itemsForMercadoPago,
-            payer: {
-                // Puedes pre-rellenar datos del pagador si los tienes (ej. del usuario logueado)
-                email: email, // Usar el email de la orden
-                name: full_name // Usar el nombre de la orden
-            },
+            payer: { email: email, name: full_name },
             back_urls: {
-                // Desactivado para evitar el error HTTPS en desarrollo local
-                // Cuando despliegues, asegúrate de que estas URLs sean HTTPS y reales.
-                success: 'http://localhost:3000/success',
-                failure: 'http://localhost:3000/failure',
-                pending: 'http://localhost:3000/pending',
+                success: `http://127.0.0.1:5500/success.html?order_id=${orderId}`, // Redirigir al frontend
+                failure: `http://127.0.0.1:5500/failure.html?order_id=${orderId}`,
+                pending: `http://127.0.0.1:5500/pending.html?order_id=${orderId}`,
             },
-            // auto_return: 'approved', // Desactivado para evitar el error HTTPS en desarrollo local
-            // notifications_url: 'https://tu-dominio.com/webhook-mercadopago', // ¡MUY IMPORTANTE para producción!
-            external_reference: orderId.toString() // <-- CRÍTICO: Usar el ID de la orden de tu DB
+            auto_return: 'approved',
+            external_reference: orderId.toString()
         };
 
         const preference = new Preference(client);
         const response = await preference.create({ body: preferenceBody });
-
-        console.log('Mercado Pago preference created, init_point:', response.init_point);
+        
         res.json({ init_point: response.init_point });
 
     } catch (error) {
-        console.error('Error in /create_preference route:', error);
-        res.status(500).json({ message: 'Error al crear la preferencia de pago en el servidor.', error: error.message });
+        console.error('Error en /create_preference:', error.stack);
+        res.status(500).json({ message: 'Error al crear la preferencia de pago.', error: error.message });
     }
 });
 
-// Rutas de redirección para back_urls de Mercado Pago
-app.get('/success', (req, res) => {
-    // Aquí podrías mostrar un mensaje de éxito, y si tienes webhooks,
-    // el estado final de la orden ya se habrá actualizado en tu DB.
-    // También podrías pasar el external_reference (ID de la orden) para buscarla.
-    const externalReference = req.query.external_reference; // Mercado Pago lo envía
-    console.log(`Redirigido a success. Ref. externa: ${externalReference}`);
-    res.send('<h1>¡Pago exitoso! Gracias por tu compra.</h1><p>Puedes cerrar esta ventana.</p><p>Referencia de tu orden: ' + externalReference + '</p>');
-});
 
-app.get('/failure', (req, res) => {
-    const externalReference = req.query.external_reference;
-    console.log(`Redirigido a failure. Ref. externa: ${externalReference}`);
-    res.send('<h1>El pago falló.</h1><p>Hubo un problema con tu pago. Por favor, intenta de nuevo.</p><p>Referencia de tu orden: ' + externalReference + '</p>');
-});
+// =================================================================
+// SERVIR ARCHIVOS ESTÁTICOS Y MANEJO DE ERRORES (AL FINAL)
+// =================================================================
 
-app.get('/pending', (req, res) => {
-    const externalReference = req.query.external_reference;
-    console.log(`Redirigido a pending. Ref. externa: ${externalReference}`);
-    res.send('<h1>Tu pago está pendiente.</h1><p>Tu pago está pendiente de aprobación. Te notificaremos cuando se complete.</p><p>Referencia de tu orden: ' + externalReference + '</p>');
-});
-// --- FIN: RUTAS DE MERCADO PAGO ---
-
-
-// 3) Servir front-end estático
-// Asegúrate de que tu `public` folder contenga tus archivos HTML, CSS, JS del frontend
+// Servir el frontend estático desde la carpeta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-// Middleware de manejo de errores (siempre al final de todas las rutas y middleware)
+// Middleware de manejo de errores global (debe ser el último middleware)
 app.use((err, req, res, next) => {
     console.error('Unhandled server error:', err.stack);
     res.status(500).json({
@@ -260,5 +226,9 @@ app.use((err, req, res, next) => {
 });
 
 
-// 4) Arrancar servidor
-app.listen(PORT, () => console.log(`Server en http://localhost:${PORT}`));
+// =================================================================
+// INICIAR SERVIDOR
+// =================================================================
+app.listen(PORT, () => {
+    console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+});

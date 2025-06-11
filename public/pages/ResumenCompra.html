@@ -119,117 +119,53 @@
     <script src="/js/common.js"></script>
 
     <script>
-        // --- Productos Hardcodeados para el carrito ---
-        // Estos productos simulan lo que podrías obtener de tu base de datos o de un carrito real.
-        const hardcodedCartProducts = [
-            {
-                id: 1, // ID de producto (importante para el backend)
-                title: 'Almohadón Ortopédico Deluxe - 70x50 cm',
-                quantity: 1,
-                unit_price: 9290, // Precio por unidad
-                image: '../images/fotosProductos/Margarita-Photoroom.png'
-            },
-            {
-                id: 2, // Otro producto de ejemplo
-                title: 'Cojín Lumbar Ergonómico',
-                quantity: 2,
-                unit_price: 3500,
-                image: 'https://via.placeholder.com/100/FF0000/FFFFFF?text=Cojin' // Imagen de ejemplo
-            },
-            {
-                id: 3, // Otro producto de ejemplo
-                title: 'Funda de Almohada de Algodón Premium',
-                quantity: 3,
-                unit_price: 1200,
-                image: 'https://via.placeholder.com/100/0000FF/FFFFFF?text=Funda' // Imagen de ejemplo
-            }
-        ];
-
-        // --- Función para renderizar los productos en el carrito ---
-        function renderCartProducts() {
-            const container = document.getElementById('cart-products-container');
-            container.innerHTML = ''; // Limpiar el contenedor antes de renderizar
-
-            let subtotal = 0;
-
-            hardcodedCartProducts.forEach(product => {
-                const productDiv = document.createElement('div');
-                productDiv.classList.add('Producto');
-                productDiv.id = `product-${product.id}`; // Un ID único para cada producto
-
-                const productHtml = `
-                    <input type="checkbox" id="checkbox-${product.id}" class="checkbox" checked disabled>
-                    <label for="checkbox-${product.id}" class="producto-label">
-                        <img src="${product.image}" alt="Producto ${product.title}" class="producto-img">
-                        <div class="producto-info">
-                            <span class="producto-nombre">${product.title}</span>
-                            <span class="producto-cantidad">Cantidad: ${product.quantity}</span>
-                            <span class="producto-precio">Precio unitario: $${product.unit_price.toLocaleString('es-AR')}</span>
-                            <span class="producto-precio-total">Subtotal: $${(product.quantity * product.unit_price).toLocaleString('es-AR')}</span>
-                        </div>
-                    </label>
-                    <div class="acciones">
-                        <button class="eliminar" data-product-id="${product.id}">Eliminar</button>
-                    </div>
-                `;
-                productDiv.innerHTML = productHtml;
-                container.appendChild(productDiv);
-
-                subtotal += product.quantity * product.unit_price;
-            });
-
-            // Actualizar el resumen de compra
-            const shippingCost = 1500; // Costo de envío fijo para este ejemplo
-            const total = subtotal + shippingCost;
-
-            document.getElementById('product-subtotal').textContent = `Producto: $${subtotal.toLocaleString('es-AR')}.00`;
-            document.getElementById('total-amount').textContent = `Total: $${total.toLocaleString('es-AR')}.00`;
-
-            // Agregar event listeners a los botones de eliminar (opcional para hardcodeado, pero buena práctica)
-            container.querySelectorAll('.eliminar').forEach(button => {
-                button.addEventListener('click', function() {
-                    const productIdToRemove = parseInt(this.dataset.productId);
-                    alert(`Funcionalidad de eliminar para el producto ID ${productIdToRemove} (no implementado en este ejemplo hardcodeado).`);
-                    // Aquí deberías:
-                    // 1. Eliminar el producto del array hardcodedCartProducts.
-                    // 2. Volver a llamar a renderCartProducts() para actualizar la vista.
-                });
-            });
-        }
-
-        // Llamar a la función para renderizar los productos cuando el DOM esté listo
-        document.addEventListener('DOMContentLoaded', renderCartProducts);
-
-        // --- Lógica del botón "Continuar compra" para Mercado Pago ---
         document.getElementById('comprar').addEventListener('click', function () {
-            // Prepara los ítems para enviar a Mercado Pago desde el array hardcodeado
-            // Es crucial enviar el ID del producto para que el backend lo valide con su "DB"
+            const hardcodedCartProducts = [
+                { id: 1, title: 'Almohadón Ortopédico Deluxe - 70x50 cm', quantity: 1, unit_price: 9290, image: '../images/fotosProductos/Margarita-Photoroom.png' },
+                { id: 2, title: 'Cojín Lumbar Ergonómico', quantity: 2, unit_price: 3500, image: 'https://via.placeholder.com/100/FF0000/FFFFFF?text=Cojin' },
+                { id: 3, title: 'Funda de Almohada de Algodón Premium', quantity: 3, unit_price: 1200, image: 'https://via.placeholder.com/100/0000FF/FFFFFF?text=Funda' }
+            ];
+    
             const cartItemsToSend = hardcodedCartProducts.map(product => ({
                 id: product.id,
-                title: product.title,       // Estos campos pueden ser validados o ignorados por el backend
-                quantity: product.quantity,
-                unit_price: product.unit_price // Estos campos pueden ser validados o ignorados por el backend
+                quantity: product.quantity
             }));
-
+    
             if (cartItemsToSend.length === 0) {
                 alert('Tu carrito está vacío. Agrega productos antes de continuar.');
                 return;
             }
-
+    
+            // --- AÑADIR DATOS DEL CLIENTE AQUÍ (para pruebas) ---
+            // En una aplicación real, estos datos vendrían de un formulario de checkout
+            // o de la sesión del usuario logueado.
+            const customerData = {
+                full_name: "Cliente de Prueba Mauri",
+                address: "Calle Falsa 123",
+                city: "Mendoza",
+                province: "Mendoza",
+                phone: "2615551234",
+                email: "hh.mauri2190@gmail.com", // Puedes usar tu correo de prueba aquí
+                user_id: null // Si no tienes user_id por ahora, déjalo en null
+            };
+            // --- FIN: DATOS DEL CLIENTE ---
+    
+    
             fetch('http://localhost:3000/create_preference', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ items: cartItemsToSend }), // Envía los ítems hardcodeados
+                body: JSON.stringify({
+                    items: cartItemsToSend,
+                    ...customerData // Añade los datos del cliente al cuerpo de la solicitud
+                }),
             })
             .then(response => {
                 if (!response.ok) {
-                    // Si la respuesta no es 2xx (ej. 400, 500), intentar leer el error JSON
-                    return response.json().then(err => { 
-                        throw new Error(err.message || 'Error desconocido al procesar la solicitud.'); 
+                    return response.json().then(err => {
+                        throw new Error(err.message || 'Error desconocido al procesar la solicitud.');
                     }).catch(() => {
-                        // Si la respuesta no es un JSON válido, aún así mostrar un error genérico
                         throw new Error(`Error HTTP: ${response.status} ${response.statusText}. Respuesta no es JSON.`);
                     });
                 }
