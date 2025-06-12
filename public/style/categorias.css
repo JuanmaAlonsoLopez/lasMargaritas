@@ -67,6 +67,17 @@
     scroll-behavior: smooth;
 }
 
+/* Reemplaza la clase .productos en tu categorias.css con esta */
+.productos {
+    display: flex; /* Cambiado de 'grid' a 'flex' para el carrusel */
+    gap: 30px;
+    padding: 10px;
+    overflow-x: hidden; /* Oculta el scroll horizontal */
+    scroll-behavior: smooth;
+    min-height: 380px; /* Asegura una altura mínima para que no colapse mientras carga */
+}
+
+
 .carousel-controls {
     position: absolute;
     top: 50%;
