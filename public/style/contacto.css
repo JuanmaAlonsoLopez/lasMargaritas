@@ -1,24 +1,32 @@
 
-
 main {
-    flex-grow: 1;
-    padding: 200px 20px 20px 20px; /* Espacio superior para el header */
+    font-family: 'Montserrat';
+    text-align: center;
+    padding: 150px;
+    margin: 100px auto;
+    max-width: 1200px;
+    background-color: white;
+    border-radius: 8px;
+    background-color: #f9f9f9;
 }
+
 
 /* Estilos de la sección de contacto */
 .contacto {
-    background-color: #5E7F58;
+    /*background-color: #5E7F58;
     color: white;
     text-align: center; 
     padding: 40px 20px 90px 20px; 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;*/
+    
+
 }
 
-.contacto h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
+.contacto  {
     font-family: 'Montserrat', sans-serif;
-    color: white;
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
 }
 
 .contacto-contenido {
@@ -32,9 +40,12 @@ main {
 }
 
 .contacto-contenido h2 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    color: #5E7F58;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
 }
 
 .contacto-items {
@@ -56,3 +67,23 @@ main {
     height: 30px;
 }
 
+.equipo-desarrollo h2 , p{
+    /*background-color: hsla(111, 26%, 59%, 1);*/
+    color: black;
+    
+    /* display: inline-block; */
+    padding: 8px 20px;
+    margin-top: 40px;
+    width: 1494;
+    height: 83;
+    top: 548px;
+    left: 154px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.equipoDesarrolloLogo img{
+    width: 220px;
+    height: 200px;
+    border-radius: 50%;
+
+}
