@@ -30,10 +30,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Función para mostrar el nombre y el botón de cerrar sesión
+  // Función para mostrar el nombre y el botón de cerrar sesión, y si el rol es 1, mostrar el botón "Administrador"
   function showUserInfo(user) {
     accountLink.innerHTML = `<span class="user-name">Hola, ${user.name}</span>`;
     accountLink.style.cursor = 'default';
+
+    // Agregar el botón "Administrador" si el usuario tiene rol 1
+    if (user.role === 1) {
+      const adminButton = document.createElement('button');
+      adminButton.textContent = 'Administrador';
+      adminButton.className = 'admin-button';
+      adminButton.style.marginLeft = '10px';
+      adminButton.onclick = () => {
+        // Redirigir al admin
+        window.location.href = '/pages/admin.html';
+      };
+      accountLink.appendChild(adminButton);
+    }
 
     // Opcional: agregar botón para cerrar sesión
     const logoutBtn = document.createElement('button');
