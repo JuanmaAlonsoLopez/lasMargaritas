@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Limpiamos el contenedor y lo llenamos con las tarjetas
             contenedorProductos.innerHTML = '';
-            if (productos.length > 0) {
+            if (productos.length >= 0) {
                 productos.forEach(producto => {
                     contenedorProductos.innerHTML += crearTarjetaProducto(producto);
                 });
