@@ -191,7 +191,7 @@
 .mision .tituloMision{
   font-size: 28px; 
   font-weight: 700;
-  color: black; /* Rojo fuerte */
+  color: black; 
   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
   border-bottom: 2px solid #5E7F58;
   padding-bottom: 5px;
