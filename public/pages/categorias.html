@@ -1,69 +1,63 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quintessential&display=swap" rel="stylesheet">
-    <!------------------>
-    <link rel="icon" href="../images/logoBanner/logo.png" type="image/png">
-    <title>Categorias</title>
-    <link rel="stylesheet" href="../style/nuevo/nav-footer.css">
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="../style/categorias.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quintessential&display=swap" rel="stylesheet">
+        <!------------------>
+        <link rel="icon" href="../images/logoBanner/logo.png" type="image/png">
+        <title>Categorias</title>
+        <link rel="stylesheet" href="../style/nuevo/nav-footer.css">
+        <link rel="stylesheet" href="../styles.css">
+        <link rel="stylesheet" href="../style/categorias.css">
+    </head>
 
 
-<body>
+    <body>
+        <!-- Header -->
+        <header id="mainHeader">
+        <div class="header-inner">
+        <!-- Logo -->
+            <div class="logo" id="logo">
+                <a href="../index.html">
+                <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas">
+                </a>
+            </div>
+
+        <!-- Menú -->
+        <nav class="main-nav" id="mainNav">
+            <a  href="../index.html">Inicio</a>
+            <a  href="../pages/categorias.html">Productos</a>
+            <a  href="../pages/sobreNosotros.html">Sobre nosotros</a>
+            <a  href="../pages/contacto.html">Contacto</a>
+        </nav>
+
+        <!-- Íconos a la derecha -->
+        <div class="icons" id="icons">
+            <a href="#">
+                <img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="Ingresar">
+            </a>
+            <a href="#">
+                <img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="Carrito">
+            </a>
+        </div>
     
 
-    <!--  -->
-    <header id="mainHeader">
-    <div class="header-inner">
-    <!-- Logo -->
-    <div class="logo" id="logo">
-        <a href="../index.html">
-            <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas">
-        </a>
-    </div>
+        </div>
+        </header>
 
-    <!-- Menú -->
-    <nav class="main-nav" id="mainNav">
-      <a  href="../index.html">Inicio</a>
-      <a class="activo" href="../pages/categorias.html">Productos</a>
-      <a href="../pages/sobreNosotros.html">Sobre nosotros</a>
-      <a href="../pages/contacto.html">Contacto</a>
-    </nav>
-
-    <!-- Íconos a la derecha -->
-    <div class="icons" id="icons">
-      <a href="#">
-        <img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="Ingresar">
-      </a>
-      <a href="#">
-        <img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="Carrito">
-      </a>
-    </div>
-    
-
-
-
-
-</div>
-</header>
-
-
-<div id="cart-blur-bg" class="cart-blur-bg hidden"></div>
-<div class="cart-dropdown" id="cartDropdown">
-  <span class="cart-close" id="cartCloseBtn">&times;</span>
-  <div class="cart-content">
-    <h3>Productos en el carrito</h3>
-    <div class="cart-items" id="cartItems"></div>
-    <button onclick="location.href='../pages/ResumenCompra.html'" class="btn-go-cart">Ir al carrito</button>
-  </div>
-</div>
+        <div id="cart-blur-bg" class="cart-blur-bg hidden"></div>
+        <div class="cart-dropdown" id="cartDropdown">
+            <span class="cart-close" id="cartCloseBtn">&times;</span>
+            <div class="cart-content">
+                <h3>Productos en el carrito</h3>
+                <div class="cart-items" id="cartItems"></div>
+                <button onclick="location.href='../pages/ResumenCompra.html'" class="btn-go-cart">Ir al carrito</button>
+            </div>
+        </div>
 
     <!-- Menú hamburguesa -->
     <nav class="menu-hamburguesa" id="menuHamburguesaResponsive">
