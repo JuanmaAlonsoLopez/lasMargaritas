@@ -12,12 +12,20 @@ main {
 
 
 /* Estilos de la sección de contacto */
-.contacto {
-    /*background-color: #5E7F58;
-    color: white;
-    text-align: center; 
-    padding: 40px 20px 90px 20px; 
-    font-family: 'Montserrat', sans-serif;*/
+.contacto h1 {
+    font-size: 48px;
+    color: BLACK;
+    padding: 20px 40px;
+    border: 4px solid #5E7F58;
+    border-radius: 16px;
+    background: linear-gradient(90deg, #eaf6ea 0%, #f5faf5 100%);
+    display: inline-block;
+    font-weight: bold;
+    width: auto;
+    margin: 90px auto 0 auto;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 16px 0 rgba(94,127,88,0.08);
     
 
 }
@@ -27,6 +35,7 @@ main {
     font-size: 2rem;
     color: #333;
     text-align: center;
+    margin: 1px;
 }
 
 .contacto-contenido {
@@ -35,7 +44,7 @@ main {
     border-radius: 10px;
     padding: 20px;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 35px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -45,7 +54,8 @@ main {
     color: #333;
     text-align: center;
     padding: 0px 0px 0px 0px;
-    margin: 0px 0px 0px 0px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    border-bottom: 2px solid #5E7F58;
 }
 
 .contacto-items {
@@ -58,14 +68,24 @@ main {
 .contacto-item {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
     font-size: 1.2rem;
 }
 
-.contacto-item img {
+.contacto-item img{
     width: 30px;
     height: 30px;
 }
+
+.contacto-item p, .contacto-item a {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #222;
+    text-decoration: none;
+}
+
+
 
 .equipo-desarrollo h2 , p{
     /*background-color: hsla(111, 26%, 59%, 1);*/
