@@ -3,70 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.adobe.com/fonts/madre-script">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
-    <!-- Nueva fuente -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quintessential&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-
-    <!------------------>
-
-    <link rel="icon" href="./images/logoBanner/logo.png" type="image/png">
     <title>Las Margaritas</title>
+    <link rel="icon" href="./images/logoBanner/logo.png" type="image/png">
+
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quintessential&display=swap" rel="stylesheet">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="./style/nuevo/nav-footer.css">
 </head>
-
 <body>
-    
-     <!--- Menu principal -->
+    <!-- Header -->
+    <header id="mainHeader">
+        <div class="header-inner">
+            <!-- Logo -->
+            <div class="logo" id="logo">
+                <a href="index.html">
+                    <img src="./images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas">
+                </a>
+            </div>
+            <!-- Menú -->
+            <nav class="main-nav" id="mainNav">
+                <a class="activo" href="index.html">Inicio</a>
+                <a href="./pages/categorias.html">Productos</a>
+                <a href="./pages/sobreNosotros.html">Sobre nosotros</a>
+                <a href="./pages/contacto.html">Contacto</a>
+            </nav>
+            <!-- Íconos a la derecha -->
+            <div class="icons" id="icons">
+                <a href="#">
+                    <img src="./images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="Ingresar">
+                </a>
+                <a href="#">
+                    <img src="./images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="Carrito">
+                </a>
+            </div>
+        </div>
+    </header>
 
-<header id="mainHeader">
-    <div class="header-inner">
-    <!-- Logo -->
-    <div class="logo" id="logo">
-        <a href="index.html">
-            <img src="./images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas">
-        </a>
+    <!-- Carrito flotante -->
+    <div id="cart-blur-bg" class="cart-blur-bg hidden"></div>
+    <div class="cart-dropdown" id="cartDropdown">
+        <span class="cart-close" id="cartCloseBtn">&times;</span>
+        <div class="cart-content">
+            <h3>Productos en el carrito</h3>
+            <div class="cart-items" id="cartItems"></div>
+            <button onclick="location.href='./pages/ResumenCompra.html'" class="btn-go-cart">Ir al carrito</button>
+        </div>
     </div>
-
-    <!-- Menú -->
-    <nav class="main-nav" id="mainNav">
-      <a class="activo" href="index.html">Inicio</a>
-      <a href="./pages/categorias.html">Productos</a>
-      <a href="./pages/sobreNosotros.html">Sobre nosotros</a>
-      <a href="./pages/contacto.html">Contacto</a>
-    </nav>
-
-    <!-- Íconos a la derecha -->
-    <div class="icons" id="icons">
-      <a href="#">
-        <img src="./images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="Ingresar">
-      </a>
-      <a href="#">
-        <img src="./images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="Carrito">
-      </a>
-    </div>
-    
-
-
-
-
-</div>
-</header>
-
-<div id="cart-blur-bg" class="cart-blur-bg hidden"></div>
-<div class="cart-dropdown" id="cartDropdown">
-  <span class="cart-close" id="cartCloseBtn">&times;</span>
-  <div class="cart-content">
-    <h3>Productos en el carrito</h3>
-    <div class="cart-items" id="cartItems"></div>
-    <button onclick="location.href='./pages/ResumenCompra.html'" class="btn-go-cart">Ir al carrito</button>
-  </div>
-</div>
-
 
     <!-- Menú hamburguesa -->
     <nav class="menu-hamburguesa" id="menuHamburguesaResponsive">
@@ -79,551 +65,199 @@
         <a href="#"><img src="./images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="carritoDeCompras"> INGRESAR</a>
     </nav>
 
- 
-<!--- Hasta aca -->
+    <!-- Botón hamburguesa -->
+    <div class="menu-hamburguesa-btn" id="btnHamburguesa" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
-    <!-- Banner -->
+    <!-- Banner principal -->
     <div class="banner">
         <div class="carousel-item">
             <img src="./images/campoMargas.jpg" alt="Banner 1">
             <div class="carousel-text">
                 <h2 class="lasMargas">Las Margaritas</h2>
                 <p>Bienvenidos a nuestra tienda, donde la calidad es lo primero.</p>
-                
             </div>
         </div>
     </div>
 
-    <!-------------->
-
+    <!-- Texto de bienvenida -->
     <div class="textMedio">
         <h2>Contamos con una gran variedad de productos</h2>
-        <span> De todo tipo, diseñadas para ofrecer la máxima comodidad y soporte. Disponemos de almohadas ortopédicas, ideales para el cuidado de tu postura, almohadas suaves de confort para un descanso placentero, y también almohadas especiales para bebés, que garantizan un sueño seguro y cómodo. Encuentra la opción perfecta para ti y tu familia.</span>
+        <span>
+            De todo tipo, diseñadas para ofrecer la máxima comodidad y soporte. Disponemos de almohadas ortopédicas, ideales para el cuidado de tu postura, almohadas suaves de confort para un descanso placentero, y también almohadas especiales para bebés, que garantizan un sueño seguro y cómodo. Encuentra la opción perfecta para ti y tu familia.
+        </span>
     </div>
 
-    <!-------------->
-
-<!-- Nuestras categorias -->
-
-
-<div class="categoriaImg">
-    <h2>Nuestras categorías</h2>
-    <div class="muestraCategorias">
-        <div class="categoriaColumna">
-            <a href="./pages/categorias.html">
-                <img src="./images/imgParaBanners/imgConfort.jpg" alt="Almohadas" />
-                <p>Confort</p>
-            </a>
-        </div>
-        <div class="categoriaColumna">
-            <a href="./pages/categorias.html">
-                <img src="./images/imgParaBanners/imgOrtopedica.jpg" alt="Almohadones" />
-                <p>Ortopedica</p>
-            </a>
-        </div>
-        <div class="categoriaColumna">
-            <a href="./pages/categorias.html">
-                <img src="./images/imgParaBanners/imgLineaBaby.jpg" alt="Almohadas Baby" />
-                <p>Linea Baby</p>
-            </a>
-        </div>
-    </div>
-
-
-</div>
- 
-<!-- Fin del bloque de categorias -->
-
-
-
-
-<!-- VIEJO  -->
-<section class="productos-destacados">
-    <h2><a href="./pages/categorias.html">Productos destacados</a></h2>
-    <div class="carousel-container" id="carousel1">
-        <div class="carousel">
-            <div class="productos">
-                <div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Margarita-Photoroom.png" alt="Producto 1">
-                    <!--!Nombre producto-->
-                    <p>Almohadon Margarita(Almohadon redondo espuma c/funda)</p>
-                    <!-- Precio -->
-                    <span>$5960</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $596</p>
-                    </div>
-                    <button onclick="location.href='./pages/Prod.Individual.html'">Ver</button>
-                </div>
-                <!-- Aquí agrega más productos -->
-                <div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Luna-Photoroom.png" alt="Producto 7">
-                    <!--!Nombre producto-->
-                    <p>Almohadón Luna(Almohadon para sillas de ruedas)</p>
-                    <!-- Precio -->
-                    <span>$18711</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $1871,1</p>
-                    </div>
-                    <button onclick="location.href='./pages/Prod.Individual.html'">Ver producto</button>
-                </div>
-                <div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Zinia-Photoroom.png" alt="Producto 10">
-                    <!--!Nombre producto-->
-                    <p>Almohadón Zinia(Almohadon redondo de obeso)</p>
-                    <!-- Precio -->
-                    <span>$12564</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $1256,4</p>
-                    </div>
-                    <button onclick="location.href='./pages/Prod.Individual.html'">Ver producto</button>
-                </div>
-                <div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Camelia lumbar-Photoroom.png" alt="Producto 9">
-                    <!--!Nombre producto-->
-                    <p>Almohadón Camelia(Almohadon cilindro lumbar)</p>
-                    <!-- Precio -->
-                    <span>$4909</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $490,9</p>
-                    </div>
-                    <button onclick="location.href='./pages/Prod.Individual.html'">Ver producto</button>
-                </div> 
-                <div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Gerber-Photoroom.png" alt="Producto 3">
-                    <!--!Nombre producto-->
-                    <p>Almohadon Gerber(Almohadon cuadrado de espuma)</p>
-                    <!-- Precio -->
-                    <span>$8720</span>
-                    <div class="cuotas">
-                        <!-- Cantidad de cuotas -->
-                        <p>12 cuotas sin interés de $872</p>
-                    </div>
-                    <button onclick="location.href='./pages/Prod.Individual.html'">Ver producto</button>
-                </div>
-                <div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Margarita-Photoroom.png" alt="Producto 1">
-                    <!--!Nombre producto-->
-                    <p>Almohadon Margarita(Almohadon redondo espuma c/funda)</p>
-                    <!-- Precio -->
-                    <span>$5960</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $596</p>
-                    </div>
-                    <button onclick="location.href='./pages/Prod.Individual.html'">Ver producto</button>
-                </div> 
+    <!-- Nuestras categorías -->
+    <div class="categoriaImg">
+        <h2>Nuestras categorías</h2>
+        <div class="muestraCategorias">
+            <div class="categoriaColumna">
+                <a href="./pages/categorias.html">
+                    <img src="./images/imgParaBanners/imgConfort.jpg" alt="Almohadas">
+                    <p>Confort</p>
+                </a>
+            </div>
+            <div class="categoriaColumna">
+                <a href="./pages/categorias.html">
+                    <img src="./images/imgParaBanners/imgOrtopedica.jpg" alt="Almohadones">
+                    <p>Ortopedica</p>
+                </a>
+            </div>
+            <div class="categoriaColumna">
+                <a href="./pages/categorias.html">
+                    <img src="./images/imgParaBanners/imgLineaBaby.jpg" alt="Almohadas Baby">
+                    <p>Linea Baby</p>
+                </a>
             </div>
         </div>
-        
     </div>
-</section>
-<!-- ----------- -->
+    <!-- Fin del bloque de categorías -->
 
+    <!-- Productos destacados (carrusel) -->
+    <section class="productos-destacados">
+        <h2><a href="./pages/categorias.html">Productos destacados</a></h2>
+        <div class="carousel-container" id="carousel1">
+            <div class="carousel">
+                <div class="productos">
+                    <!-- Aquí van las tarjetas de productos destacados -->
+                    <!-- ...productos... -->
+                </div>
+            </div>
+        </div>
+    </section>
 
-
-
-
-
-
-
-    <!-- Seccion de fotos -->
-
-
+    <!-- Sección de fotos de productos -->
     <div class="productos-seccion">
         <div class="contenedor-productos">
-    
-    
-            <!-- A esta fotos las vamos a cambiar por una con los nombres y mejor calidad-->
-                <div class="productoGrande1">
-                    
-                    <a href="./pages/confortPage.html">
-                        <img src="./images/fotosEstetica/confort.png" alt="Confort" />
+            <div class="productoGrande1">
+                <a href="./pages/confortPage.html">
+                    <img src="./images/fotosEstetica/confort.png" alt="Confort">
+                </a>
+            </div>
+            <div class="segColumna">
+                <div class="productoChico1">
+                    <a href="./pages/lineaBaby.html">
+                        <img src="./images/fotosEstetica/lineaBaby.png" alt="Línea Baby">
                     </a>
                 </div>
-                <div class="segColumna">
-                    <div class="productoChico1">
-                        <a href="./pages/lineaBaby.html"> 
-                            <img src="./images/fotosEstetica/lineaBaby.png" alt="Línea Baby" />
-                        </a>
-                        
-                    </div>
-                    <div class="productoChico2">
-                        <a href="./pages/ortopedica.html">
-                            <img src="./images/fotosEstetica/ortopedica.png" alt="Ortopédicas" />
-                        </a>
-                        
-                    </div>
+                <div class="productoChico2">
+                    <a href="./pages/ortopedica.html">
+                        <img src="./images/fotosEstetica/ortopedica.png" alt="Ortopédicas">
+                    </a>
                 </div>
-    
-        </div>
-    </div>
-
-
-
-<section class="productos-destacados">
-    <h2><a href="/pages/confortPage.html">Productos Confort</a></h2>
-    <div class="carousel-container" id="carousel2">
-        <div class="carousel">
-            <div class="productos">
-                <div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Margarita sin funda-Photoroom.png" alt="Producto 2">
-                    <!--!Nombre producto-->
-                    <p>Almohadon Margarita(Almohadon redondo espuma s/funda)</p>
-                    <!-- Precio -->
-                    <span>$4842</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $484,2</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div>
-<div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Gerber-Photoroom.png" alt="Producto 3">
-                    <!--!Nombre producto-->
-                    <p>Almohadon Gerber(Almohadon cuadrado de espuma)</p>
-                    <!-- Precio -->
-                    <span>$8720</span>
-                    <div class="cuotas">
-                        <!-- Cantidad de cuotas -->
-                        <p>12 cuotas sin interés de $872</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div> 
-<div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Manantial-Photoroom.png" alt="Producto 4">
-                    <!--!Nombre producto-->
-                    <p>Almohadón Manantial(Almohadon redondo de fibra)</p>
-                    <!-- Precio -->
-                    <span>$5503</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $550,3</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div>
-<div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Rocio-Photoroom.png" alt="Producto 5">
-                    <!--!Nombre producto-->
-                    <p>Almohadon Rocio(Almohadon cuadrado de fibra)</p>
-                    <!-- Precio -->
-                    <span>$5503</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $550,3</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div> 
-<div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Petalo-Photoroom.png" alt="Producto 6">
-                    <!--!Nombre producto-->
-                    <p>Almohadón Pétalo(Almohadon tres bastones</p>
-                    <!-- Precio -->
-                    <span>$5503</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $550,3</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div> 
             </div>
         </div>
-       
     </div>
-</section>
 
+    <!-- Carrusel de productos Confort -->
+    <section class="productos-destacados">
+        <h2><a href="/pages/confortPage.html">Productos Confort</a></h2>
+        <div class="carousel-container" id="carousel2">
+            <div class="carousel">
+                <div class="productos">
+                    <!-- ...productos confort... -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios -->
     <div class="beneficios">
         <h2 class="prueba">Beneficios</h2>
-        
-            <div class="iconos-beneficios">
-                <div class="beneficio">
-                    <img src="./images/conveniente.png" alt="" />
-                    <p class="tipoBeneficio">Comodidad</p>
-                </div>
-                <div class="beneficio">
-                    <img src="./images/diagrama.png" alt="" />
-                    <p class="tipoBeneficio">Mejor Sueño</p>
-                </div>
-                <div class="beneficio">
-                    <img src="./images/calidad.png" alt="" />
-                    <p class="tipoBeneficio">Material de calidad</p>
-                </div>
+        <div class="iconos-beneficios">
+            <div class="beneficio">
+                <img src="./images/conveniente.png" alt="">
+                <p class="tipoBeneficio">Comodidad</p>
             </div>
+            <div class="beneficio">
+                <img src="./images/diagrama.png" alt="">
+                <p class="tipoBeneficio">Mejor Sueño</p>
+            </div>
+            <div class="beneficio">
+                <img src="./images/calidad.png" alt="">
+                <p class="tipoBeneficio">Material de calidad</p>
+            </div>
+        </div>
     </div>
 
-   <section class="productos-destacados">
-    <h2><a href="/pages/lineaBaby.html">Linea Baby</a></h2>
-    <div class="carousel-container" id="carousel3">
-        <div class="carousel">
-            <div class="productos">
-                <div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Margarita sin funda-Photoroom.png" alt="Producto 2">
-                    <!--!Nombre producto-->
-                    <p>Almohadon Margarita(Almohadon redondo espuma s/funda)</p>
-                    <!-- Precio -->
-                    <span>$4842</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $484,2</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div>
-<div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Gerber-Photoroom.png" alt="Producto 3">
-                    <!--!Nombre producto-->
-                    <p>Almohadon Gerber(Almohadon cuadrado de espuma)</p>
-                    <!-- Precio -->
-                    <span>$8720</span>
-                    <div class="cuotas">
-                        <!-- Cantidad de cuotas -->
-                        <p>12 cuotas sin interés de $872</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div> 
-<div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Manantial-Photoroom.png" alt="Producto 4">
-                    <!--!Nombre producto-->
-                    <p>Almohadón Manantial(Almohadon redondo de fibra)</p>
-                    <!-- Precio -->
-                    <span>$5503</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $550,3</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div>
-<div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Rocio-Photoroom.png" alt="Producto 5">
-                    <!--!Nombre producto-->
-                    <p>Almohadon Rocio(Almohadon cuadrado de fibra)</p>
-                    <!-- Precio -->
-                    <span>$5503</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $550,3</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div> 
-<div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Petalo-Photoroom.png" alt="Producto 6">
-                    <!--!Nombre producto-->
-                    <p>Almohadón Pétalo (Almohadon tres bastones)</p>
-                    <!-- Precio -->
-                    <span>$5503</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $550,3</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div> 
-
-                <div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Margarita sin funda-Photoroom.png" alt="Producto 2">
-                    <!--!Nombre producto-->
-                    <p>Almohadon Margarita(Almohadon redondo espuma s/funda)</p>
-                    <!-- Precio -->
-                    <span>$4842</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $484,2</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div>
-
-
-                <div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Margarita sin funda-Photoroom.png" alt="Producto 2">
-                    <!--!Nombre producto-->
-                    <p>Almohadon Margarita(Almohadon redondo espuma s/funda)</p>
-                    <!-- Precio -->
-                    <span>$4842</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $484,2</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div>
-
-
-                <div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Margarita sin funda-Photoroom.png" alt="Producto 2">
-                    <!--!Nombre producto-->
-                    <p>Almohadon Margarita(Almohadon redondo espuma s/funda)</p>
-                    <!-- Precio -->
-                    <span>$4842</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $484,2</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
+    <!-- Carrusel de productos Línea Baby -->
+    <section class="productos-destacados">
+        <h2><a href="/pages/lineaBaby.html">Linea Baby</a></h2>
+        <div class="carousel-container" id="carousel3">
+            <div class="carousel">
+                <div class="productos">
+                    <!-- ...productos línea baby... -->
                 </div>
             </div>
         </div>
-        
-    </div>
-</section>
+    </section>
 
+    <!-- Banner ortopédicas -->
     <div class="banner-ortopedicas">
         <div class="texto">
             <h2>Descubre el confort y soporte<br>que tu cuerpo necesita</h2>
             <button class="ver-mas" onclick="location.href='/pages/ortopedica.html'">Ver productos</button>
         </div>
     </div>
-    
 
+    <!-- Carrusel de productos Ortopédica -->
     <section class="productos-destacados">
-    
-    <div class="carousel-container" id="carousel4">
-        <div class="carousel">
-            <div class="productos">
-                <div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Margarita sin funda-Photoroom.png" alt="Producto 2">
-                    <!--!Nombre producto-->
-                    <p>Almohadon Margarita(Almohadon redondo espuma s/funda)</p>
-                    <!-- Precio -->
-                    <span>$4842</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $484,2</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
+        <div class="carousel-container" id="carousel4">
+            <div class="carousel">
+                <div class="productos">
+                    <!-- ...productos ortopédica... -->
                 </div>
-<div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Gerber-Photoroom.png" alt="Producto 3">
-                    <!--!Nombre producto-->
-                    <p>Almohadon Gerber(Almohadon cuadrado de espuma)</p>
-                    <!-- Precio -->
-                    <span>$8720</span>
-                    <div class="cuotas">
-                        <!-- Cantidad de cuotas -->
-                        <p>12 cuotas sin interés de $872</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div> 
-<div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Manantial-Photoroom.png" alt="Producto 4">
-                    <!--!Nombre producto-->
-                    <p>Almohadón Manantial(Almohadon redondo de fibra)</p>
-                    <!-- Precio -->
-                    <span>$5503</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $550,3</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div>
-<div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Rocio-Photoroom.png" alt="Producto 5">
-                    <!--!Nombre producto-->
-                    <p>Almohadon Rocio(Almohadon cuadrado de fibra)</p>
-                    <!-- Precio -->
-                    <span>$5503</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $550,3</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div> 
-            <div class="producto">
-                    <!--Imagen de producto-->
-                    <img src="./images/fotosProductos/Petalo-Photoroom.png" alt="Producto 6">
-                    <!--!Nombre producto-->
-                    <p>Almohadón Pétalo(Almohadon tres bastones)</p>
-                    <!-- Precio -->
-                    <span>$5503</span>
-                    <div class="cuotas">
-                        <!-- Cantida de cuotas -->
-                        <p>12 cuotas sin interés de $550,3</p>
-                    </div>
-                    <button onclick="location.href='/pages/Prod.Individual.html'">Ver producto</button>
-                </div> 
             </div>
         </div>
-        
-    </div>
-</section>
+    </section>
 
-
-<!-- Footer-->
-
-   <footer class="footer">
-  <div class="footer-grid">
-    <!-- Columna izquierda -->
-    <div class="footer-right">
-      <img src="./images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas" class="footer-logo">
-      <p class="footer-desc">Fabrica de productos de confort</p>
-      <a href="#" class="footer-social">
-        <div class="socialMedia">
-           <a href="https://www.instagram.com/almohadones.lasmargaritas">
-                <img src="./images/logotipo-de-instagram.png" alt="Instagram">
-            </a>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <!-- Columna izquierda -->
+            <div class="footer-right">
+                <img src="./images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas" class="footer-logo">
+                <p class="footer-desc">Fabrica de productos de confort</p>
+                <a href="#" class="footer-social">
+                    <div class="socialMedia">
+                        <a href="https://www.instagram.com/almohadones.lasmargaritas">
+                            <img src="./images/logotipo-de-instagram.png" alt="Instagram">
+                        </a>
+                    </div>
+                </a>
+            </div>
+            <!-- Columna derecha -->
+            <div class="footer-center">
+                <span>Avda. Juan B. Justo 8667</span>
+                <span>CABA, Argentina</span>
+                <span>telefono: 11 3437-4127</span>
+                <span>Email: info@lasmargaritas.online</span>
+            </div>
+            <div class="footer-left">
+                <a href=""><span>Contacto</span></a>
+                <a href=""><span>Sobre Nosotros</span></a>
+                <a href=""><span>Otro</span></a>
+            </div>
         </div>
-      </a>
-    </div>
+        <!-- Línea inferior -->
+        <div class="footer-bottom">
+            <p>Todos los derechos reservados @ Las Margaritas 2025</p>
+        </div>
+    </footer>
 
-    <!-- Columna derecha -->
-    <div class="footer-center">
-        
-    <span>Avda. Juan B. Justo 8667</span>
-    <span>CABA, Argentina</span>
-    
-    <span>telefono: 11 3437-4127</span>
-    <span>Email: info@lasmargaritas.online</span>
-
-
-    </div>
-
-    <div class="footer-left">
-        <a href=""><span>Contacto</span></a>
-        <a href=""><span>Sobre Nosotros</span></a>
-        <a href=""><span>Otro</span></a>
-    </div>  
-  </div>
-
-  <!-- Línea inferior -->
-  <div class="footer-bottom">
-    <p>Todos los derechos reservados @ Las Margaritas 2025</p>
-  </div>
-</footer>
-
-    <!-- termina Footer-->
-
-    <script src="carousel.js"></script> <!-- Enlazamos el archivo JS aquí -->
-    <script src="js/navbar.js"></script>
-    <script src="js/carritoDes.js"></script>
-    <!-- <script src="js/admin.js"></script> -->
-
+    <!-- WhatsApp flotante -->
     <a href="https://wa.me/5492612543607" target="_blank" class="whatsapp-float" rel="noopener">
         <img src="./images/imageswhatsapp-icon.png" alt="WhatsApp">
     </a>
-</a>
-<script src="/js/common.js"></script>
-</body>
 
+    <!-- Scripts -->
+    <script src="carousel.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/carritoDes.js"></script>
+    <script src="/js/common.js"></script>
+</body>
 </html>
