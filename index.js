@@ -3,6 +3,7 @@ const session = require('express-session');
 const pool = require('./db');
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
+const userRoutes = require('./routes/users');
 const { googleCallback } = require('./controllers/authController');
 const passport = require('./utils/passport');
 const jwt = require('jsonwebtoken');
@@ -43,6 +44,7 @@ app.get('/auth/google/callback',
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 
 // 3) Servir front-end estático (si usas esta opción)
 app.use(express.static(path.join(__dirname, 'public')));

@@ -6,15 +6,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Admin – Las Margaritas</title>
 
-  <!-- Fuentes y favicon -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <link rel="icon" href="../images/logoBanner/logo.png" type="image/png">
 
-  <!-- CSS globales del proyecto -->
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="../style/nuevo/nav-footer.css">
 
-  <!-- CSS específico para admin -->
   <link rel="stylesheet" href="../style/admin.css">
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -28,18 +25,14 @@
 </head>
 
 <body>
-  <!--  -->
-  <!--HEADER -->
   <header id="mainHeader">
     <div class="header-inner">
-      <!-- Logo -->
       <div class="logo" id="logo">
         <a href="../index.html">
           <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas">
         </a>
       </div>
 
-      <!-- Menú -->
       <nav class="main-nav" id="mainNav">
         <a href="../index.html">Inicio</a>
         <a href="../pages/listadoProductos.html">Productos</a>
@@ -47,7 +40,6 @@
         <a href="../pages/contacto.html">Contacto</a>
       </nav>
 
-      <!-- Íconos a la derecha -->
       <div class="icons" id="icons">
         <a href="#">
           <img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="Ingresar">
@@ -59,9 +51,7 @@
     </div>
   </header>
 
-  <!-- MAIN ADMIN -->
   <main class="admin-main">
-    <!-- Sección Productos -->
     <section id="productsSection">
       <button id="btnAdd">+ Nuevo producto</button>
       <table id="tblProducts">
@@ -81,39 +71,35 @@
         <form id="productForm">
           <span id="closeBtn" class="close">&times;</span>
           <h2 id="formTitle">Nuevo producto</h2>
-          <input type="hidden" id="prodId" name="prodId"> <label>Nombre: 
-            <input type="text" id="name" name="name" required> </label>
-          
+          <input type="hidden" id="prodId" name="prodId">
+          <label>Nombre:
+            <input type="text" id="name" name="name" required>
+          </label>
           <label>Descripción:<br>
-            <textarea id="description" name="description" rows="3" required></textarea> </label>
-          
-          <label>Precio: 
-            <input type="number" id="price" name="price" step="0.01" min="0" required> </label>
-          
-          <label>Stock: 
-            <input type="number" id="stock" name="stock" min="0" required> </label>
-          
+            <textarea id="description" name="description" rows="3" required></textarea>
+          </label>
+          <label>Precio:
+            <input type="number" id="price" name="price" step="0.01" min="0" required>
+          </label>
+          <label>Stock:
+            <input type="number" id="stock" name="stock" min="0" required>
+          </label>
           <label for="category">Categoría:</label>
           <select id="category" name="category" required> </select>
-          
           <label>Imagen:
             <input type="file" id="image" name="image" accept="image/*">
           </label>
-        
           <img id="imagePreview" src="" alt="Vista previa" style="display:none; max-width: 120px; margin: 10px 0; border-radius: 6px;">
-
           <div class="buttons">
             <button type="submit">Guardar</button>
             <button type="button" id="btnCancel">Cancelar</button>
-            <button type="button" id="resetBtn">Reset</button>
           </div>
         </form>
       </div>
     </section>
 
-    <!-- Sección Usuarios -->
-    <section id="usersSection" class="hidden">
-      <button id="btnAddUser">+ Nuevo usuario</button>
+    <section id="usersSection">
+      <label id="btnAddUser">Usuarios</label>
       <table id="tblUsers">
         <thead>
           <tr>
@@ -129,14 +115,12 @@
         <form id="userForm">
           <span id="closeUser" class="close">&times;</span>
           <h2 id="userFormTitle">Nuevo usuario</h2>
-          <input type="hidden" id="userId">
-          <label>Email: <input type="email" id="userEmail" required></label>
-          <label>Nombre: <input type="text" id="userName" required></label>
+          <input type="hidden" id="userId" name="userId">
+          <label>Email: <input type="email" id="userEmail" name="email" required></label>
+          <label>Nombre: <input type="text" id="userName" name="name" required></label>
           <label>Estado:
-            <select id="userStatus">
-              <option value="activo">Activo</option>
-              <option value="baja">De baja</option>
-            </select>
+            <select id="userStatus" name="status">
+              </select>
           </label>
           <div class="buttons">
             <button type="submit">Guardar</button>
@@ -147,10 +131,8 @@
     </section>
   </main>
 
-  <!-- Footer-->
   <footer class="footer">
     <div class="footer-grid">
-      <!-- Columna izquierda -->
       <div class="footer-right">
         <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas" class="footer-logo">
         <p class="footer-desc">Fabrica de productos de confort</p>
@@ -163,7 +145,6 @@
         </a>
       </div>
 
-      <!-- Columna derecha -->
       <div class="footer-center">
         <span>Avda. Juan B. Justo 8667</span>
         <span>CABA, Argentina</span>
@@ -178,7 +159,6 @@
       </div>
     </div>
 
-    <!-- Línea inferior -->
     <div class="footer-bottom">
       <p>Todos los derechos reservados @ Las Margaritas 2025</p>
     </div>
@@ -188,7 +168,6 @@
     <img src="../images/imageswhatsapp-icon.png" alt="WhatsApp">
   </a>
 
-  <!-- Scripts -->
   <script src="../js/navbar.js"></script>
   <script src="../js/carritoDes.js"></script>
   <script src="../js/admin.js"></script>

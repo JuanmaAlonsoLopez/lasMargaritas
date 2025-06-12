@@ -44,9 +44,13 @@ thead { background: #f0f0f0; }
   border: none; padding: .6rem 1.2rem;
   border-radius: 4px; cursor: pointer;
 }
-#btnAdd:hover, #btnAddUser:hover {
+#btnAdd:hover{
   background: #4c6747;
 }
+#btnAddUser {
+  cursor: default;
+}
+
 /* Botones de acciones en la tabla */
 
 .actions {
