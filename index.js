@@ -5,8 +5,8 @@ const express = require('express');
 const session = require('express-session');
 const pool = require('./db'); // Conexión a la base de datos desde db.js
 const cors = require('cors');
-const path = require('path'); // <-- AÑADIDO: Importa el módulo 'path'
-const helmet = require('helmet'); // <-- AÑADIDO: Importa 'helmet' para seguridad
+const path = require('path');
+const helmet = require('helmet');
 const { MercadoPagoConfig, Preference } = require('mercadopago');
 
 // Cargar variables de entorno del archivo .env
@@ -15,7 +15,7 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Configuración del cliente de Mercado Pago
+// Configuración del cliente de Mercado Pago (usando tu variable de entorno)
 const client = new MercadoPagoConfig({
     accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN,
 });
@@ -25,16 +25,17 @@ const client = new MercadoPagoConfig({
 // MIDDLEWARE (El orden es importante)
 // =================================================================
 
-// <-- AÑADIDO: Configuración de Helmet para solucionar el Content-Security-Policy
-// Esto debe ir ANTES de tus otras rutas y middleware.
+// Configuración de Helmet para seguridad
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'"],
+      // AÑADIDO: Permitir scripts de Mercado Pago. Si no, el checkout no cargará.
+      scriptSrc: ["'self'", "https://sdk.mercadopago.com"], 
       styleSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "data:"],
-      connectSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "https://*.mercadopago.com"], // AÑADIDO: para logos e imágenes de MP
+      connectSrc: ["'self'", "https://api.mercadopago.com"], // AÑADIDO: para que el frontend hable con la API de MP
+      frameSrc: ["https://*.mercadopago.com"], // AÑADIDO: para el iframe del checkout
       fontSrc: ["'self'"],
       objectSrc: ["'none'"],
       upgradeInsecureRequests: [],
@@ -69,7 +70,6 @@ app.use(express.json());
 
 // --- RUTA PARA OBTENER TODAS LAS CATEGORÍAS ---
 app.get('/api/categories', async (req, res) => {
-    // ... tu código de la ruta de categorías aquí ...
     const query = `
         SELECT DISTINCT pc.category_name as name
         FROM public.product_category pc
@@ -89,9 +89,7 @@ app.get('/api/categories', async (req, res) => {
 
 // --- RUTA PARA OBTENER PRODUCTOS (con filtro opcional por categoría) ---
 app.get('/api/products', async (req, res) => {
-    // ... tu código de la ruta de productos aquí ...
     const { category } = req.query;
-
     let baseQuery = `
         SELECT
             p.id, p.name, p.image_url, p.description,
@@ -99,7 +97,6 @@ app.get('/api/products', async (req, res) => {
         FROM public.products p
     `;
     const queryParams = [];
-
     if (category) {
         baseQuery += `
             JOIN public.product_category pc ON p.category = pc.id
@@ -107,9 +104,7 @@ app.get('/api/products', async (req, res) => {
         `;
         queryParams.push(category);
     }
-
     baseQuery += ' ORDER BY p.id;';
-
     try {
         const result = await pool.query(baseQuery, queryParams);
         res.json(result.rows);
@@ -119,15 +114,76 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
-// ... Aquí van tus otras rutas de API como /create_preference ...
+// =================================================================
+// INICIO: RUTAS DE MERCADO PAGO
+// =================================================================
+
+// --- RUTA PARA CREAR LA PREFERENCIA DE PAGO ---
+app.post('/crear-preferencia', async (req, res) => {
+  try {
+    const productosDelCarrito = req.body.productos;
+
+    if (!productosDelCarrito || !Array.isArray(productosDelCarrito) || productosDelCarrito.length === 0) {
+      return res.status(400).json({ error: 'La lista de productos está vacía o no es válida.' });
+    }
+
+    const items = productosDelCarrito.map(producto => ({
+      title: producto.nombre,
+      description: producto.descripcion || 'Producto de la tienda',
+      quantity: Number(producto.cantidad),
+      currency_id: 'ARS',
+      unit_price: Number(producto.precio),
+    }));
+
+    const body = {
+      items: items,
+      back_urls: {
+        success: 'http://localhost:3000/feedback', // Puedes cambiar esta URL a una página de éxito de tu frontend
+        failure: 'http://localhost:3000/feedback', // Puedes cambiar esta URL a una página de error de tu frontend
+        pending: 'http://localhost:3000/feedback', // Puedes cambiar esta URL a una página de pendiente de tu frontend
+      },
+      auto_return: 'approved',
+    };
+
+    const preference = new Preference(client);
+    const result = await preference.create({ body });
+    
+    res.json({ id: result.id });
+
+  } catch (error) {
+    console.error('Error al crear la preferencia:', error);
+    res.status(500).json({ error: 'Hubo un error en el servidor al crear la preferencia.' });
+  }
+});
+
+// --- RUTA DE FEEDBACK PARA EL USUARIO DESPUÉS DEL PAGO ---
+app.get('/feedback', (req, res) => {
+    // Aquí podrías guardar el estado del pago en tu base de datos
+    console.log('Feedback de Mercado Pago recibido:');
+    console.log('Payment ID:', req.query.payment_id);
+    console.log('Status:', req.query.status);
+    console.log('Merchant Order ID:', req.query.merchant_order_id);
+
+    // Redirigir al usuario a una página de "gracias" en tu frontend
+    // res.redirect(`http://127.0.0.1:5500/tu-pagina-de-gracias.html?status=${req.query.status}`);
+    
+    // O simplemente mostrar un mensaje genérico
+    res.send(`
+        <h1>Procesando tu pago...</h1>
+        <p>Estado: ${req.query.status}</p>
+        <p>Gracias por tu compra.</p>
+    `);
+});
+
+// =================================================================
+// FIN: RUTAS DE MERCADO PAGO
+// =================================================================
 
 
 // =================================================================
 // SERVIR ARCHIVOS ESTÁTICOS (Frontend)
 // =================================================================
-
-// <-- DESCOMENTADO Y CORREGIDO: Esto le dice a Express que sirva tu frontend.
-// Debe ir DESPUÉS de tus rutas de API.
+// Esto le dice a Express que sirva tu frontend. Debe ir DESPUÉS de tus rutas de API.
 app.use(express.static(path.join(__dirname, 'public')));
 
 

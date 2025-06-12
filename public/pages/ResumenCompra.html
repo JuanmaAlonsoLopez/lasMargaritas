@@ -10,10 +10,11 @@
     <link rel="stylesheet" href="../style/nuevo/nav-footer.css">
     <link rel="stylesheet" href="../style/carrito.css">
     <link rel="stylesheet" href="../style/ResCompra.css">
+
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
 </head>
 
 <body>
-
     <header id="mainHeader">
         <div class="header-inner">
             <div class="logo" id="logo">
@@ -37,13 +38,11 @@
             </div>
         </div>
     </header>
-
     <div class="menu-hamburguesa-btn" id="btnHamburguesa" aria-label="Abrir menú">
         <span></span>
         <span></span>
         <span></span>
     </div>
-
     <nav class="menu-hamburguesa" id="menuHamburguesaResponsive">
         <a href="index.html">INICIO</a>
         <a href="./pages/categorias.html">CATEGORÍAS</a>
@@ -51,7 +50,6 @@
         <a href="./pages/sobreNosotros.html">SOBRE NOSOTROS</a>
         <a href="./pages/contacto.html">CONTACTO</a>
     </nav>
-
     <div class="container">
         <div class="left-container">
             <div id="cart-products-container">
@@ -77,6 +75,8 @@
                     <p id="total-amount">Total: $0.00</p>
                 </div>
                 <button id="comprar" class="continuar-compra">Continuar compra</button>
+                
+                <div id="wallet_container" style="margin-top: 15px;"></div>
             </div>
         </div>
     </div>
@@ -110,9 +110,7 @@
             <p>Todos los derechos reservados @ Las Margaritas 2025</p>
         </div>
     </footer>
-
     <script src="../js/navbar.js"></script>
-    <script src="../js/carritoDes.js"></script>
     <a href="https://wa.me/5492612543607" target="_blank" class="whatsapp-float">
         <img src="../images/imageswhatsapp-icon.png" alt="WhatsApp">
     </a>
@@ -120,20 +118,20 @@
 
    <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // --- CONFIGURACIÓN INICIAL ---
         const cartContainer = document.getElementById('cart-products-container');
         const subtotalElem = document.getElementById('product-subtotal');
         const totalElem = document.getElementById('total-amount');
         const checkoutButton = document.getElementById('comprar');
+        
+        // ¡IMPORTANTE! Reemplaza esto con tu Public Key de Mercado Pago
+        const publicKey = 'TU_PUBLIC_KEY';
+        const mp = new MercadoPago(publicKey);
 
-        // Obtenemos el carrito de localStorage. Esta será nuestra "única fuente de verdad".
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-        /**
-         * Función principal para renderizar (dibujar) el carrito completo.
-         * Se llamará cada vez que el carrito cambie.
-         */
+        // --- FUNCIONES DEL CARRITO (TU CÓDIGO ORIGINAL, SIN CAMBIOS) ---
         function renderCart() {
-            // Si el carrito está vacío, muestra un mensaje y deshabilita el botón de compra.
             if (cart.length === 0) {
                 cartContainer.innerHTML = '<p>Tu carrito de compras está vacío.</p>';
                 subtotalElem.textContent = 'Producto: $0.00';
@@ -143,13 +141,12 @@
             }
 
             let subtotal = 0;
-            // Limpia el contenedor y crea el HTML para cada producto en el carrito
             cartContainer.innerHTML = cart.map(product => {
                 const productTotal = product.price * product.quantity;
                 subtotal += productTotal;
                 return `
                     <div class="cart-product-item" data-id="${product.id}">
-                        <img src=".${product.image_url}" alt="${product.name}" class="cart-product-image">
+                        <img src="${product.image_url}" alt="${product.name}" class="cart-product-image">
                         <div class="cart-product-details">
                             <p class="cart-product-title">${product.name}</p>
                             <div class="cart-product-quantity-controls">
@@ -164,94 +161,112 @@
                 `;
             }).join('');
 
-            // Actualiza los totales en la página
             subtotalElem.textContent = `Producto: $${subtotal.toFixed(2)}`;
-            const shippingCost = 1500; // Puedes hacer esto dinámico si quieres
+            const shippingCost = 1500;
             totalElem.textContent = `Total: $${(subtotal + shippingCost).toFixed(2)}`;
             checkoutButton.disabled = false;
         }
 
-        /**
-         * Guarda el estado actual del carrito en localStorage.
-         */
         function saveCart() {
             localStorage.setItem('cart', JSON.stringify(cart));
         }
 
-        // Event listener para los botones de cantidad y eliminar
         cartContainer.addEventListener('click', (event) => {
             const target = event.target;
             const productItem = target.closest('.cart-product-item');
             if (!productItem) return;
-
             const productId = parseInt(productItem.dataset.id);
-
-            // Lógica para aumentar o disminuir cantidad
             if (target.classList.contains('quantity-change')) {
                 const action = target.dataset.action;
                 const productInCart = cart.find(p => p.id === productId);
-
                 if (action === 'increase') {
                     productInCart.quantity++;
                 } else if (action === 'decrease') {
                     productInCart.quantity--;
-                    // Si la cantidad llega a 0, elimina el producto del carrito
                     if (productInCart.quantity === 0) {
                         cart = cart.filter(p => p.id !== productId);
                     }
                 }
             }
-
-            // Lógica para el botón "Eliminar"
             if (target.classList.contains('remove-item')) {
                 cart = cart.filter(p => p.id !== productId);
             }
-
-            // Guarda los cambios y vuelve a renderizar todo el carrito
             saveCart();
             renderCart();
         });
 
-        // Lógica para el botón "Continuar compra"
-        checkoutButton.addEventListener('click', () => {
-            const itemsToSend = cart.map(product => ({
-                id: product.id,
-                quantity: product.quantity
-            }));
+        // --- LÓGICA DE PAGO (MODIFICADA PARA MERCADO PAGO) ---
 
-            if (itemsToSend.length === 0) {
+        /**
+         * Función para renderizar el botón de Checkout Pro de Mercado Pago
+         */
+        function renderizarBotonDePago(preferenceId) {
+            // Limpia el contenedor por si había un botón anterior
+            document.getElementById('wallet_container').innerHTML = '';
+            
+            mp.bricks().create('wallet', 'wallet_container', {
+                initialization: {
+                    preferenceId: preferenceId,
+                },
+                customization: {
+                    texts: {
+                        valueProp: 'smart_option',
+                    },
+                },
+            });
+        }
+
+        /**
+         * Event listener para el botón "Continuar compra".
+         * Ahora se comunica con nuestro backend para crear la preferencia de pago.
+         */
+        checkoutButton.addEventListener('click', async () => {
+            if (cart.length === 0) {
                 alert('Tu carrito está vacío.');
                 return;
             }
 
-            const customerData = {
-                full_name: "Cliente de Prueba", address: "Calle Falsa 123",
-                city: "Mendoza", province: "Mendoza", phone: "2615551234",
-                email: "test_user@test.com", user_id: null
-            };
+            // Ocultamos el botón original para mostrar el de Mercado Pago
+            checkoutButton.style.display = 'none';
 
-            fetch('http://localhost:3000/create_preference', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ items: itemsToSend, ...customerData }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.init_point) {
-                    window.location.href = data.init_point;
+            // Mapeamos el carrito al formato que espera nuestro backend (index.js)
+            const productosParaEnviar = cart.map(product => ({
+                nombre: product.name,
+                cantidad: product.quantity,
+                precio: product.price
+            }));
+            
+            try {
+                // Hacemos la petición a nuestro backend
+                const response = await fetch('http://localhost:3000/crear-preferencia', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ productos: productosParaEnviar }),
+                });
+
+                const preference = await response.json();
+
+                if (preference.id) {
+                    // Si el backend nos devuelve un ID, renderizamos el botón
+                    renderizarBotonDePago(preference.id);
                 } else {
-                    alert('Error al crear la preferencia de pago.');
+                    throw new Error('No se pudo obtener la preferencia de pago.');
                 }
-            })
-            .catch(error => console.error('Error al iniciar el pago:', error));
+
+            } catch (error) {
+                console.error(error);
+                alert('Error al procesar el pago. Por favor, inténtalo de nuevo.');
+                // Si hay un error, volvemos a mostrar el botón original
+                checkoutButton.style.display = 'block';
+            }
         });
 
-        // --- INICIO ---
-        // Llama a la función de renderizado por primera vez para mostrar el estado inicial del carrito.
+        // --- INICIO DE LA EJECUCIÓN ---
         renderCart();
     });
 </script>
-
 
 </body>
 </html>
