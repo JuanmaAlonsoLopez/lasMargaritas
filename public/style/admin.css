@@ -47,11 +47,48 @@ thead { background: #f0f0f0; }
 #btnAdd:hover, #btnAddUser:hover {
   background: #4c6747;
 }
+/* Botones de acciones en la tabla */
 
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.actions .btn-edit {
+  background: #85B27D;
+  color: #fff;
+  border: none;
+  padding: .4rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  margin-right: .5rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.actions .btn-edit:hover {
+  background: #5E7F58;
+}
+
+.actions .btn-delete {
+  background: #ff4d4d;
+  color: #fff;
+  border: none;
+  padding: .4rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.actions .btn-delete:hover {
+  background: #c82333;
+}
 /* Modales */
 #modal, #modalUser {
-  position: fixed; top: 0; left: 0;
-  width: 100%; height: 100%;
+  position: fixed; /* Cambiado a fixed para cubrir siempre toda la pantalla */
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
   background: rgba(0,0,0,0.5);
   display: flex; align-items: center; justify-content: center;
   z-index: 1000;
@@ -63,6 +100,8 @@ thead { background: #f0f0f0; }
   background: #fff; padding: 2rem;
   border-radius: 8px; width: 90%; max-width: 500px;
   position: relative; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  max-height: 90vh;
+  overflow-y: auto;
 }
 .close {
   position: absolute; top: .5rem; right: .5rem;

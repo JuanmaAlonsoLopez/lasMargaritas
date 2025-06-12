@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const pool = require('./db');
 const authRoutes = require('./routes/auth');
+const productRoutes = require('./routes/products');
 const { googleCallback } = require('./controllers/authController');
 const passport = require('./utils/passport');
 const jwt = require('jsonwebtoken');
@@ -21,16 +22,6 @@ app.use(cors({
 
 app.use(express.json());
 
-// 2) Rutas
-// app.get('/usuarios', async (req, res) => {
-//   try {
-//     const result = await pool.query('SELECT * FROM users');
-//     res.json(result.rows);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).send('Error al consultar usuarios');
-//   }
-// });
 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'keyboard cat',
@@ -51,6 +42,7 @@ app.get('/auth/google/callback',
 );
 
 app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
 
 // 3) Servir front-end estático (si usas esta opción)
 app.use(express.static(path.join(__dirname, 'public')));

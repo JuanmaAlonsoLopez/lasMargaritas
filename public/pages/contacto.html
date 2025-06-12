@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
@@ -10,66 +10,60 @@
     <link rel="stylesheet" href="../styles/categorias.css">
     <link rel="stylesheet" href="../style/nuevo/nav-footer.css">
     <link rel="stylesheet" href="../style/contacto.css">
-</head>
+  </head>
 
 
-<body>
-    <!--  -->
-   <!--HEADER -->
-    
-   <!--  -->
+  <body>
+   <!-- Header -->
     <header id="mainHeader">
     <div class="header-inner">
-    <!-- Logo -->
-    <div class="logo" id="logo">
-        <a href="../index.html">
+      <!-- Logo -->
+        <div class="logo" id="logo">
+          <a href="../index.html">
             <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas">
+          </a>
+        </div>
+
+      <!-- Menú -->
+      <nav class="main-nav" id="mainNav">
+        <a  href="../index.html">Inicio</a>
+        <a  href="../pages/categorias.html">Productos</a>
+        <a  href="../pages/sobreNosotros.html">Sobre nosotros</a>
+        <a  href="../pages/contacto.html">Contacto</a>
+      </nav>
+
+      <!-- Íconos a la derecha -->
+      <div class="icons" id="icons">
+        <a href="#">
+          <img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="Ingresar">
         </a>
-    </div>
-
-    <!-- Menú -->
-    <nav class="main-nav" id="mainNav">
-      <a  href="../index.html">Inicio</a>
-      <a  href="../pages/categorias.html">Productos</a>
-      <a  href="../pages/sobreNosotros.html">Sobre nosotros</a>
-      <a  class="activo" href="../pages/contacto.html">Contacto</a>
-    </nav>
-
-    <!-- Íconos a la derecha -->
-    <div class="icons" id="icons">
-      <a href="#">
-        <img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="Ingresar">
-      </a>
-      <a href="#">
-        <img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="Carrito">
-      </a>
-    </div>
+        <a href="#">
+          <img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="Carrito">
+        </a>
+      </div>
     
 
+    </div>
+    </header>
 
 
+    <div id="cart-blur-bg" class="cart-blur-bg hidden"></div>
+    <div class="cart-dropdown" id="cartDropdown">
+      <span class="cart-close" id="cartCloseBtn">&times;</span>
+      <div class="cart-content">
+        <h3>Productos en el carrito</h3>
+        <div class="cart-items" id="cartItems"></div>
+        <button onclick="location.href='../pages/ResumenCompra.html'" class="btn-go-cart">Ir al carrito</button>
+      </div>
+    </div>
 
-</div>
-</header>
-
-
-<div id="cart-blur-bg" class="cart-blur-bg hidden"></div>
-<div class="cart-dropdown" id="cartDropdown">
-  <span class="cart-close" id="cartCloseBtn">&times;</span>
-  <div class="cart-content">
-    <h3>Productos en el carrito</h3>
-    <div class="cart-items" id="cartItems"></div>
-    <button onclick="location.href='../pages/ResumenCompra.html'" class="btn-go-cart">Ir al carrito</button>
-  </div>
-</div>
-
-    <!-- Empieza el contenedor de la pagina-->
+  <!-- Empieza el contenedor de la pagina-->
     <main>
         <!-- Todo el contenido de la página va aquí (incluyendo la sección de contacto) -->
         <section class="contacto">
             <h1>Contacto</h1>
             <div class="contacto-contenido">
-                <h2>Contacta con nosotros</h2>
+              <h2>Contacta con nosotros</h2>
                 <div class="contacto-items">
                     <div class="contacto-item">
                         <img src="../images/email.png" alt="Email">
@@ -81,7 +75,7 @@
                     </div>
                     <div class="contacto-item">
                         <a href="https://www.instagram.com/lasmargaritasmza/" target="_blank">
-                            <img src="../images/logotipo-de-instagram.png" alt="Instagram">
+                          <img src="../images/logotipo-de-instagram.png" alt="Instagram">
                         </a>
                         <p>@lasmargaritasmza</p>
                     </div>
@@ -90,67 +84,61 @@
         </section>
 
         <section class="equipoDesarrolloLogo">
-              <img src="../images/equipoDev/logoJVN.png" alt="">
-              <p>Somos JVN Informatic Solutions, nos dedicamos a solucionar problemas cotidianos con informatica</p>
+          <img src="../images/equipoDev/logoJVN.png" alt="">
+          <p>Somos JVN Informatic Solutions, nos dedicamos a solucionar problemas cotidianos con informatica</p>
             
         </section>
     </main>
 
-    <!-- Footer-->
+  <!-- Footer-->
 
-   <!-- Footer-->
-
-    <footer class="footer">
-  <div class="footer-grid">
-    <!-- Columna izquierda -->
-    <div class="footer-right">
-      <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas" class="footer-logo">
-      <p class="footer-desc">Fabrica de productos de confort</p>
-      <a href="#" class="footer-social">
-        <div class="socialMedia">
-            <a href="https://www.instagram.com/almohadones.lasmargaritas">
-                <img src="../images/logotipo-de-instagram.png" alt="Instagram">
-            </a>
+  <footer class="footer">
+    <div class="footer-grid">
+        <!-- Columna izquierda -->
+        <div class="footer-right">
+          <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas" class="footer-logo">
+          <p class="footer-desc">Fabrica de productos de confort</p>
+          <a href="#" class="footer-social">
+            <div class="socialMedia">
+              <a href="https://www.instagram.com/almohadones.lasmargaritas">
+              <img src="../images/logotipo-de-instagram.png" alt="Instagram">
+              </a>
             
+            </div>
+          </a>
         </div>
-      </a>
-    </div>
 
     <!-- Columna derecha -->
-    <div class="footer-center">
+      <div class="footer-center">
         
-    <span>Avda. Juan B. Justo 8667</span>
-    <span>CABA, Argentina</span>
+        <span>Avda. Juan B. Justo 8667</span>
+        <span>CABA, Argentina</span>
     
-    <span>telefono: 11 3437-4127</span>
-    <span>Email: info@lasmargaritas.online</span>
+        <span>telefono: 11 3437-4127</span>
+        <span>Email: info@lasmargaritas.online</span>
 
 
-    </div>
+      </div>
 
-    <div class="footer-left">
+      <div class="footer-left">
         <a href=""><span>Contacto</span></a>
         <a href=""><span>Sobre Nosotros</span></a>
         <a href=""><span>Otro</span></a>
-    </div>  
-  </div>
+      </div>  
+    </div>
 
-  <!-- Línea inferior -->
-  <div class="footer-bottom">
-    <p>Todos los derechos reservados @ Las Margaritas 2025</p>
-  </div>
-</footer>
+    <!-- Línea inferior -->
+    <div class="footer-bottom">
+      <p>Todos los derechos reservados @ Las Margaritas 2025</p>
+    </div>
+  </footer>
+  <!-- termina Footer-->
 
-    <!-- termina Footer-->
-        
-
-    <script src="carousel.js"></script> <!-- Enlazamos el archivo JS aquí -->
-    <script src="../js/navbar.js"></script>
-    <script src="../js/carritoDes.js"></script>
-    
+  <script src="../js/navbar.js"></script>
+  <script src="../js/carritoDes.js"></script>
     <a href="https://wa.me/5492612543607" target="_blank" class="whatsapp-float">
-        <img src="../images/imageswhatsapp-icon.png" alt="WhatsApp">
+      <img src="../images/imageswhatsapp-icon.png" alt="WhatsApp">
     </a>
-<script src="/js/common.js"></script>
-</body>
+  <script src="/js/common.js"></script>
+  </body>
 </html>

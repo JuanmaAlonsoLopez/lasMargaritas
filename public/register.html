@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./style/stylesBack.css">
-</head>
-<body>
+  </head>
+  <body>
     <form id="registerForm">
         <input type="text" name="name" placeholder="Name" required />
         <input type="email" name="email" placeholder="Email" required />
@@ -14,9 +14,9 @@
         <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required />
         <button type="submit">Register</button>
     </form>
-<script src="register.js"></script> <!-- Aquí va el código JS del fetch -->
-<script>
-  setTimeout(() => {
+    <script src="register.js"></script> <!-- Aquí va el código JS del fetch -->
+    <script>
+    setTimeout(() => {
     if (window.opener) {
       window.opener.location.href = '/login.html';
       window.close();
@@ -24,8 +24,8 @@
       // Si no hay ventana padre
       window.location.href = '/login.html';
     }
-  }, 60000); // 1 minuto
-</script>
-<script src="./js/common.js"></script>
-</body>
+    }, 60000); // 1 minuto
+    </script>
+    <script src="./js/common.js"></script>
+  </body>
 </html>
