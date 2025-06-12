@@ -9,7 +9,10 @@
     font-size: 2.5rem;
     color: #333;
     text-align: center;
-
+    border-bottom: 2px solid #5E7F58;
+    margin-bottom: 30px;
+    padding: 60px 60px 0px 60px;
+    border-radius: 80px;
 }
 
 .categoria {
@@ -17,19 +20,6 @@
     align-items: center;
     justify-content: center;
     margin-top: 100px;
-    
-}
-
-
-.categorias h2{
-    /* padding: 100px 0px 30px 0px; */
-    /* text-shadow: 1px 1px 2px rgba(0,0,0,0.2); */
-    border-bottom: 2px solid #5E7F58;
-    /* padding-bottom: 100px; */
-    margin-bottom: 30px;
-    padding: 60px 60px 0px 60px;
-    /* background: linear-gradient(90deg, #eaf6ea 0%, #f5faf5 100%); */
-    border-radius: 80px;
 }
 
 .categoria h2 {
@@ -37,8 +27,10 @@
     font-size: 2rem;
     color: #333;
     text-align: center;
-    padding: 0px 0px 0px 0px;
-    margin: 0px 0px 0px 0px;
+    padding: 0;
+    margin: 0;
+    border-bottom: none; /* Quitado el borde duplicado */
+    border-radius: 0;
 }
 
 .categoria h3 {
@@ -47,6 +39,7 @@
     color: #333;
     text-align: center;
     justify-content: center;
+    margin-bottom: 20px; /* Añadido espacio inferior */
 }
 
 /* Carrusel funcional y compatible con el JS */
@@ -57,162 +50,118 @@
     overflow: hidden;
 }
 
+/* ÚNICA DEFINICIÓN CORRECTA PARA EL CARRUSEL */
 .productos {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    justify-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    scroll-behavior: smooth;
-}
-
-/* Reemplaza la clase .productos en tu categorias.css con esta */
-.productos {
-    display: flex; /* Cambiado de 'grid' a 'flex' para el carrusel */
+    display: flex; /* Usa flex para el carrusel horizontal */
     gap: 30px;
     padding: 10px;
     overflow-x: hidden; /* Oculta el scroll horizontal */
     scroll-behavior: smooth;
-    min-height: 380px; /* Asegura una altura mínima para que no colapse mientras carga */
-}
-
-
-.carousel-controls {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    pointer-events: none;
-    z-index: 2;
-    transform: translateY(-50%);
+    min-height: 420px; /* Aumentada la altura para dar más espacio */
+    align-items: stretch; /* Asegura que todas las tarjetas tengan la misma altura */
 }
 
 .carousel-arrow {
     background: #f5f5f5;
     border: none;
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    font-size: 1.5rem;
+    width: 40px; /* Ligeramente más grande */
+    height: 40px; /* Ligeramente más grande */
+    font-size: 1.8rem;
     color: #333;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     transition: 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
     pointer-events: all;
+    position: absolute; /* Posicionamiento absoluto */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.carousel-arrow.prev {
+    left: -15px; /* Posición de la flecha izquierda */
+}
+
+.carousel-arrow.next {
+    right: -15px; /* Posición de la flecha derecha */
 }
 
 .carousel-arrow:hover {
     background: #e0e0e0;
 }
 
-.dots-container {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    left: 50%;
-    bottom: 10px;
-    transform: translateX(-50%);
-    pointer-events: all;
-}
-
-.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #bbb;
-    display: inline-block;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.dot.active {
-    background: #5E7F58;
-}
 .categoria .carousel-container {
-    margin-bottom: 40px; /* Espacio entre el carrusel y el botón */
+    margin-bottom: 40px;
 }
 
-.ver-mas {
-    margin: 0px auto 0 auto; /* Incrementa el margen superior para separarlo del carrusel */
-}
-
-.ver-mas:hover {
-    background-color: #0a2608; /* Color de fondo al pasar el mouse */
-}
-
-/* Layout para los productos en vista de cuadricula */
-/* Solo para categorías */
-.categorias .productos-destacados {
-    padding: 30px 0 0 0;
-}
-
-.productos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    justify-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+/* ------------ TARJETA DE PRODUCTO: SOLUCIÓN DEFINITIVA ------------ */
 
 .producto {
     background-color: #ffffff;
-    
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.329);
-    width: 200px; /* Ajusta el ancho según sea necesario */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+    width: 210px; /* Ancho ligeramente ajustado */
     text-align: center;
-    min-height: 300px;
-    height: auto;
-    overflow: visible;
     margin-bottom: 30px;
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Para que el contenido respete los bordes redondeados */
+    
+    /* --- MODIFICACIÓN CLAVE 1: Convertir la tarjeta en un contenedor Flexbox vertical --- */
+    display: flex;
+    flex-direction: column;
 }
 
 .producto img {
-    max-height: 150px; /* Limita la altura de las imágenes */
-    object-fit: cover; /* Asegura que las imágenes se recorten proporcionalmente */
-    padding: 10px;
+    width: 100%; /* La imagen ocupa todo el ancho */
+    height: 200px; /* Altura fija para la imagen */
+    object-fit: cover; /* Asegura que la imagen cubra el espacio sin deformarse */
 }
 
 .producto p {
-    margin: 10px 0;
+    margin: 15px 10px 5px 10px; /* Ajuste de márgenes */
     font-size: 1.1rem;
     color: #333;
+    flex-grow: 1; /* Permite que el nombre del producto ocupe el espacio necesario */
 }
 
 .producto span {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: #000;
     display: block;
     margin-bottom: 10px;
 }
 
-.cuotas{
+.cuotas {
     width: 100%;
-    background-color: #28721b93;
+    padding: 5px 0; /* Añadido padding */
+    background-color: #e8f5e9; /* Color más suave */
+    color: #2e7d32;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
+/* --- MODIFICACIÓN CLAVE 2: Estilos para el botón --- */
 .producto button {
     background-color: #A7B5A0;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 20px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 85%; /* Ancho del botón */
+    align-self: center; /* Centra el botón horizontalmente */
+    
+    /* La magia está aquí: empuja el botón al fondo de la tarjeta */
+    margin-top: auto; 
+    margin-bottom: 15px; /* Espacio inferior para que no quede pegado al borde */
+    border-radius: 5px; /* Bordes redondeados para el botón */
 }
 
 .producto button:hover {
     background-color: #85B27D;
 }
-
-
