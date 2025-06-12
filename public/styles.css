@@ -876,3 +876,94 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 .admin-button:hover {
   background: #278f2b;
 }
+
+
+/* ================================================= */
+/* === ESTILOS PARA TARJETAS DE PRODUCTO Y CARRUSEL === */
+/* ================================================= */
+
+/* Contenedor de los productos dentro del carrusel */
+.productos-destacados .productos {
+    display: flex;
+    gap: 30px;
+    padding: 20px 10px; /* Un poco más de espacio vertical */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    min-height: 420px;
+    align-items: stretch; /* Esencial para que las tarjetas tengan la misma altura */
+    
+    /* Ocultar la barra de scroll */
+    scrollbar-width: none; /* Para Firefox */
+    -ms-overflow-style: none; /* Para Internet Explorer */
+}
+
+.productos-destacados .productos::-webkit-scrollbar {
+    display: none; /* Para Chrome, Safari, etc. */
+}
+
+/* Estilo de la tarjeta de producto individual */
+.producto {
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 210px;
+    flex-shrink: 0; /* Evita que las tarjetas se deformen o encojan */
+    text-align: center;
+    border-radius: 8px;
+    overflow: hidden;
+    
+    /* --- La Magia del Centrado Vertical --- */
+    display: flex;
+    flex-direction: column;
+}
+
+.producto img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.producto p {
+    margin: 15px 10px 5px 10px;
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 600;
+    flex-grow: 1; /* Permite que este elemento crezca y empuje al resto */
+}
+
+.producto span {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #000;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.cuotas {
+    width: 100%;
+    padding: 5px 0;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.producto button {
+    background-color: #A7B5A0;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 85%;
+    align-self: center; /* Centra el botón horizontalmente */
+    
+    /* LA LÍNEA CLAVE: empuja el botón al fondo de la tarjeta */
+    margin-top: auto; 
+    margin-bottom: 15px; /* Le da espacio para respirar en la parte inferior */
+    border-radius: 5px;
+}
+
+.producto button:hover {
+    background-color: #85B27D;
+}
