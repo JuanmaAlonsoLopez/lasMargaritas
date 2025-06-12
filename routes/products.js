@@ -8,9 +8,10 @@ const path = require('path');
 // DEFINIR LA RUTA GET /api/products/
 // Esta ruta obtendrá todos los productos de la base de datos.
 router.get('/', async (req, res) => {
+  const { category } = req.query; // Leemos el parámetro de la URL, si existe
+
   try {
-    // MODIFICAMOS LA CONSULTA PARA UNIR LAS TABLAS
-    const query = `
+    let baseQuery = `
       SELECT 
         p.id, 
         p.name, 
@@ -18,16 +19,28 @@ router.get('/', async (req, res) => {
         p.price, 
         p.stock, 
         p.image_url, 
-        pc.category_name 
+        pc.category_name,
+        p.category as category_id
       FROM 
         public.products AS p
       JOIN 
         public.product_category AS pc ON p.category = pc.id
-      ORDER BY 
-        p.id;
     `;
-    const { rows } = await pool.query(query);
+
+    const queryParams = []; // Array para los valores del filtro
+
+    // Si se especificó una categoría en la URL, añadimos el filtro WHERE
+    if (category) {
+      baseQuery += ` WHERE pc.category_name = $1`;
+      queryParams.push(category);
+    }
+
+    baseQuery += ` ORDER BY p.id;`;
+
+    // Ejecutamos la consulta con los parámetros (si los hay)
+    const { rows } = await pool.query(baseQuery, queryParams);
     res.status(200).json(rows);
+
   } catch (error) {
     console.error('Error al obtener los productos:', error);
     res.status(500).json({ message: 'Error interno del servidor' });

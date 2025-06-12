@@ -16,6 +16,7 @@ const passport = require('./utils/passport');
 const { googleCallback } = require('./controllers/authController');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
+const productRoutes = require('./routes/products'); 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -70,35 +71,36 @@ app.use(passport.session());
 // Rutas de Autenticación y API existentes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/products', productRoutes);
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile','email'] }));
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login.html' }), googleCallback);
-app.get('/api/categories', async (req, res) => {
-    try {
-        const result = await pool.query("SELECT DISTINCT category_name as name FROM public.product_category ORDER BY name ASC;");
-        res.json(result.rows.map(row => row.name));
-    } catch (error) {
-        res.status(500).json({ message: 'Error interno del servidor.' });
-    }
-});
-app.get('/api/products', async (req, res) => {
-    const { category } = req.query;
-    let baseQuery = `
-        SELECT p.id, p.name, p.image_url, p.description, p.discount AS discount_value, p.price, p.stock
-        FROM public.products p
-    `;
-    const queryParams = [];
-    if (category) {
-        baseQuery += ` JOIN public.product_category pc ON p.category = pc.id WHERE pc.category_name = $1`;
-        queryParams.push(category);
-    }
-    baseQuery += ' ORDER BY p.id;';
-    try {
-        const result = await pool.query(baseQuery, queryParams);
-        res.json(result.rows);
-    } catch (error) {
-        res.status(500).json({ message: 'Error interno del servidor.' });
-    }
-});
+// app.get('/api/categories', async (req, res) => {
+//     try {
+//         const result = await pool.query("SELECT DISTINCT category_name as name FROM public.product_category ORDER BY name ASC;");
+//         res.json(result.rows.map(row => row.name));
+//     } catch (error) {
+//         res.status(500).json({ message: 'Error interno del servidor.' });
+//     }
+// });
+// app.get('/api/products', async (req, res) => {
+//     const { category } = req.query;
+//     let baseQuery = `
+//         SELECT p.id, p.name, p.image_url, p.description, p.discount AS discount_value, p.price, p.stock
+//         FROM public.products p
+//     `;
+//     const queryParams = [];
+//     if (category) {
+//         baseQuery += ` JOIN public.product_category pc ON p.category = pc.id WHERE pc.category_name = $1`;
+//         queryParams.push(category);
+//     }
+//     baseQuery += ' ORDER BY p.id;';
+//     try {
+//         const result = await pool.query(baseQuery, queryParams);
+//         res.json(result.rows);
+//     } catch (error) {
+//         res.status(500).json({ message: 'Error interno del servidor.' });
+//     }
+// });
 
 
 // --- ¡NUEVO! RUTA PARA CREAR LA PREFERENCIA DE PAGO ---

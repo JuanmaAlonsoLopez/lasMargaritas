@@ -21,20 +21,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const categoriaNombre = elementoCategoria.dataset.category;
         const contenedorProductos = elementoCategoria.querySelector('.productos');
 
-        // Muestra un mensaje de carga
+        if (!contenedorProductos) return; // Si no encuentra el div, no hace nada.
+
         contenedorProductos.innerHTML = '<p>Cargando productos...</p>';
 
         try {
-            // Hacemos la petición a tu API backend
+            // Hacemos la petición a tu API backend (ahora el backend la filtrará)
             const response = await fetch(`http://localhost:3000/api/products?category=${encodeURIComponent(categoriaNombre)}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const productos = await response.json();
 
-            // Limpiamos el contenedor y lo llenamos con las tarjetas
             contenedorProductos.innerHTML = '';
-            if (productos.length >= 0) {
+            // CORRECCIÓN: Usamos > 0 para manejar correctamente el caso de 0 productos
+            if (productos.length > 0) {
                 productos.forEach(producto => {
                     contenedorProductos.innerHTML += crearTarjetaProducto(producto);
                 });
@@ -55,7 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const contenedorProductos = categoria.querySelector('.productos');
             const prevButton = categoria.querySelector('.prev');
             const nextButton = categoria.querySelector('.next');
-            const cardWidth = 230; // Ancho de la tarjeta (200px) + gap (30px)
+            
+            if (!contenedorProductos || !prevButton || !nextButton) return;
+
+            const cardWidth = 230; // Ancho de la tarjeta + gap
 
             nextButton.addEventListener('click', () => {
                 contenedorProductos.scrollBy({ left: cardWidth, behavior: 'smooth' });
@@ -69,14 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- INICIO DE EJECUCIÓN ---
-
-    // 1. Selecciona todas las secciones de categoría
     const todasLasCategorias = document.querySelectorAll('.categoria[data-category]');
-
-    // 2. Carga los productos para cada una
     todasLasCategorias.forEach(cargarProductosPorCategoria);
-    
-    // 3. Inicializa la funcionalidad de las flechas del carrusel
     inicializarCarruseles();
 
 });
