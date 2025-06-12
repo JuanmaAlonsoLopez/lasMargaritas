@@ -97,11 +97,14 @@
             </div>
         </div>
     </div>
+
     <section id="promotions-container">
         <h2>🔥 ¡Ofertas Imperdibles!</h2>
         <div class="productos">
             </div>
     </section>
+
+
 
 
     <!---aca va un carusel de tarjetas-->
@@ -200,14 +203,22 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const API_URL = 'http://localhost:3000/api/products';
-        const productsContainer = document.querySelector('#promotions-container .productos');
+        // --- CONSTANTES Y SELECTORES ---
+        const API_BASE_URL = 'http://localhost:3000';
+        const mainPromotionsContainer = document.querySelector('#promotions-container .productos');
+        const categoryCarouselsContainer = document.getElementById('category-carousels-container');
 
+        /**
+         * Crea el HTML para una sola tarjeta de producto. (Esta función no cambia)
+         */
         function createProductCardHTML(product) {
             const formattedPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product.price);
+            // Corregimos la ruta de la imagen para que sea relativa a la raíz del sitio
+            const imageUrl = product.image_url.startsWith('/') ? product.image_url : `/${product.image_url}`;
+            
             return `
-                <div class="producto" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-image="${product.image_url}">
-                    <img src=".${product.image_url}" alt="Imagen de ${product.name}">
+                <div class="producto" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-image="${imageUrl}">
+                    <img src=".${product.image_url}"alt="Imagen de ${product.name}">
                     <h3>${product.name}</h3>
                     <p class="precio">${formattedPrice}</p>
                     <button class="agregar-carrito">Agregar al carrito</button>
@@ -215,28 +226,95 @@
             `;
         }
 
-        async function fetchAndDisplayProducts() {
-            if (!productsContainer) return;
-            productsContainer.innerHTML = '<p>Cargando ofertas...</p>';
+        /**
+         * Busca productos y los muestra en el contenedor especificado.
+         * Puede filtrar por categoría si se proporciona una.
+         */
+        async function fetchAndRenderProducts(container, category = null) {
+            if (!container) return;
+            container.innerHTML = '<p>Cargando productos...</p>';
+
             try {
-                const response = await fetch(API_URL);
-                if (!response.ok) throw new Error(`Error del servidor: ${response.status}`);
+                let url = `${API_BASE_URL}/api/products`;
+                if (category) {
+                    url += `?category=${encodeURIComponent(category)}`;
+                }
+
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
                 const products = await response.json();
-                if (products && products.length > 0) {
-                    productsContainer.innerHTML = products.map(createProductCardHTML).join('');
+
+                if (products.length > 0) {
+                    container.innerHTML = products.map(createProductCardHTML).join('');
                 } else {
-                    productsContainer.innerHTML = '<p>No hay productos en oferta.</p>';
+                    container.innerHTML = '<p>No hay productos disponibles en esta categoría.</p>';
                 }
             } catch (error) {
-                console.error('Error al cargar los productos:', error);
-                productsContainer.innerHTML = '<p>No se pudieron cargar los productos.</p>';
+                console.error(`Error al cargar productos para la categoría "${category || 'todas'}":`, error);
+                container.innerHTML = '<p>Error al cargar productos.</p>';
             }
         }
 
-        // --- LÓGICA PARA AÑADIR AL CARRITO ---
-        // Se añade un solo 'listener' al contenedor principal para más eficiencia
-        productsContainer.addEventListener('click', (event) => {
-            // Verifica si el clic fue en un botón "agregar-carrito"
+        /**
+         * Añade un producto al carrito en localStorage. (Esta función no cambia)
+         */
+        function addToCart(productToAdd) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingProduct = cart.find(item => item.id === productToAdd.id);
+            if (existingProduct) {
+                existingProduct.quantity++;
+            } else {
+                cart.push(productToAdd);
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`"${productToAdd.name}" fue agregado al carrito.`);
+        }
+
+        /**
+         * Función principal que se ejecuta al cargar la página.
+         */
+        async function initializePage() {
+            // 1. Carga los productos principales en la sección "Ofertas Imperdibles"
+            fetchAndRenderProducts(mainPromotionsContainer, null);
+
+            // 2. Carga los carruseles por categoría
+            if (!categoryCarouselsContainer) return;
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/categories`);
+                if (!response.ok) throw new Error('No se pudieron obtener las categorías.');
+                
+                const activeCategories = await response.json();
+
+                // 3. Para cada categoría, crea una sección y carga sus productos
+                activeCategories.forEach(categoryName => {
+                    // Crea los elementos HTML para la nueva sección
+                    const categorySection = document.createElement('section');
+                    categorySection.className = 'productos-destacados'; // Usamos esta clase para darle estilo
+                    
+                    const title = document.createElement('h2');
+                    title.textContent = `Novedades en ${categoryName}`;
+
+                    const productsContainer = document.createElement('div');
+                    productsContainer.className = 'productos'; // El contenedor de las tarjetas
+                    
+                    // Une las partes y las añade al contenedor principal
+                    categorySection.appendChild(title);
+                    categorySection.appendChild(productsContainer);
+                    categoryCarouselsContainer.appendChild(categorySection);
+
+                    // Llama a la función para llenar esta nueva sección con productos de su categoría
+                    fetchAndRenderProducts(productsContainer, categoryName);
+                });
+
+            } catch (error) {
+                console.error('Error al inicializar los carruseles de categorías:', error);
+                categoryCarouselsContainer.innerHTML = '<p>No se pudieron cargar las categorías de productos.</p>';
+            }
+        }
+
+        // Listener para los botones "Agregar al carrito"
+        document.body.addEventListener('click', (event) => {
             if (event.target.classList.contains('agregar-carrito')) {
                 const productCard = event.target.closest('.producto');
                 const product = {
@@ -246,35 +324,12 @@
                     image: productCard.dataset.image,
                     quantity: 1
                 };
-
                 addToCart(product);
             }
         });
 
-        function addToCart(productToAdd) {
-            // 1. Obtiene el carrito actual de localStorage o crea uno nuevo
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            
-            // 2. Busca si el producto ya existe en el carrito
-            const existingProduct = cart.find(item => item.id === productToAdd.id);
-
-            if (existingProduct) {
-                // Si existe, solo aumenta la cantidad
-                existingProduct.quantity += 1;
-            } else {
-                // Si no existe, lo añade al carrito
-                cart.push(productToAdd);
-            }
-
-            // 3. Guarda el carrito actualizado de vuelta en localStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
-
-            // 4. Muestra una confirmación al usuario
-            alert(`"${productToAdd.name}" fue agregado al carrito.`);
-        }
-
-        // Inicia la carga de productos al cargar la página
-        fetchAndDisplayProducts();
+        // Inicia todo al cargar la página
+        initializePage();
     });
 </script>
 </body>
