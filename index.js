@@ -56,30 +56,30 @@ const { googleCallback } = require('./controllers/authController');
 const passport = require('./utils/passport');
 const jwt = require('jsonwebtoken');
 app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
+secret: process.env.SESSION_SECRET,
+resave: false,
+saveUninitialized: false,
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile','email'] })
+passport.authenticate('google', { scope: ['profile','email'] })
 );
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login.html' }),
-  googleCallback
+passport.authenticate('google', { failureRedirect: '/login.html' }),
+googleCallback
 );
 app.use('/api/auth', authRoutes);
 
 app.get('/usuarios', async (req, res) => {
-  try {
+try {
     const result = await pool.query('SELECT * FROM users');
     res.json(result.rows);
-  } catch (err) {
+} catch (err) {
     console.error(err);
     res.status(500).send('Error al consultar usuarios');
-  }
+}
 });
 */
 
@@ -87,11 +87,7 @@ app.get('/usuarios', async (req, res) => {
 // RUTAS DE LA API
 // =================================================================
 
-// --- RUTA PARA OBTENER PRODUCTOS ---
-
-// AÑADE ESTE CÓDIGO EN TU ARCHIVO index.js
-
-// --- NUEVA RUTA PARA OBTENER CATEGORÍAS ACTIVAS ---
+// --- RUTA PARA OBTENER CATEGORÍAS ACTIVAS ---
 // Devuelve una lista de nombres de categorías que tienen productos en promoción.
 app.get('/api/categories', async (req, res) => {
     // Esta consulta selecciona los nombres distintos de las categorías
@@ -119,6 +115,62 @@ app.get('/api/categories', async (req, res) => {
         res.status(500).json({ message: 'Error interno del servidor al obtener categorías.' });
     }
 });
+
+
+// === INICIO DEL CÓDIGO AÑADIDO ===
+
+// --- RUTA PARA OBTENER PRODUCTOS ---
+// Devuelve una lista de productos, opcionalmente filtrada por categoría.
+app.get('/api/products', async (req, res) => {
+    // Obtiene el parámetro 'category' de la URL (ej: /api/products?category=Confort)
+    const { category } = req.query;
+
+    // Renombramos la columna 'discount' a 'discount_value' para que coincida con tu HTML.
+    // Solo traemos productos que estén activos para la promoción.
+    let baseQuery = `
+        SELECT
+            p.id,
+            p.name,
+            p.image_url,
+            p.description,
+            p.promotion_active,
+            p.discount AS discount_value,
+            pc.name AS category_name,
+            p.price,
+            p.stock
+        FROM
+            public.products p
+        JOIN
+            public.product_category pc ON p.category = pc.id
+        WHERE
+            p.promotion_active = TRUE
+    `;
+
+    const queryParams = [];
+
+    // Si se proporciona una categoría en la URL, se añade un filtro a la consulta
+    if (category) {
+        baseQuery += ' AND pc.name = $1';
+        queryParams.push(category);
+    }
+
+    baseQuery += ' ORDER BY p.id;'; // Ordenamos para un resultado consistente
+
+    console.log(`Ejecutando consulta para productos: ${baseQuery.trim()}`);
+    if (queryParams.length > 0) {
+        console.log(`Con parámetros: ${JSON.stringify(queryParams)}`);
+    }
+
+    try {
+        const result = await pool.query(baseQuery, queryParams);
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error al obtener productos (GET /api/products):', error.stack);
+        res.status(500).json({ message: 'Error interno del servidor al obtener productos.' });
+    }
+});
+
+// === FIN DEL CÓDIGO AÑADIDO ===
 
 
 // --- RUTAS DE MERCADO PAGO ---
