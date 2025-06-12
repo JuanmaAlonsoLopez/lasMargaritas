@@ -200,53 +200,61 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const API_BASE_URL = 'http://127.0.0.1:3000';
+            // Define la URL base de tu API
+            const API_BASE_URL = 'http://localhost:3000';
+
+            // Selecciona los contenedores del HTML donde se mostrarán los productos
             const mainPromotionsContainer = document.querySelector('#promotions-container .productos');
             const categoryCarouselsContainer = document.getElementById('category-carousels-container');
-    
+
+            /**
+             * Crea el código HTML para una tarjeta de producto.
+             * @param {object} product - El objeto del producto con sus datos.
+             * @returns {string} - El string HTML de la tarjeta.
+             */
             /**
              * Crea el HTML para una tarjeta de producto.
              */
             function createProductHtml(product) {
-                let priceHtml = `<p class="precio">$${product.price}</p>`;
-                if (product.promotion_active && product.discount_value > 0) {
-                    const discountedPrice = product.price * (1 - product.discount_value / 100);
-                    priceHtml = `
-                        <p class="precio-original">$${product.price}</p>
-                        <p class="precio-oferta">$${discountedPrice.toFixed(2)} <span class="descuento">-${product.discount_value}%</span></p>
-                    `;
-                }
+                // Formatea el precio a moneda local (ARS)
+                const formattedPrice = new Intl.NumberFormat('es-AR', { 
+                    style: 'currency', 
+                    currency: 'ARS' 
+                }).format(product.price);
+                
+                // ¡LA CORRECCIÓN ESTÁ AQUÍ!
+                // ASEGÚRATE DE QUE ESTA LÍNEA EMPIECE CON UN ACENTO GRAVE (`), NO UNA COMILLA.
                 return `
                     <div class="producto" data-id="${product.id}">
-                        <img src="${product.image_url}" alt="${product.name}">
+                        
+                        <img src=".${product.image_url}" alt="Imagen de ${product.name}"> <--- ACA PONER EL PUNTO PARA LA RUTA
                         <h3>${product.name}</h3>
-                        <p>${product.description}</p>
-                        ${priceHtml}
-                        <p>Stock: ${product.stock}</p>
+                        <p class="precio">${formattedPrice}</p>
                         <button class="agregar-carrito">Agregar al carrito</button>
                     </div>
-                `;
+                `; // <-- Y ASEGÚRATE DE QUE TERMINE CON UN ACENTO GRAVE (`).
             }
-    
+
             /**
-             * Busca productos y los renderiza en un contenedor.
+             * Busca productos de una categoría y los muestra en un contenedor.
+             * @param {HTMLElement} container - El elemento div donde se insertarán las tarjetas.
+             * @param {string|null} category - El nombre de la categoría a buscar, o null para todas.
              */
             async function fetchAndRenderProducts(container, category = null) {
                 if (!container) return;
                 container.innerHTML = '<p>Cargando productos...</p>';
-    
+
                 try {
                     let url = `${API_BASE_URL}/api/products`;
                     if (category) {
                         url += `?category=${encodeURIComponent(category)}`;
                     }
-    
+
                     const response = await fetch(url);
-                    if (!response.ok) {
-                        throw new Error(`Error HTTP: ${response.status}`);
-                    }
+                    if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+                    
                     const products = await response.json();
-    
+
                     if (products.length > 0) {
                         container.innerHTML = products.map(createProductHtml).join('');
                     } else {
@@ -254,52 +262,55 @@
                     }
                 } catch (error) {
                     console.error(`Error al cargar productos para la categoría "${category || 'promociones'}":`, error);
-                    container.innerHTML = '<p>Error al cargar productos. Por favor, inténtalo de nuevo más tarde.</p>';
+                    container.innerHTML = '<p>Error al cargar productos. Por favor, inténtalo de nuevo.</p>';
                 }
             }
-    
+
             /**
-             * Función principal para inicializar la página.
+             * Función principal que inicializa toda la lógica de la página.
              */
             async function initializePage() {
-                // 1. Cargar el carrusel principal de todas las promociones.
+                // 1. Carga los productos en la sección principal de "Ofertas Imperdibles".
+                // Aquí podrías tener una lógica para traer solo los que están en promoción.
+                // Por ahora, trae todos los productos.
                 fetchAndRenderProducts(mainPromotionsContainer, null);
-    
-                // 2. Obtener la lista de categorías activas desde el backend.
+
+                // 2. Obtiene las categorías desde el backend para crear carruseles dinámicos.
                 try {
                     const response = await fetch(`${API_BASE_URL}/api/categories`);
                     if (!response.ok) throw new Error('No se pudieron obtener las categorías.');
                     
                     const activeCategories = await response.json();
-    
-                    // 3. Crear un carrusel para CADA categoría recibida.
+
+                    // 3. Crea una sección de productos para cada categoría.
                     activeCategories.forEach(categoryName => {
                         const categorySection = document.createElement('section');
-                        categorySection.className = 'productos-destacados'; // Reutilizamos la clase para mantener el estilo
+                        categorySection.className = 'productos-destacados';
                         
                         const title = document.createElement('h2');
-                        title.textContent = categoryName;
-    
+                        title.textContent = `Novedades en ${categoryName}`;
+
                         const productsContainer = document.createElement('div');
                         productsContainer.className = 'productos';
                         
                         categorySection.appendChild(title);
                         categorySection.appendChild(productsContainer);
-    
+
                         categoryCarouselsContainer.appendChild(categorySection);
-    
+
+                        // Llama a la función para cargar los productos de esa categoría específica
                         fetchAndRenderProducts(productsContainer, categoryName);
                     });
-    
+
                 } catch (error) {
                     console.error('Error al inicializar los carruseles de categorías:', error);
                     if (categoryCarouselsContainer) {
-                        categoryCarouselsContainer.innerHTML = '<p>No se pudieron cargar las categorías de productos.</p>';
+                        categoryCarouselsContainer.innerHTML = '<p>No se pudieron cargar las categorías.</p>';
                     }
                 }
             }
-    
-            // Iniciar la carga de contenido.
+
+            // Inicia todo el proceso.
             initializePage();
         });
     </script>
