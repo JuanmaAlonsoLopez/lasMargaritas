@@ -41,7 +41,9 @@ h1 {
 /* --- Base para todos los elementos interactivos --- */
 #loginForm input,
 #registerForm input,
-#resetForm input,
+#resetForm #password,
+#resetForm #confirmPassword,
+#resetForm #submit,
 #forgotForm input,
 #loginForm button,
 #registerForm button,
@@ -60,6 +62,10 @@ h1 {
   padding: 0 15px; /* Padding horizontal para el texto */
   display: flex;
   align-items: center; /* Centra el contenido verticalmente */
+}
+
+#resetForm{
+  height: 60%;
 }
 
 /* --- Estilos específicos para Inputs --- */
@@ -154,4 +160,39 @@ h1 {
 #forgotForm p a:hover {
   text-decoration: underline;
   background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* =============================================================== */
+/* ESTILOS PARA EL SPINNER DE CARGA (LOADER)                       */
+/* =============================================================== */
+
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#loading-overlay.hidden {
+  display: none;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #28a745; /* Verde, a juego con tus botones */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

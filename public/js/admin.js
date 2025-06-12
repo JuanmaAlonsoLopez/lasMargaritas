@@ -27,12 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const tblUsers = document.querySelector('#tblUsers tbody');
   const modalUser = document.getElementById('modalUser');
   const userForm = document.getElementById('userForm');
-  const userStatusSelect = document.getElementById('userStatus');
+  // CORRECCIÓN: Apuntamos al nuevo ID del select de roles
+  const userRoleSelect = document.getElementById('userRole'); 
   const closeModalBtnUser = document.getElementById('closeUser');
   const cancelBtnUser = document.getElementById('btnCancelUser');
 
   // ===================================================================
-  // LÓGICA DE GESTIÓN DE PRODUCTOS
+  // LÓGICA DE GESTIÓN DE PRODUCTOS (SIN CAMBIOS)
   // ===================================================================
 
   const loadProducts = async () => {
@@ -93,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const openModalForCreateProduct = () => {
+    productForm.reset(); // reset() limpia todo el formulario
     formTitleProduct.textContent = 'Nuevo Producto';
     imagePreview.style.display = 'none';
     document.getElementById('prodId').value = '';
@@ -101,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const populateFormForEditProduct = (product) => {
+    productForm.reset();
     formTitleProduct.textContent = 'Editar Producto';
     document.getElementById('prodId').value = product.id;
     document.getElementById('name').value = product.name;
@@ -139,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // ===================================================================
-  // LÓGICA DE GESTIÓN DE USUARIOS
+  // LÓGICA DE GESTIÓN DE USUARIOS (CORREGIDA)
   // ===================================================================
   
   const loadUsers = async () => {
@@ -150,12 +153,13 @@ document.addEventListener('DOMContentLoaded', () => {
       tblUsers.innerHTML = '';
       users.forEach(u => {
         const row = document.createElement('tr');
+        // CORRECCIÓN: Muestra role_name y guarda el data-role-id
         row.innerHTML = `
           <td>${u.email}</td>
           <td>${u.name}</td>
-          <td>${u.status_name}</td>
+          <td>${u.role_name}</td>
           <td class="actions">
-            <button class="btn-edit" data-id="${u.id}" data-status-id="${u.status}">Editar</button>
+            <button class="btn-edit" data-id="${u.id}" data-role-id="${u.role}">Editar</button>
             <button class="btn-delete" data-id="${u.id}">Eliminar</button>
           </td>
         `;
@@ -167,17 +171,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const loadUserStatuses = async () => {
+  // CORRECCIÓN: Carga roles desde el endpoint /api/users/roles
+  const loadUserRoles = async () => {
     try {
-        const response = await fetch('/api/users/statuses', { headers: { 'Authorization': `Bearer ${token}` } });
-        if (!response.ok) throw new Error('No se pudieron cargar los estados.');
-        const statuses = await response.json();
-        userStatusSelect.innerHTML = '';
-        statuses.forEach(status => {
+        const response = await fetch('/api/users/roles', { headers: { 'Authorization': `Bearer ${token}` } });
+        if (!response.ok) throw new Error('No se pudieron cargar los roles.');
+        const roles = await response.json();
+        userRoleSelect.innerHTML = '';
+        roles.forEach(role => {
             const option = document.createElement('option');
-            option.value = status.status_code;
-            option.textContent = status.status_name;
-            userStatusSelect.appendChild(option);
+            option.value = role.id;
+            option.textContent = role.role_name;
+            userRoleSelect.appendChild(option);
         });
     } catch (error) {
         console.error(error);
@@ -189,11 +194,13 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const populateUserFormForEdit = (user) => {
+    userForm.reset();
     modalUser.querySelector('#userFormTitle').textContent = 'Editar Usuario';
     modalUser.querySelector('#userId').value = user.id;
     modalUser.querySelector('#userEmail').value = user.email;
     modalUser.querySelector('#userName').value = user.name;
-    modalUser.querySelector('#userStatus').value = user.status;
+    // CORRECCIÓN: Asigna el valor al select de roles
+    userRoleSelect.value = user.role;
     modalUser.classList.remove('hidden');
   };
 
@@ -201,10 +208,11 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
     const id = modalUser.querySelector('#userId').value;
     if (!id) return;
+    // CORRECCIÓN: Envía el campo "role"
     const userData = {
       email: modalUser.querySelector('#userEmail').value,
       name: modalUser.querySelector('#userName').value,
-      status: modalUser.querySelector('#userStatus').value,
+      role: userRoleSelect.value,
     };
     try {
       const response = await fetch(`/api/users/${id}`, {
@@ -263,19 +271,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const id = target.dataset.id;
     if (target.classList.contains('btn-edit')) {
       const row = target.closest('tr');
+      // CORRECCIÓN: Lee el data-role-id
       const user = {
           id: id,
           email: row.cells[0].textContent,
           name: row.cells[1].textContent,
-          status: target.dataset.statusId
+          role: target.dataset.roleId
       };
       populateUserFormForEdit(user);
     }
     if (target.classList.contains('btn-delete')) {
       if (confirm(`¿Seguro que quieres eliminar al usuario con ID ${id}?`)) {
-        fetch(`/api/users/${id}`, {
-          method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` }
-        })
+        fetch(`/api/users/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` }})
         .then(res => {
           if(!res.ok) throw new Error('Error en la respuesta del servidor');
           target.closest('tr').remove();
@@ -309,5 +316,6 @@ document.addEventListener('DOMContentLoaded', () => {
   loadProducts();
   loadCategories();
   loadUsers();
-  loadUserStatuses();
+  // CORRECCIÓN: Llama a la función que carga los roles
+  loadUserRoles(); 
 });

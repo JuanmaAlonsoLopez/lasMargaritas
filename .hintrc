@@ -11,7 +11,8 @@
           "-webkit-overflow-scrolling",
           "scrollbar-width",
           "scrollbar-width: none",
-          "-moz-appearance"
+          "-moz-appearance",
+          "backdrop-filter"
         ]
       }
     ],

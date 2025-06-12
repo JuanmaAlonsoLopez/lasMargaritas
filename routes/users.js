@@ -4,13 +4,14 @@ const express = require('express');
 const pool = require('../db');
 const router = express.Router();
 
-// --- RUTA GET /: Obtiene todos los usuarios con el nombre de su estado ---
+// --- RUTA GET /: Obtiene todos los usuarios con el nombre de su ROL ---
 router.get('/', async (req, res) => {
   try {
+    // CAMBIO: Hacemos JOIN con user_role usando la columna "role"
     const query = `
-      SELECT u.id, u.name, u.email, u.status, sa.status_name
+      SELECT u.id, u.name, u.email, u.role, ur.role_name
       FROM public.users AS u
-      JOIN public.status_account AS sa ON u.status = sa.status_code
+      JOIN public.user_role AS ur ON u.role = ur.id
       ORDER BY u.id ASC;
     `;
     const { rows } = await pool.query(query);
@@ -21,13 +22,14 @@ router.get('/', async (req, res) => {
   }
 });
 
-// --- RUTA GET /statuses: Obtiene todos los estados de cuenta posibles ---
-router.get('/statuses', async (req, res) => {
+// --- RUTA GET /roles: Obtiene todos los roles posibles ---
+// CAMBIO: Antes se llamaba /statuses
+router.get('/roles', async (req, res) => {
     try {
-        const { rows } = await pool.query('SELECT * FROM public.status_account ORDER BY status_code');
+        const { rows } = await pool.query('SELECT * FROM public.user_role ORDER BY id');
         res.status(200).json(rows);
     } catch (error) {
-        console.error('Error al obtener los estados de cuenta:', error);
+        console.error('Error al obtener los roles:', error);
         res.status(500).json({ message: 'Error interno del servidor' });
     }
 });
@@ -35,17 +37,18 @@ router.get('/statuses', async (req, res) => {
 // --- RUTA PUT /:id: Actualiza un usuario ---
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
-  // Solo permitimos cambiar nombre, email y status
-  const { name, email, status } = req.body;
+  // CAMBIO: Ahora recibimos "role" en lugar de "status"
+  const { name, email, role } = req.body;
 
   try {
+    // CAMBIO: Actualizamos la columna "role"
     const updateQuery = `
       UPDATE public.users 
-      SET name = $1, email = $2, status = $3 
+      SET name = $1, email = $2, role = $3 
       WHERE id = $4 
       RETURNING *;
     `;
-    const values = [name, email, parseInt(status), id];
+    const values = [name, email, parseInt(role), id];
     const { rows } = await pool.query(updateQuery, values);
     
     if (rows.length === 0) {
@@ -58,12 +61,11 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// --- RUTA DELETE /:id: Elimina un usuario ---
+// --- RUTA DELETE /:id: Elimina un usuario (SIN CAMBIOS) ---
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const deleteResult = await pool.query('DELETE FROM public.users WHERE id = $1', [id]);
-    // rowCount te dice cuántas filas fueron eliminadas.
     if (deleteResult.rowCount === 0) {
       return res.status(404).json({ message: 'Usuario no encontrado.' });
     }

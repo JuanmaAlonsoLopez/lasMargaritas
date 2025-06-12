@@ -1,4 +1,3 @@
-
 main {
     font-family: 'Montserrat';
     text-align: center;
@@ -90,7 +89,6 @@ main {
 .equipo-desarrollo h2 , p{
     /*background-color: hsla(111, 26%, 59%, 1);*/
     color: black;
-    
     /* display: inline-block; */
     padding: 8px 20px;
     margin-top: 40px;
@@ -106,4 +104,77 @@ main {
     height: 200px;
     border-radius: 50%;
 
+}
+
+
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .contacto h1 {
+        font-size: 40px;
+        margin-top: 50px;
+        padding: 10px 30px;
+    }
+
+    .contacto-contenido {
+        padding: 20px;
+        max-width: 100%;
+        margin: 20px auto;
+    }
+
+    .contacto-item {
+        flex-direction: column; /* Establece los ítems en una columna para móviles */
+        align-items: center; /* Alinea los ítems al centro */
+    }
+
+    .contacto-item img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .contacto-item p {
+        font-size: 1.4rem;
+    }
+}
+
+/* Estilos para móviles */
+@media (max-width: 768px) {
+    .contacto h1 {
+        font-size: 24px;
+        padding: 15px 20px;
+    }
+
+    .contacto-contenido {
+        padding: 15px;
+        max-width: 100%;
+        margin: 15px;
+    }
+
+    .contacto-items {
+        flex-direction: column; /* Coloca los ítems en columna */
+        align-items: center; /* Asegura que los ítems estén centrados */
+        justify-content: center; /* Asegura que los ítems estén centrados verticalmente */
+        text-align: center;  /* Asegura el centrado del texto */
+    }
+
+    .contacto-item {
+        flex-direction: column;  /* Cambia a columna en móviles */
+        align-items: center; /* Centra los elementos dentro de cada item */
+        justify-content: center;
+    }
+
+    .contacto-item img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .contacto-item p {
+        font-size: 1.2rem;
+    }
+}
+
+.equipoDesarrolloLogo img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
 }

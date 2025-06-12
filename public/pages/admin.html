@@ -35,9 +35,6 @@
 
       <nav class="main-nav" id="mainNav">
         <a href="../index.html">Inicio</a>
-        <a href="../pages/listadoProductos.html">Productos</a>
-        <a href="../pages/sobreNosotros.html">Sobre nosotros</a>
-        <a href="../pages/contacto.html">Contacto</a>
       </nav>
 
       <div class="icons" id="icons">
@@ -85,7 +82,7 @@
             <input type="number" id="stock" name="stock" min="0" required>
           </label>
           <label for="category">Categoría:</label>
-          <select id="category" name="category" required> </select>
+            <select id="category" name="category" required> </select>
           <label>Imagen:
             <input type="file" id="image" name="image" accept="image/*">
           </label>
@@ -105,7 +102,7 @@
           <tr>
             <th>Email</th>
             <th>Nombre</th>
-            <th>Estado</th>
+            <th>Rol</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -118,8 +115,8 @@
           <input type="hidden" id="userId" name="userId">
           <label>Email: <input type="email" id="userEmail" name="email" required></label>
           <label>Nombre: <input type="text" id="userName" name="name" required></label>
-          <label>Estado:
-            <select id="userStatus" name="status">
+          <label>Rol:
+            <select id="userRole" name="role">
               </select>
           </label>
           <div class="buttons">
