@@ -619,6 +619,17 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     z-index: 9999;
 }
 
+/*IMAGENES CATEGORIAS*/
+
+.categoriaImg .muestraCategorias .categoriaColumna a p{
+    font-size: 20px;
+}
+
+.categoriaImg .muestraCategorias .categoriaColumna a img{
+    height: 500px;
+    width: 150px;
+}
+
   /* Las 3 barras del icono hamburguesa */
 .menu-hamburguesa-btn span {
     display: block;
