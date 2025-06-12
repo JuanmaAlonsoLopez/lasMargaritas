@@ -38,7 +38,83 @@
     justify-content: center;
 }
 
+/* Carrusel funcional y compatible con el JS */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    min-height: 60px;
+    overflow: hidden;
+}
 
+.productos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    justify-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    scroll-behavior: smooth;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+    z-index: 2;
+    transform: translateY(-50%);
+}
+
+.carousel-arrow {
+    background: #f5f5f5;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+}
+
+.carousel-arrow:hover {
+    background: #e0e0e0;
+}
+
+.dots-container {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+    pointer-events: all;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #bbb;
+    display: inline-block;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.dot.active {
+    background: #5E7F58;
+}
 .categoria .carousel-container {
     margin-bottom: 40px; /* Espacio entre el carrusel y el botón */
 }
@@ -52,6 +128,11 @@
 }
 
 /* Layout para los productos en vista de cuadricula */
+/* Solo para categorías */
+.categorias .productos-destacados {
+    padding: 30px 0 0 0;
+}
+
 .productos-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
