@@ -8,35 +8,45 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  // --- REFERENCIAS A ELEMENTOS DEL DOM ---
-  const tableBody = document.querySelector('#tblProducts tbody');
-  const btnAdd = document.getElementById('btnAdd');
-  const modal = document.getElementById('modal');
-  const closeModalBtn = document.getElementById('closeBtn');
-  const cancelBtn = document.getElementById('btnCancel');
+  // ===================================================================
+  // REFERENCIAS AL DOM
+  // ===================================================================
+  // --- Productos ---
+  const tblProducts = document.querySelector('#tblProducts tbody');
+  const modalProduct = document.getElementById('modal');
   const productForm = document.getElementById('productForm');
-  const formTitle = document.getElementById('formTitle');
+  const btnAddProduct = document.getElementById('btnAdd');
+  const formTitleProduct = document.getElementById('formTitle');
   const imagePreview = document.getElementById('imagePreview');
   const imageInput = document.getElementById('image');
   const categorySelect = document.getElementById('category');
+  const closeModalBtnProduct = document.getElementById('closeBtn');
+  const cancelBtnProduct = document.getElementById('btnCancel');
 
-  // --- FUNCIÓN PARA CARGAR Y MOSTRAR PRODUCTOS ---
+  // --- Usuarios ---
+  const tblUsers = document.querySelector('#tblUsers tbody');
+  const modalUser = document.getElementById('modalUser');
+  const userForm = document.getElementById('userForm');
+  const userStatusSelect = document.getElementById('userStatus');
+  const closeModalBtnUser = document.getElementById('closeUser');
+  const cancelBtnUser = document.getElementById('btnCancelUser');
+
+  // ===================================================================
+  // LÓGICA DE GESTIÓN DE PRODUCTOS
+  // ===================================================================
+
   const loadProducts = async () => {
     try {
       const response = await fetch('http://localhost:3000/api/products', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      if (!response.ok) {
-        throw new Error('No se pudieron cargar los productos.');
-      }
+      if (!response.ok) throw new Error('No se pudieron cargar los productos.');
       const products = await response.json();
-      tableBody.innerHTML = ''; // Limpiar tabla
-
+      tblProducts.innerHTML = '';
       if (products.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="6">No hay productos para mostrar.</td></tr>';
+        tblProducts.innerHTML = '<tr><td colspan="6">No hay productos para mostrar.</td></tr>';
         return;
       }
-
       products.forEach(product => {
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -50,22 +60,20 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="btn-delete" data-id="${product.id}">Eliminar</button>
           </td>
         `;
-        tableBody.appendChild(row);
+        tblProducts.appendChild(row);
       });
     } catch (error) {
       console.error(error);
-      tableBody.innerHTML = `<tr><td colspan="6">Error al cargar los datos. Revise la consola.</td></tr>`;
+      tblProducts.innerHTML = `<tr><td colspan="6">Error al cargar los datos. Revise la consola.</td></tr>`;
     }
   };
 
-  // --- FUNCIÓN PARA CARGAR CATEGORÍAS EN EL SELECT ---
   const loadCategories = async () => {
     try {
       const response = await fetch('http://localhost:3000/api/products/categories', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!response.ok) throw new Error('No se pudieron cargar las categorías.');
-
       const categories = await response.json();
       categorySelect.innerHTML = '<option value="">Seleccione una categoría...</option>';
       categories.forEach(cat => {
@@ -79,23 +87,21 @@ document.addEventListener('DOMContentLoaded', () => {
       categorySelect.innerHTML = '<option value="">Error al cargar categorías</option>';
     }
   };
-  
-  // --- FUNCIONES PARA MANEJAR EL MODAL (CREAR Y EDITAR) ---
-  const closeModal = () => {
-    modal.classList.add('hidden');
+
+  const closeProductModal = () => {
+    modalProduct.classList.add('hidden');
   };
-  
-  const openModalForCreate = () => {
-    formTitle.textContent = 'Nuevo Producto';
-    productForm.reset();
+
+  const openModalForCreateProduct = () => {
+    formTitleProduct.textContent = 'Nuevo Producto';
     imagePreview.style.display = 'none';
     document.getElementById('prodId').value = '';
     document.getElementById('image').required = true;
-    modal.classList.remove('hidden');
+    modalProduct.classList.remove('hidden');
   };
 
-  const populateFormForEdit = (product) => {
-    formTitle.textContent = 'Editar Producto';
+  const populateFormForEditProduct = (product) => {
+    formTitleProduct.textContent = 'Editar Producto';
     document.getElementById('prodId').value = product.id;
     document.getElementById('name').value = product.name;
     document.getElementById('description').value = product.description;
@@ -105,10 +111,9 @@ document.addEventListener('DOMContentLoaded', () => {
     imagePreview.src = product.image_url;
     imagePreview.style.display = 'block';
     document.getElementById('image').required = false;
-    modal.classList.remove('hidden');
+    modalProduct.classList.remove('hidden');
   };
 
-  // --- FUNCIÓN DE ENVÍO DEL FORMULARIO (PARA CREAR Y EDITAR) ---
   const handleProductSubmit = async (event) => {
     event.preventDefault();
     const id = document.getElementById('prodId').value;
@@ -116,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const formData = new FormData(productForm);
     const url = isEditing ? `http://localhost:3000/api/products/${id}` : 'http://localhost:3000/api/products';
     const method = isEditing ? 'PUT' : 'POST';
-
     try {
       const response = await fetch(url, {
         method: method,
@@ -124,21 +128,105 @@ document.addEventListener('DOMContentLoaded', () => {
         body: formData
       });
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Error al guardar el producto.');
+        throw new Error((await response.json()).message || 'Error al guardar el producto.');
       }
-      closeModal();
-      loadProducts(); // Recargar productos tras el éxito
+      closeProductModal();
+      loadProducts();
     } catch (error) {
-      console.error('Error en el envío del formulario:', error);
+      console.error('Error en el envío del formulario de producto:', error);
       alert(`Error: ${error.message}`);
     }
   };
 
-  // --- EVENT LISTENERS ---
+  // ===================================================================
+  // LÓGICA DE GESTIÓN DE USUARIOS
+  // ===================================================================
+  
+  const loadUsers = async () => {
+    try {
+      const response = await fetch('/api/users', { headers: { 'Authorization': `Bearer ${token}` } });
+      if (!response.ok) throw new Error('No se pudieron cargar los usuarios.');
+      const users = await response.json();
+      tblUsers.innerHTML = '';
+      users.forEach(u => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${u.email}</td>
+          <td>${u.name}</td>
+          <td>${u.status_name}</td>
+          <td class="actions">
+            <button class="btn-edit" data-id="${u.id}" data-status-id="${u.status}">Editar</button>
+            <button class="btn-delete" data-id="${u.id}">Eliminar</button>
+          </td>
+        `;
+        tblUsers.appendChild(row);
+      });
+    } catch (error) {
+      console.error(error);
+      tblUsers.innerHTML = `<tr><td colspan="4">Error al cargar usuarios.</td></tr>`;
+    }
+  };
 
-  // 1. Para los botones de la tabla (Editar y Eliminar)
-  tableBody.addEventListener('click', async (event) => {
+  const loadUserStatuses = async () => {
+    try {
+        const response = await fetch('/api/users/statuses', { headers: { 'Authorization': `Bearer ${token}` } });
+        if (!response.ok) throw new Error('No se pudieron cargar los estados.');
+        const statuses = await response.json();
+        userStatusSelect.innerHTML = '';
+        statuses.forEach(status => {
+            const option = document.createElement('option');
+            option.value = status.status_code;
+            option.textContent = status.status_name;
+            userStatusSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error(error);
+    }
+  };
+
+  const closeUserModal = () => {
+    modalUser.classList.add('hidden');
+  };
+
+  const populateUserFormForEdit = (user) => {
+    modalUser.querySelector('#userFormTitle').textContent = 'Editar Usuario';
+    modalUser.querySelector('#userId').value = user.id;
+    modalUser.querySelector('#userEmail').value = user.email;
+    modalUser.querySelector('#userName').value = user.name;
+    modalUser.querySelector('#userStatus').value = user.status;
+    modalUser.classList.remove('hidden');
+  };
+
+  const handleUserSubmit = async (event) => {
+    event.preventDefault();
+    const id = modalUser.querySelector('#userId').value;
+    if (!id) return;
+    const userData = {
+      email: modalUser.querySelector('#userEmail').value,
+      name: modalUser.querySelector('#userName').value,
+      status: modalUser.querySelector('#userStatus').value,
+    };
+    try {
+      const response = await fetch(`/api/users/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify(userData)
+      });
+      if (!response.ok) throw new Error((await response.json()).message);
+      closeUserModal();
+      loadUsers();
+    } catch (error) {
+      console.error('Error al actualizar usuario:', error);
+      alert(`Error: ${error.message}`);
+    }
+  };
+  
+  // ===================================================================
+  // EVENT LISTENERS
+  // ===================================================================
+  
+  // --- Para la tabla de PRODUCTOS ---
+  tblProducts.addEventListener('click', async (event) => {
     const target = event.target;
     if (target.classList.contains('btn-delete')) {
       const id = target.dataset.id;
@@ -162,20 +250,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         if (!response.ok) throw new Error('No se pudieron obtener los datos del producto.');
         const product = await response.json();
-        populateFormForEdit(product);
+        populateFormForEditProduct(product);
       } catch (error) {
         alert(`Error: ${error.message}`);
       }
     }
   });
 
-  // 2. Para los botones y formularios principales
-  btnAdd.addEventListener('click', openModalForCreate);
-  closeModalBtn.addEventListener('click', closeModal);
-  cancelBtn.addEventListener('click', closeModal);
-  productForm.addEventListener('submit', handleProductSubmit);
+  // --- Para la tabla de USUARIOS ---
+  tblUsers.addEventListener('click', (event) => {
+    const target = event.target;
+    const id = target.dataset.id;
+    if (target.classList.contains('btn-edit')) {
+      const row = target.closest('tr');
+      const user = {
+          id: id,
+          email: row.cells[0].textContent,
+          name: row.cells[1].textContent,
+          status: target.dataset.statusId
+      };
+      populateUserFormForEdit(user);
+    }
+    if (target.classList.contains('btn-delete')) {
+      if (confirm(`¿Seguro que quieres eliminar al usuario con ID ${id}?`)) {
+        fetch(`/api/users/${id}`, {
+          method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` }
+        })
+        .then(res => {
+          if(!res.ok) throw new Error('Error en la respuesta del servidor');
+          target.closest('tr').remove();
+        })
+        .catch(err => alert('No se pudo eliminar el usuario.'));
+      }
+    }
+  });
 
-  // 3. Para la vista previa de la imagen
+  // --- Para los formularios y modales ---
+  btnAddProduct.addEventListener('click', openModalForCreateProduct);
+  productForm.addEventListener('submit', handleProductSubmit);
+  closeModalBtnProduct.addEventListener('click', closeProductModal);
+  cancelBtnProduct.addEventListener('click', closeProductModal);
+
+  userForm.addEventListener('submit', handleUserSubmit);
+  closeModalBtnUser.addEventListener('click', closeUserModal);
+  cancelBtnUser.addEventListener('click', closeUserModal);
+
   imageInput.addEventListener('change', event => {
     const file = event.target.files[0];
     if (file) {
@@ -184,7 +303,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- CARGA INICIAL DE DATOS ---
+  // ===================================================================
+  // CARGA INICIAL DE DATOS
+  // ===================================================================
   loadProducts();
   loadCategories();
+  loadUsers();
+  loadUserStatuses();
 });

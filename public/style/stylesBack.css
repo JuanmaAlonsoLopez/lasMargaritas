@@ -1,7 +1,5 @@
+/* --- Estilos Globales para la Página --- */
 body {
-  /* font-family: Arial, sans-serif;
-  padding: 20px;
-  background-color: #f4f4f4; */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #f0f2f5;
   display: flex;
@@ -9,185 +7,151 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  padding: 20px;
 }
 
 h1 {
   text-align: center;
   color: #333;
-}
-
-form {
-  max-width: 400px;
-  margin: auto;
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-
-}
-
-/* input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-} */
-
-/* Inputs estilo */
-#loginForm input[type="email"],
-#loginForm input[type="password"] {
-  width: 90%;
-  padding: 12px 15px;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
+}
+
+/* --- Estilo Unificado para Todos los Formularios --- */
+#loginForm,
+#registerForm,
+#resetForm,
+#forgotForm {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 380px;
+  height: 50%;
+  box-sizing: border-box;
+}
+
+/* =============================================================== */
+/* SOLUCIÓN: UNIFICAR ALTURAS DE CAMPOS Y BOTONES                  */
+/* =============================================================== */
+
+/* --- Base para todos los elementos interactivos --- */
+#loginForm input,
+#registerForm input,
+#resetForm input,
+#forgotForm input,
+#loginForm button,
+#registerForm button,
+#resetForm button,
+#forgotForm button,
+.google-btn {
+  /* LA CLAVE: Misma altura y box-sizing para todos */
+  height: 44px;
+  box-sizing: border-box;
+
+  /* Estilos comunes */
+  width: 100%;
   border-radius: 6px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  margin: 0;
+  padding: 0 15px; /* Padding horizontal para el texto */
+  display: flex;
+  align-items: center; /* Centra el contenido verticalmente */
 }
 
-button {
-  width: 98%;
-  padding: 10px;
+/* --- Estilos específicos para Inputs --- */
+#loginForm input,
+#registerForm input,
+#resetForm input,
+#forgotForm input {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  justify-content: flex-start; /* Alinea el texto a la izquierda */
+}
+
+/* --- Estilos específicos para Botones Principales --- */
+#loginForm button,
+#registerForm button,
+#resetForm button,
+#forgotForm button {
   background-color: #28a745;
   color: white;
+  font-weight: 600;
   border: none;
-  border-radius: 4px;
-  font-size: 16px;
-
-}
-
-button:hover {
-  background-color: #218838;
-  transition: 0.5s ease;
-
-
-}
-
-#show-hide{
-  position: relative;
-  top: -10px;
-  float: right;
-  color: rgb(117, 109, 109);
   cursor: pointer;
-  border: 1px solid transparent;
-  transition: all .5s ease;
+  transition: background-color 0.3s ease;
+  justify-content: center; /* Centra el texto del botón */
 }
 
-/* Google Button */
+#loginForm button:hover,
+#registerForm button:hover,
+#resetForm button:hover,
+#forgotForm button:hover {
+  background-color: #218838;
+}
+
+/* --- Estilos específicos para el Botón de Google --- */
 .google-btn {
-  display: inline-flex;
-  align-items: center;
   background-color: #fff;
   border: 1px solid #dcdcdc;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   color: #757575;
   font-family: 'Roboto', Arial, sans-serif;
-  font-size: 14px;
   font-weight: 500;
-  height: 40px;
-  padding: 0 12px;
   text-decoration: none;
   cursor: pointer;
-  transition: box-shadow 0.2s ease;
-  margin-top: 15px; /* o el valor que quieras */
-
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  justify-content: center; /* Centra el contenido del botón */
 }
 
 .google-btn:hover {
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+  border-color: #aaa;
 }
 
 .google-btn .google-icon {
   width: 18px;
   height: 18px;
-  margin-right: 8px;
+  margin-right: 12px;
 }
 
-/* ----REGISTER------- */
-
-/* Estilo para el formulario */
-#registerForm {
-  background: white;
-  padding: 20px 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
-
-  display: grid;
-  grid-template-columns: 1fr; /* UNA SOLA COLUMNA */
-  gap: 15px; /* espacio entre filas */
-  width: 350px;
+/* --- Estilos para los enlaces inferiores --- */
+#loginForm p,
+#registerForm p,
+#resetForm p,
+#forgotForm p {
+  text-align: center;
+  margin: 5px 0 0 0; /* Un poco de espacio superior */
 }
 
-/* Inputs estilo */
-#registerForm input {
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  box-sizing: border-box;
+#loginForm p a,
+#registerForm p a,
+#resetForm p a,
+#forgotForm p a {
+  color: #007bff;
+  background-color: transparent;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-/* Botón estilo */
-#registerForm button {
-  grid-column: 1 / -1; /* Ocupa las dos columnas */
-  padding: 12px;
-  background-color: #28a745; /* Verde */
-  color: white;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+#loginForm p a:visited,
+#registerForm p a:visited,
+#resetForm p a:visited,
+#forgotForm p a:visited {
+  color: #007bff;
 }
 
-#registerForm button:hover {
-  background-color: #218838;
+#loginForm p a:hover,
+#registerForm p a:hover,
+#resetForm p a:hover,
+#forgotForm p a:hover {
+  text-decoration: underline;
+  background-color: rgba(0, 123, 255, 0.05);
 }
-
-/* ----reset-password------- */
-
-
-
-/* Formulario con fondo blanco, sombra y borde redondeado */
-#resetForm {
-  background: white;
-  padding: 25px 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
-  width: 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-/* Inputs estilo */
-#resetForm input {
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Botón ancho y con color */
-#resetForm button {
-  background-color: #28a745;
-  color: white;
-  padding: 12px;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-/* Hover del botón */
-#resetForm button:hover {
-  background-color: #218838;
-}
-

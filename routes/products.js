@@ -141,30 +141,36 @@ router.put('/:id', upload.single('image'), async (req, res) => {
 
 // Archivo: routes/products.js
 
+// Archivo: routes/products.js
+
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   const client = await pool.connect();
 
-  try {
-    await client.query('BEGIN');
+  let productToDelete; // Definir la variable aquí para que sea accesible en todo el bloque
 
-    // 1. Obtener el producto que se va a eliminar
+  try {
+    // 1. Obtener el producto que se va a eliminar. Es crucial tener sus datos antes de borrarlo.
     const productResult = await client.query('SELECT * FROM public.products WHERE id = $1', [id]);
     if (productResult.rows.length === 0) {
-      throw new Error('Producto no encontrado.');
+      // Si no se encuentra el producto, no hay nada que hacer.
+      return res.status(404).json({ message: 'Producto no encontrado.' });
     }
-    const productToDelete = productResult.rows[0];
+    productToDelete = productResult.rows[0];
 
-    // 2. Insertar el producto en la tabla de borrados
-    
-    // --- CORRECCIÓN 1: La consulta ahora espera parámetros del $1 al $8 ---
+    // Iniciar la transacción AHORA, justo antes de empezar a modificar datos.
+    await client.query('BEGIN');
+
+    // 2. Eliminar el producto de la tabla principal PRIMERO
+    await client.query('DELETE FROM public.products WHERE id = $1', [id]);
+
+    // 3. Insertar el producto en la tabla de borrados DESPUÉS
     const insertDeletedQuery = `
       INSERT INTO public.products_deleted (id, name, description, price, stock, image_url, category, promotion_active, discount)
-      VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8);
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
     `;
-    
-    // --- CORRECCIÓN 2: El array ya no incluye el 'id' antiguo. Ahora tiene 8 valores ---
     await client.query(insertDeletedQuery, [
+      productToDelete.id,
       productToDelete.name,
       productToDelete.description,
       productToDelete.price,
@@ -174,18 +180,16 @@ router.delete('/:id', async (req, res) => {
       productToDelete.promotion_active,
       productToDelete.discount
     ]);
-
-    // 3. Eliminar el producto de la tabla principal
-    await client.query('DELETE FROM public.products WHERE id = $1', [id]);
     
-    // 4. Confirmar la transacción
+    // 4. Si todo fue bien, confirmar la transacción
     await client.query('COMMIT');
-
-    // 5. Eliminar el archivo de imagen del servidor
+    
+    // 5. Por último, si la transacción fue exitosa, eliminar el archivo de imagen.
     if (productToDelete.image_url) {
       const imagePath = path.join(__dirname, '..', 'public', productToDelete.image_url);
       fs.unlink(imagePath, (err) => {
         if (err) {
+          // Esto ya no puede afectar la transacción, solo lo registramos.
           console.error(`Error al eliminar el archivo de imagen ${imagePath}:`, err);
         }
       });
@@ -194,11 +198,18 @@ router.delete('/:id', async (req, res) => {
     res.status(200).json({ message: 'Producto eliminado y archivado correctamente.' });
 
   } catch (error) {
-    await client.query('ROLLBACK');
+    // Si la transacción se inició y algo falló, hacemos rollback.
+    if (client) {
+        console.log("Ocurrió un error, haciendo ROLLBACK...");
+        await client.query('ROLLBACK');
+    }
     console.error('Error al eliminar el producto:', error);
     res.status(500).json({ message: 'Error interno del servidor.' });
   } finally {
-    client.release();
+    // Siempre liberar el cliente al final.
+    if (client) {
+        client.release();
+    }
   }
 });
 
