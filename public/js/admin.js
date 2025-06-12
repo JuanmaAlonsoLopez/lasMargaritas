@@ -27,13 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const tblUsers = document.querySelector('#tblUsers tbody');
   const modalUser = document.getElementById('modalUser');
   const userForm = document.getElementById('userForm');
-  // CORRECCIÓN: Apuntamos al nuevo ID del select de roles
-  const userRoleSelect = document.getElementById('userRole'); 
+  const userRoleSelect = document.getElementById('userRole');
   const closeModalBtnUser = document.getElementById('closeUser');
   const cancelBtnUser = document.getElementById('btnCancelUser');
 
   // ===================================================================
-  // LÓGICA DE GESTIÓN DE PRODUCTOS (SIN CAMBIOS)
+  // LÓGICA DE GESTIÓN DE PRODUCTOS (CON CAMBIOS)
   // ===================================================================
 
   const loadProducts = async () => {
@@ -93,10 +92,13 @@ document.addEventListener('DOMContentLoaded', () => {
     modalProduct.classList.add('hidden');
   };
 
+  // --- MODIFICACIÓN #1 ---
+  // Se asegura de que la vista previa esté oculta y limpia al crear un nuevo producto.
   const openModalForCreateProduct = () => {
-    productForm.reset(); // reset() limpia todo el formulario
+    productForm.reset();
     formTitleProduct.textContent = 'Nuevo Producto';
-    imagePreview.style.display = 'none';
+    imagePreview.src = ''; // Limpiar cualquier imagen de una sesión anterior
+    imagePreview.style.display = 'none'; // Ocultar el contenedor de la vista previa
     document.getElementById('prodId').value = '';
     document.getElementById('image').required = true;
     modalProduct.classList.remove('hidden');
@@ -112,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('stock').value = product.stock;
     document.getElementById('category').value = product.category;
     imagePreview.src = product.image_url;
-    imagePreview.style.display = 'block';
+    imagePreview.style.display = 'block'; // En modo edición, sí mostramos la imagen existente
     document.getElementById('image').required = false;
     modalProduct.classList.remove('hidden');
   };
@@ -142,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // ===================================================================
-  // LÓGICA DE GESTIÓN DE USUARIOS (CORREGIDA)
+  // LÓGICA DE GESTIÓN DE USUARIOS (SIN CAMBIOS)
   // ===================================================================
   
   const loadUsers = async () => {
@@ -153,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
       tblUsers.innerHTML = '';
       users.forEach(u => {
         const row = document.createElement('tr');
-        // CORRECCIÓN: Muestra role_name y guarda el data-role-id
         row.innerHTML = `
           <td>${u.email}</td>
           <td>${u.name}</td>
@@ -171,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // CORRECCIÓN: Carga roles desde el endpoint /api/users/roles
   const loadUserRoles = async () => {
     try {
         const response = await fetch('/api/users/roles', { headers: { 'Authorization': `Bearer ${token}` } });
@@ -199,7 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
     modalUser.querySelector('#userId').value = user.id;
     modalUser.querySelector('#userEmail').value = user.email;
     modalUser.querySelector('#userName').value = user.name;
-    // CORRECCIÓN: Asigna el valor al select de roles
     userRoleSelect.value = user.role;
     modalUser.classList.remove('hidden');
   };
@@ -208,7 +207,6 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
     const id = modalUser.querySelector('#userId').value;
     if (!id) return;
-    // CORRECCIÓN: Envía el campo "role"
     const userData = {
       email: modalUser.querySelector('#userEmail').value,
       name: modalUser.querySelector('#userName').value,
@@ -271,7 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const id = target.dataset.id;
     if (target.classList.contains('btn-edit')) {
       const row = target.closest('tr');
-      // CORRECCIÓN: Lee el data-role-id
       const user = {
           id: id,
           email: row.cells[0].textContent,
@@ -301,8 +298,21 @@ document.addEventListener('DOMContentLoaded', () => {
   userForm.addEventListener('submit', handleUserSubmit);
   closeModalBtnUser.addEventListener('click', closeUserModal);
   cancelBtnUser.addEventListener('click', closeUserModal);
-
+  
+  // --- MODIFICACIÓN #2 ---
+  // El listener ahora comprueba si se está editando antes de mostrar la vista previa.
   imageInput.addEventListener('change', event => {
+    // Verificamos si el campo de ID del producto tiene un valor.
+    // Si lo tiene, estamos editando. Si está vacío, estamos creando.
+    const isEditing = !!document.getElementById('prodId').value;
+
+    // Si NO estamos editando (o sea, estamos creando), no hacemos nada.
+    // La imagen se selecciona pero no se muestra la vista previa.
+    if (!isEditing) {
+      return;
+    }
+  
+    // Si estamos editando, sí mostramos la vista previa del nuevo archivo seleccionado.
     const file = event.target.files[0];
     if (file) {
       imagePreview.src = URL.createObjectURL(file);
@@ -316,6 +326,5 @@ document.addEventListener('DOMContentLoaded', () => {
   loadProducts();
   loadCategories();
   loadUsers();
-  // CORRECCIÓN: Llama a la función que carga los roles
   loadUserRoles(); 
 });
