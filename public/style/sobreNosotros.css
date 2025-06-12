@@ -38,13 +38,37 @@
     height: auto;
 }
 
-.titulo-nosotros {
-    top: 50%;
-    width: 1494;
-    left: 50%;
+
+
+/* .titulo-nosotros {
     font-size: 48px;
     color: BLACK;
-    padding: 200px 0px 0px 0px;
+    padding: 20px 40px;
+    border: 4px solid #5E7F58;
+    border-radius: 10px;
+    background: #fff;
+    display: inline-block;
+    font-weight: bold;
+    width: auto;         
+    margin: 130px auto 0 auto; 
+    position: relative;  
+    z-index: 1;
+} */
+
+.titulo-nosotros {
+    font-size: 48px;
+    color: BLACK;
+    padding: 20px 40px;
+    border: 4px solid #5E7F58;
+    border-radius: 16px;
+    background: linear-gradient(90deg, #eaf6ea 0%, #f5faf5 100%);
+    display: inline-block;
+    font-weight: bold;
+    width: auto;
+    margin: 140px auto 0 auto;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 16px 0 rgba(94,127,88,0.08);
 }
 
 .nuestra-empresa h2, .equipo-desarrollo h2 , p{
@@ -105,6 +129,17 @@
 
   /* IMAGENS DEL EQUIPO --------------------------------- */ 
 
+.equipo-desarrollo h2{
+    font-size: 36px;
+    color: black;
+    padding: 20px 0;
+    margin: 0 auto;
+    text-align: center;
+    /* text-shadow: 1px 1px 2px rgba(0,0,0,0.2); */
+    border-bottom: 2px solid #5E7F58;
+}
+
+
 .btn-contacto {
     /*background-color: hsla(111, 26%, 59%, 1);
     color: black;
@@ -148,11 +183,42 @@
 
 .mision{
     padding: 60px 60px 0px 60px;
+    background: linear-gradient(90deg, #eaf6ea 0%, #f5faf5 100%);
+    border-radius: 16px;
+
 }
+
+.mision .tituloMision{
+  font-size: 28px; 
+  font-weight: 700;
+  color: black; /* Rojo fuerte */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  border-bottom: 2px solid #5E7F58;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* .titulo-nosotros {
+    font-size: 48px;
+    color: BLACK;sss
+    padding: 20px 40px;
+    border: 4px solid #5E7F58;
+    border-radius: 16px;
+    background: linear-gradient(90deg, #eaf6ea 0%, #f5faf5 100%);
+    display: inline-block;
+    font-weight: bold;
+    width: auto;
+    margin: 140px auto 0 auto;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 16px 0 rgba(94,127,88,0.08);
+} */
 
 .imagenes-equipo{
     display: grid;
     grid-template-columns: 16% 16% 16% 16% 16% 16%;
+    
 }
 
 
@@ -181,6 +247,14 @@
     text-align: center;
     font-size: 15px;
     color: #053a07; 
+}
+
+.equipoDesarrolloLogo p{
+    font-family: Sans-serif;
+    padding: 10px 0px 0px 0px ;
+    text-align: center;
+    font-size: 20px;
+    
 }
 
 
