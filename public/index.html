@@ -199,120 +199,83 @@
     <script src="/js/common.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Define la URL base de tu API
-            const API_BASE_URL = 'http://localhost:3000';
+    document.addEventListener('DOMContentLoaded', () => {
+        const API_URL = 'http://localhost:3000/api/products';
+        const productsContainer = document.querySelector('#promotions-container .productos');
 
-            // Selecciona los contenedores del HTML donde se mostrarán los productos
-            const mainPromotionsContainer = document.querySelector('#promotions-container .productos');
-            const categoryCarouselsContainer = document.getElementById('category-carousels-container');
+        function createProductCardHTML(product) {
+            const formattedPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product.price);
+            return `
+                <div class="producto" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-image="${product.image_url}">
+                    <img src=".${product.image_url}" alt="Imagen de ${product.name}">
+                    <h3>${product.name}</h3>
+                    <p class="precio">${formattedPrice}</p>
+                    <button class="agregar-carrito">Agregar al carrito</button>
+                </div>
+            `;
+        }
 
-            /**
-             * Crea el código HTML para una tarjeta de producto.
-             * @param {object} product - El objeto del producto con sus datos.
-             * @returns {string} - El string HTML de la tarjeta.
-             */
-            /**
-             * Crea el HTML para una tarjeta de producto.
-             */
-            function createProductHtml(product) {
-                // Formatea el precio a moneda local (ARS)
-                const formattedPrice = new Intl.NumberFormat('es-AR', { 
-                    style: 'currency', 
-                    currency: 'ARS' 
-                }).format(product.price);
-                
-                // ¡LA CORRECCIÓN ESTÁ AQUÍ!
-                // ASEGÚRATE DE QUE ESTA LÍNEA EMPIECE CON UN ACENTO GRAVE (`), NO UNA COMILLA.
-                return `
-                    <div class="producto" data-id="${product.id}">
-                        
-                        <img src=".${product.image_url}" alt="Imagen de ${product.name}"> <--- ACA PONER EL PUNTO PARA LA RUTA
-                        <h3>${product.name}</h3>
-                        <p class="precio">${formattedPrice}</p>
-                        <button class="agregar-carrito">Agregar al carrito</button>
-                    </div>
-                `; // <-- Y ASEGÚRATE DE QUE TERMINE CON UN ACENTO GRAVE (`).
-            }
-
-            /**
-             * Busca productos de una categoría y los muestra en un contenedor.
-             * @param {HTMLElement} container - El elemento div donde se insertarán las tarjetas.
-             * @param {string|null} category - El nombre de la categoría a buscar, o null para todas.
-             */
-            async function fetchAndRenderProducts(container, category = null) {
-                if (!container) return;
-                container.innerHTML = '<p>Cargando productos...</p>';
-
-                try {
-                    let url = `${API_BASE_URL}/api/products`;
-                    if (category) {
-                        url += `?category=${encodeURIComponent(category)}`;
-                    }
-
-                    const response = await fetch(url);
-                    if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-                    
-                    const products = await response.json();
-
-                    if (products.length > 0) {
-                        container.innerHTML = products.map(createProductHtml).join('');
-                    } else {
-                        container.innerHTML = '<p>No hay productos disponibles en esta categoría.</p>';
-                    }
-                } catch (error) {
-                    console.error(`Error al cargar productos para la categoría "${category || 'promociones'}":`, error);
-                    container.innerHTML = '<p>Error al cargar productos. Por favor, inténtalo de nuevo.</p>';
+        async function fetchAndDisplayProducts() {
+            if (!productsContainer) return;
+            productsContainer.innerHTML = '<p>Cargando ofertas...</p>';
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error(`Error del servidor: ${response.status}`);
+                const products = await response.json();
+                if (products && products.length > 0) {
+                    productsContainer.innerHTML = products.map(createProductCardHTML).join('');
+                } else {
+                    productsContainer.innerHTML = '<p>No hay productos en oferta.</p>';
                 }
+            } catch (error) {
+                console.error('Error al cargar los productos:', error);
+                productsContainer.innerHTML = '<p>No se pudieron cargar los productos.</p>';
             }
+        }
 
-            /**
-             * Función principal que inicializa toda la lógica de la página.
-             */
-            async function initializePage() {
-                // 1. Carga los productos en la sección principal de "Ofertas Imperdibles".
-                // Aquí podrías tener una lógica para traer solo los que están en promoción.
-                // Por ahora, trae todos los productos.
-                fetchAndRenderProducts(mainPromotionsContainer, null);
+        // --- LÓGICA PARA AÑADIR AL CARRITO ---
+        // Se añade un solo 'listener' al contenedor principal para más eficiencia
+        productsContainer.addEventListener('click', (event) => {
+            // Verifica si el clic fue en un botón "agregar-carrito"
+            if (event.target.classList.contains('agregar-carrito')) {
+                const productCard = event.target.closest('.producto');
+                const product = {
+                    id: parseInt(productCard.dataset.id),
+                    name: productCard.dataset.name,
+                    price: parseFloat(productCard.dataset.price),
+                    image: productCard.dataset.image,
+                    quantity: 1
+                };
 
-                // 2. Obtiene las categorías desde el backend para crear carruseles dinámicos.
-                try {
-                    const response = await fetch(`${API_BASE_URL}/api/categories`);
-                    if (!response.ok) throw new Error('No se pudieron obtener las categorías.');
-                    
-                    const activeCategories = await response.json();
-
-                    // 3. Crea una sección de productos para cada categoría.
-                    activeCategories.forEach(categoryName => {
-                        const categorySection = document.createElement('section');
-                        categorySection.className = 'productos-destacados';
-                        
-                        const title = document.createElement('h2');
-                        title.textContent = `Novedades en ${categoryName}`;
-
-                        const productsContainer = document.createElement('div');
-                        productsContainer.className = 'productos';
-                        
-                        categorySection.appendChild(title);
-                        categorySection.appendChild(productsContainer);
-
-                        categoryCarouselsContainer.appendChild(categorySection);
-
-                        // Llama a la función para cargar los productos de esa categoría específica
-                        fetchAndRenderProducts(productsContainer, categoryName);
-                    });
-
-                } catch (error) {
-                    console.error('Error al inicializar los carruseles de categorías:', error);
-                    if (categoryCarouselsContainer) {
-                        categoryCarouselsContainer.innerHTML = '<p>No se pudieron cargar las categorías.</p>';
-                    }
-                }
+                addToCart(product);
             }
-
-            // Inicia todo el proceso.
-            initializePage();
         });
-    </script>
+
+        function addToCart(productToAdd) {
+            // 1. Obtiene el carrito actual de localStorage o crea uno nuevo
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // 2. Busca si el producto ya existe en el carrito
+            const existingProduct = cart.find(item => item.id === productToAdd.id);
+
+            if (existingProduct) {
+                // Si existe, solo aumenta la cantidad
+                existingProduct.quantity += 1;
+            } else {
+                // Si no existe, lo añade al carrito
+                cart.push(productToAdd);
+            }
+
+            // 3. Guarda el carrito actualizado de vuelta en localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // 4. Muestra una confirmación al usuario
+            alert(`"${productToAdd.name}" fue agregado al carrito.`);
+        }
+
+        // Inicia la carga de productos al cargar la página
+        fetchAndDisplayProducts();
+    });
+</script>
 </body>
 </html>
