@@ -115,6 +115,7 @@ a{
     font-size: 2rem;
     z-index: 1;
     padding: 0;
+    
 }
 
 
@@ -124,12 +125,22 @@ a{
     font-weight: bold;
     color:#ffffff;
     font-family: "Quintessential", serif;
+    text-shadow:
+    -1px -1px 0 rgba(0,0,0,0.6),
+     1px -1px 0 rgba(0,0,0,0.6),
+    -1px  1px 0 rgba(0,0,0,0.6),
+     1px  1px 0 rgba(0,0,0,0.6);
 }
 
 .carousel-text p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    color: #fbff00;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #ffe94f;
+  text-shadow:
+    -1px -1px 0 #333,
+     1px -1px 0 #333,
+    -1px  1px 0 #333,
+     1px  1px 0 #333;
 }
 
 .date {
@@ -174,33 +185,31 @@ a{
     padding: 30px;
 }
 
-.muestraCategorias{
-    display: grid;
-    grid-template-columns: 33% 33% 33%;
-    justify-content: center;
-    align-items: center;
+.muestraCategorias {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
-.categoriaColumna{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+.categoriaColumna {
+  text-align: center;
 }
 
-.categoriaColumna img{
-    width: 100%;
-    gap: 10px;
-    height: 600px;
-    object-fit: cover;
+.categoriaColumna img {
+  width: 100%;
+  height: 180px; /* Menor altura para que quepan horizontalmente */
+  object-fit: cover;
+  border-radius: 10px;
 }
 
-.categoriaColumna p{
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2rem;
-    color: #333;
-    text-align: center;
-    margin-bottom: 30px;
+.categoriaColumna p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  color: #333;
 }
 
 
@@ -1017,6 +1026,150 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     background-color: #85B27D;
 }
 
+/* === MEDIA QUERIES === */
+
+/* Tablets y Notebooks */
+@media (max-width: 1024px) {
+  .textMedio {
+    font-size: 1.4rem;
+    padding: 40px 40px 10px 40px;
+  }
+
+  .textMedio h2 {
+    font-size: 2rem;
+  }
+
+  .categoriaImg .muestraCategorias {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .categoriaColumna img {
+    height: 350px;
+  }
+
+  .categoriaColumna p {
+    font-size: 1.4rem;
+  }
+
+  .iconos-beneficios {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .beneficio img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .tipoBeneficio {
+    font-size: 1.5rem;
+  }
+
+  .carousel-text h2 {
+    font-size: 2.5rem;
+  }
+
+  .carousel-text p {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobile (<=768px) */
+@media (max-width: 768px) {
+  .textMedio {
+    padding: 40px 20px 10px 20px;
+    font-size: 1.2rem;
+  }
+
+  .textMedio h2 {
+    font-size: 1.6rem;
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+
+  .textMedio span {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .muestraCategorias {
+    grid-template-columns: 1fr;
+  }
+
+  .categoriaColumna img {
+    height: auto;
+    width: 100%;
+  }
+
+  .categoriaColumna p {
+    font-size: 1.2rem;
+  }
+
+  .productos-seccion .contenedor-productos {
+    grid-template-columns: 1fr;
+  }
+
+  .productoGrande1,
+  .segColumna {
+    width: 100%;
+  }
+
+  .productoChico1 img,
+  .productoChico2 img {
+    height: auto;
+  }
+
+  .iconos-beneficios {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .tipoBeneficio {
+    font-size: 1.3rem;
+  }
+
+  .beneficio img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .carousel-text h2 {
+    font-size: 2rem;
+  }
+
+  .carousel-text p {
+    font-size: 1rem;
+  }
+
+  .banner {
+    height: 60vh;
+  }
+
+  .banner-ortopedicas {
+    padding: 30px 20px;
+    height: auto;
+    background-size: cover;
+    background-position: center;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .banner-ortopedicas .texto h2 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
+  }
+
+  .banner-ortopedicas .ver-mas {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+
+  .carousel .producto {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
 
 
 

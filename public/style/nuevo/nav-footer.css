@@ -431,3 +431,8 @@ justify-content: center;
 }
 }
 
+.footer, .footer * {
+  color: #000000 !important; /* Fuerza texto oscuro */
+}
+
+

@@ -198,3 +198,33 @@ body {
     background-color: #cccccc;
     cursor: not-allowed;
 }
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr; /* Apila en columna */
+        margin: 100px 15px 40px 15px; /* Ajusta márgenes */
+    }
+
+    .left-container,
+    .right-container {
+        width: 100%;
+        padding: 20px 15px;
+    }
+
+    .cart-product-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cart-product-details {
+        width: 100%;
+    }
+
+    .cart-product-quantity-controls {
+        justify-content: flex-start;
+    }
+
+    .cart-product-image {
+        width: 100%;
+        height: auto;
+    }
+}
