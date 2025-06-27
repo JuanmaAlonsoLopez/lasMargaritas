@@ -29,33 +29,53 @@ const mpClient = new MercadoPagoConfig({
 // MIDDLEWARE
 // =================================================================
 
-// 1. Helmet para seguridad (CORREGIDO PARA PERMITIR MERCADO PAGO)
+// 1. Helmet para seguridad (VERSIÓN FINAL Y DEFINITIVA)
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      // Se permiten los scripts de tu propio sitio y de los dominios de MP.
-      scriptSrc: ["'self'", "https://sdk.mercadopago.com", "https://*.mercadolibre.com", "'unsafe-inline'"],
+      // Asegúrate de que script-src permite los scripts de Mercado Pago
+      scriptSrc: [
+        "'self'", 
+        "https://sdk.mercadopago.com", 
+        "https://*.mercadolibre.com", 
+        "'unsafe-inline'" // Necesario si tienes scripts inline
+      ],
       styleSrc: ["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
       imgSrc: ["'self'", "data:", "https:", "http://http2.mlstatic.com"], 
-      // Permite la conexión a las APIs necesarias.
-      connectSrc: ["'self'", "http://localhost:3000", "https://api.mercadopago.com", "*.mercadolibre.com"],
+      connectSrc: [
+        "'self'", 
+        "http://localhost:3000", // Tu propio backend
+        "https://api.mercadopago.com" // API de MP
+      ],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       objectSrc: ["'none'"],
-      // Permite que el checkout de MP se muestre en un iframe.
-      frameSrc: ["'self'", "https://www.mercadopago.com", "https://www.mercadopago.com.ar", "*.mercadolibre.com"],
+      
+      // =======================================================
+      // ====>         AQUÍ ESTÁ LA LÍNEA CLAVE               <====
+      // Esta directiva autoriza la carga de iframes desde
+      // cualquier subdominio de mercadopago.com y mercadopago.com.ar
+      // =======================================================
+      frameSrc: [
+        "'self'",
+        "https://www.mercadopago.com",
+        "https://www.mercadopago.com.ar",
+        "https://mercadopago.com",
+        "https://mercadopago.com.ar",
+        "http://*.mercadolibre.com"
+      ],
+      
       upgradeInsecureRequests: [],
     },
   })
 );
 
-// 2. CORS
+
+// 2. CORS y otros middlewares
 app.use(cors({
     origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5500', 'http://127.0.0.1:5500'],
     credentials: true
 }));
-
-// 3. Otros middlewares
 app.use(express.json());
 app.use(session({
   secret: process.env.SESSION_SECRET || 'un_secreto_muy_seguro',
@@ -70,7 +90,6 @@ app.use(passport.session());
 // RUTAS
 // =================================================================
 
-// Rutas de Autenticación y API existentes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
@@ -78,7 +97,7 @@ app.use('/api/products', productRoutes);
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile','email'] }));
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login.html' }), googleCallback);
 
-// --- RUTA UNIFICADA Y CORREGIDA PARA CREAR LA PREFERENCIA DE PAGO ---
+// --- RUTA PARA CREAR LA PREFERENCIA DE PAGO ---
 app.post('/api/pagos/crear-preferencia', async (req, res) => {
     try {
         const carrito = req.body.carrito;
@@ -95,23 +114,30 @@ app.post('/api/pagos/crear-preferencia', async (req, res) => {
             currency_id: 'ARS',
         }));
 
+        // =======================================================
+        // ====>               ¡AQUÍ ESTÁ LA SOLUCIÓN!         <====
+        // Se elimina la propiedad 'auto_return' para pruebas locales.
+        // =======================================================
         const body = {
             items: items,
-            back_urls: { // ¡EN PLURAL! Esta es la corrección del error de la terminal.
-                success: 'http://127.0.0.1:5500/pages/paginaError.html?status=success', 
-                failure: 'http://127.0.0.1:5500/pages/paginaError.html?status=failure',
-                pending: '',
+            back_urls: { 
+                success: 'http://127.0.0.1:5500/pages/success.html', // Puedes crear esta página
+                failure: 'http://127.0.0.1:5500/pages/failure.html', // Puedes crear esta página
+                pending: 'http://127.0.0.1:5500/pages/pending.html', // Puedes crear esta página
             },
-            auto_return: 'approved',
         };
+        
+        console.log("OBJETO ENVIADO A MERCADO PAGO:", JSON.stringify(body, null, 2));
 
         const preference = new Preference(mpClient);
         const result = await preference.create({ body });
         
+        // ¡Si llegamos aquí, todo salió bien!
+        console.log('Preferencia creada con éxito. ID:', result.id);
         res.json({ id: result.id });
 
     } catch (error) {
-        console.error('Error al crear la preferencia:', error.cause ? JSON.stringify(error.cause) : error.message);
+        console.error('Error detallado de MP:', error.cause ? JSON.stringify(error.cause, null, 2) : error.message);
         res.status(500).json({ error: 'Error interno al crear la preferencia.' });
     }
 });
