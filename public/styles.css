@@ -659,6 +659,55 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
   height: 18px;
   margin-right: 8px;
 }
+/* Correciones y adaptaciones de texto en el menu  */
+
+@media (max-width: 768px) {
+  .textMedio {
+    padding: 40px 20px 10px 20px;
+    font-size: 1.2rem;
+  }
+
+  .textMedio h2 {
+    font-size: 1.6rem;
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+
+  .textMedio span {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+}
+@media (max-width: 768px) {
+  .banner-ortopedicas {
+    padding: 30px 20px;
+    height: auto;
+    background-size: cover; /* En vez de 'contain' */
+    background-position: center;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .banner-ortopedicas .texto h2 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
+  }
+
+  .banner-ortopedicas .ver-mas {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
+/* ----Seccion Contacto------- */
+
+
+
+
+
+
+
 
 /* ----REGISTER------- */
 
@@ -967,3 +1016,7 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 .producto button:hover {
     background-color: #85B27D;
 }
+
+
+
+
