@@ -32,42 +32,37 @@ const mpClient = new MercadoPagoConfig({
 // 1. Helmet para seguridad (VERSIÓN FINAL Y DEFINITIVA)
 app.use(
   helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      // Asegúrate de que script-src permite los scripts de Mercado Pago
-      scriptSrc: [
-        "'self'", 
-        "https://sdk.mercadopago.com", 
-        "https://*.mercadolibre.com", 
-        "'unsafe-inline'" // Necesario si tienes scripts inline
-      ],
-      styleSrc: ["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
-      imgSrc: ["'self'", "data:", "https:", "http://http2.mlstatic.com"], 
-      connectSrc: [
-        "'self'", 
-        "http://localhost:3000", // Tu propio backend
-        "https://api.mercadopago.com" // API de MP
-      ],
-      fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      objectSrc: ["'none'"],
-      
-      // =======================================================
-      // ====>         AQUÍ ESTÁ LA LÍNEA CLAVE               <====
-      // Esta directiva autoriza la carga de iframes desde
-      // cualquier subdominio de mercadopago.com y mercadopago.com.ar
-      // =======================================================
-      frameSrc: [
-        "'self'",
-        "https://www.mercadopago.com",
-        "https://www.mercadopago.com.ar",
-        "https://mercadopago.com",
-        "https://mercadopago.com.ar",
-        "http://*.mercadolibre.com"
-      ],
-      
-      upgradeInsecureRequests: [],
-    },
-  })
+  directives: {
+    defaultSrc: ["'self'"],
+    scriptSrc: [
+      "'self'",
+      "https://sdk.mercadopago.com",
+      "https://*.mercadolibre.com",
+      "'unsafe-inline'"
+    ],
+    styleSrc: ["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
+    imgSrc: ["'self'", "data:", "https:", "http://http2.mlstatic.com"],
+    connectSrc: [
+      "'self'",
+      "http://localhost:3000",
+      "https://api.mercadopago.com",
+      "https://api.mercadolibre.com"
+    ],
+    fontSrc: ["'self'", "https://fonts.gstatic.com"],
+    objectSrc: ["'none'"],
+    frameSrc: [
+      "'self'",
+      "https://www.mercadopago.com",
+      "https://www.mercadopago.com.ar",
+      "https://mercadopago.com",
+      "https://mercadopago.com.ar",
+      "https://sandbox.mercadopago.com.ar", // CLAVE
+      "https://sandbox.mercadopago.com",    // OPCIONAL
+      "http://*.mercadolibre.com"
+    ],
+    upgradeInsecureRequests: [],
+  },
+})
 );
 
 
