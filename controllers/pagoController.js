@@ -28,12 +28,12 @@ const pagoController = {
             // =======================================================
             const body = {
                 items: items,
-                back_urls: { // ¡EN PLURAL! Esta era la clave del error.
-                    success: 'http://127.0.0.1:5500/pages/paginaError.html?status=success', // Temporalmente usamos esta página
+                back_urls: {
+                    success: 'http://127.0.0.1:5500/pages/paginaError.html?status=success',
                     failure: 'http://127.0.0.1:5500/pages/paginaError.html?status=failure',
-                    pending: '', // Es buena práctica incluirla aunque esté vacía.
+                    pending: '',
                 },
-                auto_return: 'approved',
+                auto_return: 'approved', // <-- Ya está implementado aquí
             };
 
             const preference = new Preference(client);
