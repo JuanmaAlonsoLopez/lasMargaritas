@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../style/nuevo/nav-footer.css">
     <link rel="stylesheet" href="../style/ResCompra.css">
+    <style>
+        #btn-pagar.hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <header id="mainHeader">
@@ -17,7 +22,7 @@
             </div>
             <nav class="main-nav" id="mainNav">
                 <a href="../index.html">Inicio</a>
-                <a href="./listadoProductos.html">Productos</a>
+                <a href="./categorias.html">Productos</a>
                 <a href="./sobreNosotros.html">Sobre nosotros</a>
                 <a href="./contacto.html">Contacto</a>
             </nav>
@@ -42,7 +47,8 @@
                     <p id="shipping-cost">Envío: $1,500.00</p>
                     <p id="total-amount">Total: $0.00</p>
                 </div>
-                <button id="comprar" class="continuar-compra">Continuar compra</button>
+                <button id="btn-pagar" class="continuar-compra">Continuar compra</button>
+                <div class="checkout-btn" style="margin-top: 10px;"></div>
             </div>
         </div>
     </div>
@@ -51,25 +57,27 @@
     <a href="https://wa.me/5491134374127" target="_blank" class="whatsapp-float">
         <img src="../images/imageswhatsapp-icon.png" alt="WhatsApp">
     </a>
+
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // === Lógica para renderizar el carrito (sin cambios) ===
             const cartContainer = document.getElementById('cart-products-container');
             const subtotalElem = document.getElementById('product-subtotal');
             const totalElem = document.getElementById('total-amount');
-            const checkoutButton = document.getElementById('comprar');
             const shippingCost = 1500;
-
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
+            const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
+            
             function renderCart() {
+                const cart = getCart();
                 if (!cartContainer) return;
 
                 if (cart.length === 0) {
                     cartContainer.innerHTML = '<p>Tu carrito de compras está vacío.</p>';
                     subtotalElem.textContent = 'Productos: $0.00';
                     totalElem.textContent = `Total: $${shippingCost.toFixed(2)}`;
-                    checkoutButton.disabled = true;
+                    document.getElementById('btn-pagar').disabled = true;
                     return;
                 }
 
@@ -89,21 +97,22 @@
                                 </div>
                             </div>
                             <p class="cart-product-price">$${productTotal.toFixed(2)}</p>
-                            <button class="remove-item" data-id="${product.id}">Eliminar</button>
+                            <button class="remove-item">Eliminar</button>
                         </div>
                     `;
                 }).join('');
                 
                 subtotalElem.textContent = `Productos: $${subtotal.toFixed(2)}`;
                 totalElem.textContent = `Total: $${(subtotal + shippingCost).toFixed(2)}`;
-                checkoutButton.disabled = false;
+                document.getElementById('btn-pagar').disabled = false;
             }
 
-            function saveCart() {
+            function saveCart(cart) {
                 localStorage.setItem('cart', JSON.stringify(cart));
             }
 
             cartContainer.addEventListener('click', (event) => {
+                let cart = getCart();
                 const target = event.target;
                 const productItem = target.closest('.cart-product-item');
                 if (!productItem) return;
@@ -115,54 +124,77 @@
                     const action = target.dataset.action;
                     if (action === 'increase') {
                         productInCart.quantity++;
-                    } else if (action === 'decrease') {
+                    } else if (action === 'decrease' && productInCart.quantity > 1) {
                         productInCart.quantity--;
-                        if (productInCart.quantity === 0) {
-                            cart = cart.filter(p => p.id !== productId);
-                        }
                     }
-                }
-
-                if (target.classList.contains('remove-item')) {
+                } else if (target.classList.contains('remove-item')) {
                     cart = cart.filter(p => p.id !== productId);
                 }
-
-                saveCart();
+                
+                saveCart(cart);
                 renderCart();
             });
 
-            checkoutButton.addEventListener('click', () => {
-                const itemsToSend = cart.map(p => ({ id: p.id, quantity: p.quantity }));
-                if (itemsToSend.length === 0) return alert('El carrito está vacío.');
-                
-                const customerData = {
-                    full_name: "Usuario de Prueba",
-                    email: "test_user_123456@testuser.com" // Usa tu email de comprador de prueba
-                };
+            // === SECCIÓN DE PAGO CON MERCADO PAGO (CORREGIDA) ===
+            const checkoutButton = document.getElementById('btn-pagar');
+            
+            // Reemplaza con tu Public Key de prueba
+            const publicKey = 'TEST-5a6b315b-a5f0-4396-9625-8b6142c2ba69'; 
+            const mercadopago = new MercadoPago(publicKey, { locale: 'es-AR' });
 
-                fetch('http://localhost:3000/create_preference', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ items: itemsToSend, ...customerData }),
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.init_point) {
-                        window.location.href = data.init_point;
-                    } else {
-                        throw new Error(data.message || 'Error al crear preferencia');
+            checkoutButton.addEventListener('click', async () => {
+                const cart = getCart(); // Obtener el carrito actualizado
+                if (cart.length === 0) {
+                    alert('El carrito está vacío.');
+                    return;
+                }
+                
+                checkoutButton.disabled = true;
+
+                try {
+                    // =======================================================
+                    // ====>               ¡AQUÍ ESTÁ LA SOLUCIÓN!         <====
+                    // Se usa la URL completa del backend que corre en el puerto 3000
+                    // =======================================================
+                    const response = await fetch('http://localhost:3000/api/pagos/crear-preferencia', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ carrito: cart }), 
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || 'Error del servidor');
                     }
-                })
-                .catch(err => {
+
+                    const preference = await response.json();
+
+                    if (preference.id) {
+                        checkoutButton.classList.add('hidden');
+                        createCheckoutButton(preference.id);
+                    } else {
+                        throw new Error('No se recibió un ID de preferencia válido.');
+                    }
+                } catch (err) {
                     console.error('Error en el checkout:', err);
-                    alert('No se pudo iniciar el proceso de pago.');
-                });
+                    alert(`No se pudo iniciar el proceso de pago: ${err.message}`);
+                    checkoutButton.disabled = false;
+                }
             });
 
+            function createCheckoutButton(preferenceId) {
+                mercadopago.checkout({
+                    preference: { id: preferenceId },
+                    render: {
+                        container: '.checkout-btn',
+                        label: 'Pagar con Mercado Pago',
+                    }
+                });
+            }
+            
             renderCart();
         });
     </script>
-    
     <script src="/js/common.js"></script>
-</body>
+    </body>
 </html>

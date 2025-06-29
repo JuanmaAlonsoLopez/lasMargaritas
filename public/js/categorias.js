@@ -1,17 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // Función para crear la tarjeta HTML de un producto
-    function crearTarjetaProducto(producto) {
-        // Formatear el precio a moneda local (Argentina)
-        const precioFormateado = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(producto.price);
-
+    function createProductCardHTML(product) {
+        const formattedPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product.price);
+        const imageUrl = product.image_url.startsWith('/') ? product.image_url : `/${product.image_url}`;
         return `
-            <div class="producto">
-                <img src="../${producto.image_url}" alt="${producto.name}">
-                <p>${producto.name}</p>
-                <span>${precioFormateado}</span>
-                <div class="cuotas">3 cuotas sin interés</div>
-                <button class="agregar-carrito" data-id="${producto.id}">Agregar al carrito</button>
+            <div class="producto" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-image="${imageUrl}">
+                <img src="${imageUrl}" alt="Imagen de ${product.name}">
+                <h3>${product.name}</h3>
+                <p class="precio">${formattedPrice}</p>
+                <button class="agregar-carrito">Agregar al carrito</button>
             </div>
         `;
     }
@@ -37,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // CORRECCIÓN: Usamos > 0 para manejar correctamente el caso de 0 productos
             if (productos.length > 0) {
                 productos.forEach(producto => {
-                    contenedorProductos.innerHTML += crearTarjetaProducto(producto);
+                    contenedorProductos.innerHTML += createProductCardHTML(producto);
                 });
             } else {
                 contenedorProductos.innerHTML = '<p>No hay productos en esta categoría.</p>';
