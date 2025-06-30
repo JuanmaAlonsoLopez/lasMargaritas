@@ -13,14 +13,22 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "index.js"
+      "dest": "/index.js"
     },
     {
       "src": "/(.*\\.(css|js|ico|png|jpg|jpeg|gif|svg))$",
       "dest": "/public/$1"
     },
     {
-      "src": "/(.*)",
+      "src": "/(?<page>[^/.]+).html",
+      "dest": "/public/$1.html"
+    },
+    {
+      "src": "/pages/(?<page>[^/.]+)",
+      "dest": "/public/pages/$1.html"
+    },
+    {
+      "src": "/(?<page>[^/.]+)",
       "dest": "/public/$1.html"
     }
   ]
