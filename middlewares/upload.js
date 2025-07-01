@@ -1,22 +1,9 @@
 const multer = require('multer');
-const path = require('path');
 
 // --- Configuración de almacenamiento de Multer ---
-const storage = multer.diskStorage({
-  // 1. Destino: Dónde se guardará el archivo
-  destination: function (req, file, cb) {
-    // Usamos path.join para crear una ruta absoluta y evitar problemas entre SO
-    // NOTA: Asegúrate de que la carpeta 'public/images/fotosProductos' exista
-    const destPath = path.join(__dirname, '..', 'public', 'images', 'fotosProductos');
-    cb(null, destPath);
-  },
-  // 2. Nombre del archivo: Para evitar sobreescribir archivos con el mismo nombre
-  filename: function (req, file, cb) {
-    // Creamos un nombre único: timestamp + nombre original
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
+// Usamos memoryStorage para que Multer guarde el archivo en la memoria del servidor.
+// Luego, nuestro controlador lo leerá de la memoria y lo subirá a GCS.
+const storage = multer.memoryStorage();
 
 // --- Filtro de archivos: Asegurarnos que solo se suban imágenes ---
 const fileFilter = (req, file, cb) => {
