@@ -1,25 +1,4 @@
-/* ========== HEADER ESTILOS COMPLETOS ========== */
-#mainHeader {
-  width: 100%;
-  background-color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  
-}
 
-.header-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative; /* necesario para posicionar .menu-toggle */
-  box-sizing: border-box;
-}
 
 /* LOGO */
 .logo img {
@@ -36,7 +15,7 @@
 .main-nav a {
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
-  color: #333;
+  color: black;
   text-decoration: none;
   padding: 10px;
   transition: color 0.3s ease;
