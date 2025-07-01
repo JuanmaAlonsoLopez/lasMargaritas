@@ -6,7 +6,7 @@ const router = express.Router();
 // const fs = require('fs');
 const path = require('path'); // Todavía necesitamos 'path' para path.extname
 
-const bucket = require('../utils/gcs'); // Importa tu bucket de GCS
+const bucket = require('../utils/gcs.js'); // Importa tu bucket de GCS
 
 // =================================================================
 // FUNCIONES AUXILIARES PARA GOOGLE CLOUD STORAGE

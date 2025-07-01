@@ -3,6 +3,7 @@
 // =================================================================
 const express = require('express');
 const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
 const cors = require('cors');
 const path = require('path');
 const helmet = require('helmet');
@@ -105,10 +106,18 @@ app.use(cors({
 }));
 
 app.use(express.json());
+// Configuración de la sesión con PostgreSQL
 app.use(session({
+  store: new pgSession({
+    pool : pool,                // pool de pg ya configurado en db.js
+    tableName : 'session',      // Nombre de la tabla para las sesiones (la crearás en tu BD)
+    // Insert define table here, if it is still empty
+    // createTableIfMissing: true // Opcional: crea la tabla si no existe, pero es mejor crearla manualmente
+  }),
   secret: process.env.SESSION_SECRET || 'un_secreto_muy_seguro',
   resave: false,
   saveUninitialized: false,
+  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 días de duración de la cookie
 }));
 app.use(passport.initialize());
 app.use(passport.session());
