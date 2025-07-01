@@ -15,7 +15,7 @@ exports.googleCallback = (req, res) => {
 
   const user = req.user;
   // ✅ Redirige a la URL de producción
-  res.redirect(`${PRODUCTION_URL}/index.html?token=${token}&user=${encodeURIComponent(JSON.stringify({ name: user.name, email: user.email }))}`);
+  res.redirect(`https://las-margaritas.vercel.app/index.html?token=${token}&user=${encodeURIComponent(JSON.stringify({ name: user.name, email: user.email }))}`);
 };
 
 exports.register = async (req, res) => {
@@ -32,7 +32,7 @@ exports.register = async (req, res) => {
 
     const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1d' });
     // ✅ Usa la URL de producción para el enlace de activación
-    const link = `${PRODUCTION_URL}/api/auth/activate/${token}`;
+    const link = `https://las-margaritas.vercel.app/api/auth/activate/${token}`;
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: email,
@@ -56,11 +56,11 @@ exports.activate = async (req, res) => {
       [email]
     );
     // ✅ Redirige a la página de login después de activar
-    res.redirect(`${PRODUCTION_URL}/login.html?activated=true`);
+    res.redirect(`https://las-margaritas.vercel.app/login.html?activated=true`);
   } catch (err) {
     console.error(err);
     // ✅ Redirige a una página de error si el token es inválido
-    res.redirect(`${PRODUCTION_URL}/pages/error.html?message=link_invalido`);
+    res.redirect(`https://las-margaritas.vercel.app/pages/error.html?message=link_invalido`);
   }
 };
 
@@ -102,7 +102,7 @@ exports.forgotPassword = async (req, res) => {
 
     const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '15m' });
     // ✅ Usa la URL de producción para el enlace de reseteo
-    const link = `${PRODUCTION_URL}/reset-password.html?token=${token}`;
+    const link = `https://las-margaritas.vercel.app/reset-password.html?token=${token}`;
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: email,
