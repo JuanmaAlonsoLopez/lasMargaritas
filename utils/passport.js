@@ -46,7 +46,7 @@ passport.use(new GoogleStrategy({
         const newUserResult = await pool.query(
           `INSERT INTO users (name, email, role, status, is_google)
            VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-          [name, email, 'user', 'active', true] // 'role' y 'status' pueden variar según tu lógica
+          [name, email, 2, 2, true] // 'role' y 'status' pueden variar según tu lógica
         );
         user = newUserResult.rows[0];
       }
