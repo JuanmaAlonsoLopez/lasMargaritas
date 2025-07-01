@@ -38,8 +38,22 @@ passport.use(new GoogleStrategy({
 
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser(async (id, done) => {
-  const res = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
-  done(null, res.rows[0]);
+  try {
+    const res = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
+    if (res.rows.length > 0) {
+      // User found, pass the user object
+      done(null, res.rows[0]);
+    } else {
+      // User not found with the given ID in the database
+      // This means the user ID in the session is no longer valid.
+      console.warn(`[Deserialize Error]: User with ID ${id} not found in DB.`);
+      done(new Error('User not found or session invalid.'), null);
+    }
+  } catch (err) {
+    // Handle any database query errors
+    console.error("[Deserialize Error]: Database query failed:", err);
+    done(err, null);
+  }
 });
 
 module.exports = passport;
