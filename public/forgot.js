@@ -12,7 +12,8 @@ forgotForm.addEventListener('submit', async e => {
   showLoader(); // Muestra el loader
 
   try {
-    const res = await fetch('http://localhost:3000/api/auth/forgot-password', {
+    // ✅ ¡CORRECCIÓN! Se usa una ruta relativa para que funcione en producción.
+    const res = await fetch('/api/auth/forgot-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email })

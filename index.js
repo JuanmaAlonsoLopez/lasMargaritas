@@ -15,10 +15,13 @@ const passport = require('./utils/passport');
 const { googleCallback } = require('./controllers/authController');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
-const productRoutes = require('./routes/products'); 
+const productRoutes = require('./routes/products');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// --- URL DE PRODUCCIÓN ---
+const PRODUCTION_URL = 'https://las-margaritas.vercel.app';
 
 // --- CONFIGURACIÓN DEL CLIENTE DE MERCADO PAGO ---
 const mpClient = new MercadoPagoConfig({
@@ -29,48 +32,78 @@ const mpClient = new MercadoPagoConfig({
 // MIDDLEWARE
 // =================================================================
 
-// 1. Helmet para seguridad (VERSIÓN FINAL Y DEFINITIVA)
+// 1. Helmet para seguridad (VERSIÓN DEFINITIVA PARA PRODUCCIÓN)
 app.use(
   helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'self'"],
-    scriptSrc: [
-      "'self'",
-      "https://sdk.mercadopago.com",
-      "https://*.mercadolibre.com",
-      "'unsafe-inline'"
-    ],
-    styleSrc: ["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
-    imgSrc: ["'self'", "data:", "https:", "http://http2.mlstatic.com"],
-    connectSrc: [
-      "'self'",
-      "http://localhost:3000",
-      "https://api.mercadopago.com",
-      "https://api.mercadolibre.com"
-    ],
-    fontSrc: ["'self'", "https://fonts.gstatic.com"],
-    objectSrc: ["'none'"],
-    frameSrc: [
-      "'self'",
-      "https://www.mercadopago.com",
-      "https://www.mercadopago.com.ar",
-      "https://mercadopago.com",
-      "https://mercadopago.com.ar",
-      "https://sandbox.mercadopago.com.ar", // CLAVE
-      "https://sandbox.mercadopago.com",    // OPCIONAL
-      "http://*.mercadolibre.com"
-    ],
-    upgradeInsecureRequests: [],
-  },
-})
+    directives: {
+      // --- General ---
+      defaultSrc: ["'self'"], // Por defecto, solo tu dominio
+      objectSrc: ["'none'"], // No permitir plugins (Flash, etc.)
+      upgradeInsecureRequests: [],
+
+      // --- Scripts ---
+      scriptSrc: [
+        "'self'", // Scripts de tu dominio
+        "https://apis.google.com", // API de Google
+        "https://sdk.mercadopago.com", // SDK de Mercado Pago
+        "'unsafe-inline'" // Necesario a veces, pero úsalo con precaución
+      ],
+
+      // --- Estilos ---
+      styleSrc: [
+        "'self'",
+        "https://fonts.googleapis.com", // Fuentes de Google
+        "'unsafe-inline'"
+      ],
+
+      // --- Imágenes ---
+      imgSrc: [
+        "'self'", // Imágenes de tu dominio (favicon.ico)
+        "data:", // Imágenes en base64
+        "https://lh3.googleusercontent.com", // Avatares de cuentas de Google
+        "https://http2.mlstatic.com" // Logos de medios de pago de ML
+      ],
+      
+      // --- Conexiones (APIs, WebSockets) ---
+      connectSrc: [
+        "'self'", // API propia
+        "https://accounts.google.com/o/oauth2/", // Autenticación de Google
+        "https://api.mercadopago.com" // API de Mercado Pago
+      ],
+
+      // --- Fuentes ---
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+
+      // --- iFrames ---
+      frameSrc: [
+        "'self'",
+        "https://accounts.google.com/", // iFrame de login de Google
+        "https://*.mercadopago.com", // Checkout de Mercado Pago
+        "https://*.mercadopago.com.ar"
+      ],
+    },
+  })
 );
 
 
-// 2. CORS y otros middlewares
+// 2. CORS y otros middlewares (VERSIÓN PARA PRODUCCIÓN)
+const allowedOrigins = [
+  'http://localhost:5500', // Mantener para pruebas locales
+  'http://127.0.0.1:5500', // Mantener para pruebas locales
+  PRODUCTION_URL // <-- URL DE VERCEL PARA PRODUCCIÓN
+];
+
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5500', 'http://127.0.0.1:5500'],
-    credentials: true
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('No permitido por CORS'));
+    }
+  },
+  credentials: true
 }));
+
 app.use(express.json());
 app.use(session({
   secret: process.env.SESSION_SECRET || 'un_secreto_muy_seguro',
@@ -85,6 +118,11 @@ app.use(passport.session());
 // RUTAS
 // =================================================================
 
+// Redirige la ruta raíz a login.html para una entrada limpia
+app.get('/', (req, res) => {
+    res.redirect('/login.html');
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
@@ -92,7 +130,7 @@ app.use('/api/products', productRoutes);
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile','email'] }));
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login.html' }), googleCallback);
 
-// --- RUTA PARA CREAR LA PREFERENCIA DE PAGO ---
+// --- RUTA PARA CREAR LA PREFERENCIA DE PAGO (VERSIÓN PARA PRODUCCIÓN) ---
 app.post('/api/pagos/crear-preferencia', async (req, res) => {
     try {
         const carrito = req.body.carrito;
@@ -109,17 +147,14 @@ app.post('/api/pagos/crear-preferencia', async (req, res) => {
             currency_id: 'ARS',
         }));
 
-        // =======================================================
-        // ====>               ¡AQUÍ ESTÁ LA SOLUCIÓN!         <====
-        // Se elimina la propiedad 'auto_return' para pruebas locales.
-        // =======================================================
         const body = {
             items: items,
-            back_urls: { 
-                success: 'http://127.0.0.1:5500/pages/success.html', // Puedes crear esta página
-                failure: 'http://127.0.0.1:5500/pages/failure.html', // Puedes crear esta página
-                pending: 'http://127.0.0.1:5500/pages/pending.html', // Puedes crear esta página
+            back_urls: {
+                success: `${PRODUCTION_URL}/pages/success.html`,
+                failure: `${PRODUCTION_URL}/pages/failure.html`,
+                pending: `${PRODUCTION_URL}/pages/pending.html`,
             },
+            auto_return: 'approved',
         };
         
         console.log("OBJETO ENVIADO A MERCADO PAGO:", JSON.stringify(body, null, 2));
@@ -127,7 +162,6 @@ app.post('/api/pagos/crear-preferencia', async (req, res) => {
         const preference = new Preference(mpClient);
         const result = await preference.create({ body });
         
-        // ¡Si llegamos aquí, todo salió bien!
         console.log('Preferencia creada con éxito. ID:', result.id);
         res.json({ id: result.id });
 

@@ -7,6 +7,7 @@
   top: 0;
   left: 0;
   z-index: 1000;
+  
 }
 
 .header-inner {
@@ -73,6 +74,7 @@
   top: 50%;
   translate: 0 -50%;
   z-index: 1001;
+  padding-top: 70px;
 }
 
 .menu-toggle span {
@@ -166,4 +168,7 @@
   .menu-toggle {
     display: flex;
   }
+}
+body {
+    padding-top: 95px;
 }

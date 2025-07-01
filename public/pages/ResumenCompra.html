@@ -138,12 +138,12 @@
             // === SECCIÓN DE PAGO CON MERCADO PAGO (CORREGIDA) ===
             const checkoutButton = document.getElementById('btn-pagar');
             
-            // Reemplaza con tu Public Key de prueba
+            // Reemplaza con tu Public Key de producción cuando la tengas
             const publicKey = 'TEST-5a6b315b-a5f0-4396-9625-8b6142c2ba69'; 
             const mercadopago = new MercadoPago(publicKey, { locale: 'es-AR' });
 
             checkoutButton.addEventListener('click', async () => {
-                const cart = getCart(); // Obtener el carrito actualizado
+                const cart = getCart(); 
                 if (cart.length === 0) {
                     alert('El carrito está vacío.');
                     return;
@@ -152,11 +152,8 @@
                 checkoutButton.disabled = true;
 
                 try {
-                    // =======================================================
-                    // ====>               ¡AQUÍ ESTÁ LA SOLUCIÓN!         <====
-                    // Se usa la URL completa del backend que corre en el puerto 3000
-                    // =======================================================
-                    const response = await fetch('http://localhost:3000/api/pagos/crear-preferencia', {
+                    // ✅ ¡CORRECCIÓN! Se usa una ruta relativa para que funcione en producción.
+                    const response = await fetch('/api/pagos/crear-preferencia', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ carrito: cart }), 

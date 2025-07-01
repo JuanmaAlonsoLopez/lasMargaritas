@@ -24,15 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
         contenedorProductos.innerHTML = '<p>Cargando productos...</p>';
 
         try {
-            // Hacemos la petición a tu API backend (ahora el backend la filtrará)
-            const response = await fetch(`http://localhost:3000/api/products?category=${encodeURIComponent(categoriaNombre)}`);
+            // ✅ ¡CORRECCIÓN! Se usa una ruta relativa para que funcione en producción.
+            const response = await fetch(`/api/products?category=${encodeURIComponent(categoriaNombre)}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const productos = await response.json();
 
             contenedorProductos.innerHTML = '';
-            // CORRECCIÓN: Usamos > 0 para manejar correctamente el caso de 0 productos
             if (productos.length > 0) {
                 productos.forEach(producto => {
                     contenedorProductos.innerHTML += createProductCardHTML(producto);

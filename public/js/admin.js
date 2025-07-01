@@ -32,12 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const cancelBtnUser = document.getElementById('btnCancelUser');
 
   // ===================================================================
-  // LÓGICA DE GESTIÓN DE PRODUCTOS (CON CAMBIOS)
+  // LÓGICA DE GESTIÓN DE PRODUCTOS
   // ===================================================================
 
   const loadProducts = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/products', {
+      // ✅ CAMBIO PARA PRODUCCIÓN
+      const response = await fetch('/api/products', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!response.ok) throw new Error('No se pudieron cargar los productos.');
@@ -70,7 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const loadCategories = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/products/categories', {
+      // ✅ CAMBIO PARA PRODUCCIÓN
+      const response = await fetch('/api/products/categories', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!response.ok) throw new Error('No se pudieron cargar las categorías.');
@@ -92,13 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
     modalProduct.classList.add('hidden');
   };
 
-  // --- MODIFICACIÓN #1 ---
-  // Se asegura de que la vista previa esté oculta y limpia al crear un nuevo producto.
   const openModalForCreateProduct = () => {
     productForm.reset();
     formTitleProduct.textContent = 'Nuevo Producto';
-    imagePreview.src = ''; // Limpiar cualquier imagen de una sesión anterior
-    imagePreview.style.display = 'none'; // Ocultar el contenedor de la vista previa
+    imagePreview.src = '';
+    imagePreview.style.display = 'none';
     document.getElementById('prodId').value = '';
     document.getElementById('image').required = true;
     modalProduct.classList.remove('hidden');
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('stock').value = product.stock;
     document.getElementById('category').value = product.category;
     imagePreview.src = product.image_url;
-    imagePreview.style.display = 'block'; // En modo edición, sí mostramos la imagen existente
+    imagePreview.style.display = 'block';
     document.getElementById('image').required = false;
     modalProduct.classList.remove('hidden');
   };
@@ -124,7 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const id = document.getElementById('prodId').value;
     const isEditing = !!id;
     const formData = new FormData(productForm);
-    const url = isEditing ? `http://localhost:3000/api/products/${id}` : 'http://localhost:3000/api/products';
+    // ✅ CAMBIO PARA PRODUCCIÓN
+    const url = isEditing ? `/api/products/${id}` : '/api/products';
     const method = isEditing ? 'PUT' : 'POST';
     try {
       const response = await fetch(url, {
@@ -144,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // ===================================================================
-  // LÓGICA DE GESTIÓN DE USUARIOS (SIN CAMBIOS)
+  // LÓGICA DE GESTIÓN DE USUARIOS
   // ===================================================================
   
   const loadUsers = async () => {
@@ -238,7 +239,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const id = target.dataset.id;
       if (confirm(`¿Estás seguro de que quieres eliminar el producto con ID ${id}?`)) {
         try {
-          const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+          // ✅ CAMBIO PARA PRODUCCIÓN
+          const response = await fetch(`/api/products/${id}`, {
             method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` }
           });
           if (!response.ok) throw new Error((await response.json()).message);
@@ -251,7 +253,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (target.classList.contains('btn-edit')) {
       const id = target.dataset.id;
       try {
-        const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+        // ✅ CAMBIO PARA PRODUCCIÓN
+        const response = await fetch(`/api/products/${id}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!response.ok) throw new Error('No se pudieron obtener los datos del producto.');
@@ -299,20 +302,12 @@ document.addEventListener('DOMContentLoaded', () => {
   closeModalBtnUser.addEventListener('click', closeUserModal);
   cancelBtnUser.addEventListener('click', closeUserModal);
   
-  // --- MODIFICACIÓN #2 ---
-  // El listener ahora comprueba si se está editando antes de mostrar la vista previa.
   imageInput.addEventListener('change', event => {
-    // Verificamos si el campo de ID del producto tiene un valor.
-    // Si lo tiene, estamos editando. Si está vacío, estamos creando.
     const isEditing = !!document.getElementById('prodId').value;
-
-    // Si NO estamos editando (o sea, estamos creando), no hacemos nada.
-    // La imagen se selecciona pero no se muestra la vista previa.
     if (!isEditing) {
       return;
     }
   
-    // Si estamos editando, sí mostramos la vista previa del nuevo archivo seleccionado.
     const file = event.target.files[0];
     if (file) {
       imagePreview.src = URL.createObjectURL(file);
