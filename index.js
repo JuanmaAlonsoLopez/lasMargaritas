@@ -15,7 +15,7 @@ const passport = require('./utils/passport');
 const { googleCallback } = require('./controllers/authController');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
-const productRoutes = require('./routes/products'); 
+const productRoutes = require('./routes/products');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -32,40 +32,59 @@ const mpClient = new MercadoPagoConfig({
 // MIDDLEWARE
 // =================================================================
 
-// 1. Helmet para seguridad (VERSIÓN PARA PRODUCCIÓN)
+// 1. Helmet para seguridad (VERSIÓN DEFINITIVA PARA PRODUCCIÓN)
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'", PRODUCTION_URL],
+      // --- General ---
+      defaultSrc: ["'self'"], // Por defecto, solo tu dominio
+      objectSrc: ["'none'"], // No permitir plugins (Flash, etc.)
+      upgradeInsecureRequests: [],
+
+      // --- Scripts ---
       scriptSrc: [
+        "'self'", // Scripts de tu dominio
+        "https://apis.google.com", // API de Google
+        "https://sdk.mercadopago.com", // SDK de Mercado Pago
+        "'unsafe-inline'" // Necesario a veces, pero úsalo con precaución
+      ],
+
+      // --- Estilos ---
+      styleSrc: [
         "'self'",
-        PRODUCTION_URL,
-        "https://sdk.mercadopago.com",
-        "https://*.mercadolibre.com",
+        "https://fonts.googleapis.com", // Fuentes de Google
         "'unsafe-inline'"
       ],
-      styleSrc: ["'self'", PRODUCTION_URL, "https://fonts.googleapis.com", "'unsafe-inline'"],
-      imgSrc: ["'self'", "data:", "https:", "http://http2.mlstatic.com"],
-      connectSrc: [
-        "'self'",
-        PRODUCTION_URL,
-        "https://api.mercadopago.com",
-        "https://api.mercadolibre.com"
+
+      // --- Imágenes ---
+      imgSrc: [
+        "'self'", // Imágenes de tu dominio (favicon.ico)
+        "data:", // Imágenes en base64
+        "https://lh3.googleusercontent.com", // Avatares de cuentas de Google
+        "https://http2.mlstatic.com" // Logos de medios de pago de ML
       ],
+      
+      // --- Conexiones (APIs, WebSockets) ---
+      connectSrc: [
+        "'self'", // API propia
+        "https://accounts.google.com/o/oauth2/", // Autenticación de Google
+        "https://api.mercadopago.com" // API de Mercado Pago
+      ],
+
+      // --- Fuentes ---
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      objectSrc: ["'none'"],
+
+      // --- iFrames ---
       frameSrc: [
         "'self'",
-        PRODUCTION_URL,
-        "https://www.mercadopago.com",
-        "https://www.mercadopago.com.ar",
-        "https://sandbox.mercadopago.com.ar",
-        "http://*.mercadolibre.com"
+        "https://accounts.google.com/", // iFrame de login de Google
+        "https://*.mercadopago.com", // Checkout de Mercado Pago
+        "https://*.mercadopago.com.ar"
       ],
-      upgradeInsecureRequests: [],
     },
   })
 );
+
 
 // 2. CORS y otros middlewares (VERSIÓN PARA PRODUCCIÓN)
 const allowedOrigins = [
@@ -130,7 +149,7 @@ app.post('/api/pagos/crear-preferencia', async (req, res) => {
 
         const body = {
             items: items,
-            back_urls: { 
+            back_urls: {
                 success: `${PRODUCTION_URL}/pages/success.html`,
                 failure: `${PRODUCTION_URL}/pages/failure.html`,
                 pending: `${PRODUCTION_URL}/pages/pending.html`,
