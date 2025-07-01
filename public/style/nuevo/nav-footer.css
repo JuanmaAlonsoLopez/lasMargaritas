@@ -121,6 +121,21 @@ header.scrolled .icons img {
   width: 22px;
 }
 
+/* Botón lupa */
+.search-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+}
+
+.search-toggle img {
+  width: 24px;
+  height: 24px;
+}
+
 /* media  */
 
 
