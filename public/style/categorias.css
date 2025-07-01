@@ -5,11 +5,13 @@
   height: 50px;
 }
 
+
 /* NAV PRINCIPAL (solo desktop) */
 .main-nav {
   display: flex;
   gap: 30px;
   align-items: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .main-nav a {
@@ -103,5 +105,15 @@
   }
 }
 body {
-    padding-top: 95px;
+   font-family: 'Montserrat', sans-serif;
+  padding-top: 15000px; /* Ajusta según la altura de tu encabezado */
+
 }
+h3 {
+    font-family:'Montserrat', sans-serif;; /* Cambia la fuente de los textos debajo de los titulos */
+}
+.categoria h3 {
+    font-family: 'Montserrat', sans-serif !important; /* Cambia la fuente a 'Montserrat' */
+    font-weight: 100 !important;
+}
+
