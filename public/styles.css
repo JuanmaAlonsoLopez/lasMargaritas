@@ -90,6 +90,12 @@ a{
     top: 70px;
 }
 
+.productos-destacados h2 {
+  text-decoration: underline;
+  text-decoration-color: #5E7F58; /* verde */
+  text-underline-offset: 6px;
+}
+
 .carousel-item {
     position: relative;
     
@@ -162,7 +168,7 @@ a{
 }
 
 .textMedio h2{
-    font-family: "Quintessential", serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 2.5rem;
     color: #333;
     text-align: center;
@@ -181,8 +187,11 @@ a{
 /*--------------------------------------------------*/
 
 .categoriaImg h2{
-    font-family: "Quintessential", serif;
-    padding: 30px;
+  font-family: 'Montserrat', sans-serif;
+  padding: 30px;
+  text-decoration: underline;
+  text-decoration-color: #5E7F58; /* verde */
+  text-underline-offset: 6px;
 }
 
 .muestraCategorias {
