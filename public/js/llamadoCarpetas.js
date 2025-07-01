@@ -2,7 +2,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- CONSTANTES Y SELECTORES ---
-    const API_BASE_URL = 'http://localhost:3000';
+    // NO se necesita una URL base. Usaremos rutas relativas.
+    // const API_BASE_URL = 'http://localhost:3000'; // Se elimina esta línea
 
     // Selectores para los carruseles de productos
     const destacadosContainer = document.querySelector('#carousel1 .productos');
@@ -31,10 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!container) return;
         container.innerHTML = '<p>Cargando...</p>';
         try {
-            let url = `${API_BASE_URL}/api/products`;
+            // ✅ ¡ESTA ES LA CORRECCIÓN PRINCIPAL!
+            // Se usa una ruta relativa para que funcione en cualquier dominio (local y producción).
+            let url = `/api/products`; 
             if (category) { url += `?category=${encodeURIComponent(category)}`; }
+            
             const response = await fetch(url);
             if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+            
             const products = await response.json();
             container.innerHTML = products.length > 0 ? products.map(createProductCardHTML).join('') : '<p>No hay productos en esta categoría.</p>';
         } catch (error) {
@@ -56,12 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         alert(`"${productToAdd.name}" fue agregado al carrito.`);
         
-        // Actualizamos el contenido del carrito desplegable CADA VEZ que se añade algo
         updateCartDropdown();
     }
     
     function updateCartDropdown() {
-        // Asegurarnos de que el contenedor exista antes de intentar usarlo
         if (!cartItemsContainer) return;
 
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -89,11 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchAndRenderProducts(babyContainer, 'Baby');
         fetchAndRenderProducts(ortopedicaContainer, 'Ortopédica');
         
-        // Actualiza el carrito desplegable al cargar la página por si ya había items
         updateCartDropdown();
     }
 
-    // Listener para los botones "Agregar al carrito"
     document.body.addEventListener('click', (event) => {
         if (event.target.classList.contains('agregar-carrito')) {
             const productCard = event.target.closest('.producto');
@@ -108,6 +109,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Inicia todo el proceso
     initializePage();
 });

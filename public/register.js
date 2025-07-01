@@ -19,7 +19,8 @@ registerForm.addEventListener('submit', async e => {
   showLoader(); // Muestra el loader
 
   try {
-    const res = await fetch('http://localhost:3000/api/auth/register', {
+    // ✅ ¡CORRECCIÓN! Se usa una ruta relativa para que funcione en producción.
+    const res = await fetch('/api/auth/register', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({ name, email, password, confirmPassword: confirm })
