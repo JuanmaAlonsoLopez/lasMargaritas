@@ -331,9 +331,11 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 }
 
 .ver-mas {
+    font-family: 'Montserrat', sans-serif;
     background-color: #5E7F58;
     color: white;
-    width: auto;
+    width: 12rem;
+    text-align: center;
     border: none;
     padding: 10px 40px;
     border-radius: 5px;
