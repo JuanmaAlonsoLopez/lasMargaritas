@@ -21,7 +21,8 @@
 
 .search-modal-content {
     background-color: #fff;
-    padding: 20px;
+    padding: 30px; /* Aumenta el padding general */
+    padding-top: 50px; /* Más espacio arriba para el botón de cerrar */
     border-radius: 8px;
     width: 90%;
     max-width: 700px; /* Ancho máximo para el modal */
@@ -34,39 +35,40 @@
 
 .search-modal-content .close-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 15px;  /* Ajusta la posición vertical para alejarla del borde */
+    right: 15px; /* Ajusta la posición horizontal para alejarla del borde */
     background: none;
     border: none;
     font-size: 28px; /* Tamaño más grande para el botón de cerrar */
     cursor: pointer;
     color: #333;
-    padding: 5px;
+    padding: 0; /* Asegurar que no tenga padding propio que lo empuje */
+    line-height: 1; /* Asegurar que la altura de línea no interfiera con el tamaño visual */
 }
 
 .search-modal-content .close-button:hover {
-    color: #007bff;
+    color: #007bff; /* Color al pasar el mouse por encima */
 }
 
 #search-input {
     width: 100%;
     padding: 12px;
-    margin-bottom: 15px;
+    margin-bottom: 15px; /* Margen inferior para separar del contenido */
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
-    outline: none; /* Quita el contorno al enfocar */
+    outline: none; /* Quita el contorno por defecto al enfocar */
 }
 
 #search-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    border-color: #007bff; /* Color del borde al enfocar */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra al enfocar */
 }
 
 #search-results-container {
     overflow-y: auto; /* Permite scroll vertical si los resultados exceden la altura */
     flex-grow: 1; /* Permite que el contenedor de resultados ocupe el espacio disponible */
-    padding-right: 10px; /* Espacio para la barra de scroll */
+    padding-right: 10px; /* Espacio para la barra de scroll, si aparece */
 }
 
 /* Estilo para cada item de resultado de búsqueda */
@@ -79,15 +81,15 @@
 }
 
 .search-result-item:last-child {
-    border-bottom: none; /* No hay borde en el último item */
+    border-bottom: none; /* No hay borde en el último item de la lista */
 }
 
 .search-result-item img {
-    width: 90px; /* Tamaño de la imagen del producto */
+    width: 90px; /* Tamaño fijo para la imagen del producto */
     height: 90px;
-    object-fit: cover;
+    object-fit: cover; /* Recorta la imagen para que cubra el área sin distorsionarse */
     border-radius: 4px;
-    flex-shrink: 0; /* Evita que la imagen se comprima */
+    flex-shrink: 0; /* Evita que la imagen se comprima en pantallas pequeñas */
 }
 
 .search-result-details {
@@ -107,9 +109,9 @@
     margin: 0 0 8px 0;
     font-size: 0.9em;
     color: #666;
-    max-height: 3.2em; /* Limitar la altura de la descripción a 2 líneas aprox. */
+    max-height: 3.2em; /* Limitar la altura de la descripción a unas 2 líneas */
     overflow: hidden;
-    text-overflow: ellipsis; /* Añadir puntos suspensivos */
+    text-overflow: ellipsis; /* Añadir puntos suspensivos si el texto es muy largo */
     line-height: 1.6em;
 }
 
@@ -151,10 +153,16 @@
 @media (max-width: 768px) {
     .search-modal-content {
         width: 95%;
-        padding: 15px;
+        padding: 20px; /* Reducir padding en móviles */
+        padding-top: 40px; /* Ajustar padding-top para el botón de cerrar en móviles */
+    }
+    .search-modal-content .close-button {
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
     }
     .search-result-item {
-        flex-wrap: wrap; /* Permite que los items se envuelvan */
+        flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea */
         text-align: center;
         justify-content: center;
         padding: 10px 0;
@@ -166,10 +174,10 @@
         margin-bottom: 10px;
     }
     .search-result-details {
-        align-items: center;
+        align-items: center; /* Centrar texto en dispositivos móviles */
         margin-bottom: 10px;
     }
     .search-result-item .add-to-cart-btn {
-        width: 100%;
+        width: 100%; /* Botón de añadir al carrito ocupa todo el ancho */
     }
 }
