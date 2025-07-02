@@ -84,10 +84,11 @@
                 let subtotal = 0;
                 cartContainer.innerHTML = cart.map(product => {
                     const productTotal = product.price * product.quantity;
+                    const imageUrl = product.image_url; 
                     subtotal += productTotal;
                     return `
                         <div class="cart-product-item" data-id="${product.id}">
-                            <img src="${product.image_url}" alt="${product.name}" class="cart-product-image">
+                            <img src="${imageUrl}" alt="${product.name}" class="cart-product-image">
                             <div class="cart-product-details">
                                 <p class="cart-product-title">${product.name}</p>
                                 <div class="cart-product-quantity-controls">
