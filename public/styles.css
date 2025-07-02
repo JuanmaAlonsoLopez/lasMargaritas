@@ -343,7 +343,7 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
     font-weight: bold;
     cursor: pointer;
     display: block;
-    margin: 0 auto;
+    margin: 20px auto;
     transition: background-color 0.3s ease;
 }
 

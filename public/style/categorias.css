@@ -140,7 +140,7 @@
 }
 
 .categorias {
-  margin-top: 130px; /* Ajusta el valor según lo que necesites */
+  margin-top: 50px; /* Ajusta el valor según lo que necesites */
 }
 
 .categoriash2 {
@@ -148,7 +148,7 @@
   text-align: center;
   font-size: 2.5rem;
   font-weight: bold;
-  margin: 40px 0 20px 0;
+  margin: 0 0 20px 0;
   border-bottom: 2px solid #5E7F58;
   background: linear-gradient(90deg, #eaf6ea 0%, #f5faf5 100%);
   border-radius: 16px;
