@@ -106,6 +106,36 @@ header {
     box-shadow: 0 0 3px rgba(0,0,0,0.3); /* Subtle shadow */
 }
 
+/*Esto de aca mueve la pelotita del carrito de comptas GUARDA*/
+
+@media (max-width: 764px){
+
+.cart-icon-link {
+    position: relative; /* Essential for positioning the badge */
+    display: inline-block; /* Ensures proper width/height for positioning */
+}
+
+.cart-count-badge {
+    background-color: #ff0000; /* Red background for visibility */
+    color: #ffffff; /* White text */
+    border-radius: 50%; /* Makes it circular */
+    padding: 2px 7px; /* Adjust padding for size */
+    font-size: 0.75em; /* Smaller font size */
+    font-weight: bold;
+    position: absolute; /* Positions it relative to the .cart-icon-link */
+    top: -5px; /* Adjust vertical position */
+    right: 187px; /* Adjust horizontal position */
+    min-width: 20px; /* Ensure a minimum width for single digits */
+    text-align: center; /* Center the number */
+    line-height: 1.2; /* Adjust line height for vertical centering */
+    display: none; /* Hidden by default when cart is empty */
+    box-shadow: 0 0 3px rgba(0,0,0,0.3); /* Subtle shadow */
+}
+
+}
+
+
+
 /* Estilo cuando se scrollea */
 header.scrolled .header-inner {
   flex-wrap: nowrap;
@@ -458,3 +488,105 @@ justify-content: center;
 }
 
 
+/* Ocultamos el botón de hamburguesa en desktop */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    font-size: 28px;
+    z-index: 1002; /* Para que esté por encima de otros elementos */
+}
+
+/* Overlay para el fondo oscuro */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Evitar scroll del body cuando el menú está abierto */
+body.no-scroll {
+    overflow: hidden;
+}
+
+
+/* --- VISTA MÓVIL --- */
+@media (max-width: 768px) {
+
+    /* Mostramos el botón de hamburguesa */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Contenedor del menú: lo convertimos en un sidebar */
+    #nav-content {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Lo posicionamos fuera de la pantalla */
+        width: 280px;
+        height: 100%;
+        background-color: #f8f8f8; /* Un color de fondo para que no sea transparente */
+        z-index: 999;
+        box-shadow: -4px 0 15px rgba(0,0,0,0.2);
+        transition: right 0.4s ease-in-out;
+
+        /* Hacemos que los elementos internos se apilen verticalmente */
+        display: flex;
+        flex-direction: column;
+        padding: 60px 20px 20px;
+        align-items: flex-start;
+    }
+
+    /* Cuando el contenedor tiene la clase .active, se desplaza a la vista */
+    #nav-content.active {
+        right: 0;
+    }
+
+    /* Estilos para los links de navegación dentro del sidebar */
+    #nav-content .main-nav {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+
+    #nav-content .main-nav a {
+        padding: 15px 10px;
+        font-size: 1.1rem;
+        color: #333;
+        border-bottom: none; /* Quitamos bordes si los tuviera */
+    }
+
+    /* Estilos para los íconos dentro del sidebar */
+    #nav-content .icons {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #nav-content .icons a {
+        display: flex;
+        align-items: center;
+        padding: 15px 10px;
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+    #nav-content .icons img {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+    }
+}
