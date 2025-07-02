@@ -3,16 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const subtotalElem = document.getElementById('product-subtotal');
     const totalElem = document.getElementById('total-amount');
     const shippingCost = 1500;
-    const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Función para obtener los detalles completos de un producto desde la API
-    // Esto es lo nuevo que usaremos para obtener la imagen por ID
+    const getCart = () => JSON.parse(localStorage.getItem('cart')) || []; // Asegúrate de que esta esté vinculada a la global si es necesario
+
     async function fetchProductDetails(productId) {
         try {
             const response = await fetch(`/api/products/${productId}`);
             if (!response.ok) {
                 console.error(`Error al obtener detalles del producto ${productId}:`, response.statusText);
-                return null; // Devuelve null si no se puede obtener el producto
+                return null;
             }
             const productDetails = await response.json();
             return productDetails;
@@ -22,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    async function renderCart() { // <--- Ahora es async
+    async function renderCart() {
         const cart = getCart();
         if (!cartContainer) return;
 
@@ -37,19 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
         let subtotal = 0;
         let productsHtml = [];
 
-        // Hacemos una solicitud para cada producto en el carrito
-        // Esto garantiza que siempre obtenemos la URL de imagen más actual de la BD
+        // Obtener detalles completos para cada producto del carrito
         const productDetailsPromises = cart.map(product => fetchProductDetails(product.id));
         const detailedProducts = await Promise.all(productDetailsPromises);
 
         cart.forEach((product, index) => {
             const fetchedProduct = detailedProducts[index];
-            
-            // Usamos la URL de la imagen obtenida por la API, si existe
-            // Si por alguna razón la llamada falló, usamos la que ya tenemos en localStorage
             const imageUrl = fetchedProduct ? fetchedProduct.image_url : product.image_url;
 
-            const productTotal = product.price * product.quantity; // Usamos el precio del carrito
+            const productTotal = product.price * product.quantity;
             subtotal += productTotal;
 
             productsHtml.push(`
@@ -93,20 +87,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const action = target.dataset.action;
             if (action === 'increase') {
                 productInCart.quantity++;
-                window.updateCartIconBadge();
             } else if (action === 'decrease' && productInCart.quantity > 1) {
                 productInCart.quantity--;
-                window.updateCartIconBadge();
             }
+            window.dispatchEvent(new Event('cartUpdated')); // Disparar evento para actualizar el badge globalmente
         } else if (target.classList.contains('remove-item')) {
             cart = cart.filter(p => p.id !== productId);
-            window.updateCartIconBadge();
+            window.dispatchEvent(new Event('cartUpdated')); // Disparar evento para actualizar el badge globalmente
         }
         
         saveCart(cart);
-        // Volvemos a renderizar para actualizar la UI
-        window.updateCartIconBadge();
-        renderCart(); 
+        renderCart(); // Vuelve a renderizar el carrito
     });
 
     // === SECCIÓN DE PAGO CON MERCADO PAGO ===
@@ -116,6 +107,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const mercadopago = new MercadoPago(publicKey, { locale: 'es-AR' });
 
     checkoutButton.addEventListener('click', async () => {
+        // Verificar si la sesión está iniciada antes de proceder
+        const user = JSON.parse(localStorage.getItem('user'));
+        const token = localStorage.getItem('token'); // Asumiendo que el token es un indicador de sesión
+
+        if (!user || !token || !user.id) {
+            alert('Debes iniciar sesión para continuar la compra.');
+            return;
+        }
+
         const cart = getCart(); 
         if (cart.length === 0) {
             alert('El carrito está vacío.');
@@ -125,10 +125,18 @@ document.addEventListener('DOMContentLoaded', () => {
         checkoutButton.disabled = true;
 
         try {
+            // Calcula el total del carrito para enviarlo
+            const totalAmount = parseFloat(totalElem.textContent.replace('Total: $', '').replace(',', ''));
+            
+            // Envía el carrito y el ID del usuario al backend
             const response = await fetch('/api/pagos/crear-preferencia', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ carrito: cart }), 
+                body: JSON.stringify({ 
+                    carrito: cart, 
+                    userId: user.id, // Envía el ID del usuario
+                    total: totalAmount // Envía el total calculado
+                }), 
             });
 
             if (!response.ok) {
@@ -139,8 +147,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const preference = await response.json();
 
             if (preference.id) {
+                // Redirigir a la página de envío con el status (y opcionalmente el orderId si lo necesitas para shipment.html)
+                // Usamos la URL de retorno que Mercado Pago nos dará en el backend.
+                // Aquí podrías guardar el orderId en localStorage si lo necesitas en shipment.html
+                // localStorage.setItem('lastOrderId', preference.orderId); // Si el backend te devuelve un orderId
+
+                // Mercado Pago ya maneja la redirección a las back_urls que definimos en el backend.
+                // Aquí solo necesitamos hacer el render del botón de MP.
                 checkoutButton.classList.add('hidden');
-                createCheckoutButton(preference.id);
+                createCheckoutButton(preference.id); // Esto renderiza el botón de MP
+                // Si quieres ir a shipment.html *después* del pago de MP, MP se encargará de la redirección
+                // a las URLs definidas en tu backend (success, failure, pending).
+                // Esas URLs de retorno (back_urls) ya apuntan a shipment.html?status=...
+                // Por lo tanto, no necesitas una redirección directa aquí.
             } else {
                 throw new Error('No se recibió un ID de preferencia válido.');
             }
@@ -161,32 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const cartIconCountElement = document.getElementById('cart-item-count');
-
-    // Make getCart global if other scripts need direct access
-    window.getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
-
-    // Make updateCartIconBadge global
-    window.updateCartIconBadge = function() {
-        const cart = window.getCart(); // Use the global getCart
-        let totalQuantity = 0;
-        cart.forEach(product => {
-            totalQuantity += product.quantity;
-        });
-
-        if (cartIconCountElement) {
-            cartIconCountElement.textContent = totalQuantity;
-            if (totalQuantity > 0) {
-                cartIconCountElement.style.display = 'block';
-            } else {
-                cartIconCountElement.style.display = 'none';
-            }
-        }
-    };
-
-    // Call the function on page load to set the initial count
-    window.updateCartIconBadge();
+    // Asegurarse de que getCart y updateCartIconBadge sean globales si se llaman en otros lugares.
+    // getCart ya está definido localmente. updateCartIconBadge se llamará mediante el evento.
     
-    // Llama a la función de renderizado al cargar la página
+    // Iniciar el renderizado del carrito al cargar la página
     renderCart();
 });

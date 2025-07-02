@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/logoBanner/logo.png" type="image/png">
+    <title>Datos de Envío</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../style/nuevo/nav-footer.css">
+    <link rel="stylesheet" href="../style/shipment.css"> </head>
+<body>
+    <header id="mainHeader">
+        <div class="header-inner">
+            <div class="logo" id="logo">
+                <a href="../index.html">
+                    <img src="../images/logoBanner/logoMargasNuevo.png" alt="Logo Las Margaritas">
+                </a>
+            </div>
+            <nav class="main-nav" id="mainNav">
+                <a href="../index.html">Inicio</a>
+                <a href="../pages/categorias.html">Productos</a>
+                <a href="../pages/sobreNosotros.html">Sobre nosotros</a>
+                <a href="../pages/contacto.html">Contacto</a>
+            </nav>
+            <div class="icons" id="icons">
+                <a href="#" id="user-session-desktop">
+                    <img src="../images/logoBanner/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="Ingresar">
+                    <span id="user-name-desktop"></span>
+                </a>
+                <a href="#" id="search-icon-btn">
+                    <img src="../images/logoBanner/icon-search-2.svg" alt="Buscar">
+                </a>
+                <a href="./ResumenCompra.html" class="cart-icon-link">
+                    <img src="../images/logoBanner/shopping-cart_icon-icons.com_72552.svg" alt="Carrito">
+                    <span id="cart-item-count" class="cart-count-badge">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="shipment-main">
+        <div class="shipment-container">
+            <h2>Datos de Envío</h2>
+            <div id="payment-status-message" class="status-message"></div>
+            <form id="shipment-form">
+                <p>Por favor, completa tus datos para el envío:</p>
+                <label for="fullName">Nombre Completo:</label>
+                <input type="text" id="fullName" name="fullName" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Teléfono:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="address">Dirección (Calle y número):</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="city">Ciudad:</label>
+                <input type="text" id="city" name="city" required>
+
+                <label for="province">Provincia:</label>
+                <input type="text" id="province" name="province" required>
+                
+                <button type="submit" id="confirm-shipment-btn">Confirmar Envío</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer"></footer>
+    <a href="https://wa.me/5491134374127" target="_blank" class="whatsapp-float">
+        <img src="../images/imageswhatsapp-icon.png" alt="WhatsApp">
+    </a>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/llamadoCarpetas.js"></script>
+    <script src="../js/updateCartIcon.js"></script>
+    <script src="../js/searchBar.js"></script>
+    <script src="../js/shipment.js"></script> </body>
+</html>
