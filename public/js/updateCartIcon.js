@@ -1,31 +1,25 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const cartIconCountElement = document.getElementById('cart-item-count');
+// public/js/updateCartIcon.js
 
-    // Function to get cart from localStorage
-    const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
+// Función para actualizar el contador del carrito en el icono (GLOBAL)
+function updateCartIconBadge() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let totalQuantity = 0;
+    cart.forEach(product => {
+        totalQuantity += product.quantity;
+    });
 
-    // Function to update the cart icon badge
-    function updateCartIconBadge() {
-        const cart = getCart();
-        let totalQuantity = 0;
-        cart.forEach(product => {
-            totalQuantity += product.quantity;
-        });
-
-        if (cartIconCountElement) {
-            cartIconCountElement.textContent = totalQuantity;
-            if (totalQuantity > 0) {
-                cartIconCountElement.style.display = 'block'; // Show badge if items exist
-            } else {
-                cartIconCountElement.style.display = 'none'; // Hide badge if no items
-            }
-        }
+    const cartIconCountElement = document.getElementById('cart-item-count'); // Obtener el elemento aquí
+    if (cartIconCountElement) {
+        cartIconCountElement.textContent = totalQuantity;
+        // Muestra u oculta el badge según si hay productos
+        cartIconCountElement.style.display = totalQuantity > 0 ? 'block' : 'none'; 
     }
+}
 
-    // Call the function on page load to set the initial count
+document.addEventListener('DOMContentLoaded', () => {
+    // Llamar a la función al cargar el DOM para establecer el conteo inicial
     updateCartIconBadge();
 
-    // Listen for a custom event to update the badge
-    // This event will be dispatched by any script that modifies the cart
+    // Escuchar el evento 'cartUpdated' despachado por addToCart para actualizar el badge
     window.addEventListener('cartUpdated', updateCartIconBadge);
 });

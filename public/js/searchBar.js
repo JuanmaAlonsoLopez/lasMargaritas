@@ -2,44 +2,39 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // Referencias a los elementos del DOM
-    const searchIconBtn = document.getElementById('search-icon-btn'); // Botón para abrir el buscador
-    const searchModal = document.getElementById('search-modal');       // El overlay/modal completo
-    const closeSearchModalBtn = document.getElementById('close-search-modal'); // Botón para cerrar el modal
-    const searchInput = document.getElementById('search-input');       // Input de búsqueda
-    const searchResultsContainer = document.getElementById('search-results-container'); // Contenedor de resultados
-    const noResultsMessage = document.getElementById('no-results-message'); // Mensaje de "no resultados"
+    const searchIconBtn = document.getElementById('search-icon-btn'); 
+    const searchModal = document.getElementById('search-modal');       
+    const closeSearchModalBtn = document.getElementById('close-search-modal'); 
+    const searchInput = document.getElementById('search-input');       
+    const searchResultsContainer = document.getElementById('search-results-container'); 
+    const noResultsMessage = document.getElementById('no-results-message'); 
 
-    let searchTimeout; // Variable para el temporizador de "debounce"
-    const SEARCH_DELAY = 300; // Retraso en milisegundos para la búsqueda (evita muchas peticiones)
+    let searchTimeout; 
+    const SEARCH_DELAY = 300; 
 
     // =========================================================
     // FUNCIONES PARA CONTROLAR EL MODAL
     // =========================================================
 
     function openSearchModal() {
-        searchModal.classList.remove('hidden'); // Muestra el modal
-        searchInput.focus(); // Pone el foco en el input para que el usuario pueda escribir
-        searchResultsContainer.innerHTML = ''; // Limpia resultados de búsquedas anteriores
-        noResultsMessage.classList.add('hidden'); // Oculta el mensaje de "no resultados"
-        searchInput.value = ''; // Limpia el valor del input
+        searchModal.classList.remove('hidden'); 
+        searchInput.focus(); 
+        searchResultsContainer.innerHTML = ''; 
+        noResultsMessage.classList.add('hidden'); 
+        searchInput.value = ''; 
     }
 
     function closeSearchModal() {
-        searchModal.classList.add('hidden'); // Oculta el modal
-        searchResultsContainer.innerHTML = ''; // Limpia los resultados al cerrar
-        searchInput.value = ''; // Limpia el input
+        searchModal.classList.add('hidden'); 
+        searchResultsContainer.innerHTML = ''; 
+        searchInput.value = ''; 
     }
 
     // =========================================================
     // LÓGICA DE BÚSQUEDA DE PRODUCTOS
     // =========================================================
 
-    /**
-     * Realiza una búsqueda de productos en el backend.
-     * @param {string} query El término de búsqueda ingresado por el usuario.
-     */
     async function performSearch(query) {
-        // Si la búsqueda está vacía o solo son espacios, limpiar y salir
         if (query.trim() === '') {
             searchResultsContainer.innerHTML = '';
             noResultsMessage.classList.add('hidden');
@@ -47,13 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            // Realiza la petición a tu nueva ruta de búsqueda
             const response = await fetch(`/api/products/search?query=${encodeURIComponent(query)}`);
             if (!response.ok) {
                 throw new Error('Error al buscar productos. Código: ' + response.status);
             }
             const products = await response.json();
-            renderSearchResults(products); // Renderiza los productos encontrados
+            renderSearchResults(products); 
         } catch (error) {
             console.error('Error en la búsqueda:', error);
             searchResultsContainer.innerHTML = '<p style="color: red; text-align: center;">Error al cargar los resultados de búsqueda. Intente de nuevo.</p>';
@@ -61,31 +55,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * Renderiza los productos encontrados en el contenedor de resultados.
-     * @param {Array} products Array de objetos producto.
-     */
     function renderSearchResults(products) {
-        searchResultsContainer.innerHTML = ''; // Limpiar resultados anteriores
+        searchResultsContainer.innerHTML = ''; 
         if (products.length === 0) {
-            noResultsMessage.classList.remove('hidden'); // Muestra el mensaje si no hay resultados
+            noResultsMessage.classList.remove('hidden'); 
         } else {
-            noResultsMessage.classList.add('hidden'); // Oculta el mensaje si hay resultados
+            noResultsMessage.classList.add('hidden'); 
             products.forEach(product => {
                 const productCardHtml = createSearchResultCardHTML(product);
-                searchResultsContainer.innerHTML += productCardHtml; // Añade el HTML de la tarjeta
+                searchResultsContainer.innerHTML += productCardHtml; 
             });
         }
     }
 
-    /**
-     * Crea el HTML para una tarjeta de producto en los resultados de búsqueda.
-     * @param {Object} product El objeto producto con sus detalles.
-     * @returns {string} El string HTML de la tarjeta del producto.
-     */
     function createSearchResultCardHTML(product) {
         const formattedPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product.price);
-        // La image_url ya viene como URL absoluta de GCS, la usamos directamente
         const imageUrl = product.image_url; 
 
         return `
@@ -93,7 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
                  data-id="${product.id}"
                  data-name="${product.name}"
                  data-price="${product.price}"
-                 data-image="${imageUrl}"> <img src="${imageUrl}" alt="${product.name}">
+                 data-image="${imageUrl}">
+                <img src="${imageUrl}" alt="${product.name}">
                 <div class="search-result-details">
                     <h3>${product.name}</h3>
                     <p class="description">${product.description}</p>
@@ -108,60 +93,56 @@ document.addEventListener('DOMContentLoaded', () => {
     // EVENT LISTENERS
     // =========================================================
 
-    // 1. Abrir el modal de búsqueda al hacer clic en el ícono
-    if (searchIconBtn) { // Asegurarse de que el elemento existe
+    // Abrir el modal de búsqueda
+    if (searchIconBtn) { 
         searchIconBtn.addEventListener('click', (event) => {
-            event.preventDefault(); // Evita que la página salte si el href es "#"
+            event.preventDefault(); 
             openSearchModal();
         });
     }
 
-    // 2. Cerrar el modal de búsqueda al hacer clic en el botón de cerrar
-    if (closeSearchModalBtn) { // Asegurarse de que el elemento existe
+    // Cerrar el modal de búsqueda
+    if (closeSearchModalBtn) { 
         closeSearchModalBtn.addEventListener('click', closeSearchModal);
     }
 
-    // 3. Cerrar el modal al hacer clic en el overlay (fuera del contenido del modal)
+    // Cerrar el modal al hacer clic en el overlay
     searchModal.addEventListener('click', (event) => {
-        if (event.target === searchModal) { // Solo si el clic es directamente en el overlay
+        if (event.target === searchModal) { 
             closeSearchModal();
         }
     });
 
-    // 4. Búsqueda en tiempo real (con "debounce" para no saturar el servidor)
+    // Búsqueda en tiempo real (con "debounce")
     searchInput.addEventListener('input', (event) => {
-        clearTimeout(searchTimeout); // Limpia el temporizador anterior
+        clearTimeout(searchTimeout); 
         searchTimeout = setTimeout(() => {
-            performSearch(event.target.value); // Ejecuta la búsqueda después del retraso
+            performSearch(event.target.value); 
         }, SEARCH_DELAY);
     });
 
-    // 5. Delegación de eventos para los botones "Agregar al carrito" dentro de los resultados de búsqueda
-    // Usamos delegación porque los resultados se añaden dinámicamente al DOM
+    // Delegación de eventos para los botones "Agregar al carrito"
     searchResultsContainer.addEventListener('click', (event) => {
-        const addToCartBtn = event.target.closest('.add-to-cart-btn'); // Busca el botón "Agregar al carrito"
+        const addToCartBtn = event.target.closest('.add-to-cart-btn'); 
         
-        if (addToCartBtn) { // Si se hizo clic en un botón "Agregar al carrito"
-            const productItem = addToCartBtn.closest('.search-result-item'); // Obtiene la tarjeta del producto padre
+        if (addToCartBtn) { 
+            const productItem = addToCartBtn.closest('.search-result-item'); 
             if (productItem) {
-                // Extrae la información del producto de los atributos data-
                 const product = {
                     id: parseInt(productItem.dataset.id),
                     name: productItem.dataset.name,
                     price: parseFloat(productItem.dataset.price),
-                    image_url: productItem.dataset.image, // Usar image_url para consistencia con el carrito
+                    image: productItem.dataset.image, // Cambiado a 'image' para coincidir con `addToCart`
                     quantity: 1
                 };
                 
                 // Llama a las funciones globales addToCart y updateCartIconBadge
-                // (asumiendo que estas funciones están definidas en llamadoCarpetas.js o common.js y son globales)
-                if (typeof addToCart === 'function' && typeof updateCartIconBadge === 'function') {
+                if (typeof addToCart === 'function') { // Solo verificamos addToCart
                     addToCart(product);
-                    updateCartIconBadge();
-                    // Opcional: Podrías cerrar el modal después de añadir al carrito
-                    // closeSearchModal(); 
+                    // updateCartIconBadge se actualizará automáticamente por el evento 'cartUpdated'
+                    // closeSearchModal(); // Opcional
                 } else {
-                    console.error('Error: Las funciones `addToCart` o `updateCartIconBadge` no están disponibles globalmente.');
+                    console.error('Error: La función `addToCart` no está disponible globalmente.');
                     alert('No se pudo añadir el producto al carrito. Revise la consola.');
                 }
             }
