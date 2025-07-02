@@ -29,9 +29,9 @@ function initializeAllCarousels() {
     .then(response => response.json())
     .then(products => {
       // Filtra productos por categoría (puedes ajustar los IDs).
+      const ortopedicaProducts = products.filter(p => p.category_id === 1);
       const confortProducts = products.filter(p => p.category_id === 1);
-      const babyProducts = products.filter(p => p.category_id === 2);
-      const ortopedicaProducts = products.filter(p => p.category_id === 3);
+      const babyProducts = products.filter(p => p.category_id === 3);
 
       // Crea cada carrusel con sus productos.
       createCarousel('confort-carousel', 'Línea Confort', confortProducts);
@@ -65,22 +65,20 @@ function createCarousel(carouselId, title, products) {
 // **MODIFICADO**: Esta función ahora solo devuelve el HTML de la tarjeta.
 // No añade ningún event listener, lo que previene el bug de duplicación.
 function createProductCardHTML(product) {
-  const formattedPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product.price);
-  const imageUrl = product.image_url; 
-  return `
-    <div class="producto" 
-           data-id="${product.id}" 
-           data-name="${product.name}" 
-           data-price="${product.price}" 
-           data-image="${imageUrl}"><a href="/pages/Prod.Individual.html?id=${product.id}">
-        <img src="${imageUrl}" alt="${product.name}" class="product-image">
-        <h3 class="product-name">${product.name}</h3>
-        <p class="product-price">${formattedPrice}</p>
-      </a>
-      <button class="agregar-carrito">Agregar al carrito</button>
-    </div>
-  `;
+  const formattedPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product.price);
+  const imageUrl = product.image_url; 
+  return `
+    <div class="producto" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-image="${imageUrl}">
+      <a href="/pages/Prod.Individual.html?id=${product.id}">
+        <img src="${imageUrl}" alt="${product.name}" class="product-image">
+        <h3 class="product-name">${product.name}</h3>
+        <p class="product-price">${formattedPrice}</p>
+      </a>
+      <button class="agregar-carrito">Agregar al carrito</button>
+    </div>
+  `;
 }
+
 
 // =================================================================
 // SOLUCIÓN AL BUG: DELEGACIÓN DE EVENTOS PARA "AGREGAR AL CARRITO"
