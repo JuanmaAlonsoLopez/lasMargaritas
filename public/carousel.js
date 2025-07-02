@@ -105,88 +105,88 @@ document.body.addEventListener('click', (event) => {
 // LÓGICA DE CONTROLES Y NAVEGACIÓN DEL CARRUSEL (Tu código original, adaptado)
 // =================================================================
 
-function generateCarouselControls(carouselId) {
-  const productos = document.querySelectorAll(`#${carouselId} .producto`);
-  const totalProductos = productos.length;
-  if (totalProductos === 0) return;
+// function generateCarouselControls(carouselId) {
+//   const productos = document.querySelectorAll(`#${carouselId} .producto`);
+//   const totalProductos = productos.length;
+//   if (totalProductos === 0) return;
   
-  const totalGrupos = Math.ceil(totalProductos / productosPorGrupo);
+//   const totalGrupos = Math.ceil(totalProductos / productosPorGrupo);
 
-  const container = document.querySelector(`#${carouselId}`);
-  const dotsWrapper = document.createElement('div');
-  dotsWrapper.className = 'carousel-controls';
+//   const container = document.querySelector(`#${carouselId}`);
+//   const dotsWrapper = document.createElement('div');
+//   dotsWrapper.className = 'carousel-controls';
 
-  const leftArrow = document.createElement('button');
-  leftArrow.className = 'carousel-arrow';
-  leftArrow.innerHTML = '&#9664;';
-  leftArrow.onclick = () => moveToSlide(carouselsState[carouselId].currentIndex - 1, carouselId);
+//   const leftArrow = document.createElement('button');
+//   leftArrow.className = 'carousel-arrow';
+//   leftArrow.innerHTML = '&#9664;';
+//   leftArrow.onclick = () => moveToSlide(carouselsState[carouselId].currentIndex - 1, carouselId);
 
-  const rightArrow = document.createElement('button');
-  rightArrow.className = 'carousel-arrow';
-  rightArrow.innerHTML = '&#9654;';
-  rightArrow.onclick = () => moveToSlide(carouselsState[carouselId].currentIndex + 1, carouselId);
+//   const rightArrow = document.createElement('button');
+//   rightArrow.className = 'carousel-arrow';
+//   rightArrow.innerHTML = '&#9654;';
+//   rightArrow.onclick = () => moveToSlide(carouselsState[carouselId].currentIndex + 1, carouselId);
 
-  const dotsContainer = document.createElement('div');
-  dotsContainer.className = 'dots-container';
-  dotsContainer.id = `${carouselId}-dots`;
+//   const dotsContainer = document.createElement('div');
+//   dotsContainer.className = 'dots-container';
+//   dotsContainer.id = `${carouselId}-dots`;
 
-  for (let i = 0; i < totalGrupos; i++) {
-    const dot = document.createElement('span');
-    dot.classList.add('dot');
-    dot.onclick = () => moveToSlide(i, carouselId);
-    dotsContainer.appendChild(dot);
-  }
+//   for (let i = 0; i < totalGrupos; i++) {
+//     const dot = document.createElement('span');
+//     dot.classList.add('dot');
+//     dot.onclick = () => moveToSlide(i, carouselId);
+//     dotsContainer.appendChild(dot);
+//   }
 
-  dotsWrapper.appendChild(leftArrow);
-  dotsWrapper.appendChild(dotsContainer);
-  dotsWrapper.appendChild(rightArrow);
+//   dotsWrapper.appendChild(leftArrow);
+//   dotsWrapper.appendChild(dotsContainer);
+//   dotsWrapper.appendChild(rightArrow);
 
-  container.appendChild(dotsWrapper);
+//   container.appendChild(dotsWrapper);
 
-  carouselsState[carouselId] = {
-    currentIndex: 0,
-    totalGrupos,
-    isAutoScrolling: true,
-    autoScrollTimeout: null,
-  };
+//   carouselsState[carouselId] = {
+//     currentIndex: 0,
+//     totalGrupos,
+//     isAutoScrolling: true,
+//     autoScrollTimeout: null,
+//   };
 
-  updateDots(carouselId);
-  moveToSlide(0, carouselId, false);
-}
+//   updateDots(carouselId);
+//   moveToSlide(0, carouselId, false);
+// }
 
-function updateDots(carouselId) {
-  const state = carouselsState[carouselId];
-  const dots = document.querySelectorAll(`#${carouselId}-dots .dot`);
-  if (!dots) return;
-  dots.forEach((dot, i) => {
-    dot.classList.toggle('active', i === state.currentIndex);
-  });
-}
+// function updateDots(carouselId) {
+//   const state = carouselsState[carouselId];
+//   const dots = document.querySelectorAll(`#${carouselId}-dots .dot`);
+//   if (!dots) return;
+//   dots.forEach((dot, i) => {
+//     dot.classList.toggle('active', i === state.currentIndex);
+//   });
+// }
 
-function moveToSlide(index, carouselId, pauseAutoScroll = true) {
-  const carousel = document.querySelector(`#${carouselId} .productos`);
-  const state = carouselsState[carouselId];
-  if (!carousel || !state) return;
+// function moveToSlide(index, carouselId, pauseAutoScroll = true) {
+//   const carousel = document.querySelector(`#${carouselId} .productos`);
+//   const state = carouselsState[carouselId];
+//   if (!carousel || !state) return;
 
-  if (index >= state.totalGrupos) index = 0;
-  if (index < 0) index = state.totalGrupos - 1;
+//   if (index >= state.totalGrupos) index = 0;
+//   if (index < 0) index = state.totalGrupos - 1;
 
-  state.currentIndex = index;
+//   state.currentIndex = index;
 
-  const producto = carousel.querySelector('.producto');
-  if (!producto) return;
+//   const producto = carousel.querySelector('.producto');
+//   if (!producto) return;
 
-  const style = getComputedStyle(producto);
-  const productoWidth = producto.getBoundingClientRect().width + parseFloat(style.marginRight);
-  const scrollPosition = productoWidth * productosPorGrupo * index;
+//   const style = getComputedStyle(producto);
+//   const productoWidth = producto.getBoundingClientRect().width + parseFloat(style.marginRight);
+//   const scrollPosition = productoWidth * productosPorGrupo * index;
 
-  carousel.scrollTo({ left: scrollPosition, behavior: 'smooth' });
-  updateDots(carouselId);
+//   carousel.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+//   updateDots(carouselId);
 
-  if (pauseAutoScroll) {
-    pauseAutoScrollFor(carouselId, 5000);
-  }
-}
+//   if (pauseAutoScroll) {
+//     pauseAutoScrollFor(carouselId, 5000);
+//   }
+// }
 
 function pauseAutoScrollFor(carouselId, duration) {
   const state = carouselsState[carouselId];

@@ -333,6 +333,7 @@ grid-template-columns: 20% 20% 20% 20% 20%; /* Cambia el tamaño mínimo según 
 .ver-mas {
     background-color: #5E7F58;
     color: white;
+    width: auto;
     border: none;
     padding: 10px 40px;
     border-radius: 5px;
