@@ -93,15 +93,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const action = target.dataset.action;
             if (action === 'increase') {
                 productInCart.quantity++;
+                window.updateCartIconBadge();
             } else if (action === 'decrease' && productInCart.quantity > 1) {
                 productInCart.quantity--;
+                window.updateCartIconBadge();
             }
         } else if (target.classList.contains('remove-item')) {
             cart = cart.filter(p => p.id !== productId);
+            window.updateCartIconBadge();
         }
         
         saveCart(cart);
         // Volvemos a renderizar para actualizar la UI
+        window.updateCartIconBadge();
         renderCart(); 
     });
 
@@ -156,6 +160,32 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    const cartIconCountElement = document.getElementById('cart-item-count');
+
+    // Make getCart global if other scripts need direct access
+    window.getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Make updateCartIconBadge global
+    window.updateCartIconBadge = function() {
+        const cart = window.getCart(); // Use the global getCart
+        let totalQuantity = 0;
+        cart.forEach(product => {
+            totalQuantity += product.quantity;
+        });
+
+        if (cartIconCountElement) {
+            cartIconCountElement.textContent = totalQuantity;
+            if (totalQuantity > 0) {
+                cartIconCountElement.style.display = 'block';
+            } else {
+                cartIconCountElement.style.display = 'none';
+            }
+        }
+    };
+
+    // Call the function on page load to set the initial count
+    window.updateCartIconBadge();
     
     // Llama a la función de renderizado al cargar la página
     renderCart();

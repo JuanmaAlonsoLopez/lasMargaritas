@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeAllCarousels();
 
   // 2. Configura el listener de eventos para "Agregar al Carrito" (SOLUCIÓN AL BUG).
-  setupAddToCartListener();
+  // setupAddToCartListener();
 
   // 3. Inicia el auto-scroll de los carruseles.
   requestAnimationFrame(autoScrollTick);
@@ -65,20 +65,16 @@ function createCarousel(carouselId, title, products) {
 // **MODIFICADO**: Esta función ahora solo devuelve el HTML de la tarjeta.
 // No añade ningún event listener, lo que previene el bug de duplicación.
 function createProductCardHTML(product) {
+  const formattedPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product.price);
+  const imageUrl = product.image_url; 
   return `
     <div class="producto">
       <a href="/pages/Prod.Individual.html?id=${product.id}">
-        <img src="${product.image_url}" alt="${product.name}" class="product-image">
+        <img src="${imageUrl}" alt="${product.name}" class="product-image">
         <h3 class="product-name">${product.name}</h3>
-        <p class="product-price">$${product.price}</p>
+        <p class="product-price">${formattedPrice}</p>
       </a>
-      <button class="add-to-cart-btn" 
-              data-product-id="${product.id}"
-              data-product-name="${product.name}"
-              data-product-price="${product.price}"
-              data-product-image="${product.image_url}">
-        Agregar al carrito
-      </button>
+      <button class="agregar-carrito">Agregar al carrito</button>
     </div>
   `;
 }
@@ -87,35 +83,21 @@ function createProductCardHTML(product) {
 // SOLUCIÓN AL BUG: DELEGACIÓN DE EVENTOS PARA "AGREGAR AL CARRITO"
 // =================================================================
 
-function setupAddToCartListener() {
-  // Se añade UN SOLO listener al cuerpo del documento.
-  document.body.addEventListener('click', (event) => {
-    // Se comprueba si el elemento clickeado es un botón de "Agregar al carrito".
-    const addToCartBtn = event.target.closest('.add-to-cart-btn');
-    
-    if (addToCartBtn) {
-      // Se obtienen los datos del producto desde los atributos 'data-*' del botón.
-      const product = {
-        id: addToCartBtn.dataset.productId,
-        name: addToCartBtn.dataset.productName,
-        price: parseFloat(addToCartBtn.dataset.productPrice),
-        image: addToCartBtn.dataset.productImage,
-        quantity: 1
-      };
-
-      // Se llama a las funciones globales del carrito.
-      // Asegúrate de que los archivos 'cart.js' (o similar) estén cargados en tu HTML.
-      if (typeof addToCart === 'function' && typeof updateCartUI === 'function') {
-        addToCart(product);
-        updateCartUI();
-        // Opcional: muestra una notificación al usuario.
-        // alert(`${product.name} ha sido agregado al carrito.`);
-      } else {
-        console.error('Error: Las funciones `addToCart` o `updateCartUI` no están disponibles globalmente.');
-      }
-    }
-  });
-}
+document.body.addEventListener('click', (event) => {
+        if (event.target.classList.contains('agregar-carrito')) {
+            const productCard = event.target.closest('.producto');
+            if (productCard) {
+                const product = {
+                    id: parseInt(productCard.dataset.id), name: productCard.dataset.name,
+                    price: parseFloat(productCard.dataset.price), image: productCard.dataset.image,
+                    quantity: 1
+                };
+                addToCart(product);
+                updateCartIconBadge()
+            }
+            updateCartIconBadge()
+        }
+    });
 
 
 // =================================================================
