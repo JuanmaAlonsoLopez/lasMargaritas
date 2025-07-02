@@ -45,7 +45,7 @@ header {
   display: flex;
   justify-content: center;
   gap: 40px; /* antes: 60px */
-  margin-top: 15px; /* antes: 20px */
+  margin-top: 20px; /* antes: 20px */
   transition: all 0.3s ease;
 }
 .main-nav a {
@@ -57,6 +57,7 @@ header {
   position: relative;
   padding-bottom: 4px; /* antes: 5px */
   transition: all 0.3s ease;
+  flex: none;
 }
 .main-nav a.activo::after {
   content: '';
@@ -66,6 +67,11 @@ header {
   height: 2px; /* antes: 3px */
   width: 100%;
   background-color: #5E7F58;
+ 
+
+
+
+
 }
 
 /* Íconos */
@@ -97,8 +103,8 @@ header {
     font-size: 0.75em; /* Smaller font size */
     font-weight: bold;
     position: absolute; /* Positions it relative to the .cart-icon-link */
-    top: -5px; /* Adjust vertical position */
-    right: -8px; /* Adjust horizontal position */
+    top: -13px; /* Adjust vertical position */
+    right: -17px; /* Adjust horizontal position */
     min-width: 20px; /* Ensure a minimum width for single digits */
     text-align: center; /* Center the number */
     line-height: 1.2; /* Adjust line height for vertical centering */
@@ -106,7 +112,7 @@ header {
     box-shadow: 0 0 3px rgba(0,0,0,0.3); /* Subtle shadow */
 }
 
-/*Esto de aca mueve la pelotita del carrito de comptas GUARDA*/
+/*Esto de aca mueve la pelotita del carrito de comptas*/
 
 @media (max-width: 764px){
 
@@ -123,8 +129,8 @@ header {
     font-size: 0.75em; /* Smaller font size */
     font-weight: bold;
     position: absolute; /* Positions it relative to the .cart-icon-link */
-    top: -5px; /* Adjust vertical position */
-    right: 187px; /* Adjust horizontal position */
+    top: -2px; /* Adjust vertical position */
+    right: 227px; /* Adjust horizontal position */
     min-width: 20px; /* Ensure a minimum width for single digits */
     text-align: center; /* Center the number */
     line-height: 1.2; /* Adjust line height for vertical centering */
