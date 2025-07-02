@@ -84,6 +84,28 @@ header {
   cursor: pointer;
 }
 
+.cart-icon-link {
+    position: relative; /* Essential for positioning the badge */
+    display: inline-block; /* Ensures proper width/height for positioning */
+}
+
+.cart-count-badge {
+    background-color: #ff0000; /* Red background for visibility */
+    color: #ffffff; /* White text */
+    border-radius: 50%; /* Makes it circular */
+    padding: 2px 7px; /* Adjust padding for size */
+    font-size: 0.75em; /* Smaller font size */
+    font-weight: bold;
+    position: absolute; /* Positions it relative to the .cart-icon-link */
+    top: -5px; /* Adjust vertical position */
+    right: -8px; /* Adjust horizontal position */
+    min-width: 20px; /* Ensure a minimum width for single digits */
+    text-align: center; /* Center the number */
+    line-height: 1.2; /* Adjust line height for vertical centering */
+    display: none; /* Hidden by default when cart is empty */
+    box-shadow: 0 0 3px rgba(0,0,0,0.3); /* Subtle shadow */
+}
+
 /* Estilo cuando se scrollea */
 header.scrolled .header-inner {
   flex-wrap: nowrap;
