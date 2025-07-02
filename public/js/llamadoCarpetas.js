@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- LÓGICA DE PRODUCTOS ---
     function createProductCardHTML(product) {
         const formattedPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product.price);
-        const imageUrl = product.image_url.startsWith('/') ? product.image_url : `/${product.image_url}`;
+        const imageUrl = product.image_url.startsWith('https://') ? product.image_url : `/${product.image_url}`;
         return `
             <div class="producto" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-image="${imageUrl}">
                 <img src="${imageUrl}" alt="Imagen de ${product.name}">
