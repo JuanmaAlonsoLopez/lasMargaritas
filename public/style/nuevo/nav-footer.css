@@ -55,6 +55,7 @@ header {
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   position: relative;
+  padding-top: 10px;
   padding-bottom: 4px; /* antes: 5px */
   transition: all 0.3s ease;
   flex: none;
@@ -63,16 +64,23 @@ header {
   content: '';
   position: absolute;
   left: 0;
-  bottom: 0;
-  height: 2px; /* antes: 3px */
+  bottom: 15px;
+  height: 5px; /* antes: 3px */
   width: 100%;
   background-color: #5E7F58;
- 
-
-
-
-
 }
+
+header.scrolled .main-nav a.activo::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  height: 5px; /* antes: 3px */
+  width: 100%;
+  background-color: #5E7F58;
+}
+
+
 
 /* Íconos */
 .icons {
@@ -103,7 +111,7 @@ header {
     font-size: 0.75em; /* Smaller font size */
     font-weight: bold;
     position: absolute; /* Positions it relative to the .cart-icon-link */
-    top: -13px; /* Adjust vertical position */
+    top: -3px; /* Adjust vertical position */
     right: -17px; /* Adjust horizontal position */
     min-width: 20px; /* Ensure a minimum width for single digits */
     text-align: center; /* Center the number */
