@@ -14,9 +14,9 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   position: relative; /* necesario para posicionar .menu-toggle */
   box-sizing: border-box;
 }
@@ -62,27 +62,26 @@
 
 /* MENÚ HAMBURGUESA: BOTÓN CENTRAL */
 .menu-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 20px;
-  cursor: pointer;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 50%;
-  translate: 0 -50%;
-  z-index: 1001;
-  padding-top: 70px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    margin: 0 16px;
+    z-index: 1100;
 }
 
 .menu-toggle span {
-  height: 3px;
-  width: 100%;
-  background-color: #5E7F58;
-  border-radius: 2px;
-  transition: 0.3s;
+    height: 3px;
+    width: 100%;
+    background-color: #5E7F58;
+    border-radius: 2px;
+    margin: 3px 0;
+    transition: 0.3s;
 }
 
 /* MENÚ DESPLEGABLE (mobile) */
@@ -101,12 +100,15 @@
 }
 
 .menu-hamburguesa a {
-  font-family: 'Montserrat', sans-serif;
-  padding: 15px 20px;
-  font-size: 1.1rem;
-  border-bottom: 1px solid #eee;
-  color: #333;
-  text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600; /* <--- Esto lo hace más grueso */
+    border-bottom: 1px solid #eee;
+    color: #222;
+    text-decoration: none;
+    padding: 15px 20px;
+    display: block;
+    text-align: center;
 }
 
 .menu-hamburguesa.show {
@@ -115,14 +117,13 @@
 
 /* ========== MEDIA QUERY (SOLO MOBILE) ========== */
 @media (max-width: 900px) {
-  .main-nav {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: flex;
-  }
-}
-body {
-    padding-top: 95px;
+    .main-nav {
+        display: none;
+    }
+    .menu-toggle {
+        display: flex;
+    }
+    .icons {
+        margin-left: auto;
+    }
 }
