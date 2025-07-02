@@ -55,14 +55,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const existingProduct = cart.find(item => item.id === productToAdd.id);
         if (existingProduct) {
             existingProduct.quantity++;
+            updateCartIconBadge()
         } else {
             cart.push(productToAdd);
+            updateCartIconBadge()
         }
         localStorage.setItem('cart', JSON.stringify(cart));
         
         alert(`"${productToAdd.name}" fue agregado al carrito.`);
         
         updateCartDropdown();
+        updateCartIconBadge()
     }
     
     function updateCartDropdown() {
@@ -94,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchAndRenderProducts(ortopedicaContainer, 'Ortopédica');
         
         updateCartDropdown();
+        updateCartIconBadge()
     }
 
     document.body.addEventListener('click', (event) => {
@@ -106,7 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     quantity: 1
                 };
                 addToCart(product);
+                updateCartIconBadge()
             }
+            updateCartIconBadge()
         }
     });
     
