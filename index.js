@@ -17,7 +17,6 @@ const { googleCallback } = require('./controllers/authController');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
 const productRoutes = require('./routes/products');
-const orderRoutes = require('./routes/orders');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -136,18 +135,12 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
-app.use('/api/orders', orderRoutes);
 
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile','email'] }));
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login.html' }), googleCallback);
 
 // --- RUTA PARA CREAR LA PREFERENCIA DE PAGO (VERSIÓN PARA PRODUCCIÓN) ---
 app.post('/api/pagos/crear-preferencia', async (req, res) => {
-    // Verificar si el usuario está logueado
-    if (!req.isAuthenticated()) { // `req.isAuthenticated()` es una función de Passport
-        return res.status(401).json({ error: 'Debes iniciar sesión para continuar la compra.' });
-    }
-
     try {
         const carrito = req.body.carrito;
 
@@ -165,11 +158,10 @@ app.post('/api/pagos/crear-preferencia', async (req, res) => {
 
         const body = {
             items: items,
-            // Las back_urls ahora redirigirán a shipment.html después del pago
             back_urls: {
-                success: `${PRODUCTION_URL}/pages/shipment.html?status=success`,
-                failure: `${PRODUCTION_URL}/pages/shipment.html?status=failure`,
-                pending: `${PRODUCTION_URL}/pages/shipment.html?status=pending`,
+                success: `${PRODUCTION_URL}/pages/success.html`,
+                failure: `${PRODUCTION_URL}/pages/failure.html`,
+                pending: `${PRODUCTION_URL}/pages/pending.html`,
             },
             auto_return: 'approved',
         };
@@ -180,7 +172,7 @@ app.post('/api/pagos/crear-preferencia', async (req, res) => {
         const result = await preference.create({ body });
         
         console.log('Preferencia creada con éxito. ID:', result.id);
-        res.json({ id: result.id, userId: req.user.id }); // También enviamos el userId
+        res.json({ id: result.id });
 
     } catch (error) {
         console.error('Error detallado de MP:', error.cause ? JSON.stringify(error.cause, null, 2) : error.message);
