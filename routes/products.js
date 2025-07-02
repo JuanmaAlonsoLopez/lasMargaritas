@@ -311,4 +311,40 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+router.get('/search', async (req, res) => {
+    const { query } = req.query; // El término de búsqueda que viene de la URL (ej: /api/products/search?query=almohada)
+    if (!query) {
+        return res.status(400).json({ message: 'El término de búsqueda es requerido.' });
+    }
+
+    try {
+        const searchQuery = `
+            SELECT
+                p.id,
+                p.name,
+                p.description,
+                p.price,
+                p.stock,
+                p.image_url,
+                pc.category_name,
+                p.category as category_id
+            FROM
+                public.products AS p
+            JOIN
+                public.product_category AS pc ON p.category = pc.id
+            WHERE
+                p.name ILIKE $1 OR p.description ILIKE $1
+            ORDER BY p.name;
+        `;
+        // ILIKE es para búsqueda case-insensitive en PostgreSQL
+        // %${query}% busca el término en cualquier parte del nombre o descripción
+        const { rows } = await pool.query(searchQuery, [`%${query}%`]);
+        res.status(200).json(rows);
+
+    } catch (error) {
+        console.error('Error al buscar productos:', error);
+        res.status(500).json({ message: 'Error interno del servidor al buscar productos.' });
+    }
+});
+
 module.exports = router;

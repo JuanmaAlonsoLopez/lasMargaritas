@@ -1,0 +1,175 @@
+/* public/style/search.css */
+
+.search-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegura que esté por encima de todo lo demás */
+    backdrop-filter: blur(5px); /* Efecto de desenfoque del fondo */
+    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+}
+
+.search-modal-overlay.hidden {
+    display: none; /* Oculta el modal por defecto */
+}
+
+.search-modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 700px; /* Ancho máximo para el modal */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    max-height: 85vh; /* Altura máxima del contenido, para que sea scrollable si hay muchos resultados */
+    display: flex;
+    flex-direction: column;
+}
+
+.search-modal-content .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 28px; /* Tamaño más grande para el botón de cerrar */
+    cursor: pointer;
+    color: #333;
+    padding: 5px;
+}
+
+.search-modal-content .close-button:hover {
+    color: #007bff;
+}
+
+#search-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none; /* Quita el contorno al enfocar */
+}
+
+#search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+#search-results-container {
+    overflow-y: auto; /* Permite scroll vertical si los resultados exceden la altura */
+    flex-grow: 1; /* Permite que el contenedor de resultados ocupe el espacio disponible */
+    padding-right: 10px; /* Espacio para la barra de scroll */
+}
+
+/* Estilo para cada item de resultado de búsqueda */
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    gap: 15px; /* Espacio entre los elementos de la tarjeta */
+}
+
+.search-result-item:last-child {
+    border-bottom: none; /* No hay borde en el último item */
+}
+
+.search-result-item img {
+    width: 90px; /* Tamaño de la imagen del producto */
+    height: 90px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0; /* Evita que la imagen se comprima */
+}
+
+.search-result-details {
+    flex-grow: 1; /* Permite que los detalles ocupen el espacio restante */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.search-result-details h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.search-result-details p.description {
+    margin: 0 0 8px 0;
+    font-size: 0.9em;
+    color: #666;
+    max-height: 3.2em; /* Limitar la altura de la descripción a 2 líneas aprox. */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Añadir puntos suspensivos */
+    line-height: 1.6em;
+}
+
+.search-result-details p.price {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.search-result-item .add-to-cart-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    white-space: nowrap; /* Evita que el botón se rompa en varias líneas */
+    font-size: 0.9em;
+}
+
+.search-result-item .add-to-cart-btn:hover {
+    background-color: #218838;
+}
+
+#no-results-message {
+    text-align: center;
+    color: #888;
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+#no-results-message.hidden {
+    display: none;
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
+    .search-modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+    .search-result-item {
+        flex-wrap: wrap; /* Permite que los items se envuelvan */
+        text-align: center;
+        justify-content: center;
+        padding: 10px 0;
+    }
+    .search-result-item img {
+        width: 70px;
+        height: 70px;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .search-result-details {
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .search-result-item .add-to-cart-btn {
+        width: 100%;
+    }
+}
